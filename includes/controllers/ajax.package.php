@@ -809,8 +809,110 @@ switch ($action) {
         // Return success. The JavaScript will handle the UI update.
         echo json_encode(array("action" => "success"));
         break;
-        // ------------------------------------
 
+    case "additinerarypackage":
+        $record = new PackageItinerary();
 
+        $record->package_id     = $_REQUEST['package_id'];
+        $record->title             = $_REQUEST['title'];
+        $record->slug             = create_slug($_REQUEST['title']);
+        $record->content             = $_REQUEST['content'];
+        $record->status            = isset($_REQUEST['status']) ? $_REQUEST['status'] : 1;
+        $record->sortorder        = PackageItinerary::find_maximum_byparent("sortorder", $_REQUEST['package_id']);
+
+        $db->begin();
+        if ($record->save()): $db->commit();
+            $message  = sprintf($GLOBALS['basic']['addedSuccess_'], "Package Itinerary '" . $record->title . "'");
+            echo json_encode(array("action" => "success", "message" => $message));
+        else: $db->rollback();
+            echo json_encode(array("action" => "error", "message" => $GLOBALS['basic']['unableToSave']));
+        endif;
+        break;
+
+    case "edititinerarypackage":
+        $record = PackageItinerary::find_by_id($_REQUEST['idValue']);
+
+        $record->package_id     = $_REQUEST['package_id'];
+        $record->title             = $_REQUEST['title'];
+        $record->slug             = create_slug($_REQUEST['title']);
+        $record->content             = $_REQUEST['content'];
+        $record->status            = isset($_REQUEST['status']) ? $_REQUEST['status'] : 1;
+
+        $db->begin();
+        if ($record->save()): $db->commit();
+            $message  = sprintf($GLOBALS['basic']['changesSaved_'], "Package Itinerary '" . $record->title . "'");
+            echo json_encode(array("action" => "success", "message" => $message));
+        else: $db->rollback();
+            echo json_encode(array("action" => "notice", "message" => $GLOBALS['basic']['noChanges']));
+        endif;
+        break;
+
+    case "deletepackageitinerary":
+        $id = $_REQUEST['id'];
+        $record = PackageItinerary::find_by_id($id);
+        log_action("Package Itinerary [" . $record->title . "]" . $GLOBALS['basic']['deletedSuccess'], 1, 6);
+        $db->begin();
+
+        $res   = $db->query("DELETE FROM tbl_packageitineary WHERE id='{$id}'");
+        if ($res): $db->commit();
+        else: $db->rollback();
+        endif;
+        reOrder("tbl_packageitineary", "sortorder");
+        echo json_encode(array("action" => "success", "message" => "Package Itinerary [" . $record->title . "]" . $GLOBALS['basic']['deletedSuccess']));
+        break;
+
+    case "packageitSort":
+        $id      = $_REQUEST['id'];
+        $sortIds = $_REQUEST['sortIds'];
+        $posId   = PackageItinerary::field_by_id($id, 'package_id');
+        datatableReordering('tbl_packageitineary', $sortIds, "sortorder", "package_id", $posId, 0);
+        $message  = sprintf($GLOBALS['basic']['sorted_'], "Package Itinerary");
+        echo json_encode(array("action" => "success", "message" => $message));
+        break;
+
+    case "packageitbulkDelete":
+        $id = $_REQUEST['idArray'];
+        $allid = explode("|", $id);
+        $return = "0";
+        $db->begin();
+        for ($i = 1; $i < count($allid); $i++) {
+            $record = PackageItinerary::find_by_id($allid[$i]);
+            $res  = $db->query("DELETE FROM tbl_packageitineary WHERE id='" . $allid[$i] . "'");
+            $return = 1;
+        }
+        if ($res) $db->commit();
+        else $db->rollback();
+
+        if ($return == 1):
+            $message  = sprintf($GLOBALS['basic']['deletedSuccess_bulk'], "Package Itinerary");
+            echo json_encode(array("action" => "success", "message" => $message));
+        else:
+            echo json_encode(array("action" => "error", "message" => $GLOBALS['basic']['noRecords']));
+        endif;
+        break;
+
+    case "packageitbulkToggleStatus":
+        $id = $_REQUEST['idArray'];
+        $allid = explode("|", $id);
+        $return = "0";
+        for ($i = 1; $i < count($allid); $i++) {
+            $record = PackageItinerary::find_by_id($allid[$i]);
+            $record->status = ($record->status == 1) ? 0 : 1;
+            $record->save();
+        }
+        echo json_encode(array("action" => "success"));
+        break;
+
+    case "statusItineraryPackage":
+        $itemId = (int)$_REQUEST['id'];
+        $record = PackageItinerary::find_by_id($itemId);
+
+        if ($record) {
+            $record->status = ($record->status == 1) ? 0 : 1;
+            $record->save();
+        }
+
+        echo json_encode(array("action" => "success"));
+        break;
 
 }

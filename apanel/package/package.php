@@ -34,6 +34,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <th style="display:none;"></th>
                         <th class="text-center"><input class="check-all" type="checkbox" /></th>
                         <th class="text-center">Title</th>
+                        <th>Itinerary</th>
                         <!-- <th class="text-center">Images</th>  -->
 
                         <th>Sub Package</th>
@@ -52,8 +53,16 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                     onclick="editRecord(<?php echo $record->id; ?>);">
                                     <span><?php echo $record->title; ?></span>
                                 </a>
-                            </td>
-                            <!-- <td>
+                            </td>                            <td>
+                                <a class="primary-bg medium btn loadingbar-demo" title=""
+                                    onClick="viewItinerarylistPackage(<?php echo $record->id; ?>);" href="javascript:void(0);">
+                                    <span class="button-content">
+                                        <span class="badge bg-orange radius-all-4 mrg5R" title=""
+                                            data-original-title="Badge with tooltip"><?php echo $countItinerary = PackageItinerary::getTotalSub($record->id); ?></span>
+                                        <span class="text-transform-upr font-bold font-size-11">View Lists</span>
+                                    </span>
+                                </a>
+                            </td>                            <!-- <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewsubimagelist(<?php echo $record->id; ?>);" href="javascript:void(0);">
                                     <span class="button-content">
@@ -695,6 +704,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 
 <?php endif;
 include("sub_package.php");
+include("itinerarypackage.php");
 // include("subpackage_images.php");
 
 ?>

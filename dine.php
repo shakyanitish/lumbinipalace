@@ -3,14 +3,14 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 //include ("jpcache/jpcache.php");
 
-define('CHAIR_PAGE', 1); // Track homepage.
+define('SUBPACKAGE_PAGE', 1); // Track homepage.
 define('JCMSTYPE', 0); // Track Current site language.
 
 require_once("includes/initialize.php");
 
 $currentTemplate	= Config::getCurrentTemplate('template');
 $jVars 				= array();
-$template 			= "template/{$currentTemplate}/chairman.html";
+$template 			= "template/{$currentTemplate}/dining.html";
 
 require_once('views/modules.php');
 

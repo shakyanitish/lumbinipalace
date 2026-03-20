@@ -114,7 +114,7 @@
         }
 
 
-        // Itinerary datatable
+        // Sub-package Itinerary datatable (subexample1)
         var desiredItineraryPage = localStorage.getItem("itinerarydbpage") ? parseInt(localStorage.getItem("itinerarydbpage")) : 0;
         var desiredItineraryLength = localStorage.getItem("itinerarydblength") ? parseInt(localStorage.getItem("itinerarydblength")) : 10;
 
@@ -150,6 +150,41 @@
             }
         }
 
+        // Package Itinerary datatable (subexample2)
+        var desiredPackageItineraryPage = localStorage.getItem("packageitinerarydbpage") ? parseInt(localStorage.getItem("packageitinerarydbpage")) : 0;
+        var desiredPackageItineraryLength = localStorage.getItem("packageitinerarydblength") ? parseInt(localStorage.getItem("packageitinerarydblength")) : 10;
+
+        var oPackageItineraryTable = $('#subexample2').dataTable({
+            "bJQueryUI": true,
+            "sPaginationType": "full_numbers",
+            "aLengthMenu": [
+                [10, 25, 50, -1],
+                [10, 25, 50, "All"]
+            ],
+            "iDisplayLength": desiredPackageItineraryLength
+        }).rowReordering({
+            sURL: "<?php echo BASE_URL; ?>includes/controllers/ajax.package.php?action=packageitSort",
+            fnSuccess: function(message) {
+                var msg = jQuery.parseJSON(message);
+                showMessage(msg.action, msg.message);
+            }
+        });
+
+        $(document).on("click", "#subexample2 .fg-button", function() {
+            var currentPage = oPackageItineraryTable.fnPagingInfo().iPage;
+            localStorage.setItem("packageitinerarydbpage", currentPage);
+        });
+
+        $(document).on('change', '#subexample2_length select', function() {
+            var selectedLength = $(this).val();
+            localStorage.setItem("packageitinerarydblength", selectedLength);
+        });
+
+        if (oPackageItineraryTable.fnPagingInfo() != null) {
+            if (desiredPackageItineraryLength != -1) {
+                oPackageItineraryTable.fnPageChange(desiredPackageItineraryPage, true);
+            }
+        }
 
         $('.btn-submit').on('click', function() {
             var actVal = $(this).attr('btn-action');
@@ -419,6 +454,70 @@
             }
         });
 
+        jQuery('#itinerarypackage_frm').validationEngine({
+            prettySelect: true,
+            autoHidePrompt: true,
+            useSuffix: "_chosen",
+            promptPosition: "bottomLeft",
+            scroll: true,
+            onValidationComplete: function(form, status) {
+                if (status == true) {
+                    var Re = $("#package_id").val();
+                    $('.btn-submit').attr('disabled', 'true');
+                    var action = ($('#idValue').val() == 0) ? "action=additinerarypackage&" : "action=edititinerarypackage&";
+                    for (instance in CKEDITOR.instances)
+                        CKEDITOR.instances[instance].updateElement();
+
+                    var data = $('#itinerarypackage_frm').serialize();
+                    queryString = action + data;
+                    $.ajax({
+                        type: "POST",
+                        dataType: "JSON",
+                        url: getLocation(),
+                        data: queryString,
+                        success: function(data) {
+                            var msg = eval(data);
+                            if (msg.action == 'warning') {
+                                showMessage(msg.action, msg.message);
+                                $('.btn-submit').removeAttr('disabled');
+                                $('.formButtons').show();
+                                return false
+                            }
+                            if (msg.action == 'success') {
+                                showMessage(msg.action, msg.message);
+                                var actionId = $('#idValue').attr('myaction');
+                                if (actionId == 2)
+                                    setTimeout(function() {
+                                        window.location.href = "<?php echo ADMIN_URL ?>package/itinerarylistpackage/" + Re;
+                                    }, 3000);
+                                if (actionId == 1)
+                                    setTimeout(function() {
+                                        window.location.href = "<?php echo ADMIN_URL ?>package/addEditItineraryPackage/" + Re;
+                                    }, 3000);
+                                if (actionId == 0)
+                                    setTimeout(function() {
+                                        window.location.href = "<?php echo ADMIN_URL ?>package/itinerarylistpackage/" + Re;
+                                    }, 3000);
+                            }
+                            if (msg.action == 'notice') {
+                                showMessage(msg.action, msg.message);
+                                setTimeout(function() {
+                                    window.location.href = window.location.href;
+                                }, 3000);
+                            }
+                            if (msg.action == 'error') {
+                                showMessage(msg.action, msg.message);
+                                $('#buttonsP img').remove();
+                                $('.formButtons').show();
+                                return false;
+                            }
+                        }
+                    });
+                    return false;
+                }
+            }
+        });
+
         $('#linkPage').change(function() {
             $('#linksrc').val($(this).val());
         });
@@ -501,6 +600,48 @@
 
             reStructureList(getTableId());
         });
+
+        $('#applySelected_btn2').on("click", function() {
+            var action = $('#groupTaskField2').val();
+            if (action == '0') {
+                showMessage('warning', 'Please select an action!!');
+                return;
+            }
+
+            var idArray = '0';
+            $('.bulkCheckbox:checked').each(function() {
+                idArray += "|" + $(this).attr('bulkId');
+            });
+            if (idArray == '0') {
+                showMessage('warning', 'Please select at least one record.');
+                return;
+            }
+
+            switch (action) {
+                case "packageitoggleStatus":
+                    togglePackageItineraryStatus(idArray);
+                    break;
+                case "packageitdelete":
+                    $('.MsgTitle').html('Do you want to delete the selected rows?');
+                    $('.pText').html('Click on yes button to delete these rows permanently!');
+                    $('.divMessageBox').fadeIn();
+                    $('.MessageBoxContainer').fadeIn(1000);
+
+                    $(".botTempo").off("click").on("click", function() {
+                        if ($(this).attr("id") === 'yes') {
+                            packageitdeleteSelectedRecords(idArray);
+                        }
+                        $('.divMessageBox').fadeOut();
+                        $('.MessageBoxContainer').fadeOut(1000);
+                    });
+                    break;
+                default:
+                    showMessage('warning', 'Action not supported.');
+                    break;
+            }
+
+            reStructureList(getTableId());
+        });
         
         var initialType = <?php echo !empty($advInfo->explorelinktype) ? $advInfo->explorelinktype : 0; ?>;
         exploreLinkTypeSelect(initialType);
@@ -509,6 +650,34 @@
             $('#explorelinksrc').val($(this).val());
         });
     });
+
+    function togglePackageItineraryStatus(idArray) {
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: getLocation(),
+            data: "action=packageitbulkToggleStatus&idArray=" + idArray,
+            success: function(data) {
+                var msg = eval(data);
+                showMessage(msg.action, msg.message);
+                location.reload();
+            }
+        });
+    }
+
+    function packageitdeleteSelectedRecords(idArray) {
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: getLocation(),
+            data: "action=packageitbulkDelete&idArray=" + idArray,
+            success: function(data) {
+                var msg = eval(data);
+                showMessage(msg.action, msg.message);
+                reStructureList(getTableId());
+            }
+        });
+    }
 
     function addRowss() {
         var rowNum = Math.floor((Math.random() * 999) + 1);
@@ -664,6 +833,32 @@
         }
     });
 
+    $(document).on('click', '.statusItineraryPackage', function() {
+        var id = $(this).attr('moduleId');
+        var status = $(this).attr('status');
+        newStatus = (status == 1) ? 0 : 1;
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: getLocation(),
+            data: "action=statusItineraryPackage&id=" + id,
+            success: function(msg) {
+                var data = eval(msg);
+                showMessage(data.action, 'Status updated successfully');
+            }
+        });
+        $(this).attr({
+            'status': newStatus
+        });
+        if (status == 1) {
+            $('#imgHolder_' + id).removeClass("bg-green").addClass("bg-red");
+            $(this).attr("data-original-title", "Click to Publish");
+        } else {
+            $('#imgHolder_' + id).removeClass("bg-red").addClass("bg-green");
+            $(this).attr("data-original-title", "Click to Un-publish");
+        }
+    });
+
     function subrecordDelete(Re) {
         $('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'], "Package") ?>');
         $('.pText').html('Click on yes button to delete this package permanently.!!');
@@ -768,6 +963,46 @@
 
     function viewItinerarylist(Re) {
         window.location.href = "<?php echo ADMIN_URL ?>package/itinerarylist/" + Re;
+    }
+
+    function editItineraryPackage(Pid, Re) {
+        window.location.href = "<?php echo ADMIN_URL ?>package/addEditItineraryPackage/" + Pid + "/" + Re;
+    }
+
+    function AddNewItineraryPackage(Re) {
+        window.location.href = "<?php echo ADMIN_URL ?>package/addEditItineraryPackage/" + Re;
+    }
+
+    function viewItinerarylistPackage(Re) {
+        window.location.href = "<?php echo ADMIN_URL ?>package/itinerarylistpackage/" + Re;
+    }
+
+    function packageItinDelete(Re) {
+        $('.MsgTitle').html('<?php echo sprintf($GLOBALS['basic']['deleteRecord_'], "Package Itinerary") ?>');
+        $('.pText').html('Click on yes button to delete this itinerary permanently.!!');
+        $('.divMessageBox').fadeIn();
+        $('.MessageBoxContainer').fadeIn(1000);
+        $(".botTempo").on("click", function() {
+            var popAct = $(this).attr("id");
+            if (popAct == 'yes') {
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: getLocation(),
+                    data: 'action=deletepackageitinerary&id=' + Re,
+                    success: function(data) {
+                        var msg = eval(data);
+                        showMessage(msg.action, msg.message);
+                        $('#' + Re).remove();
+                        reStructureList(getTableId());
+                    }
+                });
+            } else {
+                Re = null;
+            }
+            $('.divMessageBox').fadeOut();
+            $('.MessageBoxContainer').fadeOut(1000);
+        });
     }
 
     function deleteSavedimage(Re) {
@@ -1052,4 +1287,5 @@
             if ($('#explorelinksrc').val() == '') $('#explorelinksrc').val('https://www.');
         }
     }
+
 </script>

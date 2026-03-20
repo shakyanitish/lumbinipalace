@@ -2,29 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumbini Palace Resort | Harmony of Nature &amp; Culture</title>
+     <jcms:site:seotitle/>
 
-    <link rel="icon" href="assets/img/logo_2.png" type="image/png">
+    <!-- Fevicon -->
+    <jcms:site:fevicon/>
 
     <!-- Google Fonts -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'>
 
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'>
 
     <!-- Animate.css (WOW.js) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css'>
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
 
 
     <!-- Custom CSS (extracted, only used styles) -->
@@ -42,7 +41,6 @@
 
     <!-- ============ SIDEBAR (MOBILE) ============ -->
     <jcms:module:header/>
-
 
     <!-- BANNER SECTION -->
     <section class="marriott-style-banner">
@@ -68,28 +66,18 @@
         <!-- DINING LIST SECTION -->
         <section class="m-dining-section pb-5">
             <div class="container container-custom">
-                <p class="text-center m-dining-label mb-5 mt-4">AT THIS HOTEL</p>
+                <p class="text-center m-dining-label mt-4">AT THIS HOTEL</p>
 
-                <div class="m-dining-list">
-                    <!-- Dining Card 1 -->
-                    <div class="m-dining-card">
-                        <div class="row g-0 h-100">
-                            <div class="col-md-5">
-                                <div class="m-dining-img-wrap">
-                                    <img src="assets/img/dine-details-img-big-1.jpg" alt="Irish Bar with Restaurant"
-                                        class="img-fluid w-100 h-100 object-fit-cover">
-                                </div>
-                            </div>
-                            <div class="col-md-7">
-                                <div class="m-dining-details">
-                                    <h3 class="m-dining-title">Irish Bar with Restaurant</h3>
-                                    <p class="m-dining-cuisine">Multiple cuisines</p>
-                                    <p class="m-dining-desc">Experience a relaxed yet elegant atmosphere with warm
-                                        wooden accents, comfortable seating, and soft lighting. Whether you’re enjoying
-                                        a cocktail by the window or a hearty meal in our cozy, stylish dining area,
-                                        you’ll find the perfect setting for small gatherings or casual evenings</p>
+                <jcms:module:dining-list/>
+            </div>
+        </section>
 
-                                    <div class="m-dining-info mb-4">
+
+        <!-- FAQ SECTION -->
+
+        <section class="m-property-details py-5 bg-white">
+            <div class="container">
+                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
                                         <div class="d-flex align-items-center me-5">
                                             <i class="bi bi-clock me-2"></i>
                                             <span>Everyday</span>
@@ -133,7 +121,6 @@
                         </div>
                     </div>
 
-                </div>
             </div>
         </section>
 
@@ -223,8 +210,82 @@
     </main>
 
     <!-- FOOTER -->
-    <jcms:module:footer/>
-
+    <footer class="ul-footer py-5 footer-main">
+        <div class="container">
+            <h2 class="footer-title">Lumbini Palace Resort</h2>
+            <div class="footer-divider"></div>
+            <div class="row gx-lg-5">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled mb-0" style="line-height: 2.2;">
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Overview</a>
+                                </li>
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Gallery</a>
+                                </li>
+                                <li><a href="#"
+                                        class="text-decoration-underline text-dark fw-normal small">Accommodations</a>
+                                </li>
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Dining</a>
+                                </li>
+                                <li><a href="#"
+                                        class="text-decoration-underline text-dark fw-normal small">Experiences</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled mb-0" style="line-height: 2.2;">
+                                <li><a href="events.html"
+                                        class="text-decoration-underline text-dark fw-normal small">Meetings and
+                                        Weddings</a></li>
+                                <li><a href="offers.html"
+                                        class="text-decoration-underline text-dark fw-normal small">Offers</a>
+                                </li>
+                                <li><a href="#virtualTourModal" data-bs-toggle="modal"
+                                        class="text-decoration-underline text-dark fw-normal small">Virtual
+                                        Tours</a></li>
+                                <li><a href="faq.html"
+                                        class="text-decoration-underline text-dark fw-normal small">FAQ</a>
+                                </li>
+                                <li><a href="instagram.html"
+                                        class="text-decoration-underline text-dark fw-normal small">Instagram Wall</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 border-start-md ps-md-5" style="letter-spacing: 0.5px;">
+                    <p class="small mb-4 text-uppercase fw-normal" style="line-height: 1.6;">
+                        SIYARI-05, RUPANDEHI | LUMBINI-PROVINCE, NEPAL<br>
+                        RUPANDEHI, NEPAL, 32900
+                    </p>
+                    <p class="small mb-0 fw-normal">
+                        TOLL FREE: <a href="tel:+97771413016" class="text-dark text-decoration-none">+977
+                            71413016</a><br>
+                        ROOM RESERVATIONS PHONE NUMBER: <a href="tel:+9779857018135"
+                            class="text-dark text-decoration-none">+977 9857018135</a><br>
+                        FAX: <a href="tel:+97771413020" class="text-dark text-decoration-none">+977 71413020</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-divider" style="margin-bottom: 30px;"></div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="small d-inline-block me-3 mb-0">Follow Lumbini Palace Resort</p>
+                    <a href="https://www.facebook.com/lumbinipalaceresort" class="text-dark me-2"><i
+                            class="fab fa-facebook-square"></i></a>
+                    <a href="https://www.instagram.com/lumbini_palace_resort/" class="text-dark"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <!-- <div class="row mt-4 pt-2">
+                <div class="col-12">
+                    <p class="x-small text-muted mb-0" style="font-size: 10px; opacity: 0.7;">
+                        &copy; 2026 LUMBINI PALACE RESORT - OFFICIAL SITE.
+                    </p>
+                </div>
+            </div> -->
+        </div>
+    </footer>
 
     <!-- VIRTUAL TOUR POPUP MODAL -->
     <div class="modal fade m-vt-popup" id="virtualTourModal" tabindex="-1" aria-labelledby="virtualTourModalLabel"
@@ -306,10 +367,10 @@
         </div>
     </div>
     <!-- JS Libraries (CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js'></script>
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
 
     <!-- ============ ENQUIRY MODAL ============ -->
     <div class="modal fade m-enquiry-modal" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel"
@@ -358,6 +419,14 @@
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/swiper.js"></script>
+    <script src="assets/js/calendar.js"></script>
+
+    <!-- Mobile Floating Action Button -->
+    <div class="m-mob-floating-action d-lg-none">
+        <a href="https://booking.marriott.com/rez/v3/hotel/61486" class="btn m-btn-check-availability">Check
+            Availability</a>
+    </div>
+
 </body>
 
 

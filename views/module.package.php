@@ -401,6 +401,46 @@ if (isset($_REQUEST['slug'])) {
 ';
         }
     }
+    
+    // Package Itinerary FAQ for package detail page
+    $pkg_itinerary_faq = '';
+    if (!empty($pkgRow)) {
+        $packageItineraryInfos = Package::get_itinerary($pkgRow->id);
+        if (!empty($packageItineraryInfos)) {
+            $faqItems = '';
+            foreach ($packageItineraryInfos as $i => $iti) {
+                $collapseId = 'pkgItiFaq' . ($i + 1);
+                $expandedAttr = '';
+                $btnClass = ' collapsed';
+                $faqItems .= '
+        <div class="accordion-item border-top ' . ($i === count($packageItineraryInfos) - 1 ? 'border-bottom' : 'border-bottom-0') . '">
+            <h2 class="accordion-header">
+                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
+                    . htmlspecialchars($iti->title) .
+                '</button>
+            </h2>
+            <div id="' . $collapseId . '" class="accordion-collapse collapse ' . $expandedAttr . '" data-bs-parent="#pkgFaqAccordion">
+                <div class="accordion-body text-muted pt-0 pb-4">' . $iti->content . '</div>
+            </div>
+        </div>';
+            }
+
+            $pkg_itinerary_faq = '
+    <section class="m-property-details py-5 bg-white">
+        <div class="container">
+            <h2 class="h5 fw-bold mb-4 title">Itinerary</h2>
+            <div class="accordion accordion-flush" id="pkgFaqAccordion">
+                ' . $faqItems . '
+            </div>
+        </div>
+    </section>';
+
+            $roombread .= $pkg_itinerary_faq;
+        }
+    }
+
+    $jVars['module:package-itinerary-faq'] = $pkg_itinerary_faq;
 }
 
 /*
