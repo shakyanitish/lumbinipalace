@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!-- saved from url=(0072)https://support.fastbooking.net/webmaster/quicksearch/FB_hotelform.phtml -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Author" content="(c) Copyright 2006 Richard Kefs, FastBooking, http://www.fastbooking.com">
+<meta http-equiv="expires" content="Mon, 1 Jan 2006 05:00:00 GMT"><meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"><meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<title>CRS - Quick Reservations</title>
+<style>
+input,textarea,select,button {color : #312E64; font-family : Verdana, Arial, Helvetica; font-size : xx-small; background-color:#FFFFFF;}
+body {
+	font-family : Verdana, Arial, Helvetica;
+	font-size : x-small;
+	color: #312E64;
+	margin-top: 0px;
+}
+table {font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #312E64;	text-decoration: none; bgcolor: #FFFFFF;}
+a:link {color: #312E64; font-family : Verdana, Arial, Helvetica; font-size : xx-small; }
+.Style2 {	color: #A01323;	font-weight: bold; 	font-size : x-small; }
+.Style1  {font-family : Verdana, Arial, Helvetica; font-size : xx-small; color: #A01323; font-style: italic; }
+.Style3 { 	color: #312E64;	 font-family : Verdana, Arial, Helvetica; font-size : xx-small; }
+.Style4 { 	color: #312E64;	 font-weight: bold; font-family : Verdana, Arial, Helvetica; font-size : xx-small; }
+</style>
+<script language="javascript" type="text/javascript" src="./CRS - Quick Reservations_files/fbparam.js"></script><script language="javascript" type="text/javascript" src="./CRS - Quick Reservations_files/fblib.js"></script></head>
+
+<body onload="start();">
+
+<img src="./CRS - Quick Reservations_files/logoFB.png" alt="fastbooking" width="215" height="60" vspace="15">
+
+<table width="780" cellspacing="5" cellpadding="3">
+<tbody><tr valign="top">
+	<td height="20" colspan="2" align="left" valign="bottom"><span class="Style2">Pokhara Choice Inn</span></td>
+</tr>
+<tr valign="top">
+	<td height="116" align="center" valign="middle" bgcolor="#A01323">
+
+	<table width="100%" height="100%" border="0" align="center" cellpadding="8" cellspacing="0">
+	<tbody><tr>
+		<td bgcolor="#EEEEEE">
+		<form target="dispoprice" name="idForm" action="http://www.fastbookings.biz/DIRECTORY/dispoprice.phtml">
+		<input type="hidden" name="showPromotions" value="1">
+		<input type="hidden" name="langue" value=""><input type="hidden" name="Clusternames" value="NPPOKHTLPokharaChoic"><input type="hidden" name="Hotelnames" value="NPPOKHTLPokharaChoic">
+		<br><b>Check In Date: </b><br>
+		<!-- MONTH -->
+		<select name="frommonth">
+		<option value="1">Jan</option>
+		<option value="2">Feb</option>
+		<option value="3">Mar</option>
+		<option value="4">Apr</option>
+		<option value="5">May</option>
+		<option value="6">Jun</option>
+		<option value="7">Jul</option>
+		<option value="8">Aug</option>
+		<option value="9">Sept</option>
+		<option value="10">Oct</option>
+		<option value="11">Nov</option>
+		<option value="12">Dec</option>
+		</select>
+
+		<!-- DAY -->
+		<select name="fromday"> 
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+		<option value="24">24</option>
+		<option value="25">25</option>
+		<option value="26">26</option>
+		<option value="27">27</option>
+		<option value="28">28</option>
+		<option value="29">29</option>
+		<option value="30">30</option>
+		<option value="31">31</option>
+		</select>
+
+		<!-- YEAR -->
+		<select name="fromyear" onchange="update_departure();">
+		  
+		<option value="2016" selected="">2016</option><option value="2017">2017</option></select>
+		<br>
+
+		<b>Check Out Date: </b><br>
+
+<select name="tomonth">
+<option value="1">Jan</option>
+<option value="2">Feb</option>
+<option value="3">Mar</option>
+<option value="4">Apr</option>
+<option value="5">May</option>
+<option value="6">Jun</option>
+<option value="7">Jul</option>
+<option value="8">Aug</option>
+<option value="9">Sept</option>
+<option value="10">Oct</option>
+<option value="11">Nov</option>
+<option value="12">Dec</option>
+</select>
+
+
+<select name="today"> 
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+</select>
+
+
+
+<select name="toyear" onchange="update_departure();"><option value="2016" selected="">2016</option><option value="2017">2017</option></select><br>
+<br>	
+			 
+		
+		<b>Adults per room:</b>
+		<select name="adulteresa"><option value="1" selected="">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select><br>
+				
+		 <strong>Children :</strong><select name="enfantresa"><option value="0" selected="">0</option><option value="1">1</option><option value="2">2</option></select><br><strong>Access code/IATA code :</strong> <input type="password" name="AccessCode" value=""><br> 
+		 <br>
+		<!-- //// BUTTONS //// -->
+		<input name="B1" type="button" value="Check Availability" onclick="hhotelDispoprice(this.form)">
+		<a href="javascript:;" onclick="hhotelcancel(&#39;NPPOKHTLPokharaChoic&#39;,&#39;&#39;);">Cancel</a>&nbsp;&nbsp;<a href="javascript:;" onclick="hhotelSearch(&#39;NPPOKHTLPokharaChoic&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;);">Options/Languages</a> 				
+		<script src="./CRS - Quick Reservations_files/fbfulltrack.js"></script>
+		</form>
+		</td>
+	</tr>
+	</tbody></table>
+	</td>
+	<td width="487" align="left" valign="middle">
+	<p>
+
+	<!--  *************************** TEXT AREA  *******************************--> 
+<textarea name="textarea" rows="7" style="width:100%; ">&lt;body onLoad='start();'&gt;
+&lt;form target="dispoprice" name="idForm"&gt;
+&lt;input type='hidden' name='showPromotions' value='1'&gt;
+&lt;input type='hidden' name='langue' value=''&gt;&lt;input type='hidden' name='Clusternames' value='NPPOKHTLPokharaChoic'&gt;&lt;input type='hidden' name='Hotelnames' value='NPPOKHTLPokharaChoic'&gt;
+&lt;br&gt;&lt;b&gt;Check In Date: &lt;/b&gt;&lt;br&gt;
+&lt;!-- MONTH --&gt;
+&lt;select name='frommonth'&gt;
+&lt;option value='1'&gt;Jan&lt;/option&gt;
+&lt;option value='2'&gt;Feb&lt;/option&gt;
+&lt;option value='3'&gt;Mar&lt;/option&gt;
+&lt;option value='4'&gt;Apr&lt;/option&gt;
+&lt;option value='5'&gt;May&lt;/option&gt;
+&lt;option value='6'&gt;Jun&lt;/option&gt;
+&lt;option value='7'&gt;Jul&lt;/option&gt;
+&lt;option value='8'&gt;Aug&lt;/option&gt;
+&lt;option value='9'&gt;Sept&lt;/option&gt;
+&lt;option value='10'&gt;Oct&lt;/option&gt;
+&lt;option value='11'&gt;Nov&lt;/option&gt;
+&lt;option value='12'&gt;Dec&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- DAY --&gt;
+&lt;select name='fromday'&gt; 
+&lt;option value='1'&gt;1&lt;/option&gt;
+&lt;option value='2'&gt;2&lt;/option&gt;
+&lt;option value='3'&gt;3&lt;/option&gt;
+&lt;option value='4'&gt;4&lt;/option&gt;
+&lt;option value='5'&gt;5&lt;/option&gt;
+&lt;option value='6'&gt;6&lt;/option&gt;
+&lt;option value='7'&gt;7&lt;/option&gt;
+&lt;option value='8'&gt;8&lt;/option&gt;
+&lt;option value='9'&gt;9&lt;/option&gt;
+&lt;option value='10'&gt;10&lt;/option&gt;
+&lt;option value='11'&gt;11&lt;/option&gt;
+&lt;option value='12'&gt;12&lt;/option&gt;
+&lt;option value='13'&gt;13&lt;/option&gt;
+&lt;option value='14'&gt;14&lt;/option&gt;
+&lt;option value='15'&gt;15&lt;/option&gt;
+&lt;option value='16'&gt;16&lt;/option&gt;
+&lt;option value='17'&gt;17&lt;/option&gt;
+&lt;option value='18'&gt;18&lt;/option&gt;
+&lt;option value='19'&gt;19&lt;/option&gt;
+&lt;option value='20'&gt;20&lt;/option&gt;
+&lt;option value='21'&gt;21&lt;/option&gt;
+&lt;option value='22'&gt;22&lt;/option&gt;
+&lt;option value='23'&gt;23&lt;/option&gt;
+&lt;option value='24'&gt;24&lt;/option&gt;
+&lt;option value='25'&gt;25&lt;/option&gt;
+&lt;option value='26'&gt;26&lt;/option&gt;
+&lt;option value='27'&gt;27&lt;/option&gt;
+&lt;option value='28'&gt;28&lt;/option&gt;
+&lt;option value='29'&gt;29&lt;/option&gt;
+&lt;option value='30'&gt;30&lt;/option&gt;
+&lt;option value='31'&gt;31&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- YEAR --&gt;
+&lt;select name='fromyear' onChange='update_departure();'&gt;
+  &lt;option value="0"&gt;&lt;/option&gt;
+&lt;/select&gt;
+&lt;br&gt;
+
+&lt;b&gt;Check Out Date: &lt;/b&gt;&lt;br&gt;
+
+&lt;select name='tomonth'&gt;
+&lt;option value='1'&gt;Jan&lt;/option&gt;
+&lt;option value='2'&gt;Feb&lt;/option&gt;
+&lt;option value='3'&gt;Mar&lt;/option&gt;
+&lt;option value='4'&gt;Apr&lt;/option&gt;
+&lt;option value='5'&gt;May&lt;/option&gt;
+&lt;option value='6'&gt;Jun&lt;/option&gt;
+&lt;option value='7'&gt;Jul&lt;/option&gt;
+&lt;option value='8'&gt;Aug&lt;/option&gt;
+&lt;option value='9'&gt;Sept&lt;/option&gt;
+&lt;option value='10'&gt;Oct&lt;/option&gt;
+&lt;option value='11'&gt;Nov&lt;/option&gt;
+&lt;option value='12'&gt;Dec&lt;/option&gt;
+&lt;/select&gt;
+
+
+&lt;select name='today'&gt; 
+&lt;option value='1'&gt;1&lt;/option&gt;
+&lt;option value='2'&gt;2&lt;/option&gt;
+&lt;option value='3'&gt;3&lt;/option&gt;
+&lt;option value='4'&gt;4&lt;/option&gt;
+&lt;option value='5'&gt;5&lt;/option&gt;
+&lt;option value='6'&gt;6&lt;/option&gt;
+&lt;option value='7'&gt;7&lt;/option&gt;
+&lt;option value='8'&gt;8&lt;/option&gt;
+&lt;option value='9'&gt;9&lt;/option&gt;
+&lt;option value='10'&gt;10&lt;/option&gt;
+&lt;option value='11'&gt;11&lt;/option&gt;
+&lt;option value='12'&gt;12&lt;/option&gt;
+&lt;option value='13'&gt;13&lt;/option&gt;
+&lt;option value='14'&gt;14&lt;/option&gt;
+&lt;option value='15'&gt;15&lt;/option&gt;
+&lt;option value='16'&gt;16&lt;/option&gt;
+&lt;option value='17'&gt;17&lt;/option&gt;
+&lt;option value='18'&gt;18&lt;/option&gt;
+&lt;option value='19'&gt;19&lt;/option&gt;
+&lt;option value='20'&gt;20&lt;/option&gt;
+&lt;option value='21'&gt;21&lt;/option&gt;
+&lt;option value='22'&gt;22&lt;/option&gt;
+&lt;option value='23'&gt;23&lt;/option&gt;
+&lt;option value='24'&gt;24&lt;/option&gt;
+&lt;option value='25'&gt;25&lt;/option&gt;
+&lt;option value='26'&gt;26&lt;/option&gt;
+&lt;option value='27'&gt;27&lt;/option&gt;
+&lt;option value='28'&gt;28&lt;/option&gt;
+&lt;option value='29'&gt;29&lt;/option&gt;
+&lt;option value='30'&gt;30&lt;/option&gt;
+&lt;option value='31'&gt;31&lt;/option&gt;
+&lt;/select&gt;
+
+
+
+&lt;select name='toyear' onchange='update_departure();'&gt;&lt;option value='0'&gt;&lt;/option&gt;&lt;/select&gt;&lt;br&gt;
+&lt;br&gt; 
+	 
+
+		&lt;b&gt;Adults per room:&lt;/b&gt;
+		&lt;select name='adulteresa'&gt;&lt;option value='1' selected&gt;1&lt;/option&gt;&lt;option value='2' &gt;2&lt;/option&gt;&lt;option value='3' &gt;3&lt;/option&gt;&lt;option value='4' &gt;4&lt;/option&gt;&lt;/select&gt;&lt;br&gt;
+				
+ &lt;strong&gt;Children :&lt;/strong&gt;&lt;select name='enfantresa'&gt;&lt;option value='0' selected&gt;0&lt;/option&gt;&lt;option value='1' &gt;1&lt;/option&gt;&lt;option value='2'&gt;2&lt;/option&gt;&lt;/select&gt;&lt;BR&gt;&lt;strong&gt;Access code/IATA code :&lt;/strong&gt; &lt;input type='password' name='AccessCode' value=''&gt;&lt;BR&gt;		 
+&lt;br&gt;&lt;!-- //// BUTTONS //// --&gt;
+		&lt;input name='B1' type='button' value='Check Availability' onclick='hhotelDispoprice(this.form)'&gt;
+		&lt;a href="javascript:;" onClick="hhotelcancel('NPPOKHTLPokharaChoic','');" colspan="2"&gt;Cancel&lt;/a&gt;
+		&lt;a href="javascript:;" onclick='hhotelSearch("NPPOKHTLPokharaChoic", "", "", "", "", "", "&amp;FSTBKNGTrackLink=");'&gt;Options/Languages&lt;/a&gt; 
+&lt;SCRIPT SRC='fbfulltrack.js'&gt;&lt;/script&gt;
+&lt;/form&gt;
+</textarea>
+	<!-- ***********************************FIN TEXTAREA -->
+	<br>
+	<span class="Style1">Required files:
+	<a href="./CRS - Quick Reservations_files/fblib.js">fblib.js</a>, <a href="./CRS - Quick Reservations_files/fbparam.js">fbparam.js</a>			,<a href="./CRS - Quick Reservations_files/fbfulltrack.js">fbfulltrack.js</a></span>
+
+	</p>
+	</td>
+</tr>
+<tr valign="top">
+<td height="41" colspan="2" align="left">       
+<table width="100%" cellpadding="4" cellspacing="1">
+	<tbody><tr align="justify">
+		<td height="30" colspan="10">
+		<p><span class="Style2">Step 1</span><br>Copy this script files <span class="Style1">
+		<a href="./CRS - Quick Reservations_files/fblib.js">fblib.js</a>, <a href="./CRS - Quick Reservations_files/fbparam.js">fbparam.js</a>			, <a href="./CRS - Quick Reservations_files/fbfulltrack.js">fbfulltrack.js</a></span> at the root of your Web site.</p><br>
+		<p><span class="Style2">Step 2</span><br>Include the <a href="./CRS - Quick Reservations_files/fblib.js">fblib.js</a>, <a href="./CRS - Quick Reservations_files/fbparam.js">fbparam.js</a> 
+		script file in the  header section of your web page.<br><span class="Style1"></span></p><xmp><head><title>..</title><script language='javascript' type='text/javascript' src='fbparam.js'></script><script language='javascript' type='text/javascript' src='fblib.js'>...</head>.</xmp>
+		<p></p><br>
+		<p><span class="Style2">Step 3</span><br>Call the <em><strong>start();</strong></em> function on the 'onload' event of the body tag:<br><span class="Style1"> &lt;body onLoad='start();'&gt;</span><br>
+		</p><br>
+		<p align="left"><span class="Style2">Step 4</span><br>Include the 'fbfulltrack.js'  before the &lt;/body&gt; tag of your web page: <br><span class="Style1">....<br>&lt;script LANGUAGE='javascript' type='text/javascript' src='fbfulltrack.js'&gt;&lt;/script&gt;<br>&lt;/body&gt;</span><br>This will identify your client web origin (Web site).
+		</p><br>
+		<p><span class="Style2">Step 5</span><br>Use styles to personalize the style form: <span class="Style1"><br>&lt;style type="text/css"&gt;
+		input,textarea,select,button {color: #312E64; ... } ... &lt;/style&gt;.</span></p><br>
+		<p><span class="Style2">Step 6</span><br> By default  the reservation form will use  clients browser language. For the English version of the website, we do suggest not to force the language, using the following code : &lt;input type="hidden" name="langue" <span class="Style1">value=""</span>&gt;. 
+		For other language versions, use the following codes for the "langue" hidden field:<br></p>				</td><td colspan="3">&nbsp;</td>
+	</tr>
+	<tr class="Style4" valign="bottom" bgcolor="#EEEEEE">
+          <td height="30"><strong class="Style">Language</strong></td>
+          <td height="30">Arab</td>
+          <td height="30">Chinese</td>
+          <td height="30" colspan="2">Traditional Chinese</td>
+          <td height="30">Korean</td>
+          <td height="30">Serbo-Croat</td>
+          <td height="30">Czech</td>
+          <td height="30">Danish</td>
+          <td height="30">Finnish</td>
+          <td height="30">French</td>
+          <td height="30">German</td>
+          <td height="30">Greek</td>
+          <td height="30">Hungarian</td>
+		  <td height="30">Icelandic</td>
+		  <td height="30">Bulgarian</td>
+		  <td height="30">Slovak</td>
+        </tr>
+        <tr valign="top" class="Style3">
+          <td height="30"><span class="Style">value</span></td>
+          <td>arab</td>
+          <td>china</td>
+          <td colspan="2">chinatrad</td>
+          <td>coreen</td>
+          <td>croate</td>
+          <td>czech</td>
+          <td>dansk</td>
+          <td>finnish</td>
+          <td>france</td>
+          <td>germany</td>
+          <td>greek</td>
+          <td>hungria</td>
+		  <td>islensk</td>
+		  <td>bulgarian</td>
+		  <td>slovak</td>
+        </tr>
+        <tr valign="bottom" class="Style4" bgcolor="#EEEEEE">
+          <td height="30"><strong class="Style">Language</strong></td>
+          <td height="30">Italian</td>
+          <td height="30">Japanese</td>
+          <td height="30">Dutch</td>
+          <td height="30">Norwegian</td>
+          <td height="30">Portuguese</td>
+          <td height="30">Polish</td>
+		  <td height="30">Romanian</td>
+          <td height="30">Russian</td>
+          <td height="30">Spanish</td>
+          <td height="30">Swedish</td>
+		  <td height="30">Thai</td>
+          <td height="30">Turkish</td>
+          <td height="30">English</td>
+		  <td height="30">Catalan</td>
+		  <td height="30">Slovenian</td>
+        </tr>
+        <tr class="Style3" valign="top">
+          <td height="30" class="Style">value</td>
+          <td>italy</td>
+          <td>japan</td>
+          <td>nether</td>
+          <td>norsk</td>
+          <td>portuguese</td>
+          <td>poland</td>
+		  <td>romanian</td>
+          <td>russian</td>
+          <td>spain</td>
+          <td>svensk</td>
+		  <td>thai</td>
+          <td>turk</td>
+          <td>uk</td>
+		  <td>catalan</td>
+		  <td>slovenian</td>
+        </tr>
+		</tbody></table>
+</td>
+</tr>
+</tbody></table>
+
+
+</body></html>

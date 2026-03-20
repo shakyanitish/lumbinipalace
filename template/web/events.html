@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumbini Palace Resort | Harmony of Nature &amp; Culture</title>
+
+    <link rel="icon" href="assets/img/logo_2.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- Animate.css (WOW.js) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS (extracted, only used styles) -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- ============ SIDEBAR (MOBILE) ============ -->
+    <div class="ul-sidebar">
+        <div class="ul-sidebar-header">
+            <button class="ul-sidebar-closer"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="ul-sidebar-header-nav-wrapper d-block d-lg-none"></div>
+        <div class="to-go-to-sidebar-in-mobile d-block d-lg-none">
+            <nav class="ul-header-nav">
+                <a href="index.html" role="button">Home</a>
+                <a href="#">About</a>
+                <a href="#">Rooms</a>
+                <a href="#">Meeting &amp; Events</a>
+                <a href="#" role="button">Restro &amp; Bar</a>
+                <a href="#">Explore</a>
+                <a href="#" role="button">Blog</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+        <div class="ul-sidebar-footer">
+            <span class="ul-sidebar-footer-title">Follow us</span>
+            <div class="ul-sidebar-footer-social">
+                <a href="https://www.facebook.com/lumbinipalaceresort"><i class="fab fa-facebook"></i></a>
+                <a href="https://x.com/LumbiniResort"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/lumbini_palace_resort/"><i class="fab fa-instagram"></i></a>
+                <a href="https://np.linkedin.com/company/lumbini-palace-resort"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ DESKTOP HEADER ============ -->
+    <header class="marriott-header d-none d-lg-block w-100 bg-white">
+        <div class="marriott-header-top">
+            <div class="marriott-header-logo">
+                <a href="index.html"><img src="assets/img/LPR logo.png" alt="Lumbini Palace Resort"
+                        class="mh-logo-img"></a>
+            </div>
+            <div class="marriott-header-nav">
+                <a href="index.html">Overview</a>
+                <a href="rooms.html">Accommodations</a>
+                <a href="dining.html">Dining</a>
+                <a href="events.html" class="active">Events</a>
+                <a href="experiences.html">Experiences</a>
+                <a href="gallery.html">Gallery</a>
+            </div>
+        </div>
+        <div class="marriott-header-middle-wrapper mh-middle-h">
+            <div class="marriott-header-middle">
+                <div class="mhm-left">
+                    <h1 class="mhm-title">Lumbini Palace Resort</h1>
+                    <div class="mhm-stars">
+                        <i class="fa-solid fa-circle"></i>
+                        <i class="fa-solid fa-circle"></i>
+                        <i class="fa-solid fa-circle"></i>
+                        <i class="fa-solid fa-circle"></i>
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                    </div>
+                    <div class="mhm-reviews">
+                        <span>4.6 • </span>
+                        <a href="#">622 Reviews</a>
+                    </div>
+                </div>
+                <div class="mhm-right">
+                    <div class="mhm-right">
+                        <a href="https://www.google.com/maps/place/Lumbini+Palace+Resort+Ltd./@27.5844296,83.376834,774m/data=!3m2!1e3!4b1!4m9!3m8!1s0x39968f83cc85c70f:0x728b57934588e771!5m2!4m1!1i2!8m2!3d27.5844296!4d83.376834!16s%2Fg%2F11j2fyr7k5?hl=en&entry=ttu&g_ep=EgoyMDI2MDMxMC4wIKXMDSoASAFQAw%3D%3D"
+                            target="_blank" rel="noopener noreferrer" class="mhm-right-link"><i
+                                class="bi bi-geo-alt text-decoration-none"></i> <span>VIEW MAP</span></a>
+
+                        <a href="tel:+97715970300" class="mhm-right-link"><i class="fa-solid fa-phone"></i> <span>+977
+                                1-5970300</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="marriott-header-bottom-wrapper mh-bottom-h">
+            <div class="marriott-header-bottom">
+                <div class="mhb-fields-container">
+                    <div class="mhb-field" id="mhb-dates-field">
+                        <div class="mhb-label"><i class="fa-regular fa-calendar-days mhb-label-icon"></i> DATES (1
+                            NIGHT)</div>
+                        <div class="mhb-value">
+                            <span>Sun, Mar 08 <span class="mhb-date-arrow">&rarr;</span> Mon, Mar
+                                09</span>
+                        </div>
+                        <!-- Dates Dropdown -->
+                        <div class="mhb-dropdown mhb-dates-dropdown">
+                            <div class="mhb-dropdown-header">
+                                <div class="mhb-close-btn"><i class="fa-solid fa-xmark"></i></div>
+                            </div>
+                            <div class="mhb-dates-tabs">
+                                <div class="mhb-date-tab active">Specific Dates</div>
+                                <div class="mhb-date-tab">Flexible Dates</div>
+                            </div>
+                            <div class="mhb-calendar-container">
+                                <div class="mhb-calendar-month">
+                                    <div class="mhb-month-header">
+                                        <i class="fa-solid fa-chevron-left mhb-cal-nav"></i>
+                                        <div class="mhb-month-title">March 2026</div>
+                                        <div></div>
+                                    </div>
+                                    <div class="mhb-days-grid">
+                                        <div class="mhb-day-name">Sun</div>
+                                        <div class="mhb-day-name">Mon</div>
+                                        <div class="mhb-day-name">Tue</div>
+                                        <div class="mhb-day-name">Wed</div>
+                                        <div class="mhb-day-name">Thu</div>
+                                        <div class="mhb-day-name">Fri</div>
+                                        <div class="mhb-day-name">Sat</div>
+                                        <div class="mhb-day other-month">22</div>
+                                        <div class="mhb-day other-month">23</div>
+                                        <div class="mhb-day other-month">24</div>
+                                        <div class="mhb-day other-month">25</div>
+                                        <div class="mhb-day other-month">26</div>
+                                        <div class="mhb-day other-month">27</div>
+                                        <div class="mhb-day other-month">28</div>
+                                        <div class="mhb-day">1</div>
+                                        <div class="mhb-day">2</div>
+                                        <div class="mhb-day">3</div>
+                                        <div class="mhb-day">4</div>
+                                        <div class="mhb-day">5</div>
+                                        <div class="mhb-day">6</div>
+                                        <div class="mhb-day">7</div>
+                                        <div class="mhb-day selected">8</div>
+                                        <div class="mhb-day selected">9</div>
+                                        <div class="mhb-day">10</div>
+                                        <div class="mhb-day">11</div>
+                                        <div class="mhb-day">12</div>
+                                        <div class="mhb-day">13</div>
+                                        <div class="mhb-day">14</div>
+                                        <div class="mhb-day">15</div>
+                                        <div class="mhb-day">16</div>
+                                        <div class="mhb-day">17</div>
+                                        <div class="mhb-day">18</div>
+                                        <div class="mhb-day">19</div>
+                                        <div class="mhb-day">20</div>
+                                        <div class="mhb-day">21</div>
+                                        <div class="mhb-day">22</div>
+                                        <div class="mhb-day">23</div>
+                                        <div class="mhb-day">24</div>
+                                        <div class="mhb-day">25</div>
+                                        <div class="mhb-day">26</div>
+                                        <div class="mhb-day">27</div>
+                                        <div class="mhb-day">28</div>
+                                        <div class="mhb-day">29</div>
+                                        <div class="mhb-day">30</div>
+                                        <div class="mhb-day">31</div>
+                                        <div class="mhb-day other-month">1</div>
+                                        <div class="mhb-day other-month">2</div>
+                                        <div class="mhb-day other-month">3</div>
+                                        <div class="mhb-day other-month">4</div>
+                                    </div>
+                                </div>
+                                <div class="mhb-calendar-month">
+                                    <div class="mhb-month-header">
+                                        <div></div>
+                                        <div class="mhb-month-title">April 2026</div>
+                                        <i class="fa-solid fa-chevron-right mhb-cal-nav"></i>
+                                    </div>
+                                    <div class="mhb-days-grid">
+                                        <div class="mhb-day-name">Sun</div>
+                                        <div class="mhb-day-name">Mon</div>
+                                        <div class="mhb-day-name">Tue</div>
+                                        <div class="mhb-day-name">Wed</div>
+                                        <div class="mhb-day-name">Thu</div>
+                                        <div class="mhb-day-name">Fri</div>
+                                        <div class="mhb-day-name">Sat</div>
+                                        <div class="mhb-day other-month">29</div>
+                                        <div class="mhb-day other-month">30</div>
+                                        <div class="mhb-day other-month">31</div>
+                                        <div class="mhb-day">1</div>
+                                        <div class="mhb-day">2</div>
+                                        <div class="mhb-day">3</div>
+                                        <div class="mhb-day">4</div>
+                                        <div class="mhb-day">5</div>
+                                        <div class="mhb-day">6</div>
+                                        <div class="mhb-day">7</div>
+                                        <div class="mhb-day">8</div>
+                                        <div class="mhb-day">9</div>
+                                        <div class="mhb-day">10</div>
+                                        <div class="mhb-day">11</div>
+                                        <div class="mhb-day">12</div>
+                                        <div class="mhb-day">13</div>
+                                        <div class="mhb-day">14</div>
+                                        <div class="mhb-day">15</div>
+                                        <div class="mhb-day">16</div>
+                                        <div class="mhb-day">17</div>
+                                        <div class="mhb-day">18</div>
+                                        <div class="mhb-day">19</div>
+                                        <div class="mhb-day">20</div>
+                                        <div class="mhb-day">21</div>
+                                        <div class="mhb-day">22</div>
+                                        <div class="mhb-day">23</div>
+                                        <div class="mhb-day">24</div>
+                                        <div class="mhb-day">25</div>
+                                        <div class="mhb-day">26</div>
+                                        <div class="mhb-day">27</div>
+                                        <div class="mhb-day">28</div>
+                                        <div class="mhb-day">29</div>
+                                        <div class="mhb-day">30</div>
+                                        <div class="mhb-day other-month">1</div>
+                                        <div class="mhb-day other-month">2</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mhb-dropdown-done">
+                                <button class="mhb-done-btn">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seperator-line"></div>
+                    <div class="mhb-field" id="mhb-rooms-field">
+                        <div class="mhb-label">ROOMS &amp; GUESTS</div>
+                        <div class="mhb-value">
+                            <span>1 Room, 1 Adult</span>
+                            <i class="fa-solid fa-chevron-down mhb-value-icon"></i>
+                        </div>
+                        <!-- Rooms Dropdown -->
+                        <div class="mhb-dropdown mhb-rooms-dropdown">
+                            <div class="mhb-dropdown-header">
+                                <div class="mhb-close-btn"><i class="fa-solid fa-xmark"></i></div>
+                            </div>
+                            <div class="mhb-rooms-msg">MAXIMUM 8 GUESTS PER ROOM</div>
+                            <div class="mhb-row" data-type="rooms">
+                                <div class="mhb-row-info">
+                                    <span class="mhb-row-label">Rooms</span>
+                                    <span class="mhb-row-subtext">(Max: 3 Rooms/person)</span>
+                                </div>
+                                <div class="mhb-counter">
+                                    <button class="mhb-count-btn minus disabled">-</button>
+                                    <span class="mhb-count-num">1</span>
+                                    <button class="mhb-count-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="mhb-row" data-type="adults">
+                                <div class="mhb-row-info">
+                                    <span class="mhb-row-label">Adults</span>
+                                    <span class="mhb-row-subtext">(Max: 8 total guests/room)</span>
+                                </div>
+                                <div class="mhb-counter">
+                                    <button class="mhb-count-btn minus disabled">-</button>
+                                    <span class="mhb-count-num">1</span>
+                                    <button class="mhb-count-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="mhb-row" data-type="children">
+                                <div class="mhb-row-info">
+                                    <span class="mhb-row-label">Children</span>
+                                    <span class="mhb-row-subtext">(Max: 8 total guests/room)</span>
+                                </div>
+                                <div class="mhb-counter">
+                                    <button class="mhb-count-btn minus disabled">-</button>
+                                    <span class="mhb-count-num">0</span>
+                                    <button class="mhb-count-btn plus">+</button>
+                                </div>
+                            </div>
+                            <div class="mhb-dropdown-done">
+                                <button class="mhb-done-btn">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seperator-line"></div>
+                    <div class="mhb-field" style="border-right: none;" id="mhb-rates-field">
+                        <div class="mhb-label">SPECIAL RATES</div>
+                        <div class="mhb-value">
+                            <span>Lowest Regular Rate</span>
+                            <i class="fa-solid fa-chevron-down mhb-value-icon"></i>
+                        </div>
+                        <!-- Rates Dropdown -->
+                        <div class="mhb-dropdown mhb-rates-dropdown">
+                            <div class="mhb-dropdown-header">
+                                <div class="mhb-close-btn"><i class="fa-solid fa-xmark"></i></div>
+                            </div>
+                            <div class="mhb-rate-item active" data-rate="Lowest Regular Rate">
+                                <span class="mhb-rate-text">Lowest Regular Rate</span>
+                                <div class="mhb-radio"></div>
+                            </div>
+                            <div class="mhb-rate-item" data-rate="Corp/Promo Code">
+                                <span class="mhb-rate-text">Corp/Promo Code</span>
+                                <div class="mhb-radio"></div>
+                            </div>
+                            <div class="mhb-promo-field d-none">
+                                <input type="text" class="mhb-promo-input" placeholder="Enter Code">
+                                <i class="fa-solid fa-circle-xmark mhb-promo-clear"></i>
+                            </div>
+                            <div class="mhb-rate-item" data-rate="Senior Discount">
+                                <span class="mhb-rate-text">Senior Discount</span>
+                                <div class="mhb-radio"></div>
+                            </div>
+                            <div class="mhb-rate-item" data-rate="AAA/CAA">
+                                <span class="mhb-rate-text">AAA/CAA</span>
+                                <div class="mhb-radio"></div>
+                            </div>
+                            <div class="mhb-rate-item" data-rate="Government & Military">
+                                <span class="mhb-rate-text">Government & Military</span>
+                                <div class="mhb-radio"></div>
+                            </div>
+                            <div class="mhb-rate-item" data-rate="Group Code">
+                                <span class="mhb-rate-text">Group Code</span>
+                                <div class="mhb-radio"></div>
+                            </div>
+                            <div class="mhb-rate-item" data-rate="Marriott Bonvoy Points">
+                                <span class="mhb-rate-text">Marriott Bonvoy Points</span>
+                                <div class="mhb-radio"></div>
+                            </div>
+                            <div class="mhb-dropdown-done">
+                                <button class="mhb-done-btn">Done</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mhb-action">
+                        <a href="#" class="mhb-btn">View Rates</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============ MOBILE HEADER ============ -->
+    <header class="ul-header d-lg-none bg-white">
+        <div class="ul-header-bottom">
+            <div class="ul-header-bottom-wrapper ul-mob-header-wrap">
+                <div class="header-bottom-left">
+                    <div class="logo-container">
+                        <a href="index.html" class="d-inline-block"><img src="assets/img/logo.png" alt="logo"
+                                class="logo ul-mob-logo-img"></a>
+                    </div>
+                </div>
+                <div class="ul-header-actions">
+                    <button class="ul-header-sidebar-opener ul-mob-menu-btn"><i
+                            class="fa-solid fa-bars ul-mob-menu-btn-icon"></i></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER SECTION -->
+    <section class="marriott-style-banner">
+        <div class="ul-banner-slider swiper ul-hero-swiper-fixed">
+            <div class="ul-banner-slide marriott-slide-image" data-img="assets/img/hall-details-img-big-1.jpg">
+            </div>
+        </div>
+    </section>
+    <main class="main-body">
+
+        <!-- EVENTS HERO SECTION -->
+        <section class="m-events-hero text-white text-center m-events-hero-bg">
+            <div class="container py-5">
+                <p class="font-secondary text-uppercase mb-3 m-events-hero-label">EVENTS</p>
+                <div class="m-events-hero-divider"></div>
+                <h1 class="font-secondary fw-bold mb-3 m-events-hero-title">Start Planning Your Meetings or Events Here
+                </h1>
+                <p class="font-secondary mb-4 pb-2 m-events-hero-desc">Tell us about your event, then we'll contact you
+                    and plan it together</p>
+                <a href="#eventPlanModal" data-bs-toggle="modal"
+                    class="btn btn-light rounded-pill px-4 py-2 font-secondary text-dark m-events-hero-btn">Start Your
+                    Plan Here</a>
+            </div>
+        </section>
+
+        <!-- EVENTS STATS STRIP -->
+        <section class="m-events-stats py-4">
+            <div class="container">
+                <div class="row text-center g-4 justify-content-center">
+                    <div class="col-6 col-md-3">
+                        <div class="m-events-stat-divider"></div>
+                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num">7</h2>
+                        <p class="font-secondary text-dark fw-bold mb-0 m-events-stat-label">Event Rooms</p>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="m-events-stat-divider"></div>
+                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num">954 SQ MT</h2>
+                        <p class="font-secondary text-dark fw-bold mb-0 m-events-stat-label">Total Event Space</p>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="m-events-stat-divider"></div>
+                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num">600</h2>
+                        <p class="font-secondary text-dark fw-bold mb-0 m-events-stat-label">Capacity Largest Space</p>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="m-events-stat-divider"></div>
+                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num">5</h2>
+                        <p class="font-secondary text-dark fw-bold mb-0 m-events-stat-label">Breakout Rooms</p>
+                    </div>
+                </div>
+
+                <div class="text-center pt-5 pb-3">
+                    <a href="#collapseCapacity"
+                        class="text-dark text-decoration-none font-secondary fw-bold m-events-stat-link ul-scroll-to-accordion"><span
+                            class="text-decoration-underline ul-underline-offset">Capacity Chart</span></a>
+                    <span class="mx-4 ul-text-light-gray">|</span>
+                    <a href="#collapseEquipment"
+                        class="text-dark text-decoration-none font-secondary fw-bold m-events-stat-link ul-scroll-to-accordion"><span
+                            class="text-decoration-underline ul-underline-offset">Equipment and Services</span></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEETING AND EVENTS OVERVIEW -->
+        <section class="m-meeting-overview bg-white pb-5">
+            <!-- Large Image (Full Width) -->
+            <div class="container-fluid px-0 pb-4">
+                <div class="m-meeting-hero-img accordion-highlights__image dynamic-meetings__image">
+                    <picture>
+                        <source media="(min-width: 1920px)" srcset="./assets/img/hall-details-img-big-1.jpg">
+                        <source media="(min-width: 1200px) and (max-width: 1919px)"
+                            srcset="./assets/img/hall-details-img-big-1.jpg">
+                        <source media="(min-width: 768px) and (max-width: 1199px)"
+                            srcset="./assets/img/hall-details-img-big-1.jpg">
+                        <source media="(min-width: 320px) and (max-width: 767px)"
+                            srcset="./assets/img/hall-details-img-big-1.jpg">
+                        <img src="./assets/img/hall-details-img-big-1.jpg"
+                            class="img-fluid w-100 object-fit-cover m-meeting-hero-img-style"
+                            alt="Trishuli Meeting Room">
+                    </picture>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Meeting Info Text -->
+                <div class="text-center pb-2 mx-auto m-meeting-info-wrap">
+                    <h2 class="font-primary fw-bold mt-2 m-meeting-info-title">Meeting and Events</h2>
+                    <p class="font-secondary text-dark m-meeting-info-desc">Enjoy 8,105 square feet of contemporary
+                        event space and banquet halls in Kathmandu</p>
+                </div>
+
+                <!-- 3 Columns with Red Borders -->
+                <div class="row gx-4 gx-lg-5 gy-4 align-items-stretch pb-3">
+                    <div class="col-md-4">
+                        <div class="h-100 ps-3 py-1 m-meeting-feature-border">
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">Our impressive banquet hall
+                                in Kathmandu boasts 16-foot ceilings and is ideal for large events</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="h-100 ps-3 py-1 m-meeting-feature-border">
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">At our Kathmandu event
+                                space, all party venues include modern AV equipment and high-speed Wi-Fi</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="h-100 ps-3 py-1 m-meeting-feature-border">
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">Energize your attendees
+                                with catered meals, snacks and beverages prepared by our culinary team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3 mb-4">
+                    <a href="#" class="text-muted text-decoration-none font-secondary m-meeting-see-more"><span
+                            class="text-decoration-underline ul-underline-offset">See More</span></a>
+                </div>
+            </div>
+        </section>
+        <section class="m-meeting-overview bg-white pb-5">
+            <!-- Large Image (Full Width) -->
+            <div class="container-fluid px-0 pb-4">
+                <div class="m-meeting-hero-img accordion-highlights__image dynamic-meetings__image">
+                    <picture>
+                        <source media="(min-width: 1920px)" srcset="./assets/img/hall-details-img-big-1.jpg">
+                        <source media="(min-width: 1200px) and (max-width: 1919px)"
+                            srcset="./assets/img/hall-details-img-big-1.jpg">
+                        <source media="(min-width: 768px) and (max-width: 1199px)"
+                            srcset="./assets/img/hall-details-img-big-1.jpg">
+                        <source media="(min-width: 320px) and (max-width: 767px)"
+                            srcset="./assets/img/hall-details-img-big-1.jpg">
+                        <img src="./assets/img/hall-details-img-big-1.jpg"
+                            class="img-fluid w-100 object-fit-cover m-meeting-hero-img-style"
+                            alt="Trishuli Meeting Room">
+                    </picture>
+                </div>
+            </div>
+
+            <div class="container">
+                <!-- Meeting Info Text -->
+                <div class="text-center pb-2 mx-auto m-meeting-info-wrap">
+                    <h2 class="font-primary fw-bold mt-2 m-meeting-info-title">Meeting and Events</h2>
+                    <p class="font-secondary text-dark m-meeting-info-desc">Enjoy 8,105 square feet of contemporary
+                        event space and banquet halls in Kathmandu</p>
+                </div>
+
+                <!-- 3 Columns with Red Borders -->
+                <div class="row gx-4 gx-lg-5 gy-4 align-items-stretch pb-3">
+                    <div class="col-md-4">
+                        <div class="h-100 ps-3 py-1 m-meeting-feature-border">
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">Our impressive banquet hall
+                                in Kathmandu boasts 16-foot ceilings and is ideal for large events</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="h-100 ps-3 py-1 m-meeting-feature-border">
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">At our Kathmandu event
+                                space, all party venues include modern AV equipment and high-speed Wi-Fi</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="h-100 ps-3 py-1 m-meeting-feature-border">
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">Energize your attendees
+                                with catered meals, snacks and beverages prepared by our culinary team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3 mb-4">
+                    <a href="#" class="text-muted text-decoration-none font-secondary m-meeting-see-more"><span
+                            class="text-decoration-underline ul-underline-offset">See More</span></a>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="events-accordion-container aem-GridColumn aem-GridColumn--default--12 bg-light py-4">
+            <div
+                class="faq-accordion app-js__faq-accordion d-flex justify-content-center marriott-aem w-100 color-scheme3">
+                <div class="container">
+                    <div
+                        class="faq-accordion-content-container d-flex justify-content-start align-items-start flex-column container col-12 col-xl-10">
+
+                        <div class="faq-accordion-container d-flex flex-column w-100 py-4 mt-1 mb-2 mt-xl-2 mb-xl-4 m-auto"
+                            data-multiple="true">
+                            <div class="accordion" id="eventsAccordion">
+
+                                <!-- Capacity Chart Accordion -->
+                                <div class="accordion-item border-0 bg-transparent border-top rounded-0 mb-0">
+                                    <h2 class="accordion-header" id="headingCapacity">
+                                        <button class="accordion-button collapsed bg-transparent shadow-none px-0 py-4"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseCapacity"
+                                            aria-expanded="false" aria-controls="collapseCapacity">
+                                            Capacity Chart
+                                        </button>
+                                    </h2>
+                                    <div id="collapseCapacity" class="accordion-collapse collapse"
+                                        aria-labelledby="headingCapacity" data-bs-parent="#eventsAccordion">
+                                        <div class="accordion-body px-0 pt-0 pb-4">
+                                            <div class="capacity-chart app-js__capacity-chart">
+                                                <ul class="nav nav-pills mb-4" id="capacity-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button
+                                                            class="nav-link active rounded-pill px-4 py-2 font-secondary small"
+                                                            id="feet-tab" data-bs-toggle="pill" data-bs-target="#feet"
+                                                            type="button" role="tab" aria-controls="feet"
+                                                            aria-selected="true"
+                                                            style="background-color: var(--ul-primary); color: white;">Feet</button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button
+                                                            class="nav-link rounded-pill px-4 py-2 font-secondary small text-dark border ms-2"
+                                                            id="meter-tab" data-bs-toggle="pill" data-bs-target="#meter"
+                                                            type="button" role="tab" aria-controls="meter"
+                                                            aria-selected="false">Meters</button>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content border-top pt-4" id="capacity-tabContent">
+                                                    <!-- Feet Tab Panel -->
+                                                    <div class="tab-pane fade show active" id="feet" role="tabpanel"
+                                                        aria-labelledby="feet-tab">
+                                                        <div class="table-responsive">
+                                                            <table
+                                                                class="table font-secondary small text-muted align-middle">
+                                                                <thead>
+                                                                    <tr class="text-dark border-bottom">
+                                                                        <th class="fw-bold py-3 border-0">Meeting Room
+                                                                        </th>
+                                                                        <th class="fw-bold py-3 border-0">Dimensions
+                                                                            (LxWxH)</th>
+                                                                        <th class="fw-bold py-3 border-0">Area (sq.ft)
+                                                                        </th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Theater</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Schoolroom</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Conference</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            U-Shape</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Reception</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Banquet</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Glade 1</td>
+                                                                        <td class="py-3 border-0">147.6x139.4x59.1</td>
+                                                                        <td class="py-3 border-0">1912.8</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">70</td>
+                                                                        <td class="text-center py-3 border-0">80</td>
+                                                                        <td class="text-center py-3 border-0">60</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">80</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Glade 2</td>
+                                                                        <td class="py-3 border-0">147.6x139.4x59.1</td>
+                                                                        <td class="py-3 border-0">1912.8</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">70</td>
+                                                                        <td class="text-center py-3 border-0">80</td>
+                                                                        <td class="text-center py-3 border-0">60</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">80</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Kosi Lawn
+                                                                        </td>
+                                                                        <td class="py-3 border-0">1,417.4x196.9x-</td>
+                                                                        <td class="py-3 border-0">2368.1</td>
+                                                                        <td class="text-center py-3 border-0">750</td>
+                                                                        <td class="text-center py-3 border-0">600</td>
+                                                                        <td class="text-center py-3 border-0">350</td>
+                                                                        <td class="text-center py-3 border-0">400</td>
+                                                                        <td class="text-center py-3 border-0">750</td>
+                                                                        <td class="text-center py-3 border-0">350</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Glade
+                                                                            Ballroom</td>
+                                                                        <td class="py-3 border-0">278.9x147.6x59.1</td>
+                                                                        <td class="py-3 border-0">3825.5</td>
+                                                                        <td class="text-center py-3 border-0">300</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">120</td>
+                                                                        <td class="text-center py-3 border-0">300</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Glade Pre
+                                                                            Function Area</td>
+                                                                        <td class="py-3 border-0">173.9x75.5x59.1</td>
+                                                                        <td class="py-3 border-0">1218.5</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Kosi Lawn
+                                                                            Deck</td>
+                                                                        <td class="py-3 border-0">150.9x59.1x-</td>
+                                                                        <td class="py-3 border-0">827.8</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Center Lawn
+                                                                        </td>
+                                                                        <td class="py-3 border-0">433.1x387.2x-</td>
+                                                                        <td class="py-3 border-0">15575.5</td>
+                                                                        <td class="text-center py-3 border-0">500</td>
+                                                                        <td class="text-center py-3 border-0">400</td>
+                                                                        <td class="text-center py-3 border-0">500</td>
+                                                                        <td class="text-center py-3 border-0">300</td>
+                                                                        <td class="text-center py-3 border-0">600</td>
+                                                                        <td class="text-center py-3 border-0">250</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Meters Tab Panel -->
+                                                    <div class="tab-pane fade" id="meter" role="tabpanel"
+                                                        aria-labelledby="meter-tab">
+                                                        <div class="table-responsive">
+                                                            <table
+                                                                class="table font-secondary small text-muted align-middle">
+                                                                <thead>
+                                                                    <tr class="text-dark border-bottom">
+                                                                        <th class="fw-bold py-3 border-0">Meeting Room
+                                                                        </th>
+                                                                        <th class="fw-bold py-3 border-0">Dimensions
+                                                                            (LxWxH)</th>
+                                                                        <th class="fw-bold py-3 border-0">Area (sq.mt)
+                                                                        </th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Theater</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Schoolroom</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Conference</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            U-Shape</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Reception</th>
+                                                                        <th class="fw-bold py-3 border-0 text-center">
+                                                                            Banquet</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <!-- Table rows structure equivalent to feet but with sq.mt values, for demonstration matching user request -->
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Glade 1</td>
+                                                                        <td class="py-3 border-0">45.0x42.5x18.0</td>
+                                                                        <td class="py-3 border-0">177.7</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">70</td>
+                                                                        <td class="text-center py-3 border-0">80</td>
+                                                                        <td class="text-center py-3 border-0">60</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">80</td>
+                                                                    </tr>
+                                                                    <!-- Add remaining table rows similarly to original response -->
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Glade 2</td>
+                                                                        <td class="py-3 border-0">45.0x42.5x18.0</td>
+                                                                        <td class="py-3 border-0">177.7</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">70</td>
+                                                                        <td class="text-center py-3 border-0">80</td>
+                                                                        <td class="text-center py-3 border-0">60</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">80</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Kosi Lawn
+                                                                        </td>
+                                                                        <td class="py-3 border-0">432.0x60.0x-</td>
+                                                                        <td class="py-3 border-0">220.0</td>
+                                                                        <td class="text-center py-3 border-0">750</td>
+                                                                        <td class="text-center py-3 border-0">600</td>
+                                                                        <td class="text-center py-3 border-0">350</td>
+                                                                        <td class="text-center py-3 border-0">400</td>
+                                                                        <td class="text-center py-3 border-0">750</td>
+                                                                        <td class="text-center py-3 border-0">350</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Glade
+                                                                            Ballroom</td>
+                                                                        <td class="py-3 border-0">85.0x45.0x18.0</td>
+                                                                        <td class="py-3 border-0">355.4</td>
+                                                                        <td class="text-center py-3 border-0">300</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                        <td class="text-center py-3 border-0">120</td>
+                                                                        <td class="text-center py-3 border-0">300</td>
+                                                                        <td class="text-center py-3 border-0">150</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Glade Pre
+                                                                            Function Area</td>
+                                                                        <td class="py-3 border-0">53.0x23.0x18.0</td>
+                                                                        <td class="py-3 border-0">113.2</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Kosi Lawn
+                                                                            Deck</td>
+                                                                        <td class="py-3 border-0">46.0x18.0x-</td>
+                                                                        <td class="py-3 border-0">76.9</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                        <td class="text-center py-3 border-0">-</td>
+                                                                    </tr>
+                                                                    <tr class="border-bottom">
+                                                                        <td class="text-dark py-3 border-0">Center Lawn
+                                                                        </td>
+                                                                        <td class="py-3 border-0">132.0x118.0x-</td>
+                                                                        <td class="py-3 border-0">1447.0</td>
+                                                                        <td class="text-center py-3 border-0">500</td>
+                                                                        <td class="text-center py-3 border-0">400</td>
+                                                                        <td class="text-center py-3 border-0">500</td>
+                                                                        <td class="text-center py-3 border-0">300</td>
+                                                                        <td class="text-center py-3 border-0">600</td>
+                                                                        <td class="text-center py-3 border-0">250</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Room Set-up Examples Accordion -->
+                                <div class="accordion-item border-0 bg-transparent border-top rounded-0 mb-0">
+                                    <h2 class="accordion-header" id="headingSetup">
+                                        <button class="accordion-button collapsed bg-transparent shadow-none px-0 py-4"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseSetup"
+                                            aria-expanded="false" aria-controls="collapseSetup">
+                                            Room Set-up Examples
+                                        </button>
+                                    </h2>
+                                    <div id="collapseSetup" class="accordion-collapse collapse"
+                                        aria-labelledby="headingSetup" data-bs-parent="#eventsAccordion">
+                                        <div class="accordion-body px-0 pt-0 pb-4">
+                                            <!-- Setup examples layout matches the users source request format -->
+                                            <div class="row align-items-center mb-4">
+                                                <div class="col-md-3">
+                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-banquet-33747:Square?wid=206&fit=constrain"
+                                                        alt="Banquet setup" class="img-fluid border">
+                                                </div>
+                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
+                                                    <h6 class="text-dark fw-bold mb-2">Banquet</h6>
+                                                    <p class="small mb-0">Generally used for meals and sessions
+                                                        involving small group discussions. A five foot round table seats
+                                                        eight people comfortably. A six foot round table seats 10 people
+                                                        comfortably.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-4">
+                                                <div class="col-md-3">
+                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-conference-and-hollow-40456:Square?wid=206&fit=constrain"
+                                                        alt="Conference Setup" class="img-fluid border">
+                                                </div>
+                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
+                                                    <h6 class="text-dark fw-bold mb-2">Conference and Hollow Square</h6>
+                                                    <p class="small mb-0">Appropriate for interactive discussions and
+                                                        note-taking sessions for fewer than 25 people. Many hotels have
+                                                        elegant "boardrooms" for 10 to 20 people, equipped with full
+                                                        audiovisual capabilities, a writing board, cork board and a flip
+                                                        chart.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-4">
+                                                <div class="col-md-3">
+                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-e-u-t-shape-32935:Square?wid=206&fit=constrain"
+                                                        alt="E-U-T Shape Setup" class="img-fluid border">
+                                                </div>
+                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
+                                                    <h6 class="text-dark fw-bold mb-2">E-Shape, U-Shape and T-Shape</h6>
+                                                    <p class="small mb-0">Appropriate for groups of fewer than 40
+                                                        people. These are best for interaction with a leader seated at
+                                                        the head of the setup. Audiovisual is usually best set up at the
+                                                        open end of the seating.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-4">
+                                                <div class="col-md-3">
+                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-theater-15044:Square?wid=206&fit=constrain"
+                                                        alt="Theater Setup" class="img-fluid border">
+                                                </div>
+                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
+                                                    <h6 class="text-dark fw-bold mb-2">Theater</h6>
+                                                    <p class="small mb-0">Appropriate for large sessions and short
+                                                        lectures that do not require extensive note-taking. This is a
+                                                        convenient setup to use before breaking into discussion or
+                                                        role-playing groups because chairs can be moved.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-4">
+                                                <div class="col-md-3">
+                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-reception-10460:Square?wid=206&fit=constrain"
+                                                        alt="Reception Setup" class="img-fluid border">
+                                                </div>
+                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
+                                                    <h6 class="text-dark fw-bold mb-2">Reception</h6>
+                                                    <p class="small mb-0">Stand-up social function where beverages and
+                                                        light foods are served. Foods may be presented on small buffet
+                                                        tables or passed by servers. May precede a meal function.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center mb-4">
+                                                <div class="col-md-3">
+                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-schoolroom-20857:Square?wid=206&fit=constrain"
+                                                        alt="Schoolroom Setup" class="img-fluid border">
+                                                </div>
+                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
+                                                    <h6 class="text-dark fw-bold mb-2">Schoolroom or Classroom</h6>
+                                                    <p class="small mb-0">The most desirable setup for medium to
+                                                        large-size lectures. Requires a relatively large room. Tables
+                                                        provide attendees with space for spreading out materials and
+                                                        taking notes.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row align-items-center">
+                                                <div class="col-md-3">
+                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-ovals-and-rounds-33776:Square?wid=206&fit=constrain"
+                                                        alt="Ovals and Rounds Setup" class="img-fluid border">
+                                                </div>
+                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
+                                                    <h6 class="text-dark fw-bold mb-2">Ovals and Rounds</h6>
+                                                    <p class="small mb-0">Generally used for meals and sessions
+                                                        involving small group discussions. A five foot round table seats
+                                                        eight people comfortably. A six foot round table seats 10 people
+                                                        comfortably.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Equipment and Services Accordion -->
+                                <div
+                                    class="accordion-item border-0 bg-transparent border-top border-bottom rounded-0 mb-0">
+                                    <h2 class="accordion-header" id="headingEquipment">
+                                        <button class="accordion-button collapsed bg-transparent shadow-none px-0 py-4"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseEquipment"
+                                            aria-expanded="false" aria-controls="collapseEquipment">
+                                            Equipment and Services
+                                        </button>
+                                    </h2>
+                                    <div id="collapseEquipment" class="accordion-collapse collapse"
+                                        aria-labelledby="headingEquipment" data-bs-parent="#eventsAccordion">
+                                        <div class="accordion-body px-0 pt-0 pb-4 font-secondary">
+                                            <div class="row">
+                                                <div class="col-md-4 mb-4">
+                                                    <h6 class="text-dark fw-bold mb-3 small text-uppercase">Audio-Visual
+                                                        Equipment</h6>
+                                                    <ul class="list-unstyled small text-muted">
+                                                        <li class="mb-2">AV Technician</li>
+                                                        <li class="mb-2">LCD Projector</li>
+                                                        <li class="mb-2">TV</li>
+                                                        <li class="mb-2">TV Production Service Provider</li>
+                                                        <li class="mb-2">Videoconferencing</li>
+                                                        <li class="mb-2">Wired Internet</li>
+                                                        <li class="mb-2">Wireless Internet</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-4 mb-4">
+                                                    <h6 class="text-dark fw-bold mb-3 small text-uppercase">Event
+                                                        Services</h6>
+                                                    <ul class="list-unstyled small text-muted">
+                                                        <li class="mb-2">Carpenter</li>
+                                                        <li class="mb-2">Decorator</li>
+                                                        <li class="mb-2">Electrician</li>
+                                                        <li class="mb-2">Locksmith</li>
+                                                        <li class="mb-2">Message Service</li>
+                                                        <li class="mb-2">Photographer</li>
+                                                        <li class="mb-2">Registration Service</li>
+                                                        <li class="mb-2">Security Guards</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-4 mb-4">
+                                                    <h6 class="text-dark fw-bold mb-3 small text-uppercase">Event
+                                                        Equipment & Supplies</h6>
+                                                    <ul class="list-unstyled small text-muted">
+                                                        <li class="mb-2">Direction Signs</li>
+                                                        <li class="mb-2">Easels/Markers</li>
+                                                        <li class="mb-2">Microphones</li>
+                                                        <li class="mb-2">Pens/Writing Pads</li>
+                                                        <li class="mb-2">Podium</li>
+                                                        <li class="mb-2">Tables/Chairs</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ SECTION -->
+        <section class="m-property-details py-5 bg-white">
+            <div class="container">
+                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
+                <div class="accordion accordion-flush" id="faqAccordion">
+                    <div class="accordion-item border-top border-bottom-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">What are the check-in
+                                and check-out
+                                times at Lumbini Palace Resort?</button>
+                        </h2>
+                        <div id="faqOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted pt-0 pb-4">Check-in is at 3:00 PM and check-out is at
+                                12:00 PM.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-top border-bottom-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">Does Lumbini Palace
+                                Resort allow
+                                pets?</button>
+                        </h2>
+                        <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted pt-0 pb-4">Please contact the resort directly for our
+                                current pet policy and associated fees.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-top border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">What are the parking
+                                options at
+                                Lumbini Palace Resort?</button>
+                        </h2>
+                        <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted pt-0 pb-4">We offer complimentary on-site parking and
+                                valet services for all guests.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-top border-bottom-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">What property
+                                amenities are
+                                available at Lumbini Palace Resort?</button>
+                        </h2>
+                        <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted pt-0 pb-4">Amenities include a full-service spa,
+                                outdoor pool, fitness center, and multiple dining venues.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-top border-bottom-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faqFive">Does Lumbini Palace
+                                Resort have
+                                in-room Wi-Fi?</button>
+                        </h2>
+                        <div id="faqFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted pt-0 pb-4">Yes, high-speed Wi-Fi is available in all
+                                guest rooms and public areas.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-top border-bottom">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#faqSix">What is the closest
+                                airport near
+                                Lumbini Palace Resort?</button>
+                        </h2>
+                        <div id="faqSix" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body text-muted pt-0 pb-4">Pantnagar Airport (PGH) is the nearest
+                                airport, located approximately 85 km away.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="ul-footer py-5 footer-main">
+        <div class="container">
+            <h2 class="footer-title">Lumbini Palace Resort</h2>
+            <div class="footer-divider"></div>
+            <div class="row gx-5">
+                <div class="col-md-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled mb-0 ul-footer-list">
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Overview</a>
+                                </li>
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Gallery</a>
+                                </li>
+                                <li><a href="#"
+                                        class="text-decoration-underline text-dark fw-normal small">Accommodations</a>
+                                </li>
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Dining</a>
+                                </li>
+                                <li><a href="#"
+                                        class="text-decoration-underline text-dark fw-normal small">Experiences</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled mb-0 ul-footer-list">
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Meetings and
+                                        Weddings</a></li>
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Offers</a>
+                                </li>
+                                <li><a href="#" class="text-decoration-underline text-dark fw-normal small">Virtual
+                                        Tours</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 border-start-md ps-md-5 ul-footer-address-col">
+                    <p class="small mb-4 text-uppercase fw-normal ul-footer-address-text">
+                        SIYARI-05, RUPANDEHI | LUMBINI-PROVINCE, NEPAL<br>
+                        RUPANDEHI, NEPAL, 32900
+                    </p>
+                    <p class="small mb-0 fw-normal">
+                        TOLL FREE: <a href="tel:+97771413016" class="text-dark text-decoration-none">+977
+                            71413016</a><br>
+                        ROOM RESERVATIONS PHONE NUMBER: <a href="tel:+9779857018135"
+                            class="text-dark text-decoration-none">+977 9857018135</a><br>
+                        FAX: <a href="tel:+97771413020" class="text-dark text-decoration-none">+977 71413020</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-divider" style="margin-bottom: 30px;"></div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="small d-inline-block me-3 mb-0">Follow Lumbini Palace Resort</p>
+                    <a href="https://www.facebook.com/lumbinipalaceresort" class="text-dark me-2"><i
+                            class="fab fa-facebook-square"></i></a>
+                    <a href="https://www.instagram.com/lumbini_palace_resort/" class="text-dark"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <!-- <div class="row mt-4 pt-2">
+                <div class="col-12">
+                    <p class="x-small text-muted mb-0 ul-footer-copyright">
+                        &copy; 2026 LUMBINI PALACE RESORT - OFFICIAL SITE.
+                    </p>
+                </div>
+            </div> -->
+        </div>
+    </footer>
+
+    <!-- START YOUR PLAN POPUP MODAL -->
+    <div class="modal fade m-enquiry-modal" id="eventPlanModal" tabindex="-1" aria-labelledby="eventPlanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="eventPlanModalLabel">Start Your Plan</h5>
+                    <button type="button" class="m-modal-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body p-4 p-md-5">
+                    <form id="eventPlanForm" class="m-enquiry-form">
+                        <!-- Section 1: Event Details -->
+                        <h6 class="font-secondary fw-bold text-uppercase mb-3"
+                            style="letter-spacing: 1px; color: var(--ul-primary);">1. Event Details</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6 mb-2">
+                                <label for="eventName" class="form-label font-secondary small text-muted mb-1">Name Your
+                                    Event</label>
+                                <input type="text" class="form-control shadow-none" id="eventName"
+                                    placeholder="e.g. Annual Gala" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="eventDate" class="form-label font-secondary small text-muted mb-1">Event
+                                    Date</label>
+                                <input type="date" class="form-control shadow-none text-muted" id="eventDate" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="eventPax" class="form-label font-secondary small text-muted mb-1">Event Pax
+                                    (Guests)</label>
+                                <input type="number" class="form-control shadow-none" id="eventPax"
+                                    placeholder="e.g. 150" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="eventType" class="form-label font-secondary small text-muted mb-1">Event
+                                    Type</label>
+                                <select class="form-select border border-secondary-subtle shadow-none text-muted"
+                                    style="padding: 12px 15px; border-radius: 4px; font-size: 14px;" id="eventType"
+                                    onchange="toggleOtherEventType(this)" required>
+                                    <option value="" selected disabled>Select Event Type</option>
+                                    <option value="wedding">Wedding / Reception</option>
+                                    <option value="corporate">Corporate Meeting</option>
+                                    <option value="social">Social Gathering / Party</option>
+                                    <option value="conference">Conference / Seminar</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <!-- Hidden Other Event Type Field -->
+                            <div class="col-12 mb-2 d-none" id="otherEventTypeWrapper">
+                                <label for="otherEventType"
+                                    class="form-label font-secondary small text-muted mb-1">Specify Other Event
+                                    Type</label>
+                                <input type="text" class="form-control shadow-none" id="otherEventType"
+                                    placeholder="Please specify">
+                            </div>
+
+                            <div class="col-12 mb-2">
+                                <label for="eventMessage"
+                                    class="form-label font-secondary small text-muted mb-1">Message / Additional
+                                    Details</label>
+                                <textarea class="form-control shadow-none" id="eventMessage" rows="3"
+                                    placeholder="Tell us more about your needs..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Section 2: Contact Information -->
+                        <h6 class="font-secondary fw-bold text-uppercase mb-3 mt-4"
+                            style="letter-spacing: 1px; color: var(--ul-primary);">2. Contact Information</h6>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6 mb-2">
+                                <label for="firstName" class="form-label font-secondary small text-muted mb-1">First
+                                    Name</label>
+                                <input type="text" class="form-control shadow-none" id="firstName" required>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="lastName" class="form-label font-secondary small text-muted mb-1">Last
+                                    Name</label>
+                                <input type="text" class="form-control shadow-none" id="lastName" required>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="emailAddr" class="form-label font-secondary small text-muted mb-1">Email
+                                    Address</label>
+                                <input type="email" class="form-control shadow-none" id="emailAddr" required>
+                            </div>
+                            <div class="col-4 col-md-3 mb-2">
+                                <label for="countryCode"
+                                    class="form-label font-secondary small text-muted mb-1">Code</label>
+                                <select class="form-select border border-secondary-subtle shadow-none text-muted"
+                                    style="padding: 12px 15px; border-radius: 4px; font-size: 14px;" id="countryCode">
+                                    <option value="+977">+977 (NP)</option>
+                                    <option value="+91">+91 (IN)</option>
+                                    <option value="+1">+1 (US)</option>
+                                    <option value="+44">+44 (UK)</option>
+                                    <option value="+61">+61 (AU)</option>
+                                </select>
+                            </div>
+                            <div class="col-8 col-md-9 mb-2">
+                                <label for="phoneNum" class="form-label font-secondary small text-muted mb-1">Phone
+                                    Number</label>
+                                <input type="tel" class="form-control shadow-none" id="phoneNum" required>
+                            </div>
+                        </div>
+
+                        <div class="m-form-actions mt-5 text-end">
+                            <button type="submit" class="btn m-btn-submit px-5 py-2">Submit Request</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIRTUAL TOUR POPUP MODAL -->
+    <div class="modal fade m-vt-popup" id="virtualTourModal" tabindex="-1" aria-labelledby="virtualTourModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl m-vt-dialog">
+            <div class="modal-content m-vt-content border-0">
+                <!-- Modal Header -->
+                <div class="modal-header m-vt-header border-0 px-4 py-3 bg-white align-items-center">
+                    <h5 class="modal-title m-vt-title fw-bold mb-0 text-dark" id="virtualTourModalLabel">Lumbini Palace
+                        Resort</h5>
+                    <button type="button" class="btn-close m-vt-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body (Iframe + Sidebar) -->
+                <div class="modal-body p-0 position-relative overflow-hidden w-100 bg-black"
+                    style="min-height: 500px; height: 75vh;">
+
+                    <!-- The 360 Iframe / Image placeholder -->
+                    <img src="assets/img/dine-details-img-big-1.jpg" alt="Virtual Tour Exterior"
+                        class="img-fluid w-100 h-100" style="object-fit: cover;">
+                    <!-- <iframe class="w-100 h-100 border-0 m-vt-iframe" title="Lumbini Palace Virtual Tour" src="https://visitingmedia.com/tt8/?ttid=san-francisco-marriott-marquis#/360?group=0&amp;tour=0" allowfullscreen=""></iframe> -->
+
+                    <!-- Sliding Sidebar Menu -->
+                    <div class="m-vt-sidebar-wrapper position-absolute top-0 bottom-0 start-0 d-flex h-100"
+                        id="vtSidebarWrapper">
+
+                        <!-- Panel containing menu items -->
+                        <div class="m-vt-sidebar-panel h-100 overflow-y-auto" id="vtSidebarPanel">
+                            <div class="m-vt-menu-list pb-5">
+                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0">PUBLIC SPACES</h6>
+                                <button
+                                    class="m-vt-menu-item active w-100 text-start border-0 px-4 py-3 fw-semibold transition">MAIN
+                                    LOBBY</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">ORGANIC
+                                    RESTAURANT & PRIVATE DINING</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">M
+                                    LOUNGE</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">LUXURY
+                                    SPA</button>
+
+                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0 mt-3">EVENT SPACES</h6>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">GRAND
+                                    BALLROOM</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">PRE-FUNCTION
+                                    AREA</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">MEETING
+                                    ROOM A</button>
+
+                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0 mt-3">ACCOMMODATIONS</h6>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">POND
+                                    VILLA</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">LUXURY
+                                    SUITE</button>
+                            </div>
+                        </div>
+
+                        <!-- Vertical Toggle Tab -->
+                        <div class="m-vt-sidebar-toggle h-100 d-flex flex-column justify-content-center align-items-center position-relative cursor-pointer"
+                            id="vtSidebarToggle">
+                            <!-- <div class="m-vt-tab-text fw-bold text-white text-uppercase" style="letter-spacing: 1px; white-space: nowrap;">OPEN MENU</div> -->
+                            <!-- Arrow Indicator -->
+                            <div class="m-vt-tab-arrow position-absolute"></div>
+                        </div>
+
+                    </div>
+                    <!-- /Sliding Sidebar Menu -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JS Libraries (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/swiper.js"></script>
+</body>
+
+</html>

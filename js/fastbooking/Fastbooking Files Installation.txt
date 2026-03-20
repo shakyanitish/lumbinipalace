@@ -1,0 +1,157 @@
+				//////////////////////////////////////
+				////FASTBOOKING FILES INSTALLATION////
+				//////////////////////////////////////
+
+
+You had never installed Fastbooking JavaScript Files:
+
+	1- Copy the 3 enclosed files (fbparam.js, fblib.js and fbfulltrack.js) at the root of your website.
+		
+	2- Between the <head></head> tags insert this code : 
+		
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fbparam.js'></script>
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fblib.js'></script>
+
+	3- Before the </body> tag, insert this code which helps you to know from which website comes the customer:
+
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fbfulltrack.js'></script>
+
+
+
+You already have installed Fastbooking Javascript Files:
+
+	1- Copy the 3 enclosed files (fbparam.js, fblib.js and fbfulltrack.js) at the root of your website.
+		
+	2- Between the <head></head> tags insert this code : 
+		
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fbparam.js'></script>
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fblib.js'></script>
+
+	3- Before the </body> tag, insert this code which helps you to know from which website comes the customer:
+
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fbfulltrack.js'></script>
+
+	4- Delete the old files (fblibbiz.js/fblibsilver.js, fbtrack.js)
+
+	5- Delete the following code : 
+
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fblibbiz.js'></script>
+		or
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fblibbsilver.js'></script>
+
+		
+		<script LANGUAGE='javascript' type='text/javascript' SRC='fbtrack.js'></script>
+
+
+Javascript Functions Description:
+
+	ON THE MAIN RESERVATION LINK (CRS) :
+
+		<a href="javascript:;" onClick="hhotelSearchPromo('cluster or cname', 'lg', 'theme');"></a>
+
+
+	ON A RESERVATION LINK (CRS) WITH FIRST DATE AND NUMBER OF NIGHTS :
+
+		<a href="javascript:;" onClick="hhotelSearchPriceDate('cluster or cname', 'price', 'nights', 'title','firstdate');"></a>
+
+
+	ON A DIRECT LINK USING A PROMO-DIRECT ACCESS CODE :
+
+		<a href="javascript:;" onClick="hhotelPTC('cname', 'lg', 'codeprice', 'codetrack', 'cluster');"></a>
+
+
+	ON A DIRECT LINK WITH MORE ARGUMENTS: 
+
+		<a href="javascript:;" onClick="hhotelResa('cname', 'lg', 'codeprice', 'firstroom', 'firstdate', 'codetrack', 'cluster', 'theme', 'args');"></a>
+
+		Firstdate format: YYMMDD
+
+
+	ON A DIRECT LINK WITH EXTRA ARGUMENTS FOR FIRSTDATE : 
+
+		<a href="javascript:;" onClick="hhotelResaDirect('cname', 'lg', 'codeprice', 'firstroom', 'codetrack', 'firstdate');"></a>
+
+		Firstdate format: YYMMDD;nbnights;nbadults;nbchild
+
+
+	ON A SPECIAL OFFERS LINK (TO OPEN THE PROMOTION PAGE) :
+
+		<a href="javascript:;" onClick="hhotelPromo('cname', 'lg', 'theme');"></a>
+
+
+	ON THE TITLE OF A SPECIFIC SPECIAL OFFER (TO OPEN THE DESCRIPTIVE FASTBOOKING PAGE FOR THAT OFFER)
+
+		<a href="javascript:;" onClick="hhotelOnePromo('cname', 'lg', 'codeprice', 'codetrack', 'cluster');"></a>
+
+		To deactivate the cross selling function for that offer, enter 'NO' in 'cluster'
+
+
+	ON A "CORPORATE ID RESERVATIONS" LINK
+
+		<a href ="javascript:;" onclick="hhotelNegociated('cname', 'lg', 'codeprice', 'codetrack', 'cluster')"></a>
+
+
+	TO DISPLAY THE RESULT PAGE OF THE CRS
+
+		<a href ="javascript:;" onclick="hhotelDispopriceFHP('cluster or cname', 'lg', 'codetrack', 'year', 'month', 'day', 'nights', 'currency')"></a>
+
+
+	TO OPEN THE CLASSIC RESERVATION PAGE IF ONLY ONE RATE IS CONFIGURED,
+	OR THE CRS PAGE IF AT LEAST ONE RATE IS CONFIGURED WITH A PROMO- ACCESS CODE
+
+		<a href="javascript:;" onClick="hhotelcheckrates('cname', 'lg');"></a>
+
+
+	ON A "CANCEL" LINK :
+    
+		<a href="javascript:;" onClick="hhotelcancel('cname', 'lg');"></a>
+
+
+	ON A LINK THAT PERMITS TO EXTRACT RESERVATIONS USING AN EMAIL ADDRESS :
+    
+		<a href="javascript:;" onClick="hhotelExtract('cname', 'lg');"></a>
+
+
+
+	SPECIFIC FUNCTIONS FOR GROUPS
+
+
+	ON THE MAIN RESERVATION LINK :
+
+		<a href="javascript:;" onClick="hhotelSearchGroup('cluster', 'lg', 'price', 'nights', 'title');" ></a>
+
+        
+	ON A RESERVATION LINK WITH A THEME :
+
+		<a href="javascript:;" onClick="hhotelSearch('cluster', 'lg', 'price', 'nights', 'title', 'theme', 'args');"></a>
+
+
+	ON A RESERVATION LINK WITH FIRST DATE AND NUMBER OF NIGHTS :
+
+		<a href="javascript:;" onClick="hhotelSearchPriceDate('cluster', 'price', 'nights', 'title','firstdate');"></a>
+
+		Firstdate format: YYMMDD
+
+
+	ON A RESERVATION LINK WITH A TRACKING CODE (NECESSARY FOR A PARTNER'S WEBSITE):
+
+		<a href="javascript:;" onClick="hhotelSearchPartner('cluster', 'lg', 'price', 'codetrack', 'title');"></a>
+
+
+	ON A SPECIFIC RESERVATION LINK THAT CONTAINS A BOOKER ID OR A BOOKING REFERENCE:
+
+		<a href="javascript:;" onClick="hhotelSearchExtra('cluster', 'lg', 'price', 'codetrack', 'extratitle', 'extraval', 'extrashow');"></a>
+
+		'extratitle' : title of the extrafield (codified in html)
+		'extraval' : value to be sent to our system
+		'extrashow' : '1' to display the extrafield on the booking page, '0' to hidden it
+
+
+	ON A RESERVATION LINK FOR A PREFERED CLIENT WITH AN ACCESS CODE MULT- OR PROMO-MULT-
+
+		<a href="javascript:;" onClick="hhotelSearchMultCode('cluster', 'lg', 'clecode', 'title', 'codetrack');"></a>
+
+
+	ON A RESERVATION LINK THAT ACTIVATES ANOTHER CROSS SELLING
+
+		<a href="javascript:;" onClick="hhotelSearchCrossSell('cluster', 'lg', 'codetrack', 'crossSelling');"></a>

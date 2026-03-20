@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+    <loc>http://localhost/synhawk/</loc>
+    <lastmod>2021-12-02T10:38:28+05:45</lastmod>
+    <lastmod>2021-12-02T10:38:28+05:45</lastmod>
+    <lastmod>2021-12-02T10:38:28+05:45</lastmod>
+    <priority>1</priority>
+</url>
+
+        <url>
+            <loc>http://localhost/synhawk/home</loc>
+            <lastmod>2021-12-02+054510:38:28+05:45</lastmod>
+            <priority>0.9</priority>
+        </url>
+    
+        <url>
+            <loc>http://localhost/synhawk/contact-us</loc>
+            <lastmod>2021-12-02+054510:38:28+05:45</lastmod>
+            <priority>0.9</priority>
+        </url>
+    
+        <url>
+            <loc>http://localhost/synhawk/services</loc>
+            <lastmod>2021-12-02+054510:38:28+05:45</lastmod>
+            <priority>0.9</priority>
+        </url>
+    
+        <url>
+            <loc>http://localhost/synhawk/gallery-list</loc>
+            <lastmod>2021-12-02+054510:38:28+05:45</lastmod>
+            <priority>0.9</priority>
+        </url>
+    
+        <url>
+            <loc>http://localhost/synhawk/dining</loc>
+            <lastmod>1970-01-01+053005:30:00+05:30</lastmod>
+            <priority>0.8</priority>
+        </url>
+    
+        <url>
+            <loc>http://localhost/synhawk/rooms</loc>
+            <lastmod>1970-01-01+053005:30:00+05:30</lastmod>
+            <priority>0.8</priority>
+        </url>
+    
+        <url>
+            <loc>http://localhost/synhawk/deluxe-room-with-balcony</loc>
+            <lastmod>1970-01-01+053005:30:00+05:30</lastmod>
+            <priority>0.85</priority>
+        </url>
+    </urlset>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <jcms:site:seotitle/>
+
+    <!-- Fevicon -->
+    <jcms:site:fevicon/>
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'>
+
+    <!-- Animate.css (WOW.js) -->
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'>
+
+    <!-- Font Awesome (Free only) -->
+    <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css'>
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'>
+
+
+    <!-- Lightgallery CSS -->
+    <link rel="stylesheet"
+        href='https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/css/lightgallery-bundle.min.css'>
+
+    <!-- Custom CSS (extracted, only used styles) -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <jcms:module:header/>
+
+
+
+    <!-- BANNER SECTION -->
+    <jcms:module:slideshow-uc/>
+    <main class="main-body">
+
+        <!-- OVERVIEW -->
+        <jcms:module:home-pages/>
+
+        <!-- ROOMS SECTION -->
+        <jcms:module:list-package-room/>
+
+        <!-- OFFERS & PACKAGES -->
+        <jcms:module:homeoffers-list/>
+
+
+        <!-- VIRTUAL TOUR SECTION -->
+        <section class="m-virtual-tour-promo w-100">
+            <!-- Background Image -->
+            <img src="assets/img/dine-1.jpg" alt="Virtual Tour Background" class="m-vt-promo-bg">
+
+            <!-- Centered Card -->
+            <div class="m-vt-promo-card-wrapper position-absolute top-50 start-50 translate-middle w-100 px-3">
+                <div class="m-vt-promo-card bg-white mx-auto text-center">
+                    <div class="m-vt-promo-icon mb-3">
+                        <i class="fa-brands fa-instagram" style="font-size: 1.8rem; color: #1c1c1c;"></i>
+                    </div>
+                    <h2 class="m-vt-promo-title fw-bold mb-3">Take a Virtual Tour</h2>
+                    <p class="m-vt-promo-desc mb-4 mx-auto">
+                        Explore our contemporary resort virtually and experience full 360-degree views of our guest
+                        rooms,
+                        suites, and event spaces. It's all just a click away.
+                    </p>
+                    <button class="btn mhb-btn" data-bs-toggle="modal" data-bs-target="#virtualTourModal">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="m-amenities wow animate__fadeInUp">
+            <div class="m-amenities-inner">
+                <jcms:module:features:amenities/>
+                <div class="m-hotel-info-section">
+                    <h4 class="m-hotel-info-title">HOTEL INFORMATION</h4>
+                    <div class="m-hotel-info-grid">
+                        <div class="m-amenity-item"><i class="fa-light fa-clock"></i>
+                            <div class="m-amenity-text">Check-in: 3:00 pm</div>
+                        </div>
+                        <div class="m-amenity-item"><i class="fa-light fa-clock"></i>
+                            <div class="m-amenity-text">Check-out: 12:00 pm</div>
+                        </div>
+                        <div class="m-amenity-item"><i class="fa-light fa-bell-concierge"></i>
+                            <div class="m-amenity-text">Front Desk <span>Staffed</span></div>
+                        </div>
+                        <div class="m-amenity-item"><i class="fa-light fa-paw"></i>
+                            <div class="m-amenity-text">Pet Policy</div>
+                        </div>
+                        <div class="m-amenity-item"><i class="fa-solid fa-parking"></i>
+                            <div class="m-amenity-text">Parking <span>Complimentary On Site Parking<br>Long Term
+                                    Parking</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DINING SECTION -->
+        <section class="m-great-room bg-dark text-white overflow-hidden py-5 pt-lg-0 pb-lg-0">
+            <div class="container mx-auto p-0 position-relative" style="max-width: 1200px;">
+                <div class="swiper m-great-room-swiper w-100 h-100">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <div
+                                class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
+                                <div class="col-xl-8 position-relative order-1 order-xl-2">
+                                    <img src="assets/img/dine-1.jpg" alt="The Corbett Kitchen"
+                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
+                                </div>
+                                <div
+                                    class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
+                                    <div
+                                        class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
+                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">The Corbett
+                                            Kitchen
+                                        </h2>
+                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
+                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
+                                            Enjoy global cuisine at The Corbett Kitchen in Jim Corbett, an all-day
+                                            restaurant with interactive kitchens and indoor/outdoor seating. Savor
+                                            dishes made from the freshest ingredients while engaging with our chefs for
+                                            a lively and interactive experience.
+                                        </p>
+                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
+                                            style="border-radius: 6px;">Explore</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <div
+                                class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
+                                <div class="col-xl-8 position-relative order-1 order-xl-2">
+                                    <img src="assets/img/project-2.jpg" alt="Malani Grill"
+                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
+                                </div>
+                                <div
+                                    class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
+                                    <div
+                                        class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
+                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">Malani Grill
+                                            -
+                                            Opening Soon</h2>
+                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
+                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
+                                            Embark on a unique culinary journey at Malani Grill, where chefs interpret
+                                            the five elements—Earth, Water, Air, Fire, and Space—plus the sixth,
+                                            ‘Daivik,’ for balance. Enjoy views of the hills and Kosi River at our
+                                            outdoor restaurant in Jim Corbett.
+                                        </p>
+                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
+                                            style="border-radius: 6px;">Explore</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <div
+                                class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
+                                <div class="col-xl-8 position-relative order-1 order-xl-2">
+                                    <img src="assets/img/blog-1.jpg" alt="The Great Room"
+                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
+                                </div>
+                                <div
+                                    class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
+                                    <div
+                                        class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
+                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">The Great
+                                            Room</h2>
+                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
+                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
+                                            The Great Room is the heartbeat of our hotel, designed for unwinding with a
+                                            classic cocktail. With chic, comfortable seating overlooking the pool, it
+                                            features an exquisite selection of baked pastries and artisan breads in a
+                                            relaxed atmosphere.
+                                        </p>
+                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
+                                            style="border-radius: 6px;">Explore</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide">
+                            <div
+                                class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
+                                <div class="col-xl-8 position-relative order-1 order-xl-2">
+                                    <img src="assets/img/project-3.jpg" alt="Sal Bar"
+                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
+                                </div>
+                                <div
+                                    class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
+                                    <div
+                                        class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
+                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">Sal Bar</h2>
+                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
+                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
+                                            Join Sal Bar's rich celebration of Indian spirits, blending authenticity and
+                                            innovation. Enjoy a unique journey through local distilling traditions while
+                                            honoring the country's deep-rooted customs and modern advancements in the
+                                            beverage industry.
+                                        </p>
+                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
+                                            style="border-radius: 6px;">Explore</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Global Navigation exactly inside the container to align with the left col -->
+                <div class="m-great-room-nav-container d-flex align-items-center position-absolute w-100">
+                    <div class="col-xl-4 p-4 p-md-5 py-0 py-xl-0 d-flex align-items-center justify-content-center justify-content-xl-start w-100"
+                        style="pointer-events: auto;">
+                        <div class="mgr-nav d-flex align-items-center justify-content-between justify-content-xl-start w-100"
+                            style="max-width: 320px;">
+                            <div
+                                class="m-great-room-prev small cursor-pointer text-white m-0 d-flex align-items-center fw-semibold">
+                                <span class="d-none d-xl-inline">Prev</span>
+                                <span class="mgr-line ms-0 ms-xl-3"></span>
+                            </div>
+                            <div class="m-great-room-pagination small fw-bold tracking-widest text-center mx-3 mx-xl-4"
+                                style="min-width: 60px;"></div>
+                            <div
+                                class="m-great-room-next small cursor-pointer text-white m-0 d-flex align-items-center fw-semibold">
+                                <span class="mgr-line me-0 me-xl-3"></span>
+                                <span class="d-none d-xl-inline">Next</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MORE WAYS TO ENJOY YOUR STAY -->
+        <jcms:module:enjoy-stay/>
+
+        <!-- BLOG SECTION -->
+        <jcms:module:home-blog-list/>
+
+        <!-- LOCATION / MAP SECTION -->
+        <section class="m-location wow animate__fadeInUp">
+            <div class="m-location-inner">
+                <!-- Left Content: Location details & accordion -->
+                <div class="m-location-text">
+                    <p class="m-section-label">OUR LOCATION</p>
+                    <h2 class="m-section-title">Getting Here</h2>
+
+                        <jcms:module:contact-home/>
+
+
+                    <!-- Accordion -->
+                    <div class="accordion m-location-accordion" id="locationAccordion">
+                        <jcms:module:location:accordion/>
+                    </div>
+                </div>
+
+                <!-- Right Content: Map -->
+                <div class="m-location-map-wrap bg-white p-2">
+                    <jcms:module:contact-map-home/>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROPERTY DETAILS -->
+        <jcms:module:faq:homepage1/>
+
+        <!-- FAQ -->
+        <jcms:module:faq:homepage/>
+
+        <!-- TESTIMONIALS (hidden) -->
+        <section class="m-testimonials wow animate__fadeInUp d-none">
+            <div class="m-testimonials-inner">
+                <div class="m-testimonials-header">
+                    <span class="m-section-label">Guest Reviews</span>
+                    <h2 class="m-section-title">What Our Guests Say</h2>
+                </div>
+                <div class="m-testimonials-grid">
+                    <div class="m-testimonial-card">
+                        <div class="m-testimonial-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="m-testimonial-text">"This place was situated in a really good spot which was really
+                            peaceful and the ambience is really good."</p>
+                        <div class="m-testimonial-author">
+                            <img src="assets/img/team-1.jpg" alt="Abhikalp K">
+                            <div>
+                                <p class="m-testimonial-author-name">Abhikalp K</p>
+                                <p class="m-testimonial-author-loc">India</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-testimonial-card">
+                        <div class="m-testimonial-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="m-testimonial-text">"Amazing place, wonderful service, friendly people, tasty food. We
+                            loved our pond villa stay."</p>
+                        <div class="m-testimonial-author">
+                            <img src="assets/img/team-1.jpg" alt="Vickygor">
+                            <div>
+                                <p class="m-testimonial-author-name">Vickygor</p>
+                                <p class="m-testimonial-author-loc">London, United Kingdom</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-testimonial-card">
+                        <div class="m-testimonial-stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="m-testimonial-text">"Excellent service — the director even arranged for our car to be
+                            cleaned. Very peaceful and serene location."</p>
+                        <div class="m-testimonial-author">
+                            <img src="assets/img/team-2.jpg" alt="Nick">
+                            <div>
+                                <p class="m-testimonial-author-name">Nick</p>
+                                <p class="m-testimonial-author-loc">United Kingdom</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <jcms:module:footer/>
+
+    <!-- VIRTUAL TOUR POPUP MODAL -->
+    <div class="modal fade m-vt-popup" id="virtualTourModal" tabindex="-1" aria-labelledby="virtualTourModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl m-vt-dialog">
+            <div class="modal-content m-vt-content border-0">
+                <!-- Modal Header -->
+                <div class="modal-header m-vt-header border-0 px-4 py-3 bg-white align-items-center">
+                    <h5 class="modal-title m-vt-title fw-bold mb-0 text-dark" id="virtualTourModalLabel">Lumbini Palace
+                        Resort</h5>
+                    <button type="button" class="btn-close m-vt-close shadow-none" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <!-- Modal Body (Iframe + Sidebar) -->
+                <div class="modal-body p-0 position-relative overflow-hidden w-100 bg-black"
+                    style="min-height: 500px; height: 75vh;">
+
+                    <!-- The 360 Iframe / Image placeholder -->
+                    <img src="assets/img/dine-details-img-big-1.jpg" alt="Virtual Tour Exterior"
+                        class="img-fluid w-100 h-100" style="object-fit: cover;">
+                    <!-- <iframe class="w-100 h-100 border-0 m-vt-iframe" title="Lumbini Palace Virtual Tour" src="https://visitingmedia.com/tt8/?ttid=san-francisco-marriott-marquis#/360?group=0&amp;tour=0" allowfullscreen=""></iframe> -->
+
+                    <!-- Sliding Sidebar Menu -->
+                    <div class="m-vt-sidebar-wrapper position-absolute top-0 bottom-0 start-0 d-flex h-100"
+                        id="vtSidebarWrapper">
+
+                        <!-- Panel containing menu items -->
+                        <div class="m-vt-sidebar-panel h-100 overflow-y-auto" id="vtSidebarPanel">
+                            <div class="m-vt-menu-list pb-5">
+                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0">PUBLIC SPACES</h6>
+                                <button
+                                    class="m-vt-menu-item active w-100 text-start border-0 px-4 py-3 fw-semibold transition">MAIN
+                                    LOBBY</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">ORGANIC
+                                    RESTAURANT & PRIVATE DINING</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">M
+                                    LOUNGE</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">LUXURY
+                                    SPA</button>
+
+                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0 mt-3">EVENT SPACES</h6>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">GRAND
+                                    BALLROOM</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">PRE-FUNCTION
+                                    AREA</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">MEETING
+                                    ROOM A</button>
+
+                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0 mt-3">ACCOMMODATIONS</h6>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">POND
+                                    VILLA</button>
+                                <button
+                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">LUXURY
+                                    SUITE</button>
+                            </div>
+                        </div>
+
+                        <!-- Vertical Toggle Tab -->
+                        <div class="m-vt-sidebar-toggle h-100 d-flex flex-column justify-content-center align-items-center position-relative cursor-pointer"
+                            id="vtSidebarToggle">
+                            <!-- <div class="m-vt-tab-text fw-bold text-white text-uppercase" style="letter-spacing: 1px; white-space: nowrap;">OPEN MENU</div> -->
+                            <!-- Arrow Indicator -->
+                            <div class="m-vt-tab-arrow position-absolute"></div>
+                        </div>
+
+                    </div>
+                    <!-- /Sliding Sidebar Menu -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- REVIEWS POPUP MODAL -->
+    <div class="modal fade" id="reviewsModal" tabindex="-1" aria-labelledby="reviewsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 rounded-4 shadow-lg">
+                <!-- Header -->
+                <div class="modal-header border-0 bg-light px-4 py-3 m-reviews-modal-header">
+                    <h5 class="modal-title fw-semibold text-dark m-reviews-modal-title" id="reviewsModalLabel">Ratings &
+                        Reviews</h5>
+                    <button type="button" class="btn-close shadow-none bg-secondary bg-opacity-25 m-reviews-modal-close"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Body -->
+                <div class="modal-body px-5 py-4 m-reviews-modal-body">
+                    <!-- Overall Rating -->
+                    <div class="d-flex align-items-center mb-4 pb-4 border-bottom">
+                        <div class="m-rating-dots-lg d-flex align-items-center">
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <i class="fa-solid fa-circle"></i>
+                            <span class="position-relative m-half-star-wrap-lg">
+                                <i class="fa-solid fa-circle-half-stroke"></i>
+                            </span>
+                        </div>
+                        <h3 class="fw-bold mb-0 ms-3 m-review-overall-score">4.7 &middot; 10/119 Reviews</h3>
+                    </div>
+
+                    <!-- Review 1 -->
+                    <div class="m-review-item d-flex pb-4 mb-4 border-bottom">
+                        <div class="m-review-author-col">
+                            <span class="text-secondary m-review-author-name">Anonymous</span>
+                        </div>
+                        <div class="m-review-content flex-grow-1">
+                            <div class="d-flex align-items-center mb-2 m-review-date">
+                                <div class="m-rating-dots-sm d-flex align-items-center me-2">
+                                    <i class="fa-solid fa-circle"></i>
+                                    <i class="fa-solid fa-circle"></i>
+                                    <i class="fa-solid fa-circle"></i>
+                                    <i class="fa-solid fa-circle"></i>
+                                    <i class="fa-regular fa-circle"></i>
+                                </div>
+                                <span class="fw-semibold me-2 text-dark">4</span>
+                                <span class="text-secondary">&bull; 4 days ago</span>
+                            </div>
+                            <h5 class="fw-bold mb-3 m-review-title">Excellent stay</h5>
+                            <p class="text-secondary m-review-text">We stayed at the Marriott Hotel from 28th February
+                                to 3rd March, and overall it was a wonderful experience. The hospitality throughout our
+                                stay was excellent, and the staff was extremely courteous and helpful.</p>
+                            <p class="text-secondary m-review-text">A special mention to Nikunj Kumar from the Front
+                                Office, who warmly welcomed us and quickly helped resolve the room-related issues we
+                                faced. His prompt support and professionalism were truly appreciated.</p>
+                            <p class="text-secondary m-review-text mb-0">We would also like to appreciate the restaurant
+                                team, especially Sankalp and Amanat, who did a fantastic job. They went out of their way
+                                to help us by preparing suitable dishes for our 8-month-old baby, which made our dining
+                                experience very comfortable and special.</p>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="m-review-item d-flex pb-3 mb-3 border-bottom">
+                        <div class="m-review-author-col">
+                            <span class="text-secondary m-review-author-name">Sahil</span>
+                        </div>
+                        <div class="m-review-content flex-grow-1">
+                            <div class="d-flex align-items-center mb-2 m-review-date">
+                                <div class="m-rating-dots-sm d-flex align-items-center me-2">
+                                    <i class="fa-solid fa-circle"></i>
+                                    <i class="fa-solid fa-circle"></i>
+                                    <i class="fa-solid fa-circle"></i>
+                                    <i class="fa-solid fa-circle"></i>
+                                    <i class="fa-solid fa-circle"></i>
+                                </div>
+                                <span class="fw-semibold me-2 text-dark">5</span>
+                                <span class="text-secondary">&bull; a month ago</span>
+                            </div>
+                            <h5 class="fw-bold mb-3 m-review-title">Dream Place to be at.</h5>
+                            <p class="text-secondary mb-1 m-review-text">Best stay till date.</p>
+                            <p class="text-secondary mb-1 m-review-text">Must visit.</p>
+                            <p class="text-secondary mb-1 m-review-text">Super luxury.</p>
+                            <p class="text-secondary mb-1 m-review-text">Excellent food & hospitality.</p>
+                            <p class="text-secondary mb-0 mt-2 m-review-text">Unforgettable 5 star service provided by
+                                Mr Sankalp Chaudhary & Amanat.<br>🎖️ 🎖️ 🎖️ 🎖️ 🎖️</p>
+                        </div>
+                    </div>
+
+                    <!-- Show More -->
+                </div>
+                <div class="text-end my-4 mx-4 sticky-bottom bottom-10">
+                    <a href="review.html" class="btn btn-outline-dark rounded-pill px-4 py-2 m-review-btn">Show More
+                        Reviews (109)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Libraries (CDN) -->
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js'></script>
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+
+    <!-- Lightgallery JS -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.umd.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/zoom/lg-zoom.umd.min.js'></script>
+    <script
+        src='https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/thumbnail/lg-thumbnail.umd.min.js'></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/swiper.js"></script>
+</body>
+
+</html>
