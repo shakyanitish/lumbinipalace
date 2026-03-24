@@ -127,7 +127,7 @@ $homeFaqSection = '';
 
 if (defined('HOME_PAGE')) {
     // Fetch different FAQs from Category 1
-    $homeFaqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 1 AND volunteer = 1 ORDER BY sortorder DESC");
+    $homeFaqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 4 AND volunteer = 1 ORDER BY sortorder DESC");
 
     if (!empty($homeFaqs)) {
         $accordionItems = '';
@@ -172,7 +172,7 @@ $homeFaqSection2 = '';
 
 if (defined('HOME_PAGE')) {
     // Fetch different FAQs from Category 2
-    $homeFaqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 2 AND volunteer = 1 ORDER BY sortorder DESC");
+    $homeFaqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 5 AND volunteer = 1 ORDER BY sortorder DESC");
 
     if (!empty($homeFaqs)) {
         $accordionItems = '';
@@ -218,46 +218,6 @@ $jVars['module:faq:homepage1'] = $homeFaqSection2;
 
 
 
-
-$location_accordion = '';
-
-if (defined('HOME_PAGE')) {
-    // Fetch FAQs from Category 3 for location/transportation info
-    $locationFaqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 3 AND volunteer = 1 ORDER BY sortorder DESC");
-
-    if (!empty($locationFaqs)) {
-        $accordionItems = '';
-        foreach ($locationFaqs as $i => $locationFaq) {
-            $collapseId = 'collapseLocation' . ($i + 1);
-            // All items start collapsed - user opens manually
-            
-            // Use FAQ icon if available, otherwise fallback to category icon
-            $icon = '';
-            if (!empty($locationFaq->icon)) {
-                $icon = '<i class="' . htmlspecialchars($locationFaq->icon) . '"></i> ';
-            }
-            
-            $accordionItems .= '
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingLocation' . ($i + 1) . '">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '" aria-expanded="false" aria-controls="' . $collapseId . '">
-                                    ' . $icon . htmlspecialchars($locationFaq->title) . '
-                                </button>
-                            </h2>
-                            <div id="' . $collapseId . '" class="accordion-collapse collapse" aria-labelledby="headingLocation' . ($i + 1) . '" data-bs-parent="#locationAccordion">
-                                <div class="accordion-body">
-                                    ' . $locationFaq->content . '
-                                </div>
-                            </div>
-                        </div>
-';
-        }
-
-        $location_accordion = $accordionItems;
-    }
-}
-
-$jVars['module:location:accordion'] = $location_accordion;
 
 
 

@@ -176,7 +176,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 <div id="preview_Image2"><input type="hidden" name="imageArrayname2" value="" class="" /></div>
             </div>
 
-            <div class="form-row">
+            <div class="form-row hide">
                 <div class="form-label col-md-2">
                     <label for="">
                         Logo footer :
@@ -259,14 +259,14 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 <div id="preview_Image4"></div>
             </div> -->
 
-            <!-- <div class="form-row">
+            <div class="form-row hide">
                 <div class="form-label col-md-2">
                     <label for="">
                         Gallery Image :
                     </label>
-                </div> -->
+                </div> 
 
-            <!-- <?php if (!empty($PrefeRow->gallery_upload)): ?>
+            <?php if (!empty($PrefeRow->gallery_upload)): ?>
                     <div class="col-md-2" id="removeSavedimg5">
                         <div class="infobox info-bg">
                             <div class="button-group" data-toggle="buttons">
@@ -297,12 +297,12 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                             X <?php echo Module::get_properties($moduleId, 'gimgheight'); ?> px)
                         </small>
                     </label>
-                </div> -->
+                </div>
             <!-- Upload user image preview -->
-            <!-- <div id="preview_Image5"></div>
-            </div> -->
+            <div id="preview_Image5"></div>
+            </div>
 
-            <div class="form-row">
+            <div class="form-row hide">
                 <div class="form-label col-md-2">
                     <label for="">
                         Contact Image :
@@ -344,7 +344,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 <div id="preview_Image6"></div>
             </div>
 
-            <!-- <?php if ($PrefeRow->id == 1) { ?>
+            <?php if ($PrefeRow->id == 1) { ?>
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -386,7 +386,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                     </div>
                     <div id="preview_Image7"></div>
                 </div>
-            <?php } ?> -->
+            <?php } ?>
             <!-- <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">

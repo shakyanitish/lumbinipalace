@@ -435,4 +435,20 @@ $(document).ready(function () {
         var dcode = $(this).attr('multi-data-id');
         $('tr.' + dcode).remove();
     });
+
+
+$(document).ready(function () {
+    $('input[name="deadline_type"]').on('change', function () {
+        if ($(this).val() === 'deadline') {
+            $('#date_fields_wrapper').show();
+            $('#start_date, #offer_date').addClass('validate[required]');
+        } else {
+            $('#date_fields_wrapper').hide();
+            $('#start_date, #offer_date').removeClass('validate[required]');
+        }
+    });
+
+    // Trigger on page load to handle edit mode
+    $('input[name="deadline_type"]:checked').trigger('change');
+});
 </script>

@@ -36,6 +36,11 @@ switch ($action) {
             // ? date('Y-m-d', strtotime($_REQUEST['program_date']))
             // : NULL;
         $Package->content       = $_REQUEST['content'];
+        $Package->content1      = !empty($_REQUEST['content1']) ? $_REQUEST['content1'] : '';
+        $Package->content2      = !empty($_REQUEST['content2']) ? $_REQUEST['content2'] : '';
+        $Package->content3      = !empty($_REQUEST['content3']) ? $_REQUEST['content3'] : '';
+        $Package->content4      = !empty($_REQUEST['content4']) ? $_REQUEST['content4'] : '';
+        $Package->content5      = !empty($_REQUEST['content5']) ? $_REQUEST['content5'] : '';
         $Package->type         = $_REQUEST['type'];
         $Package->meta_title        = $_REQUEST['meta_title'];
         $Package->meta_keywords        = $_REQUEST['meta_keywords'];
@@ -43,7 +48,40 @@ switch ($action) {
 
         $Package->banner_image    = serialize(array_values(array_filter($_REQUEST['imageArrayname2'])));
         // $Package->flag_image	= serialize(array_values(array_filter($_REQUEST['flagArrayname'])));
-		$Package->incexc = (!empty($_REQUEST['incexc'])) ? serialize($_REQUEST['incexc']) : 'a:0:{}';
+        
+        // Combine text and URL into array of objects
+        $incexc_items = array();
+        if (!empty($_REQUEST['incexc_text'])) {
+            $text_array = $_REQUEST['incexc_text'];
+            $url_array = !empty($_REQUEST['incexc_url']) ? $_REQUEST['incexc_url'] : array();
+            
+            foreach ($text_array as $key => $text) {
+                if (!empty($text)) {
+                    $incexc_items[] = array(
+                        'text' => trim($text),
+                        'url' => !empty($url_array[$key]) ? trim($url_array[$key]) : ''
+                    );
+                }
+            }
+        }
+        $Package->incexc = !empty($incexc_items) ? serialize($incexc_items) : 'a:0:{}';
+
+        // Combine text and URL into array of objects for incexc1
+        $incexc_items1 = array();
+        if (!empty($_REQUEST['incexc_text1'])) {
+            $text_array1 = $_REQUEST['incexc_text1'];
+            $url_array1 = !empty($_REQUEST['incexc_url1']) ? $_REQUEST['incexc_url1'] : array();
+            
+            foreach ($text_array1 as $key => $text) {
+                if (!empty($text)) {
+                    $incexc_items1[] = array(
+                        'text' => trim($text),
+                        'url' => !empty($url_array1[$key]) ? trim($url_array1[$key]) : ''
+                    );
+                }
+            }
+        }
+        $Package->incexc1 = !empty($incexc_items1) ? serialize($incexc_items1) : 'a:0:{}';
 
         $Package->status        = $_REQUEST['status'];
         $Package->sortorder        = Package::find_maximum();
@@ -93,11 +131,49 @@ switch ($action) {
         $Package->slug        = $_REQUEST['slug'];  
         $Package->title    = $_REQUEST['title'];
         $Package->sub_title = $_REQUEST['sub_title'];
-        $Package->incexc = (!empty($_REQUEST['incexc'])) ? serialize($_REQUEST['incexc']) : 'a:0:{}';
+        
+        // Combine text and URL into array of objects
+        $incexc_items = array();
+        if (!empty($_REQUEST['incexc_text'])) {
+            $text_array = $_REQUEST['incexc_text'];
+            $url_array = !empty($_REQUEST['incexc_url']) ? $_REQUEST['incexc_url'] : array();
+            
+            foreach ($text_array as $key => $text) {
+                if (!empty($text)) {
+                    $incexc_items[] = array(
+                        'text' => trim($text),
+                        'url' => !empty($url_array[$key]) ? trim($url_array[$key]) : ''
+                    );
+                }
+            }
+        }
+        $Package->incexc = !empty($incexc_items) ? serialize($incexc_items) : 'a:0:{}';
+
+        // Combine text and URL into array of objects for incexc1
+        $incexc_items1 = array();
+        if (!empty($_REQUEST['incexc_text1'])) {
+            $text_array1 = $_REQUEST['incexc_text1'];
+            $url_array1 = !empty($_REQUEST['incexc_url1']) ? $_REQUEST['incexc_url1'] : array();
+            
+            foreach ($text_array1 as $key => $text) {
+                if (!empty($text)) {
+                    $incexc_items1[] = array(
+                        'text' => trim($text),
+                        'url' => !empty($url_array1[$key]) ? trim($url_array1[$key]) : ''
+                    );
+                }
+            }
+        }
+        $Package->incexc1 = !empty($incexc_items1) ? serialize($incexc_items1) : 'a:0:{}';
         // $Package->program_date = !empty($_REQUEST['program_date'])
         //     ? date('Y-m-d', strtotime($_REQUEST['program_date']))
         //     : NULL;
         $Package->content  = $_REQUEST['content'];
+        $Package->content1 = !empty($_REQUEST['content1']) ? $_REQUEST['content1'] : '';
+        $Package->content2 = !empty($_REQUEST['content2']) ? $_REQUEST['content2'] : '';
+        $Package->content3 = !empty($_REQUEST['content3']) ? $_REQUEST['content3'] : '';
+        $Package->content4 = !empty($_REQUEST['content4']) ? $_REQUEST['content4'] : '';
+        $Package->content5 = !empty($_REQUEST['content5']) ? $_REQUEST['content5'] : '';
         $Package->status   = $_REQUEST['status'];
         $Package->type         = $_REQUEST['type'];
         $Package->meta_title        = $_REQUEST['meta_title'];

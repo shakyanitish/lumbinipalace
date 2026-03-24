@@ -17,7 +17,7 @@ $header = '
         <div class="ul-sidebar-header-nav-wrapper d-block d-lg-none"></div>
         <div class="to-go-to-sidebar-in-mobile d-block d-lg-none">
             <nav class="ul-header-nav">
-                ' . $jVars['module:mobile-nav'] . '
+                ' . $jVars['module:mobile-nav'] . ' 
             </nav>
         </div>
         <div class="ul-sidebar-footer">

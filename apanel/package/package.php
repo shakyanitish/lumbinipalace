@@ -53,7 +53,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                     onclick="editRecord(<?php echo $record->id; ?>);">
                                     <span><?php echo $record->title; ?></span>
                                 </a>
-                            </td>                            <td>
+                            </td>
+                            <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewItinerarylistPackage(<?php echo $record->id; ?>);" href="javascript:void(0);">
                                     <span class="button-content">
@@ -62,7 +63,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                         <span class="text-transform-upr font-bold font-size-11">View Lists</span>
                                     </span>
                                 </a>
-                            </td>                            <!-- <td>
+                            </td> <!-- <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewsubimagelist(<?php echo $record->id; ?>);" href="javascript:void(0);">
                                     <span class="button-content">
@@ -142,6 +143,9 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
         $unstatus = ($packageInfo->status == 0) ? "checked" : " ";
         $masrom = ($packageInfo->type == 1) ? "checked" : " ";
         $unmasrom = ($packageInfo->type == 0) ? "checked" : " ";
+        $masexp = ($packageInfo->type == 2) ? "checked" : " ";
+        $maswed = ($packageInfo->type == 3) ? "checked" : " ";
+
     endif;
 ?>
     <h3>
@@ -381,6 +385,22 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 
                 
 -->
+                <div class="events-only-fields" style="display: none;">
+                    <div class="form-row">
+                        <div class="form-label col-md-12">
+                            <label for="">
+                                Content 1:
+                            </label>
+                            <textarea name="content1" id="content1"
+                                class="large-textarea validate[]"><?php echo !empty($packageInfo->content1) ? $packageInfo->content1 : ""; ?></textarea>
+                            <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore1" href="javascript:void(0);">
+                                <span class="button-content">Read More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="form-row multi-discount">
                     <div class="form-label col-md-2">
                         <label for="">Includes :</label>
@@ -389,13 +409,20 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <div class="" id="includes_sortable">
                             <?php
                             $savedIncludes = !empty($packageInfo->incexc) ? unserialize($packageInfo->incexc) : array();
-                            if (sizeof($savedIncludes) > 0 and is_array($savedIncludes)) {
+                            if (sizeof($savedIncludes) > 0 && is_array($savedIncludes)) {
                                 foreach ($savedIncludes as $childKey => $childRow) {
+                                    // Handle both old format (string) and new format (array)
+                                    $incText = is_array($childRow) ? $childRow['text'] : $childRow;
+                                    $incUrl  = is_array($childRow) ? (!empty($childRow['url']) ? $childRow['url'] : '') : '';
                             ?>
                                     <div class="mrg10B">
                                         <span class="drag-handle cp"><i class="glyph-icon icon-arrows"></i></span>
-                                        <input type="text" placeholder="Includes" class="col-md-8 validate[]"
-                                            name="incexc[]" value="<?php echo $childRow; ?>">
+                                        <input type="text" placeholder="Includes Text" class="col-md-6 validate[]"
+                                            name="incexc_text[]" value="<?php echo $incText; ?>">
+
+                                        <input type="text" placeholder="Learn More URL (optional)" class="col-md-4 validate[]"
+                                            name="incexc_url[]" value="<?php echo $incUrl; ?>">
+
                                         <span class="cp remove_includes_row" onclick="$(this).parent().remove();"><i class="glyph-icon icon-minus-square"></i></span><br>
                                     </div>
                             <?php
@@ -410,7 +437,6 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
-
                 <div class="form-row">
                     <div class="form-label col-md-12">
                         <label for="">
@@ -424,19 +450,119 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
+                <div class="events-only-fields" style="display: none;">
+                    <!-- //Seapare includes with url set_exception_handler with content -->
+                    <div class="form-row multi-discount">
+                        <div class="form-label col-md-2">
+                            <label for="">Includes :</label>
+                        </div>
+                        <div class="form-input col-md-10">
+                            <div class="" id="includes_sortable_2">
+                                <?php
+                                $savedIncludes = !empty($packageInfo->incexc1) ? unserialize($packageInfo->incexc1) : array();
+                                if (sizeof($savedIncludes) > 0 && is_array($savedIncludes)) {
+                                    foreach ($savedIncludes as $childKey => $childRow) {
+                                        // Handle both old format (string) and new format (array)
+                                        $incText = is_array($childRow) ? $childRow['text'] : $childRow;
+                                        $incUrl  = is_array($childRow) ? (!empty($childRow['url']) ? $childRow['url'] : '') : '';
+                                ?>
+                                        <div class="mrg10B">
+                                            <span class="drag-handle cp"><i class="glyph-icon icon-arrows"></i></span>
+                                            <input type="text" placeholder="Includes Text" class="col-md-6 validate[]"
+                                                name="incexc_text1[]" value="<?php echo $incText; ?>">
+
+                                            <input type="text" placeholder="Learn More URL (optional)" class="col-md-4 validate[]"
+                                                name="incexc_url1[]" value="<?php echo $incUrl; ?>">
+
+                                            <span class="cp remove_includes_row" onclick="$(this).parent().remove();"><i class="glyph-icon icon-minus-square"></i></span><br>
+                                        </div>
+                                <?php
+                                    }
+                                } ?>
+
+                                <div id="add_includes_div_2"></div>
+                                <a href="javascript:void(0);" class="btn medium bg-blue tooltip-button" title="Add" onclick="addIncludesRow2();">
+                                    <i class="glyph-icon icon-plus-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-label col-md-12">
+                            <label for="">
+                                Content 2:
+                            </label>
+                            <textarea name="content2" id="content2"
+                                class="large-textarea validate[]"><?php echo !empty($packageInfo->content2) ? $packageInfo->content2 : ""; ?></textarea>
+                            <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore2" href="javascript:void(0);">
+                                <span class="button-content">Read More</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label col-md-12">
+                            <label for="">
+                                Content 3:
+                            </label>
+                            <textarea name="content3" id="content3"
+                                class="large-textarea validate[]"><?php echo !empty($packageInfo->content3) ? $packageInfo->content3 : ""; ?></textarea>
+                            <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore3" href="javascript:void(0);">
+                                <span class="button-content">Read More</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label col-md-12">
+                            <label for="">
+                                Content 4:
+                            </label>
+                            <textarea name="content4" id="content4"
+                                class="large-textarea validate[]"><?php echo !empty($packageInfo->content4) ? $packageInfo->content4 : ""; ?></textarea>
+                            <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore4" href="javascript:void(0);">
+                                <span class="button-content">Read More</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-label col-md-12">
+                            <label for="">
+                                Content 5:
+                            </label>
+                            <textarea name="content5" id="content5"
+                                class="large-textarea validate[]"><?php echo !empty($packageInfo->content5) ? $packageInfo->content5 : ""; ?></textarea>
+                            <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore5" href="javascript:void(0);">
+                                <span class="button-content">Read More</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
-                            Make as Room :
+                            Type :
                         </label>
                     </div>
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="type" id="check1"
                             value="1" <?php echo !empty($masrom) ? $masrom : ""; ?>>
-                        <label for="">Yes</label>
+                        <label for="">Room</label>
                         <input type="radio" class="custom-radio" name="type" id="check0"
                             value="0" <?php echo !empty($unmasrom) ? $unmasrom : "checked"; ?>>
-                        <label for="">No</label>
+                        <label for="">Dine</label>
+                        <input type="radio" class="custom-radio" name="type" id="check2"
+                            value="2" <?php echo !empty($masexp) ? $masexp : ""; ?>>
+                        <label for="">Experience</label>
+                        <input type="radio" class="custom-radio" name="type" id="check3"
+                            value="3" <?php echo !empty($maswed) ? $maswed : ""; ?>>
+                        <label for="">Events</label>
                     </div>
                 </div>
 

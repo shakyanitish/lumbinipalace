@@ -16,22 +16,30 @@ if (!empty($subpkgRec)) {
         // Main image
         $imglink = '';
         if ($v->image != "a:0:{}") {
-            $imageList = unserialize($v->image);
-            $file_path = SITE_ROOT . 'images/services/' . $imageList[0];
-            if (file_exists($file_path)) {
-                $imglink = IMAGE_PATH . 'services/' . $imageList[0];
+            $imageList = @unserialize($v->image);
+            if (is_array($imageList) && !empty($imageList[0])) {
+                $file_path = SITE_ROOT . 'images/services/' . $imageList[0];
+                if (file_exists($file_path)) {
+                    $imglink = IMAGE_PATH . 'services/' . $imageList[0];
+                }
             }
         }
 
         // Icon image
         $iconlink = '';
         if (!empty($v->iconimage) && $v->iconimage != "a:0:{}") {
-            $iconList = unserialize($v->iconimage);
-            $file_path_icon = SITE_ROOT . 'images/services/icon/' . $iconList[0];
-            if (file_exists($file_path_icon)) {
-                $iconlink = IMAGE_PATH . 'services/icon/' . $iconList[0];
+            $iconList = @unserialize($v->iconimage);
+            if (is_array($iconList) && !empty($iconList[0])) {
+                $file_path_icon = SITE_ROOT . 'images/services/icon/' . $iconList[0];
+                if (file_exists($file_path_icon)) {
+                    $iconlink = IMAGE_PATH . 'services/icon/' . $iconList[0];
+                }
             }
         }
+        
+        // Initialize linkTarget
+        $linkTarget = '';
+        
         // Only create link if linksrc exists in database
         if (!empty($v->linksrc)) {
             $linkTarget = ($v->linktype == 1) ? ' target="_blank" ' : '';
@@ -156,7 +164,10 @@ if (!empty($subpkgRec)) {
     foreach ($servpkgRec as $key => $serRec) {
         $imageList = '';
         if ($serRec->image != "a:0:{}") {
-            $imageList = unserialize($serRec->image);
+            $imageList = @unserialize($serRec->image);
+            if (!is_array($imageList)) {
+                $imageList = array();
+            }
         }
         if ($slug == $serRec->slug) {
             $class1 = "active";
@@ -171,7 +182,7 @@ if (!empty($subpkgRec)) {
                                             <div class="col-sm-6">
                                                 <div class="dining-detail-carousel">';
         // var_dump($imageList); die();
-        if ($serRec->image != "a:0:{}") {
+        if (!empty($imageList) && is_array($imageList)) {
             foreach ($imageList as $key => $imgServ) {
                 $restscont .= ' <div class="item">
                                                 <img src="' . IMAGE_PATH . 'services/' . $imgServ . '" alt="' . $serRec->title . '" />

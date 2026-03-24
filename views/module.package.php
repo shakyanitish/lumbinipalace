@@ -5,6 +5,7 @@ $roomlist = $roombread = $singlepage = '';
 $modalpopup = '';
 $room_package = '';
 $single_more = '';
+$roombreads = '';
 
 /*
 * package listing page - LIST VIEW (no slug)
@@ -548,7 +549,7 @@ if (!empty($overviewPkg)) {
                     if (!empty($item)) {
                         $overview_items_html .= '
                     <div class="m-overview-item-new">
-                        <p>' . htmlspecialchars($item) . '</p>
+                        <p>' . $item . '</p>
                     </div>';
                     }
                 }
@@ -580,6 +581,58 @@ $overview_section = '
 ';
 
 $jVars['module:rooms-overview'] = $overview_section;
+
+
+//experience
+$overview_items_html2 = '';
+$overviewPkg = Package::find_by_sql("SELECT incexc FROM tbl_package WHERE status=1 AND type=2 LIMIT 1");
+
+if (!empty($overviewPkg)) {
+    foreach ($overviewPkg as $pkg) {
+        if (!empty($pkg->incexc)) {
+            $includesList = unserialize($pkg->incexc);
+            if (!empty($includesList) && is_array($includesList)) {
+                foreach ($includesList as $item) {
+                    if (!empty($item)) {
+                        // Handle both old format (string) and new format (array)
+                        $itemText = is_array($item) ? $item['text'] : $item;
+                        $itemUrl = is_array($item) ? (!empty($item['url']) ? $item['url'] : '') : '';
+                        
+                        $learnMoreLink = '';
+                        if (!empty($itemUrl)) {
+                            $learnMoreLink = '<a href="' . htmlspecialchars($itemUrl) . '"
+                                    class="text-dark fw-bold text-decoration-underline">Learn More</a>';
+                        }
+                        
+                        $overview_items_html2 .= '
+                    <div class="col-md-4">
+                        <div class="m-attraction-text-block h-100">
+                            <p class="mb-0 text-muted" style="font-size: 0.9rem;">' . $itemText . $learnMoreLink . '</p>
+                        </div>
+                    </div>';
+                    }
+                }
+            }
+        }
+    }
+}
+
+$overview_section2 = '
+        <section class="m-local-attractions-text py-5 bg-white mt-4">
+            <div class="container">
+                <div class="row g-5">
+                 ' . $overview_items_html2 . '
+
+                </div>
+            </div>
+        </section>
+
+';
+
+$jVars['module:exp-overview'] = $overview_section2;
+
+
+
 
 /*
 * Rooms Page - All Rooms List

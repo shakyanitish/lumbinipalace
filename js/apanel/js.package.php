@@ -65,16 +65,35 @@
             }
         }
 
-        window.addIncludesRow = function() {
-            var rowNum = Math.floor((Math.random() * 999) + 1);
-            var newRow = '<div class="mrg10B">\
-                <span class="drag-handle cp"><i class="glyph-icon icon-arrows"></i></span>\
-                <input type="text" placeholder="Includes" class="col-md-8 validate[length[0,100]]" name="incexc[]">\
-                <span class="cp remove_includes_row" onclick="$(this).parent().remove();"><i class="glyph-icon icon-minus-square"></i></span><br>\
-                </div>';
-            $('#add_includes_div').append(newRow);
-        }
+window.addIncludesRow = function() {
+    var rowNum = Math.floor((Math.random() * 999) + 1);
+    
+    // We no longer need to check packageType since it's for all types now
+    var urlField = '<input type="text" placeholder="Learn More URL (optional)" class="col-md-4 validate[length[0,200]]" name="incexc_url[]">';
 
+    var newRow = '<div class="mrg10B">\
+        <span class="drag-handle cp"><i class="glyph-icon icon-arrows"></i></span>\
+        <input type="text" placeholder="Includes Text" class="col-md-6 validate[length[0,100]]" name="incexc_text[]">\
+        ' + urlField + '\
+        <span class="cp remove_includes_row" onclick="$(this).parent().remove();"><i class="glyph-icon icon-minus-square"></i></span><br>\
+        </div>';
+
+    $('#add_includes_div').append(newRow);
+}
+
+window.addIncludesRow2 = function() {
+    var rowNum = Math.floor((Math.random() * 999) + 1);
+    var urlField = '<input type="text" placeholder="Learn More URL (optional)" class="col-md-4 validate[length[0,200]]" name="incexc_url1[]">';
+
+    var newRow = '<div class="mrg10B">\
+        <span class="drag-handle cp"><i class="glyph-icon icon-arrows"></i></span>\
+        <input type="text" placeholder="Includes Text" class="col-md-6 validate[length[0,100]]" name="incexc_text1[]">\
+        ' + urlField + '\
+        <span class="cp remove_includes_row" onclick="$(this).parent().remove();"><i class="glyph-icon icon-minus-square"></i></span><br>\
+        </div>';
+
+    $('#add_includes_div_2').append(newRow);
+}
 
 
         // Subpackages datatable
@@ -649,6 +668,46 @@
         $('#exploreLinkPage').change(function() {
             $('#explorelinksrc').val($(this).val());
         });
+
+        // Type toggle logic
+        $('input[name="type"]').on('change', function() {
+            var val = $('input[name="type"]:checked').val();
+            if (val == 3) {
+                $('.events-only-fields').show();
+                $('.events-only-fields textarea, .events-only-fields input').prop('disabled', false);
+                // Initialize CKEditors for extra fields if they haven't been
+                var extra_editors = ["content1", "content2", "content3", "content4", "content5"];
+                for (var i in extra_editors) {
+                    if (!CKEDITOR.instances[extra_editors[i]]) {
+                        CKEDITOR.replace(extra_editors[i], {
+                            filebrowserBrowseUrl: '<?php echo BASE_URL; ?>ckfinder/ckfinder.html'
+                        });
+                    }
+                }
+            } else {
+                $('.events-only-fields').hide();
+                $('.events-only-fields textarea, .events-only-fields input').prop('disabled', true);
+            }
+        });
+        // Trigger on load
+        $('input[name="type"]:checked').trigger('change');
+
+        // Read More handlers for extra content fields
+        for (var i = 1; i <= 5; i++) {
+            (function(index) {
+                $(document).on('click', '#readMore' + index, function() {
+                    var instanceName = 'content' + (index == 1 ? '1' : index);
+                    if (index == 0) instanceName = 'content'; // case for main one
+                    
+                    var data = CKEDITOR.instances[instanceName].getData();
+                    if (data.match(/<hr id="system_readmore" style="border-style: dashed; border-color: orange;" \/>/g)) {
+                        showMessage('notice', 'Action already exists.');
+                    } else {
+                        CKEDITOR.instances[instanceName].insertHtml('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />');
+                    }
+                });
+            })(i);
+        }
     });
 
     function togglePackageItineraryStatus(idArray) {

@@ -105,13 +105,13 @@ if (isset($_GET['page']) && $_GET['page'] == "offers" && isset($_GET['mode']) &&
     </div>
     <?php
 
-$metasql = $db->query("SELECT * FROM tbl_metadata WHERE page_name='$pagename'");
-$metadata = $metasql->fetch_object();
-// $metaexist= !empty($metadata) ? array_shift($metadata) : false;
-// pr($metadata);
+    $metasql = $db->query("SELECT * FROM tbl_metadata WHERE page_name='$pagename'");
+    $metadata = $metasql->fetch_object();
+    // $metaexist= !empty($metadata) ? array_shift($metadata) : false;
+    // pr($metadata);
 
-?>
-<div class="form-row show  <?php echo (!empty($metadata->meta_keywords) || !empty($metadata->meta_description) || !empty($metadata->meta_title)) ? '' : 'hide'; ?> metadata">
+    ?>
+    <div class="form-row show  <?php echo (!empty($metadata->meta_keywords) || !empty($metadata->meta_description) || !empty($metadata->meta_title)) ? '' : 'hide'; ?> metadata">
         <form class="col-md-12 center-margin" id="offers_meta_frm">
             <input type="hidden" name="page_name" value="<?php echo $pagename ?>" />
             <input type="hidden" name="module_id" value="<?php echo $moduleId ?>" />
@@ -210,7 +210,7 @@ $metadata = $metasql->fetch_object();
     endif;
 ?>
     <h3>
-        <?php echo (isset($_GET['id'])) ? 'Edit ' . $mdiscount . '' : 'Add Offers'; ?>
+        <?php echo (isset($_GET['id'])) ? 'Edit Offers' : 'Add Offers'; ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);" onClick="viewOfferslist();">
             <span class="glyph-icon icon-separator">
                 <i class="glyph-icon icon-arrow-circle-left"></i>
@@ -285,28 +285,43 @@ $metadata = $metasql->fetch_object();
                 </div> -->
 
 
+
                 <div class="form-row">
                     <div class="form-label col-md-2">
-                        <label for="">
-                            Start Date :
-                        </label>
+                        <label for="">Type :</label>
                     </div>
-                    <div class="form-input col-md-4">
-                        <input placeholder="Start Date" class="col-md-6 validate[required] datepicker" type="text"
-                            name="start_date" id="start_date"
-                            value="<?php echo !empty($advInfo->start_date) ? $advInfo->start_date : ""; ?>">
+                    <div class="form-checkbox-radio col-md-9">
+                        <input type="radio" class="custom-radio" name="deadline_type" id="deadline_type1" value="deadline" <?php echo (empty($advInfo->deadline_type) || $advInfo->deadline_type == 'deadline') ? 'checked' : ''; ?>>
+                        <label for="deadline_type1">Deadline</label>
+                        <input type="radio" class="custom-radio" name="deadline_type" id="deadline_type0" value="alltime" <?php echo (!empty($advInfo->deadline_type) && $advInfo->deadline_type == 'alltime') ? 'checked' : ''; ?>>
+                        <label for="deadline_type0">All Time</label>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-label col-md-2">
-                        <label for="">
-                            Deadline :
-                        </label>
+
+                <div id="date_fields_wrapper" class="deadline-fields">
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Start Date :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-4">
+                            <input placeholder="Start Date" class="col-md-6 validate[required] datepicker" type="text"
+                                name="start_date" id="start_date"
+                                value="<?php echo !empty($advInfo->start_date) ? $advInfo->start_date : ""; ?>">
+                        </div>
                     </div>
-                    <div class="form-input col-md-4">
-                        <input placeholder="End Date" class="col-md-6 validate[required] datepicker" type="text"
-                            name="offer_date" id="offer_date"
-                            value="<?php echo !empty($advInfo->offer_date) ? $advInfo->offer_date : ""; ?>">
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Deadline :
+                            </label>
+                        </div>
+                        <div class="form-input col-md-4">
+                            <input placeholder="End Date" class="col-md-6 validate[required] datepicker" type="text"
+                                name="offer_date" id="offer_date"
+                                value="<?php echo !empty($advInfo->offer_date) ? $advInfo->offer_date : ""; ?>">
+                        </div>
                     </div>
                 </div>
 
@@ -775,6 +790,26 @@ $metadata = $metasql->fetch_object();
                         {name: 'tools', items: ['Maximize', 'ShowBlocks', '-', 'About']}
                     ]
             });*/
+            
+            // Handle deadline type toggle
+            function toggleDeadlineFields() {
+                var deadlineType = $('input[name="deadline_type"]:checked').val();
+                if (deadlineType === 'alltime') {
+                    $('#date_fields_wrapper').hide();
+                    $('#start_date').val('');
+                    $('#offer_date').val('');
+                } else {
+                    $('#date_fields_wrapper').show();
+                }
+            }
+            
+            // Initialize on page load
+            toggleDeadlineFields();
+            
+            // Handle radio button change
+            $('input[name="deadline_type"]').on('change', function() {
+                toggleDeadlineFields();
+            });
         });
     </script>
 <?php endif; ?>

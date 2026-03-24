@@ -73,8 +73,8 @@ RewriteRule ^alumini/?$ alumini.php?slug=$1  [L]
 
 
 
-#For facilities pages.
-#RewriteRule ^facilities/?$ facilities.php [L]
+#For experiences pages.
+RewriteRule ^experiences/?$ exp.php [L]
 
 #For facq pages.
 RewriteRule ^faq/?$ faq.php [L]
@@ -95,6 +95,11 @@ RewriteRule ^ - [L]
 #For BLOG pages.
 RewriteRule ^blog/?$ blog.php [L]
 RewriteRule ^blog/([a-zA-Z0-9-=]+)$ blog_detail.php?slug=$1 [L]
+
+
+#For BLOG pages.
+RewriteRule ^events/?$ events.php [L]
+RewriteRule ^events/([a-zA-Z0-9-=]+)$ events_detail.php?slug=$1 [L]
 
 #For Program/Package pages.
 RewriteRule ^dining/?$ package.php [L]

@@ -34,7 +34,7 @@ if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_
                 foreach ($records as $key => $record): ?>
                     <tr id="<?php echo $record->id; ?>">
                         <td style="display:none;"><?php echo $key + 1; ?></td>
-                        <td><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/></td>
+                        <td><?php if (!in_array($record->id, [4, 5, 6])): ?><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/><?php endif; ?></td>
                         <td>
                             <div class="col-md-7">
                                 <a href="javascript:void(0);" onClick="editCategory(<?php echo $record->id; ?>);"
@@ -68,10 +68,12 @@ if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_
                                data-placement="top" title="Edit" onclick="editCategory(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-edit"></i>
                             </a>
+                            <?php if (!in_array($record->id, [4, 5, 6])): ?>
                             <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top"
                                title="Remove" onclick="deleteCategory(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-remove"></i>
                             </a>
+                            <?php endif; ?>
                             <input name="sortId" type="hidden" value="<?php echo $record->id; ?>">
                         </td>
                     </tr>
@@ -180,19 +182,7 @@ if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_
                     </div>
                 </div>
 
-                <div class="form-row hide">
-                    <div class="form-label col-md-2">
-                        <label for="">
-                            Icon (Font Awesome Class) :
-                        </label>
-                    </div>
-                    <div class="form-input col-md-20">
-                        <input placeholder="e.g., fa-solid fa-plane" class="col-md-6" type="text"
-                               name="icon" id="icon"
-                               value="<?php echo !empty($faqInfo->icon) ? $faqInfo->icon : ''; ?>">
-                        <small class="text-muted">Enter Font Awesome icon class. Examples: fa-solid fa-plane, fa-solid fa-train, fa-solid fa-bus, fa-solid fa-map-pin</small>
-                    </div>
-                </div>
+
 
                 <div class="form-row">
                     <div class="form-checkbox-radio col-md-9">

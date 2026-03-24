@@ -6,7 +6,7 @@ class Offers extends DatabaseObject
     protected static $table_name = "tbl_offers";
     protected static $db_fields = array(
         'id', 'slug', 'title','tag', 'image', 'offer_date','offerpopup','start_date', 'linksrc', 'linktype', 'rate', 'discount', 'brief', 'content', 'adults', 'children',
-        'status', 'added_date', 'sortorder', 'type', 'list_image','homepage');
+        'status', 'added_date', 'sortorder', 'type', 'list_image','homepage', 'deadline_type');
 
     public $id;
     public $slug;
@@ -30,20 +30,21 @@ class Offers extends DatabaseObject
     public $type;
     public $list_image;
     public $homepage;
+    public $deadline_type;
 
     //Find all published rows in the current database table.
     public static function get_offer_by($limit = '')
     {
         global $db;
         $cond = !empty($limit) ? ' LIMIT ' . $limit : '';
-        return self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE status=1 AND CURDATE() BETWEEN start_date AND offer_date ORDER BY sortorder DESC $cond");
+        return self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE status=1 AND (deadline_type='alltime' OR (CURDATE() BETWEEN start_date AND offer_date)) ORDER BY sortorder DESC $cond");
     }
 
     public static function get_offer_by_popup($limit = '')
     {
         global $db;
         $cond = !empty($limit) ? ' LIMIT ' . $limit : '';
-        return self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE status=1 AND offerpopup=1 AND CURDATE() BETWEEN start_date AND offer_date ORDER BY sortorder DESC $cond");
+        return self::find_by_sql("SELECT * FROM " . self::$table_name . " WHERE status=1 AND offerpopup=1 AND (deadline_type='alltime' OR (CURDATE() BETWEEN start_date AND offer_date)) ORDER BY sortorder DESC $cond");
     }
 
     public static function get_internal_link($Lsel = '', $LType = 0)

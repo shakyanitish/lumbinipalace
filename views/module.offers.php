@@ -29,7 +29,9 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
     $currentdate = date("Y-m-d") ;
     // pr($recRow);
     // pr($currentdate);
-    if($recRow->offer_date > $currentdate){
+    if($recRow->deadline_type == 'alltime' || empty($recRow->offer_date)){
+        $enquiry='<a href="'.BASE_URL.'book/'.$recRow->slug.'" class="btn btn-primary btn-book" style="color: #fff;background-color: #7b2b2e;border-color: #7b2b2e;">Enquiry</a>';
+    } elseif($recRow->offer_date > $currentdate){
         $enquiry='<a href="'.BASE_URL.'book/'.$recRow->slug.'" class="btn btn-primary btn-book" style="color: #fff;background-color: #7b2b2e;border-color: #7b2b2e;">Enquiry</a>';
     }
     else{
@@ -94,15 +96,18 @@ else{
          foreach ($offList as $offer) {
    
              $currentdate = date("Y-m-d") ;
-             if($offer->start_date <= $currentdate){
-            //  pr($offer->offer_date);
-            //  pr($currentdate);
-             if($offer->offer_date < $currentdate ){
-             $expired .='<div class="offer__expire position-absolute"><span>Expired</span></div>';
-             }
-             else{
-                 $expired .='';
-             }
+             // Show offer if it's "All Time" or if dates are valid and within range
+             $isAllTime = ($offer->deadline_type == 'alltime' || empty($offer->start_date) || empty($offer->offer_date));
+             $isActive = $isAllTime || ($offer->start_date <= $currentdate && $offer->offer_date >= $currentdate);
+             
+             if($isActive) {
+                 // Only mark as expired if it has a deadline and is past the deadline
+                 if(!$isAllTime && $offer->offer_date < $currentdate) {
+                     $expired .='<div class="offer__expire position-absolute"><span>Expired</span></div>';
+                 }
+                 else{
+                     $expired .='';
+                 }
             //  pr($expired);
             $resinndetail.='<div class="col-md-4">
                                 <div class="offer offer-item position-relative">
@@ -116,7 +121,7 @@ else{
                                 '.$expired.'
                             </div>';
          $expired='';
-         }
+             }
          }
          $resinndetail.='</div>';
 }
@@ -149,7 +154,7 @@ else{
     }
 
 if (defined('HOME_PAGE')) {
-        $sql = "SELECT *  FROM tbl_offers WHERE status='1' and homepage='1' AND CURDATE() BETWEEN start_date AND offer_date ORDER BY sortorder DESC ";
+        $sql = "SELECT * FROM tbl_offers WHERE status='1' and homepage='1' AND (deadline_type='alltime' OR (start_date IS NOT NULL AND offer_date IS NOT NULL AND CURDATE() BETWEEN start_date AND offer_date)) ORDER BY sortorder DESC ";
         $offrRec = Offers::find_by_sql($sql);
     if ($offrRec) {
         $slides = '';
@@ -160,7 +165,7 @@ if (defined('HOME_PAGE')) {
             $file_path = SITE_ROOT . 'images/' . $imageFolder . $imageFile;
             if (file_exists($file_path) && !empty($imageFile)) {
                 $badge = !empty($offrRow->tag) ? '
-                    <div class="m-offer-badge"><i class="fa-solid fa-lock" style="font-size: 10px; margin-right: 4px;"></i> ' . htmlspecialchars($offrRow->tag) . '</div>' : '';
+                    <div class="m-offer-badge"><i class="fa-solid fa-lock" style="font-size: 10px; margin-right: 4px;"></i> ' . $offrRow->tag . '</div>' : '';
 
                 $dateRange = '';
                 if (!empty($offrRow->start_date) && !empty($offrRow->offer_date)) {
@@ -172,11 +177,11 @@ if (defined('HOME_PAGE')) {
                 $slides .= '
                 <div class="swiper-slide">
                     <a href="' . BASE_URL . 'offer/' . $offrRow->slug . '" class="m-offer-card">
-                        <img src="' . IMAGE_PATH . $imageFolder . $imageFile . '" alt="' . htmlspecialchars($offrRow->title) . '" class="m-offer-bg">
+                        <img src="' . IMAGE_PATH . $imageFolder . $imageFile . '" alt="' . $offrRow->title . '" class="m-offer-bg">
                         ' . $badge . '
                         <div class="m-offer-content">
                             <span class="m-offer-dates">' . $dateRange . '</span>
-                            <h3 class="m-offer-title">' . htmlspecialchars($offrRow->title)
+                            <h3 class="m-offer-title">' . $offrRow->title
                              . ' <i class="fa-solid fa-chevron-right"></i><i class="fa-light fa-arrow-up-right"></i></h3>
                         </div>
                     </a>

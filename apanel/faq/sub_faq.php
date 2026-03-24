@@ -108,7 +108,7 @@ if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_
     <div class="example-box">
         <div class="example-code">
             <form action="" class="col-md-12 center-margin" id="faq_frmm">
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="category">
                             Category :
@@ -141,6 +141,7 @@ if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_
                     </div>
                 </div>
 
+                <?php if($pid == 6): ?>
                 <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -153,6 +154,7 @@ if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_
                                value="<?php echo !empty($faqInfo->icon) ? $faqInfo->icon : ''; ?>">
                     </div>
                 </div>
+                <?php endif; ?>
                 <!-- <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">

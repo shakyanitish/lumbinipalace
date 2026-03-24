@@ -3,7 +3,7 @@ class Package extends DatabaseObject
 {
 
 	protected static $table_name = "tbl_package";
-	protected static $db_fields = array('id', 'slug', 'image', 'header_image', 'banner_image', 'flag_image', 'title', 'status', 'sortorder', 'detail', 'content', 'meta_title', 'meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date', 'linksrc', 'linktype', 'sub_title', 'program_date', 'incexc');
+	protected static $db_fields = array('id', 'slug', 'image', 'header_image', 'banner_image', 'flag_image', 'title', 'status', 'sortorder', 'detail', 'content', 'meta_title', 'meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date', 'linksrc', 'linktype', 'sub_title', 'program_date', 'incexc', 'content1', 'content2', 'content3', 'content4', 'content5','incexc1');
 
 	var $id;
 	var $slug;
@@ -28,6 +28,12 @@ class Package extends DatabaseObject
 	var $modified_date;
 	var $program_date;
 	var $incexc;
+	var $incexc1;	
+	var $content1;
+	var $content2;
+	var $content3;
+	var $content4;
+	var $content5;
 
 
 	public static function get_latestprogram_by($limit = '')
@@ -45,14 +51,24 @@ class Package extends DatabaseObject
 	public static function get_itinerary($pkgid = '')
 	{
 		global $db;
-		$sql = "SELECT * FROM " . self::$table_name . " WHERE status='1' AND package_id='$pkgid' ORDER BY sortorder ASC ";
-		return self::find_by_sql($sql);
+		$sql = "SELECT * FROM tbl_packageitineary WHERE status='1' AND package_id='$pkgid' ORDER BY sortorder ASC ";
+		$result = $db->query($sql);
+		$records = array();
+		while ($record = $db->fetch_object($result)) {
+			$records[] = $record;
+		}
+		return !empty($records) ? $records : array();
 	}
 	public static function get_itinerarylimit($pkgid = '')
 	{
 		global $db;
-		$sql = "SELECT * FROM " . self::$table_name . " WHERE status='1' AND package_id='$pkgid' ORDER BY sortorder ASC LIMIT 3 ";
-		return self::find_by_sql($sql);
+		$sql = "SELECT * FROM tbl_packageitineary WHERE status='1' AND package_id='$pkgid' ORDER BY sortorder ASC LIMIT 3 ";
+		$result = $db->query($sql);
+		$records = array();
+		while ($record = $db->fetch_object($result)) {
+			$records[] = $record;
+		}
+		return !empty($records) ? $records : array();
 	}
 
 

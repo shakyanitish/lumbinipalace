@@ -188,7 +188,7 @@ $metadata = $metasql->fetch_object();
                                value="<?php echo !empty($articlesInfo->title) ? $articlesInfo->title : ""; ?>">
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Sub Title :
@@ -226,7 +226,7 @@ $metadata = $metasql->fetch_object();
                 </div>                
             </div>   -->
 
-                <div class="form-row add-image">
+                <div class="form-row add-image hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Banner Image :
@@ -332,10 +332,10 @@ $metadata = $metasql->fetch_object();
                 </div>
                 <div class="form-row">
                     <div class="form-label col-md-2">
-                        <label for="">Distance :</label>
+                        <label for="">Icon :</label>
                     </div>
                     <div class="form-input col-md-20">
-                        <input placeholder="Distance"
+                        <input placeholder="Icon"
                             class="col-md-3 validate[required,length[0,200]]" type="text"
                             name="distance" id="distance"
                             value="<?php echo !empty($articlesInfo->distance) ? $articlesInfo->distance : ""; ?>">

@@ -62,26 +62,26 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
             <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
-                        Phone Number :
+                        Landline Number :
                     </label>
                 </div>
                 <div class="form-input col-md-20">
-                    <input placeholder="Contact Info" class="col-md-6" type="text" name="contact_info" id="contact_info"
+                    <input placeholder="Landline Number"Info" class="col-md-6" type="text" name="contact_info" id="contact_info"
                         value="<?php echo !empty($locationRow->contact_info) ? $locationRow->contact_info : ""; ?>">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
-                Toll Free Number:
+                    Mobile Number:
                     </label>
                 </div>
                 <div class="form-input col-md-20">
-                    <input placeholder="Toll Free Number" class="col-md-6" type="text" name="address" id="address"
+                    <input placeholder="Mobile Number" class="col-md-6" type="text" name="address" id="address"
                            value="<?php echo !empty($locationRow->address) ? $locationRow->address : ""; ?>">
                 </div>
             </div> 
-            <div class="form-row">
+            <div class="form-row hide">
                 <div class="form-label col-md-2">
                     <label for="">
                     Room Reservation Number:
@@ -92,7 +92,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                            value="<?php echo !empty($locationRow->room_reservation_number) ? $locationRow->room_reservation_number : ""; ?>">
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row hide">
                 <div class="form-label col-md-2">
                     <label for="">
                     Fax Number:
@@ -165,7 +165,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
                 </div>
                 <div class="form-input col-md-4">
                     <textarea name="location_map" id="location_map"
-                        class="large-textarea validate[required]"><?php echo !empty($locationRow->location_map) ? $locationRow->location_map : ""; ?></textarea>
+                        class="large-textarea validate[]"><?php echo !empty($locationRow->location_map) ? $locationRow->location_map : ""; ?></textarea>
                 </div>
             </div>
 

@@ -177,6 +177,20 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
+                        <label for="">
+                            Sub Title :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-20">
+                        <input placeholder="Package Sub Title" class="col-md-6 validate[required,length[0,50]]" type="text"
+                            name="sub_title" id="sub_title"
+                            value="<?php echo !empty($subpackageInfo->sub_title) ? $subpackageInfo->sub_title : ""; ?>">
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
                         <label for="">Slug :</label>
                     </div>
                     <div class="form-input col-md-20">
@@ -258,7 +272,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     <div id="preview_Image_360"></div>
                 </div>
 
-                <div class="form-row">
+                <!-- <div class="form-row">
                     <?php
                     if (!empty($subpackageInfo->three60_image)):
                         $imageRow2 = $subpackageInfo->three60_image; ?>
@@ -285,7 +299,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             </div>
                         </div>
                     <?php endif; ?>
-                </div>
+                </div> -->
 
                 <div class="form-row hide">
                     <div class="form-label col-md-2">
@@ -301,7 +315,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             word-wrap: break-word;
                         }
                     </style>
-                    <?php if (!empty($subpackageInfo->source_vid)): ?>
+                    <!-- <?php if (!empty($subpackageInfo->source_vid)): ?>
                         <div class="col-md-3" id="removeSavedVid2">
                             <div class="infobox info-bg">
                                 <div class="button-group" data-toggle="buttons">
@@ -324,7 +338,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                 </div>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php endif; ?> -->
                     <div class="form-input col-md-10 uploader2 <?php echo !empty($subpackageInfo->source_vid) ? "hide" : ""; ?>">
                         <input type="file" name="vid_upload" id="vid_upload" class="transparent no-shadow">
                         <label><small> Upload .mp4 or .webm files only</small></label>
@@ -382,30 +396,17 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         endif;
                     endif; ?>
                 </div> -->
-                <?php if ($pkg->type == 1) { ?>
+                <?php if ($pkg->type == 111) { ?>
 
+                <?php /* ?>
                     <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">
-                                Room Id (Rojai) :
+                                Day :
                             </label>
                         </div>
                         <div class="form-input col-md-6">
-                            <input placeholder="Rojai Room Id" class="col-md-3 validate[length[0,200]]" type="text"
-                                name="rojai_room_id" id="rojai_room_id"
-                                value="<?php echo !empty($subpackageInfo->rojai_room_id) ? $subpackageInfo->rojai_room_id : ""; ?>">
-                        </div>
-                    </div>
-                <?php }
-                if ($pkg->type == 1 || $pkg->id == 8) { ?>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">
-                                Currency Type :
-                            </label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Currency Type" class="col-md-3 validate[length[0,2]]" type="text"
+                            <input placeholder="Day" class="col-md-3 validate[length[0,2]]" type="text"
                                 name="currency" id="currency"
                                 value="<?php echo !empty($subpackageInfo->currency) ? $subpackageInfo->currency : ""; ?>">
                         </div>
@@ -413,19 +414,18 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 
                     <div class="form-row">
                         <div class="form-label col-md-2">
-                            <label for="">Price :</label>
+                            <label for="">Time :</label>
                         </div>
                         <div class="form-input col-md-6">
-                            <input placeholder="Price" class="col-md-3 validate[length[0,3]]" type="text"
+                            <input placeholder="Time" class="col-md-3 validate[length[0,3]]" type="text"
                                 name="onep_price" id="room_price1"
                                 value="<?php echo !empty($subpackageInfo->onep_price) ? $subpackageInfo->onep_price : ''; ?>">
                         </div>
                     </div>
-                <?php }
-                if ($pkg->type == 1) { ?>
-                    <!-- <div class="form-row">
+                */ ?>
+                    <div class="form-row hide">
                         <div class="form-label col-md-2">
-                            <label for="">Extra Bed Charge:</label>
+                            <label for="">Contact:</label>
                         </div>
                         <div class="form-input col-md-6">
                             <input placeholder="Charge" class="col-md-3 validate[length[0,3]]" type="text"
@@ -433,11 +433,11 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                    value="<?php //echo !empty($subpackageInfo->threep_price) ? $subpackageInfo->threep_price : ''; 
                                             ?>">
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- <div class="form-row">
                         <div class="form-label col-md-2">
-                            <label for="">No. of Room :</label>
+                            <label for="">No:</label>
                         </div>
                         <div class="form-input col-md-6">
                             <input placeholder="No of Room" class="col-md-3" type="text" name="number_room"
@@ -661,7 +661,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 
 
                 <?php } ?>
-                <div class="form-row hide">
+                <div class="form-row">
                     <div class="form-label col-md-6">
                         <label for="">
                             Brief :
@@ -672,584 +672,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                     </div>
                 </div>
-                <!-- <div class="form-row">
-                    <div class="form-label col-md-2">
-                        <label for="">Best Season:</label>
-                    </div>
-                    <div class="form-input col-md-6">
-                        <input placeholder="Best Season" class="col-md-3 validate[length[0,3]]" type="text"
-                            name="room_service" id="room_service"
-                            value="<?php echo !empty($subpackageInfo->room_service) ? $subpackageInfo->room_service : ''; ?>">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label col-md-2">
-                        <label for="">Min. Group Size :</label>
-                    </div>
-                    <div class="form-input col-md-4">
-                        <input placeholder="Min. Group Size" class="col-md-12" type="text" name="theatre_style" id="theatre_style"
-                            value="<?php echo !empty($subpackageInfo->theatre_style) ? $subpackageInfo->theatre_style : ''; ?>">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-label col-md-2">
-                        <label for="">Min. Days:</label>
-                    </div>
-                    <div class="form-input col-md-4">
-                        <input placeholder=" Min. Days" class="col-md-12" type="text" name="round_table" id="round_table"
-                            value="<?php echo !empty($subpackageInfo->round_table) ? $subpackageInfo->round_table : ''; ?>">
-                    </div>
-                </div> -->
-                <!-- <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Size :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="120sqm" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="size" id="size"
-                                value="<?php echo !empty($subpackageInfo->size) ? $subpackageInfo->size : ''; ?>">
-                        </div>
-                        
-                    </div> -->
-                <!-- <div class="form-row">
-                    <div class="form-label col-md-2">
-                        <label for="">Google embeded :</label>
-                    </div>
-                    <div class="form-input col-md-20">
-                        <input placeholder="Google Embeded link"
-                            class="col-md-3" type="text"
-                            name="google_embeded" id="google_embeded"
-                            value="<?php echo !empty($subpackageInfo->google_embeded) ? $subpackageInfo->google_embeded : ''; ?>">
-                    </div>
-                </div> -->
 
-                <?php if ($pkg->id == 12) { ?>
-                    <div class="form-row">
-                        <div class="col-md-3 mt-3">
-                            <label>Vat/Pan Document</label>
-                            <div class="add-list-media-wrap">
-
-                                <input type="file" id="companyDoc" name="companyDoc" accept="image/*">
-                                <div id="preview_Company_Doc">
-
-
-
-                                    <div class="" id="removeSavedCompanyDoc1">
-                                        <div class="infobox info-bg">
-                                            <div class="button-group" data-toggle="buttons">
-                                                <a class="btn btn-sm small float-right" href="javascript:void(0);" onclick="deleteSavedCompanyDoc(1);">
-                                                    <i class="glyph-icon icon-trash-o"></i>
-                                                </a>
-                                            </div>
-                                            <img src="<?php echo IMAGE_PATH . 'hotelusercompanydoc/' . $subpackageInfo->image4; ?>"
-                                                style="width:100%" />
-                                            <input type="hidden" name="imageArraynameCompanyDoc" value=" <?php echo $subpackageInfo->image4 ?> " class="" />
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Opening hours :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="theatre_style" id="theatre_style"
-                                value="<?php echo !empty($subpackageInfo->theatre_style) ? $subpackageInfo->theatre_style : ''; ?>">
-                        </div>
-                        <div class="form-label col-md-2">
-                            <label for="">Closing hours :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="class_room_style"
-                                id="class_room_style"
-                                value="<?php echo !empty($subpackageInfo->class_room_style) ? $subpackageInfo->class_room_style : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Cuisine :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="shape" id="shape"
-                                value="<?php echo !empty($subpackageInfo->shape) ? $subpackageInfo->shape : ''; ?>">
-                        </div>
-                        <div class="form-label col-md-2">
-                            <label for="">Dress Code:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="round_table" id="round_table"
-                                value="<?php echo !empty($subpackageInfo->round_table) ? $subpackageInfo->round_table : ''; ?>">
-                        </div>
-                    </div>
-
-                <?php } ?>
-                <?php if ($pkg->id == 11) { ?>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Hall Amenities:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="cocktail" id="cocktail"
-                                value="<?php echo !empty($subpackageInfo->cocktail) ? $subpackageInfo->cocktail : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Size :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="seats" id="seats"
-                                value="<?php echo !empty($subpackageInfo->seats) ? $subpackageInfo->seats : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-10">
-                            <label for="">
-                                More Details :
-                            </label>
-                            <textarea name="below_content" id="below_content"
-                                class="large-textarea"><?php echo !empty($subpackageInfo->below_content) ? $subpackageInfo->below_content : ""; ?></textarea>
-                            <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore"
-                                href="javascript:void(0);">
-                                <span class="button-content">Read More</span>
-                            </a>
-                        </div>
-                    </div>
-                <?php } ?>
-
-
-
-                <?php if ($pkg->id == 6) { ?>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Size :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="120sqm" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="size" id="size"
-                                value="<?php echo !empty($subpackageInfo->size) ? $subpackageInfo->size : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Cover:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="cocktail" id="cocktail"
-                                value="<?php echo !empty($subpackageInfo->cocktail) ? $subpackageInfo->cocktail : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Theatre Style :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="theatre_style" id="theatre_style"
-                                value="<?php echo !empty($subpackageInfo->theatre_style) ? $subpackageInfo->theatre_style : ''; ?>">
-                        </div>
-                        <div class="form-label col-md-2">
-                            <label for="">Class Room Style:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="class_room_style"
-                                id="class_room_style"
-                                value="<?php echo !empty($subpackageInfo->class_room_style) ? $subpackageInfo->class_room_style : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">U Shape :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="shape" id="shape"
-                                value="<?php echo !empty($subpackageInfo->shape) ? $subpackageInfo->shape : ''; ?>">
-                        </div>
-                        <div class="form-label col-md-2">
-                            <label for="">Round Table:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="round_table" id="round_table"
-                                value="<?php echo !empty($subpackageInfo->round_table) ? $subpackageInfo->round_table : ''; ?>">
-                        </div>
-                    </div>
-
-                    <style type="text/css">
-                        .list {
-                            background-color: #d9d9d9;
-                            text-align: center;
-                            cursor: pointer;
-                            border: 1px solid gray;
-                        }
-
-                        .items {
-                            list-style-type: none;
-                            width: 60%;
-                        }
-
-                        .items li {
-                            float: left;
-                            margin: 2px;
-                            padding: 2px;
-                        }
-                    </style>
-
-                    <!-- Feature Listing -->
-                    <?php $svfr = !empty($subpackageInfo->feature) ? $subpackageInfo->feature : '';
-                    $saveRec = unserialize($svfr);
-                    $RecFearures = Features::get_all_byparnt(0);
-                    $items = 1;
-                    if ($RecFearures) {
-                        foreach ($RecFearures as $recRow) { ?>
-                            <div class="form-row">
-                                <div class="form-label col-md-2">
-                                    <label for="">
-                                        <?php echo $recRow->title; ?> :
-                                    </label>
-                                </div>
-                                <div class="form-checkbox-radio col-md-10 form-input">
-                                    <input type="text" placeholder="Title" class="col-md-4 validate[length[0,250]]"
-                                        name="fparent[<?php echo $recRow->id; ?>][]"
-                                        value="<?php echo !empty($saveRec[$recRow->id][0][0]) ? $saveRec[$recRow->id][0][0] : ''; ?>">
-                                    <div class="clear"></div>
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#items<?php echo $items; ?>").sortable();
-                                        });
-                                    </script>
-                                    <ul id="items<?php echo $items; ?>" class="items">
-                                        <?php $childRec = Features::get_all_byparnt($recRow->id);
-                                        $checked = $unchecked = array();
-                                        if (!empty($saveRec)) {
-                                            //separating the checked ones in order they are saved in db
-                                            if (!empty($saveRec[$recRow->id][1])) {
-                                                foreach ($saveRec[$recRow->id][1] as $saved) {
-                                                    for ($i = 0; $i < sizeof($childRec); $i++) {
-                                                        if ($saved == $childRec[$i]->id) {
-                                                            $checked[] = [$childRec[$i]->id, $childRec[$i]->title];
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            //separating the unchecked ones
-                                            foreach ($childRec as $childRow) {
-                                                if (!empty($saveRec[$recRow->id][1])) {
-                                                    $unchecked[] = (in_array($childRow->id, $saveRec[$recRow->id][1])) ? '' : [$childRow->id, $childRow->title];
-                                                } else {
-                                                    $unchecked[] = [$childRow->id, $childRow->title];
-                                                }
-                                            }
-                                        } else {
-                                            foreach ($childRec as $childRow) {
-                                                $unchecked[] = [$childRow->id, $childRow->title];
-                                            }
-                                        }
-                                        foreach ($checked as $checkd) { ?>
-                                            <li class="list">
-                                                <input type="checkbox" class="custom-radio"
-                                                    name="feature[<?php echo $recRow->id; ?>][]"
-                                                    value="<?php echo $checkd[0]; ?>" checked="checked">
-                                                <label for=""><?php echo $checkd[1]; ?></label>
-                                            </li>
-                                            <?php }
-                                        foreach ($unchecked as $uncheckd) {
-                                            if (!empty($uncheckd)) { ?>
-                                                <li class="list">
-                                                    <input type="checkbox" class="custom-radio"
-                                                        name="feature[<?php echo $recRow->id; ?>][]"
-                                                        value="<?php echo $uncheckd[0]; ?>">
-                                                    <label for=""><?php echo $uncheckd[1]; ?></label>
-                                                </li>
-                                        <?php }
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
-                            </div>
-                    <?php $items++;
-                        }
-                    }
-                    // $feature_of_room = $subpackageInfo->class_room_style;
-                    // $none_selected = ($subpackageInfo->class_room_style == 'best_deal' || $subpackageInfo->class_room_style == 'featured_room')?'selected':'none';
-                    ?>
-
-                <?php } ?>
-                <?php if ($pkg->id == 30000) { ?>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Cluster :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="clusture" id="clusture"
-                                value="<?php echo !empty($subpackageInfo->clusture) ? $subpackageInfo->clusture : ''; ?>">
-                        </div>
-                        <div class="form-label col-md-2">
-                            <label for="">Cocktail:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="cocktail" id="cocktail"
-                                value="<?php echo !empty($subpackageInfo->cocktail) ? $subpackageInfo->cocktail : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Seats :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="" class="col-md-12" type="text" name="seats" id="seats"
-                                value="<?php echo !empty($subpackageInfo->seats) ? $subpackageInfo->seats : ''; ?>">
-                        </div>
-                    </div>
-                <?php } ?>
-
-                <?php if ($pkg->id == 2123123123) { ?>
-                    <!-- <div class="form-row">
-
-                        <div class="form-label col-md-2">
-                            <label for="">Location:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="09th Floor of Tower B" class="col-md-12" type="text" name="location"
-                                   id="location"
-                                   value="<?php //echo !empty($subpackageInfo->location) ? $subpackageInfo->location : ''; 
-                                            ?>">
-                        </div>
-                        <div class="form-label col-md-2">
-                            <label for="">Serves:</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="All kinds of Cocktals and Mocktails" class="col-md-12" type="text"
-                                   name="serve" id="serve"
-                                   value="<?php //echo !empty($subpackageInfo->serve) ? $subpackageInfo->serve : ''; 
-                                            ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Time :</label>
-                        </div>
-                        <div class="form-input col-md-4">
-                            <input placeholder="12:00 hrs Onwards - 22:00 hrs Last Order" class="col-md-12" type="text"
-                                   name="time" id="time"
-                                   value="<?php //echo !empty($subpackageInfo->time) ? $subpackageInfo->time : ''; 
-                                            ?>">
-                        </div>
-
-                    </div> -->
-
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Seminar :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Seminar" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="seminar" id="seminar"
-                                value="<?php echo !empty($subpackageInfo->seminar) ? $subpackageInfo->seminar : ''; ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Meeting :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Meeting" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="meeting" id="meeting"
-                                value="<?php echo !empty($subpackageInfo->meeting) ? $subpackageInfo->meeting : ''; ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Events :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Events" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="events" id="events"
-                                value="<?php echo !empty($subpackageInfo->events) ? $subpackageInfo->events : ''; ?>">
-                        </div>
-                    </div>
-
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Conference :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Conference" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="conference" id="conference"
-                                value="<?php echo !empty($subpackageInfo->conference) ? $subpackageInfo->conference : ''; ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Catering :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Catering" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="catering" id="catering"
-                                value="<?php echo !empty($subpackageInfo->catering) ? $subpackageInfo->catering : ''; ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Celebration :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Celebration" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="celebration" id="celebration"
-                                value="<?php echo !empty($subpackageInfo->celebration) ? $subpackageInfo->celebration : ''; ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Organic Food :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Organic Food" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="organic_food" id="organic_food"
-                                value="<?php echo !empty($subpackageInfo->organic_food) ? $subpackageInfo->organic_food : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">View :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="City/Village" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="view" id="view"
-                                value="<?php echo !empty($subpackageInfo->view) ? $subpackageInfo->view : ''; ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Size :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="120sqm" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="size" id="size"
-                                value="<?php echo !empty($subpackageInfo->size) ? $subpackageInfo->size : ''; ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Service :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Service" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="service" id="room_price1"
-                                value="<?php echo !empty($subpackageInfo->service) ? $subpackageInfo->service : ''; ?>">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-label col-md-2">
-                            <label for="">Live Music :</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="Live Music" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="live_music" id="live_music"
-                                value="<?php echo !empty($subpackageInfo->live_music) ? $subpackageInfo->live_music : ''; ?>">
-                        </div>
-                    </div>
-
-
-
-
-
-
-                    <!-- Feature Listing -->
-                    <?php $svfr = !empty($subpackageInfo->feature) ? $subpackageInfo->feature : '';
-                    $saveRec = unserialize($svfr);
-                    $RecFearures = Features::get_all_byparnt(0);
-                    $items = 1;
-                    if ($RecFearures) {
-                        foreach ($RecFearures as $recRow) { ?>
-                            <div class="form-row">
-                                <div class="form-label col-md-2">
-                                    <label for="">
-                                        <?php echo $recRow->title; ?> :
-                                    </label>
-                                </div>
-                                <div class="form-checkbox-radio col-md-10 form-input">
-                                    <input type="text" placeholder="Title" class="col-md-4 validate[length[0,250]]"
-                                        name="fparent[<?php echo $recRow->id; ?>][]"
-                                        value="<?php echo !empty($saveRec[$recRow->id][0][0]) ? $saveRec[$recRow->id][0][0] : ''; ?>">
-                                    <div class="clear"></div>
-                                    <script>
-                                        $(document).ready(function() {
-                                            $("#items<?php echo $items; ?>").sortable();
-                                        });
-                                    </script>
-                                    <ul id="items<?php echo $items; ?>" class="items">
-                                        <?php $childRec = Features::get_all_byparnt($recRow->id);
-                                        $checked = $unchecked = array();
-                                        $i = 1;
-                                        if (!empty($saveRec)) {
-                                            //separating the checked ones in order they are saved in db
-                                            if (!empty($saveRec[$recRow->id][1])) {
-                                                foreach ($saveRec[$recRow->id][1] as $saved) {
-                                                    for ($i = 0; $i < sizeof($childRec); $i++) {
-                                                        if ($saved == $childRec[$i]->id) {
-                                                            $checked[] = [$childRec[$i]->id, $childRec[$i]->title];
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            //separating the unchecked ones
-                                            foreach ($childRec as $childRow) {
-                                                if (!empty($saveRec[$recRow->id][1])) {
-                                                    $unchecked[] = (in_array($childRow->id, $saveRec[$recRow->id][1])) ? '' : [$childRow->id, $childRow->title];
-                                                } else {
-                                                    $unchecked[] = [$childRow->id, $childRow->title];
-                                                }
-                                            }
-                                        } else {
-                                            foreach ($childRec as $childRow) {
-                                                $unchecked[] = [$childRow->id, $childRow->title];
-                                            }
-                                        }
-                                        foreach ($checked as $checkd) { ?>
-                                            <li class="list">
-                                                <input type="checkbox" class="custom-radio"
-                                                    name="feature[<?php echo $recRow->id; ?>][]"
-                                                    value="<?php echo $checkd[0]; ?>" checked="checked">
-                                                <label for=""><?php echo $checkd[1]; ?></label>
-                                            </li>
-                                            <?php
-                                            echo ($i % 4 == 0) ? '<div class="clear"></div>' : '';
-                                            $i++;
-                                        }
-                                        foreach ($unchecked as $uncheckd) {
-                                            if (!empty($uncheckd)) { ?>
-                                                <li class="list">
-                                                    <input type="checkbox" class="custom-radio"
-                                                        name="feature[<?php echo $recRow->id; ?>][]"
-                                                        value="<?php echo $uncheckd[0]; ?>">
-                                                    <label for=""><?php echo $uncheckd[1]; ?></label>
-                                                </li>
-                                        <?php }
-                                            echo ($i % 4 == 0) ? '<div class="clear"></div>' : '';
-                                            $i++;
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
-                            </div>
-                    <?php $items++;
-                        }
-                    } ?>
-
-
-                <?php } ?>
 
                 <div class="form-row">
                     <div class="form-label col-md-10">

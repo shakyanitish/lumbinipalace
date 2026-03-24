@@ -156,7 +156,7 @@ if (isset($_GET['page']) && $_GET['page'] == "features" && isset($_GET['mode']) 
                                value="<?php echo !empty($featuresInfo->title) ? htmlentities($featuresInfo->title) : ""; ?>">
                     </div>
                 </div>
-                <div class="form-row add-image">
+                <div class="form-row add-image hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Image :

@@ -6,6 +6,7 @@ $socialRec = SocialNetworking::getSocialNetwork();
 $siteRegulars = Config::find_by_id(1);
 
 $resocl = '';
+$resocl1 = '';
 $disicon = '';
 
 if (!empty($socialRec)) {
