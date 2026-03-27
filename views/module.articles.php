@@ -146,45 +146,26 @@ if (defined('INNER_PAGE') and isset($_REQUEST['slug'])) {
         $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($recRow->content));
         $content = !empty($rescontent[1]) ? $rescontent[1] : $rescontent[0];
 
-        
 
-        $aboutdetail .=  '       
-        <section class="breadcrumb-main">
-            <div class="container">
-                <div class="breadcrumb-inner">
-                    <h2>' . $recRow->title . '</h2>
+
+        $aboutdetail .=  ' 
+                <section class="m-overview-new wow animate__fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <div class="container container-custom">
+                <div class="m-overview-header text-center">
+                    <p class="m-overview-label-new">' . $recRow->title . '</p>
+                    <div class="m-overview-divider-red"></div>
+                    <h2 class="m-overview-title-main">' . $recRow->sub_title .'</h2>
+                </div>
+
+                <div class="row mt-5">
+                ' . ($recRow->content) . '
+
                 </div>
             </div>
         </section>
 
-        <section class="about-company inner-about">
-            <div class="container">
-                <div class="row">
-                    ' . ($hasImage ? '
-                    <div class="col-lg-5 col-md-12 wow fadeInLeftBig">
-                        <div class="about-wrap-img">
-                            <img src="' . $imglink . '" alt="' . $recRow->title . '" />
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-12 wow fadeInRightBig">' : '
-                    <div class="col-lg-12 col-md-12 wow fadeInRightBig">') . '
-                        <div class="about-us-wrap">
-                            <div class="about-title">
-                                <h4 class="top-title mb-3">' . $recRow->sub_title . '</h4>
-                                <h3 class="mb-3 pb-3">' . $recRow->brief . '</h3>
-                            </div>
-                            <div class="about-content">
-                                ' . $recRow->content . '
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>';
-
-
-
-
+       
+        ';
     }
 }
 
@@ -259,4 +240,3 @@ if (defined('HOME_PAGE')) {
 }
 
 $jVars['module:home_facilities'] = $resinnh1;
-

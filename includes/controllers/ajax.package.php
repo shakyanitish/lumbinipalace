@@ -343,6 +343,8 @@ switch ($action) {
         $record->image             = !empty($_REQUEST['imageArrayname']) ? serialize(array_values(array_filter($_REQUEST['imageArrayname']))) : '';
         $record->feature        = serialize($newArr);
         $record->content         = $_REQUEST['content'];
+        $record->content2        = !empty($_REQUEST['content2']) ? $_REQUEST['content2'] : '';
+        $record->included        = !empty($_REQUEST['included']) ? $_REQUEST['included'] : 1;
         $record->status            = $_REQUEST['status'];
         $record->number_room    = !empty($_REQUEST['number_room']) ? $_REQUEST['number_room'] : '';
         $record->currency         = !empty($_REQUEST['currency']) ? $_REQUEST['currency'] : '';
@@ -452,6 +454,8 @@ switch ($action) {
         $record->image             = !empty($_REQUEST['imageArrayname']) ? serialize(array_values(array_filter($_REQUEST['imageArrayname']))) : '';
         $record->feature        = serialize($newArr);
         $record->content         = $_REQUEST['content'];
+        $record->content2         = $_REQUEST['content2'];
+        $record->included         = $_REQUEST['included'];
         $record->status            = $_REQUEST['status'];
         $record->number_room    = !empty($_REQUEST['number_room']) ? $_REQUEST['number_room'] : '';
         $record->currency         = !empty($_REQUEST['currency']) ? $_REQUEST['currency'] : '';

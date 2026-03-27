@@ -9,7 +9,7 @@ class Subpackage extends DatabaseObject
         'extra_bed', 'currency', 'discount', 'people_qnty', 'onep_price', 'twop_price', 'threep_price', 'oneb_price', 'twob_price', 'threeb_price', 'short_title',
         'time', 'location', 'serve', 'meta_title', 'meta_keywords', 'meta_description', 'status', 'sortorder', 'added_date', 'modified_date', 'type', 'theatre_style',
         'class_room_style', 'shape', 'round_table', 'clusture', 'cocktail', 'seats', 'below_content', 'seminar', 'meeting', 'events', 'conference', 'catering', 'celebration',
-        'organic_food', 'occupancy', 'view', 'size', 'service', 'three60_image','google_embeded','homepage', 'room_size', 'link_a', 'link_b', 'explorelinksrc','explorelinktype');
+        'organic_food', 'occupancy', 'view', 'size', 'service', 'three60_image','google_embeded','homepage', 'room_size', 'link_a', 'link_b', 'explorelinksrc','explorelinktype','content2','included');
 
     public $id;
     public $slug;
@@ -23,6 +23,7 @@ class Subpackage extends DatabaseObject
     public $image3;
     public $image4;
     public $content;
+    public $content2;
     public $facility_title;
     public $number_room;
     public $extra_bed;
@@ -84,6 +85,7 @@ class Subpackage extends DatabaseObject
     public $link_b;
     public $explorelinksrc;
 	public $explorelinktype;
+    public $included;
 
 
     //Get Facility Ttle

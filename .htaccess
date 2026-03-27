@@ -19,8 +19,7 @@ ErrorDocument 404 /404.php
 RewriteRule ^book/([a-zA-Z0-9-]+)/?$ book.php?slug=$1 [L]
 
 #For inner pages.
-#RewriteRule ^introduction/?$ inner.php?slug=introduction [L]
-#RewriteRule ^our-philosophy/?$ inner.php?slug=our-philosophy [L]
+RewriteRule ^/?$ inner.php?slug=about-us [L]
 
 
 

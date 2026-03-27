@@ -145,6 +145,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
         $unstatus = ($subpackageInfo->status == 0) ? "checked" : " ";
         $homepage = ($subpackageInfo->homepage == 1) ? "checked" : " ";
         $nothomepage = ($subpackageInfo->homepage == 0) ? "checked" : " ";
+        $included = ($subpackageInfo->included == 1) ? "checked" : " ";
+        $unincluded = ($subpackageInfo->included == 0) ? "checked" : " ";
     endif;
 ?>
     <h3>
@@ -687,6 +689,39 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </a>
                     </div>
                 </div>
+                <div class="form-row hide">
+                    <div class="form-label col-md-10">
+                        <label for="">
+                            Content 2 :
+                        </label>
+                        <textarea name="content2" id="content2"
+                            class="large-textarea"><?php echo !empty($subpackageInfo->content2) ? $subpackageInfo->content2 : ""; ?></textarea>
+                        <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore2"
+                            href="javascript:void(0);">
+                            <span class="button-content">Read More</span>
+                        </a>
+                    </div>
+                </div>
+
+                <?php $parentInfo = Package::find_by_id($pid);
+                if ($parentInfo->type == 2): ?>
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Included:
+                            </label>
+                        </div>
+                        <div class="form-checkbox-radio col-md-9">
+                            <input type="radio" class="custom-radio" name="included" id="check1"
+                                value="1" <?php echo !empty($included) ? $included : "checked"; ?>>
+                            <label for="">Yes</label>
+                            <input type="radio" class="custom-radio" name="included" id="check0"
+                                value="0" <?php echo !empty($unincluded) ? $unincluded : ""; ?>>
+                            <label for="">No</label>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                
 
 
                 <div class="form-row">
@@ -783,7 +818,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
     </div>
     <script>
         var base_url = "<?php echo ASSETS_PATH; ?>";
-        var editor_arr = ["content", "below_content"];
+        var editor_arr = ["content", "content2", "below_content"];
         create_editor(base_url, editor_arr);
     </script>
 
