@@ -79,13 +79,20 @@ document.addEventListener("DOMContentLoaded", function () {
         spaceBetween: 30,
         loop: true,
         navigation: {
-          nextEl: ".m-rooms-next",
-          prevEl: ".m-rooms-prev",
+          nextEl: ".m-rooms-next, .m-rooms-next-mob",
+          prevEl: ".m-rooms-prev, .m-rooms-prev-mob",
         },
         pagination: {
           el: ".m-rooms-pagination",
           type: "custom",
           renderCustom: function (swiper, current, total) {
+            var mobPag = document.querySelectorAll(".m-rooms-pagination-mob");
+            if (mobPag && mobPag.length > 0) {
+                mobPag.forEach(function(el) {
+                    el.innerHTML = String(current).padStart(2, "0") + " / " + String(total).padStart(2, "0");
+                });
+            }
+
             var activeWidth = (1 / total) * 100;
             var activeLeft = ((current - 1) / total) * 100;
 
@@ -107,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         },
         breakpoints: {
-          0: { slidesPerView: 1, spaceBetween: 20 },
+          0: { slidesPerView: 1.2, spaceBetween: 20 },
           768: { slidesPerView: 2, spaceBetween: 24 },
           1024: { slidesPerView: 2.5, spaceBetween: 30 },
         },
@@ -121,8 +128,8 @@ document.addEventListener("DOMContentLoaded", function () {
         spaceBetween: 25,
         loop: false,
         navigation: {
-          nextEl: ".m-offers-next",
-          prevEl: ".m-offers-prev",
+          nextEl: ".m-offers-next, .m-offers-next-mob",
+          prevEl: ".m-offers-prev, .m-offers-prev-mob",
         },
         pagination: {
           el: ".m-offers-pagination",
@@ -145,19 +152,53 @@ document.addEventListener("DOMContentLoaded", function () {
         effect: "fade",
         fadeEffect: { crossFade: true },
         navigation: {
-          nextEl: ".m-great-room-next",
-          prevEl: ".m-great-room-prev",
+          nextEl: ".m-great-room-next, .m-great-room-next-mob",
+          prevEl: ".m-great-room-prev, .m-great-room-prev-mob",
         },
         pagination: {
           el: ".m-great-room-pagination",
           type: "custom",
           renderCustom: function (swiper, current, total) {
+            var mobPag = document.querySelectorAll(".m-great-room-pagination-mob");
+            if (mobPag && mobPag.length > 0) {
+                mobPag.forEach(function(el) {
+                    el.innerHTML = String(current).padStart(2, "0") + " / " + String(total).padStart(2, "0");
+                });
+            }
             return (
               String(current).padStart(2, "0") +
               " / " +
               String(total).padStart(2, "0")
             );
           },
+        },
+      });
+    }
+    // ===== BLOGS SLIDER (SWIPER) =====
+    if (document.querySelector(".m-blogs-swiper")) {
+      new Swiper(".m-blogs-swiper", {
+        slidesPerView: 3,
+        spaceBetween: 24,
+        loop: false,
+        navigation: {
+          nextEl: ".m-blogs-next-mob",
+          prevEl: ".m-blogs-prev-mob",
+        },
+        pagination: {
+          el: ".m-blogs-pagination-mob",
+          type: "custom",
+          renderCustom: function (swiper, current, total) {
+            return (
+              String(current).padStart(2, "0") +
+              "/" +
+              String(total).padStart(2, "0")
+            );
+          },
+        },
+        breakpoints: {
+          0: { slidesPerView: 1, spaceBetween: 20 },
+          768: { slidesPerView: 2, spaceBetween: 20 },
+          992: { slidesPerView: 3, spaceBetween: 24, allowTouchMove: false },
         },
       });
     }

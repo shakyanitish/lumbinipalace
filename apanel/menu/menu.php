@@ -5,7 +5,7 @@ $moduleTablename  = "tbl_menu"; // Database table name
 $moduleId           = 2;                // module id >>>>> tbl_modules
 $moduleFoldername = "";        // Image folder name
 $menuLevel = Module::get_properties($moduleId, 'level');
-$position = array(1 => 'Top Menu', 2 => 'Footer Menu');
+$position = array(1 => 'Top Menu', 3 => 'Footer Menu 1', 2 => 'Footer Menu 2');
 
 if (isset($_GET['page']) && $_GET['page'] == "menu" && isset($_GET['mode']) && $_GET['mode'] == "list"):
 

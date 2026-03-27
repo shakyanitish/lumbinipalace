@@ -7,9 +7,7 @@ $room_package = '';
 $single_more = '';
 $roombreads = '';
 
-/*
-* package listing page - LIST VIEW (no slug)
-*/
+/* * package listing page - LIST VIEW (no slug) */
 if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
     $pkgList = Package::find_all();
     if (!empty($pkgList)) {
@@ -87,6 +85,7 @@ if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
     }
     $jVars['module:packages'] = $roombread;
 } else {
+    $pkgRow = Package::find_by_slug($_REQUEST['slug']);
     $sql = "SELECT *  FROM tbl_package_sub WHERE status='1' AND type = '{$pkgRow->id}' ORDER BY sortorder DESC ";
 
     $page = (isset($_REQUEST["pageno"]) and !empty($_REQUEST["pageno"])) ? $_REQUEST["pageno"] : 1;
@@ -135,7 +134,7 @@ if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
                             <div class="d-label">' . $subpkgRow->short_title . '</div>
                             <div class="d-details">
                                 <span class="d-meta-1">
-                                    <img src="template/web/assets/images/ui/user.svg" alt="">' . $subpkgRow->occupancy  . '
+                                    <img src="template/web/assets/images/ui/user.svg" alt="">' . $subpkgRow->occupancy . '
                                 </span>
                             </div>
                             <a href="' . $subpkgRow->link_a . '">
@@ -165,15 +164,17 @@ if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
                 ';
         }
 
-        $room_package =  $roomlist;
+        $room_package = $roomlist;
     }
 }
 
 // Package detail view handling
 if (isset($_REQUEST['slug'])) {
+    $pkgRow = Package::find_by_slug($_REQUEST['slug']);
+    $siteRegulars = Config::find_by_id(1);
     $imglink = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
     $pkgRowImg = $pkgRow->banner_image;
-    if ($pkgRowImg != "a:0:{}") {
+    if (!empty($pkgRowImg) && $pkgRowImg != "a:0:{}") {
         $pkgRowList = unserialize($pkgRowImg);
         $file_path = SITE_ROOT . 'images/package/banner/' . $pkgRowList[0];
         if (file_exists($file_path) and !empty($pkgRowList[0])) {
@@ -258,15 +259,16 @@ if (isset($_REQUEST['slug'])) {
     </section>';
     }
 } else {
-    $imglink = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
-    $pkgRowImg = $pkgRow->banner_image;
-    if ($pkgRowImg != "a:0:{}") {
+    $siteRegulars = Config::find_by_id(1);
+    $imglink = ($siteRegulars) ? IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload : '';
+    $pkgRowImg = !empty($pkgRow) ? $pkgRow->banner_image : '';
+    if (!empty($pkgRowImg) && $pkgRowImg != "a:0:{}") {
         $pkgRowList = unserialize($pkgRowImg);
         $file_path = SITE_ROOT . 'images/package/banner/' . $pkgRowList[0];
         if (file_exists($file_path) and !empty($pkgRowList[0])) {
             $imglink = IMAGE_PATH . 'package/banner/' . $pkgRowList[0];
         } else {
-            $imglink = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
+            $imglink = ($siteRegulars) ? IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload : '';
         }
     }
 
@@ -286,14 +288,15 @@ if (isset($_REQUEST['slug'])) {
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h1>' . $pkgRow->title . '</h1>
+                    <h1>' . (!empty($pkgRow) ? $pkgRow->title : '') . '</h1>
                 </div>
             </div>
         </div>
     </section>
 ';
 
-    $sql = "SELECT *  FROM tbl_package_sub WHERE status='1' AND type = '{$pkgRow->id}' ORDER BY sortorder DESC ";
+    $pkgRowId = !empty($pkgRow) ? $pkgRow->id : 0;
+    $sql = "SELECT *  FROM tbl_package_sub WHERE status='1' AND type = '{$pkgRowId}' ORDER BY sortorder DESC ";
 
     $page = (isset($_REQUEST["pageno"]) and !empty($_REQUEST["pageno"])) ? $_REQUEST["pageno"] : 1;
     $limit = 200;
@@ -402,7 +405,7 @@ if (isset($_REQUEST['slug'])) {
 ';
         }
     }
-    
+
     // Package Itinerary FAQ for package detail page
     $pkg_itinerary_faq = '';
     if (!empty($pkgRow)) {
@@ -419,7 +422,7 @@ if (isset($_REQUEST['slug'])) {
                 <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
                     type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
                     . htmlspecialchars($iti->title) .
-                '</button>
+                    '</button>
             </h2>
             <div id="' . $collapseId . '" class="accordion-collapse collapse ' . $expandedAttr . '" data-bs-parent="#pkgFaqAccordion">
                 <div class="accordion-body text-muted pt-0 pb-4">' . $iti->content . '</div>
@@ -444,11 +447,8 @@ if (isset($_REQUEST['slug'])) {
     $jVars['module:package-itinerary-faq'] = $pkg_itinerary_faq;
 }
 
-/*
-* package homepage listing
-
-' . BASE_URL . 'result.php?hotel_code=' . $booking_code . '
-*/
+/* * package homepage listing
+  ' . BASE_URL . 'result.php?hotel_code=' . $booking_code . ' */
 $homeroomdetail = '';
 if (defined('HOME_PAGE')) {
     $homeroomdetail = '';
@@ -532,9 +532,7 @@ $jVars['module:list-room-detail'] = $homeroomdetail;
 $jVars['module:list-package-room'] = $room_package;
 $jVars['module:list-package-room-bred'] = $roombread;
 
-/*
-* Rooms Page - Overview Section
-*/
+/* * Rooms Page - Overview Section */
 
 // Fetch overview items from tbl_package incexc field
 $overview_items_html = '';
@@ -547,9 +545,19 @@ if (!empty($overviewPkg)) {
             if (!empty($includesList) && is_array($includesList)) {
                 foreach ($includesList as $item) {
                     if (!empty($item)) {
+                        // Handle both old format (string) and new format (array)
+                        $itemText = is_array($item) ? $item['text'] : $item;
+                        $itemUrl = is_array($item) ? (!empty($item['url']) ? $item['url'] : '') : '';
+
+                        $learnMoreLink = '';
+                        if (!empty($itemUrl)) {
+                            $learnMoreLink = '<a href="' . htmlspecialchars($itemUrl) . '"
+                                    class="text-dark fw-bold text-decoration-underline">Learn More</a>';
+                        }
+
                         $overview_items_html .= '
                     <div class="m-overview-item-new">
-                        <p>' . $item . '</p>
+                        <p>' . $itemText . $learnMoreLink . '</p>
                     </div>';
                     }
                 }
@@ -582,6 +590,34 @@ $overview_section = '
 
 $jVars['module:rooms-overview'] = $overview_section;
 
+// Experience Banner
+$exp_banner = $siteRegulars = '';
+$siteRegulars = Config::find_by_id(1);
+$pkgExp = Package::find_by_sql("SELECT title, banner_image FROM tbl_package WHERE status=1 AND type=2 LIMIT 1");
+if (!empty($pkgExp)) {
+    $pkg = $pkgExp[0];
+    $imglink = ($siteRegulars) ? IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload : '';
+    if (!empty($pkg->banner_image) && $pkg->banner_image != "a:0:{}") {
+        $pkgRowList = unserialize($pkg->banner_image);
+        if (!empty($pkgRowList[0])) {
+            $file_path = SITE_ROOT . 'images/package/banner/' . $pkgRowList[0];
+            if (file_exists($file_path)) {
+                $imglink = IMAGE_PATH . 'package/banner/' . $pkgRowList[0];
+            }
+        }
+    }
+
+    $exp_banner = '
+        <section class="marriott-style-banner">
+        <div class="ul-banner-slider swiper" style="width:100%;height:100%;">
+            <div class="ul-banner-slide marriott-slide-image" data-img="' . $imglink . '">
+            </div>
+        </div>
+    </section>
+';
+}
+$jVars['module:exp-banner'] = $exp_banner;
+
 
 //experience
 $overview_items_html2 = '';
@@ -597,13 +633,13 @@ if (!empty($overviewPkg)) {
                         // Handle both old format (string) and new format (array)
                         $itemText = is_array($item) ? $item['text'] : $item;
                         $itemUrl = is_array($item) ? (!empty($item['url']) ? $item['url'] : '') : '';
-                        
+
                         $learnMoreLink = '';
                         if (!empty($itemUrl)) {
                             $learnMoreLink = '<a href="' . htmlspecialchars($itemUrl) . '"
                                     class="text-dark fw-bold text-decoration-underline">Learn More</a>';
                         }
-                        
+
                         $overview_items_html2 .= '
                     <div class="col-md-4">
                         <div class="m-attraction-text-block h-100">
@@ -616,6 +652,8 @@ if (!empty($overviewPkg)) {
         }
     }
 }
+
+
 
 $overview_section2 = '
         <section class="m-local-attractions-text py-5 bg-white mt-4">
@@ -631,12 +669,91 @@ $overview_section2 = '
 
 $jVars['module:exp-overview'] = $overview_section2;
 
+$experience_list = $experience = '';
+$roompkg = Package::find_by_sql("SELECT id FROM tbl_package WHERE status=1 AND type=2");
+if (!empty($roompkg)) {
+    $pkgids = array();
+    foreach ($roompkg as $rp) {
+        $pkgids[] = $rp->id;
+    }
+    $idstr = implode(',', $pkgids);
+    $sql = "SELECT * FROM tbl_package_sub WHERE status='1' AND type IN ($idstr) ORDER BY sortorder DESC ";
+    $pkgRec = Subpackage::find_by_sql($sql);
+
+    if (!empty($pkgRec)) {
+        foreach ($pkgRec as $subpkgRow) {
+            if (!empty($subpkgRow->image2)) {
+                $imgpath = IMAGE_PATH . 'subpackage/image/' . $subpkgRow->image2;
+            } elseif ($subpkgRow->image != "a:0:{}") {
+                $imageList = unserialize($subpkgRow->image);
+                if (!empty($imageList[0])) {
+                    $imgpath = IMAGE_PATH . 'subpackage/' . $imageList[0];
+                }
+            }
+
+            $occupancy = !empty($subpkgRow->occupancy) ? $subpkgRow->occupancy : '';
+            $size = !empty($subpkgRow->size) ? $subpkgRow->size : '';
+            $short_desc = $occupancy . ' | ' . $size;
+
+            $experience_list .= '
+                    <div class="swiper-slide">
+                        <div class="m-outlet-card">
+                            <div class="m-outlet-img-wrap">
+                                <img src="' . $imgpath . '" alt="' . $subpkgRow->title . '"
+                                    class="img-fluid w-100 h-100 object-fit-cover" style="filter: brightness(0.85);">
+                            </div>
+                            <div class="m-outlet-content">
+                                <h3 class="m-outlet-name">' . $subpkgRow->title . '</h3>
+                                <a href="' . BASE_URL . 'experiences/' . $subpkgRow->slug . '" class="btn m-btn-learn-more">Learn More +</a>
+                            </div>
+                        </div>
+                    </div>
+';
+        }
+    }
+}
+
+$experience = '
+<section class="m-outlets-section pb-5 pt-4 overflow-hidden">
+    <div class="container container-custom">
+        <div class="m-outlets-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
+            <h2 class="m-outlets-title mb-0">On-Site Outlets</h2>
+            <div class="m-outlets-stats d-flex gap-4">
+                <span class="m-outlets-stat-item">total experiences (4)</span>
+                <span class="m-outlets-stat-item"><i class="fa-regular fa-circle-check"></i> included
+                    experiences (1)</span>
+            </div>
+        </div>
+
+        <div class="m-outlets-slider-wrapper position-relative">
+            <div class="swiper m-outlets-swiper">
+                <div class="swiper-wrapper">
+                    <!-- Outlet Card 1 -->
+                    ' . $experience_list . '
+
+
+                </div>
+
+                <div class="m-outlets-controls mt-4 d-flex justify-content-center align-items-center gap-3">
+                    <button class="m-outlets-prev"><i class="fa-solid fa-chevron-left me-2"></i>
+                        Previous</button>
+                    <div class="m-outlets-pagination swiper-pagination-bullets"></div>
+                    <button class="m-outlets-next">Next <i class="fa-solid fa-chevron-right ms-2"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+';
+$jVars['module:all-exp-list'] = $experience;
 
 
 
-/*
-* Rooms Page - All Rooms List
-*/
+
+/* * Rooms Page - All Rooms List */
 $all_rooms_list = '';
 $roompkg = Package::find_by_sql("SELECT id FROM tbl_package WHERE status=1 AND type=1");
 if (!empty($roompkg)) {
@@ -647,7 +764,7 @@ if (!empty($roompkg)) {
     $idstr = implode(',', $pkgids);
     $sql = "SELECT * FROM tbl_package_sub WHERE status='1' AND type IN ($idstr) ORDER BY sortorder DESC ";
     $pkgRec = Subpackage::find_by_sql($sql);
-    
+
     if (!empty($pkgRec)) {
         foreach ($pkgRec as $subpkgRow) {
             $imgpath = IMAGE_PATH . 'static/default-art-pac-sub.jpg';
@@ -659,9 +776,9 @@ if (!empty($roompkg)) {
                     $imgpath = IMAGE_PATH . 'subpackage/' . $imageList[0];
                 }
             }
-            
-            $occupancy = !empty($subpkgRow->occupancy) ? $subpkgRow->occupancy : '2 adult';
-            $size = !empty($subpkgRow->size) ? $subpkgRow->size : '100 sq.ft.';
+
+            $occupancy = !empty($subpkgRow->occupancy) ? $subpkgRow->occupancy : '';
+            $size = !empty($subpkgRow->size) ? $subpkgRow->size : '';
             $short_desc = $occupancy . ' | ' . $size;
 
             $all_rooms_list .= '
@@ -688,9 +805,7 @@ if (!empty($roompkg)) {
 $jVars['module:all-rooms-list'] = $all_rooms_list;
 
 
-/*
-* Sub package detail
-*/
+/* * Sub package detail */
 $resubpkgDetail = '';
 $subimg = '';
 $imageList = '';
@@ -854,8 +969,8 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                         <h2 class="accordion-header">
                             <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-                                . htmlspecialchars($iti->title) .
-                            '</button>
+                        . htmlspecialchars($iti->title) .
+                        '</button>
                         </h2>
                         <div id="' . $collapseId . '" class="accordion-collapse collapse ' . $expandedAttr . '" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted pt-0 pb-4">' . $iti->content . '</div>
@@ -1142,10 +1257,10 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                             <tbody>
                                 <tr>
                                     <td><strong>' . (!empty($subpkgRec->size) ? $subpkgRec->size : 'N/A') . '</strong></td>
-                                    <td><strong>' . (!empty($subpkgRec->shape) ? $subpkgRec->shape : 'N/A')  . '	</strong></td>
+                                    <td><strong>' . (!empty($subpkgRec->shape) ? $subpkgRec->shape : 'N/A') . '	</strong></td>
                                     <td><strong>' . (!empty($subpkgRec->class_room_style) ? $subpkgRec->class_room_style : 'N/A') . '	</strong></td>
                                     <td><strong>' . (!empty($subpkgRec->theatre_style) ? $subpkgRec->theatre_style : 'N/A') . '	</strong></td>
-                                    <td><strong>' . (!empty($subpkgRec->cocktail) ? $subpkgRec->cocktail : 'N/A')   . '  </strong></td>
+                                    <td><strong>' . (!empty($subpkgRec->cocktail) ? $subpkgRec->cocktail : 'N/A') . '  </strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1440,7 +1555,7 @@ if (defined('SUBPACKAGE_PAGE') and isset($_REQUEST['slug'])) {
                 <div class="col-md-12 text-center">
                     <div class="row justify-content-md-center">
                         <div class="col-md-2 pricing-card  mt-30" style="background: transparent;">
-                            <div class="amount">' . $subpkgRec->currency .  $subpkgRec->onep_price . '<span>/ person</span></div>
+                            <div class="amount">' . $subpkgRec->currency . $subpkgRec->onep_price . '<span>/ person</span></div>
                         </div>
                         <div class="col-md-2">
                             <a class="btn-form1-submit activity-btn mt-15" href="https://wa.me/' . $siteRegulars->whatsapp_a . '" data-bs-toggle="modal" data-bs-target="#exampleModalactivities">Enquiry now</a>
@@ -1723,7 +1838,8 @@ if (!empty($subpkgRec->feature)) {
     $ftRec = unserialize($subpkgRec->feature);
     if (!empty($ftRec)) {
         foreach ($ftRec as $k => $v) {
-            if (empty($v[1])) continue;
+            if (empty($v[1]))
+                continue;
             $feattitle = !empty($v[0][0]) ? $v[0][0] : 'Amenities';
             $feature_items = '';
             foreach ($v[1] as $kk => $vv) {
@@ -1758,8 +1874,8 @@ if (!empty($itineraryInfos)) {
             <h2 class="accordion-header">
                 <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
                     type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-                    . htmlspecialchars($iti->title) .
-                '</button>
+            . htmlspecialchars($iti->title) .
+            '</button>
             </h2>
             <div id="' . $collapseId . '" class="accordion-collapse collapse ' . $expandedAttr . '" data-bs-parent="#faqAccordion">
                 <div class="accordion-body text-muted pt-0 pb-4">' . $iti->content . '</div>

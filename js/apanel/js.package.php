@@ -66,33 +66,92 @@
         }
 
 window.addIncludesRow = function() {
-    var rowNum = Math.floor((Math.random() * 999) + 1);
-    
-    // We no longer need to check packageType since it's for all types now
-    var urlField = '<input type="text" placeholder="Learn More URL (optional)" class="col-md-4 validate[length[0,200]]" name="incexc_url[]">';
-
-    var newRow = '<div class="mrg10B">\
-        <span class="drag-handle cp"><i class="glyph-icon icon-arrows"></i></span>\
-        <input type="text" placeholder="Includes Text" class="col-md-6 validate[length[0,100]]" name="incexc_text[]">\
-        ' + urlField + '\
-        <span class="cp remove_includes_row" onclick="$(this).parent().remove();"><i class="glyph-icon icon-minus-square"></i></span><br>\
-        </div>';
+    var uniqId = new Date().getTime();
+    var newRow = '<div class="mrg10B" style="background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px;">\
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">\
+            <span class="drag-handle cp" style="cursor: move;"><i class="glyph-icon icon-arrows"></i></span>\
+            <input type="text" placeholder="Includes Text" class="form-control" style="flex: 1;" name="incexc_text[' + uniqId + ']">\
+            <span class="cp remove_includes_row" onclick="$(this).closest(\'.mrg10B\').remove();" style="cursor: pointer;"><i class="glyph-icon icon-minus-square"></i></span>\
+        </div>\
+        <div class="form-row">\
+            <div class="form-label col-md-2">\
+                <label>Link Type :</label>\
+            </div>\
+            <div class="form-checkbox-radio col-md-9">\
+                <input type="radio" class="custom-radio" name="incexc_linktype[' + uniqId + ']" value="0" onclick="includeLinkTypeSelect(this);" checked>\
+                <label>Internal Link</label>\
+                <input type="radio" class="custom-radio" name="incexc_linktype[' + uniqId + ']" value="1" onclick="includeLinkTypeSelect(this);">\
+                <label>External Link</label>\
+            </div>\
+        </div>\
+        <div class="form-row">\
+            <div class="form-label col-md-2">\
+                <label>Link :</label>\
+            </div>\
+            <div class="form-input col-md-8">\
+                <div class="col-md-4" style="padding-left: 0px !important;">\
+                    <input placeholder="Menu Link" class="form-control incexc-url-input" type="text" name="incexc_url[' + uniqId + ']">\
+                </div>\
+                <div class="col-md-6" style="padding-left: 0px !important; display: block;">\
+                    <select data-placeholder="Select Link Page" class="form-control chosen-select incexc-page-select">\
+                        <option value=""></option>\
+                        <?php echo str_replace("\n", "", Article::get_internal_link()); ?>\
+                        <?php echo str_replace("\n", "", Services::get_internal_link()); ?>\
+                    </select>\
+                </div>\
+            </div>\
+        </div>\
+    </div>';
 
     $('#add_includes_div').append(newRow);
+    $('#add_includes_div .chosen-select').last().chosen();
 }
 
 window.addIncludesRow2 = function() {
-    var rowNum = Math.floor((Math.random() * 999) + 1);
-    var urlField = '<input type="text" placeholder="Learn More URL (optional)" class="col-md-4 validate[length[0,200]]" name="incexc_url1[]">';
-
-    var newRow = '<div class="mrg10B">\
-        <span class="drag-handle cp"><i class="glyph-icon icon-arrows"></i></span>\
-        <input type="text" placeholder="Includes Text" class="col-md-6 validate[length[0,100]]" name="incexc_text1[]">\
-        ' + urlField + '\
-        <span class="cp remove_includes_row" onclick="$(this).parent().remove();"><i class="glyph-icon icon-minus-square"></i></span><br>\
-        </div>';
+    var uniqId = new Date().getTime();
+    var newRow = '<div class="mrg10B" style="background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px;">\
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">\
+            <span class="drag-handle cp" style="cursor: move;"><i class="glyph-icon icon-arrows"></i></span>\
+            <input type="text" placeholder="Includes Text" class="form-control" style="flex: 1;" name="incexc_text1[' + uniqId + ']">\
+            <span class="cp remove_includes_row" onclick="$(this).closest(\'.mrg10B\').remove();" style="cursor: pointer;"><i class="glyph-icon icon-minus-square"></i></span>\
+        </div>\
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;" class="subtitle-field" ' + ($('input[name="type"]:checked').val() != 2 ? 'style="display: none;"' : '') + '>\
+            <span style="visibility: hidden;"><i class="glyph-icon icon-arrows"></i></span>\
+            <input type="text" placeholder="Subtitle" class="form-control" style="flex: 1;" name="incexc_subtitle1[' + uniqId + ']">\
+            <span style="visibility: hidden;"><i class="glyph-icon icon-minus-square"></i></span>\
+        </div>\
+        <div class="form-row">\
+            <div class="form-label col-md-2">\
+                <label>Link Type :</label>\
+            </div>\
+            <div class="form-checkbox-radio col-md-9">\
+                <input type="radio" class="custom-radio" name="incexc_linktype1[' + uniqId + ']" value="0" onclick="includeLinkTypeSelect(this);" checked>\
+                <label>Internal Link</label>\
+                <input type="radio" class="custom-radio" name="incexc_linktype1[' + uniqId + ']" value="1" onclick="includeLinkTypeSelect(this);">\
+                <label>External Link</label>\
+            </div>\
+        </div>\
+        <div class="form-row">\
+            <div class="form-label col-md-2">\
+                <label>Link :</label>\
+            </div>\
+            <div class="form-input col-md-8">\
+                <div class="col-md-4" style="padding-left: 0px !important;">\
+                    <input placeholder="Menu Link" class="form-control incexc-url-input" type="text" name="incexc_url1[' + uniqId + ']">\
+                </div>\
+                <div class="col-md-6" style="padding-left: 0px !important; display: block;">\
+                    <select data-placeholder="Select Link Page" class="form-control chosen-select incexc-page-select">\
+                        <option value=""></option>\
+                        <?php echo str_replace("\n", "", Article::get_internal_link()); ?>\
+                        <?php echo str_replace("\n", "", Services::get_internal_link()); ?>\
+                    </select>\
+                </div>\
+            </div>\
+        </div>\
+    </div>';
 
     $('#add_includes_div_2').append(newRow);
+    $('#add_includes_div_2 .chosen-select').last().chosen();
 }
 
 
@@ -672,6 +731,24 @@ window.addIncludesRow2 = function() {
         // Type toggle logic
         $('input[name="type"]').on('change', function() {
             var val = $('input[name="type"]:checked').val();
+
+            // Includes section: show for both Events (3) and Experiences (2)
+            if (val == 2 || val == 3) {
+                $('.events-and-experiences-fields').show();
+                $('.events-and-experiences-fields input').prop('disabled', false);
+
+                // Subtitle field: show ONLY for Experiences (2)
+                if (val == 2) {
+                    $('.subtitle-field').show();
+                } else {
+                    $('.subtitle-field').hide();
+                }
+            } else {
+                $('.events-and-experiences-fields').hide();
+                $('.events-and-experiences-fields input').prop('disabled', true);
+            }
+
+            // Events-only section: show only for Events (3)
             if (val == 3) {
                 $('.events-only-fields').show();
                 $('.events-only-fields textarea, .events-only-fields input').prop('disabled', false);
@@ -1346,5 +1423,40 @@ window.addIncludesRow2 = function() {
             if ($('#explorelinksrc').val() == '') $('#explorelinksrc').val('https://www.');
         }
     }
+
+    window.includeLinkTypeSelect = function(element) {
+        var $row = $(element).closest('.mrg10B');
+        var linkType = $row.find('input[name*="linktype"]:checked').val();
+        var $pageSelectParent = $row.find('.incexc-page-select').closest('.col-md-6');
+        
+        if (linkType == 0) {
+            // Internal link - show dropdown
+            $pageSelectParent.show();
+            if ($row.find('.incexc-url-input').val() == 'http://www.') {
+                $row.find('.incexc-url-input').val('');
+            }
+        } else {
+            // External link - hide dropdown
+            $pageSelectParent.hide();
+            if ($row.find('.incexc-url-input').val() == '') {
+                $row.find('.incexc-url-input').val('http://www.');
+            }
+        }
+    };
+
+    $(document).on('change', '.incexc-page-select', function() {
+        var $row = $(this).closest('.mrg10B');
+        $row.find('.incexc-url-input').val($(this).val());
+    });
+
+    $(document).ready(function() {
+        if($.fn.sortable) {
+            $("#includes_sortable, #includes_sortable_2").sortable({
+                handle: '.drag-handle',
+                cursor: 'move',
+                opacity: 0.6
+            });
+        }
+    });
 
 </script>

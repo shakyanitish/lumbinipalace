@@ -29,7 +29,7 @@ function className_metatags()
         exit;
     endif;
 
-    if ($fileName == 'subpkgdetail'):
+    if ($fileName == 'subpkgdetail' or $fileName == 'exp_detail'):
         $className = 'Subpackage';
         return $className;
         exit;

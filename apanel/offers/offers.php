@@ -242,7 +242,7 @@ if (isset($_GET['page']) && $_GET['page'] == "offers" && isset($_GET['mode']) &&
                         </label>
                     </div>
                     <div class="form-input col-md-8">
-                        <input placeholder="Offers Tag" class="col-md-6 validate[required,length[0,50]]" type="text" name="tag" id="tag"
+                        <input placeholder="Offers Tag" class="col-md-6 validate[length[0,50]]" type="text" name="tag" id="tag"
                             value="<?php echo !empty($advInfo->tag) ? $advInfo->tag : ""; ?>">
                     </div>
                 </div>
@@ -653,7 +653,7 @@ if (isset($_GET['page']) && $_GET['page'] == "offers" && isset($_GET['mode']) &&
                         <label for="">Un-Published</label>
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-checkbox-radio col-md-9">
                         <input type="radio" class="custom-radio" name="homepage" id="homepage1"
                             value="1" <?php echo !empty($homepage) ? $homepage : ""; ?>>

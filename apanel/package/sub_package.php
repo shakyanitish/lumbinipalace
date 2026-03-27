@@ -47,7 +47,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <th style="display:none;"></th>
                         <th class="text-center"><input class="check-all" type="checkbox" /></th>
                         <th>Title</th>
-                        <th>Itinerary</th>
+                        <!-- <th>Itinerary</th> -->
                         <th class="text-center">Images</th>
                         <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
                     </tr>
@@ -67,7 +67,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                         title="<?php echo $record->title; ?>"><?php echo $record->title; ?></a>
                                 </div>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewItinerarylist(<?php echo $record->id; ?>);" href="javascript:void(0);">
                                     <span class="button-content">
@@ -76,7 +76,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                                         <span class="text-transform-upr font-bold font-size-11">View Lists</span>
                                     </span>
                                 </a>
-                            </td>
+                            </td> -->
                             <td>
                                 <a class="primary-bg medium btn loadingbar-demo" title=""
                                     onClick="viewsubimagelist(<?php echo $record->id; ?>);" href="javascript:void(0);">
@@ -182,7 +182,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </label>
                     </div>
                     <div class="form-input col-md-20">
-                        <input placeholder="Package Sub Title" class="col-md-6 validate[required,length[0,50]]" type="text"
+                        <input placeholder="Package Sub Title" class="col-md-6 validate[length[0,50]]" type="text"
                             name="sub_title" id="sub_title"
                             value="<?php echo !empty($subpackageInfo->sub_title) ? $subpackageInfo->sub_title : ""; ?>">
                     </div>
@@ -661,7 +661,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 
 
                 <?php } ?>
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-6">
                         <label for="">
                             Brief :

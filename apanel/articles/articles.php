@@ -164,7 +164,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                 </div>                
             </div>   -->
 
-                <div class="form-row add-image">
+                <div class="form-row add-image hide">
                     <div class="form-label col-md-2">
                         <label for="">
                         Image :
@@ -256,7 +256,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                         </div>
                     </div>
                 </div>-->
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Brief :

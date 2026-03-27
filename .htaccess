@@ -75,6 +75,8 @@ RewriteRule ^alumini/?$ alumini.php?slug=$1  [L]
 
 #For experiences pages.
 RewriteRule ^experiences/?$ exp.php [L]
+RewriteRule ^experiences/([a-zA-Z0-9-=]+)$ exp_detail.php?slug=$1 [L]
+
 
 #For facq pages.
 RewriteRule ^faq/?$ faq.php [L]

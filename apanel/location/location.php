@@ -129,10 +129,10 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
             </div>
 
 
-            <div class="form-row hide">
+            <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
-                        Footer Map Link :
+                        Map Link :
                     </label>
                 </div>
                 <div class="form-input col-md-20">
@@ -160,7 +160,7 @@ $unstatus = ($locationRow->location_type == 0) ? "checked" : " "; ?>
             <div class="form-row <?php echo ($locationRow->location_type == 0) ? 'hide' : ''; ?> google-link">
                 <div class="form-label col-md-2">
                     <label for="">
-                        Link :
+                        Google Embeded Map Link :
                     </label>
                 </div>
                 <div class="form-input col-md-4">

@@ -4,27 +4,64 @@ $booking_code = Config::getField('hotel_code', true);
 $header = ob_get_clean();
 $sidebarlogo = '';
 $header_class = (!defined('HOME_PAGE')) ? 'header_menu_detail' : '';
+$tellinkedmobileside = '';
+$headerscript = '';
+$tellinkedmobileside = '';
+$telno = explode("/", $siteRegulars->contact_info);
+$lastElement = array_shift($telno);
+$tellinkedmobileside .= '
 
+            <a href="tel:+977' . $lastElement . '" class="usc-link">
+                <i class="fa-solid fa-phone"></i> <span>+977' . $lastElement . '</span>
+            </a>
+';
+foreach ($telno as $tel) {
+
+    $tellinkedmobileside .= '
+                <a href="tel:+977' . $tel . '" class="usc-link">
+                <i class="fa-solid fa-phone"></i> <span>+977' . $tel . '</span>
+            </a>
+
+
+
+    
+';
+    if (end($telno) != $tel) {
+        $tellinkedmobileside .= '/';
+    }
+}
 $header = '
 
 
 
     <!-- ============ SIDEBAR (MOBILE) ============ -->
-    <div class="ul-sidebar">
-        <div class="ul-sidebar-header">
-            <button class="ul-sidebar-closer"><i class="fa-solid fa-xmark"></i></button>
+     <div class="ul-sidebar">
+        <div class="ul-sidebar-top-bar">
+            <button class="ul-sidebar-closer"><i class="fa-light fa-xmark"></i></button>
         </div>
-        <div class="ul-sidebar-header-nav-wrapper d-block d-lg-none"></div>
-        <div class="to-go-to-sidebar-in-mobile d-block d-lg-none">
-            <nav class="ul-header-nav">
-                ' . $jVars['module:mobile-nav'] . ' 
-            </nav>
-        </div>
-        <div class="ul-sidebar-footer">
-            <span class="ul-sidebar-footer-title">Follow us</span>
-            <div class="ul-sidebar-footer-social">
-            ' . $jVars['module:socilaLinkbtm'] . '
+        
+        <div class="ul-sidebar-brand-section">
+            <div class="usbs-logo">
+            <a href="' . BASE_URL . '' . '">
+                <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="LPR Logo" style="height: 60px;">
+            </a>
             </div>
+            <div class="usbs-name">
+                <h3>Lumbini Palace<br>Resort</h3>
+            </div>
+        </div>
+
+        <div class="ul-sidebar-contact-section">
+            <a href="' . $siteRegulars->mapping . '" target="_blank" rel="noopener noreferrer" class="usc-link">
+                <i class="bi bi-geo-alt"></i> <span>VIEW MAP</span>
+            </a>
+            ' . $tellinkedmobileside . '
+        </div>
+
+        <div class="ul-sidebar-nav-container">
+            <nav class="ul-header-nav">
+            ' . $jVars['module:mobile-nav'] . ' 
+            </nav>
         </div>
     </div>
 
@@ -56,10 +93,10 @@ $header = '
                     </div>
                 </div>
                 <div class="mhm-right">
-                    <a href="' . $siteRegulars->location_map . '"
+                    <a href="' . $siteRegulars->mapping . '"
                         target="_blank" rel="noopener noreferrer" class="mhm-right-link"><i
                             class="bi bi-geo-alt text-decoration-none"></i> <span>VIEW MAP</span></a>
-                        ' .$jVars['site:phone-news-side'] . '
+                        ' . $jVars['site:phone-news-side'] . '
 
                 </div>
             </div>
@@ -202,7 +239,7 @@ $header = '
 
 
 
-        <header class="ul-header d-lg-none bg-white border-bottom sticky-top">
+    <header class="ul-header d-lg-none bg-white border-bottom sticky-top">
         <div class="container-fluid py-2">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
@@ -250,34 +287,3 @@ $sidebarlogo = '
 ';
 
 $jVars['module:sidebarlogo'] = $sidebarlogo;
-
-
-
-
-
-
-// $header1 = '
-//                 <header class="site-header">
-//                <div class="logo">
-//                	<a href="' . BASE_URL . 'home' . '"><img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" style="border-radius: 6%; background-color: white;"></a>
-//                </div> 
-//             </header>
-
-//             <div id="main-content" class="twelve columns">
-//                 ' . $jVars['module:slideshow-content'] . '
-$headerscript = '';
-$tellinked = '';
-$telno = explode("/", $siteRegulars->contact_info);
-$lastElement = array_shift($telno);
-$tellinked .= '
-<a href="tel:' . $lastElement . '" class="mhm-right-link"><i class="fa-solid fa-phone"></i> <span>' . $lastElement . '</span></a>
-';
-foreach ($telno as $tel) {
-
-    $tellinked .= '
-    <a href="tel:' . $tel . '" class="mhm-right-link"><i class="fa-solid fa-phone"></i> <span>' . $tel . '</span></a>
-';
-    if (end($telno) != $tel) {
-        $tellinked .= '/';
-    }
-}

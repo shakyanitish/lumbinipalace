@@ -34,7 +34,7 @@ if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_
                 foreach ($records as $key => $record): ?>
                     <tr id="<?php echo $record->id; ?>">
                         <td style="display:none;"><?php echo $key + 1; ?></td>
-                        <td><?php if (!in_array($record->id, [4, 5, 6])): ?><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/><?php endif; ?></td>
+                        <td><?php if (!in_array($record->id, [4, 5, 7,8,9,10])): ?><input type="checkbox" class="bulkCheckbox" bulkId="<?php echo $record->id; ?>"/><?php endif; ?></td>
                         <td>
                             <div class="col-md-7">
                                 <a href="javascript:void(0);" onClick="editCategory(<?php echo $record->id; ?>);"
@@ -68,7 +68,7 @@ if (isset($_GET['page']) && $_GET['page'] == "faq" && isset($_GET['mode']) && $_
                                data-placement="top" title="Edit" onclick="editCategory(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-edit"></i>
                             </a>
-                            <?php if (!in_array($record->id, [4, 5, 6])): ?>
+                            <?php if (!in_array($record->id, [4, 5, 7, 8, 9, 10])): ?>
                             <a href="javascript:void(0);" class="btn small bg-red tooltip-button" data-placement="top"
                                title="Remove" onclick="deleteCategory(<?php echo $record->id; ?>);">
                                 <i class="glyph-icon icon-remove"></i>

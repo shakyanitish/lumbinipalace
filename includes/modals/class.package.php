@@ -3,7 +3,7 @@ class Package extends DatabaseObject
 {
 
 	protected static $table_name = "tbl_package";
-	protected static $db_fields = array('id', 'slug', 'image', 'header_image', 'banner_image', 'flag_image', 'title', 'status', 'sortorder', 'detail', 'content', 'meta_title', 'meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date', 'linksrc', 'linktype', 'sub_title', 'program_date', 'incexc', 'content1', 'content2', 'content3', 'content4', 'content5','incexc1');
+	protected static $db_fields = array('id', 'slug', 'image', 'header_image', 'banner_image', 'flag_image', 'title', 'status', 'sortorder', 'detail', 'content', 'meta_title', 'meta_keywords', 'meta_description', 'type', 'added_date', 'modified_date', 'linksrc', 'linktype', 'sub_title', 'program_date', 'incexc', 'content1', 'content2', 'content3', 'content4', 'content5','incexc1','events_room','total_event_space','capacity_largest_space','breakout_rooms');
 
 	var $id;
 	var $slug;
@@ -34,7 +34,10 @@ class Package extends DatabaseObject
 	var $content3;
 	var $content4;
 	var $content5;
-
+	var $events_room;
+	var $total_event_space;
+	var $capacity_largest_space;
+	var $breakout_rooms;
 
 	public static function get_latestprogram_by($limit = '')
 	{

@@ -37,12 +37,8 @@
     <jcms:module:header/>
 
     <!-- BANNER SECTION -->
-    <section class="marriott-style-banner">
-        <div class="ul-banner-slider swiper" style="width:100%;height:100%;">
-            <div class="ul-banner-slide marriott-slide-image" data-img="assets/img/dine-1.jpg">
-            </div>
-        </div>
-    </section>
+    <jcms:module:exp-banner/>
+
     <main class="main-body">
 
         <!-- OVERVIEW SECTION -->
@@ -57,92 +53,7 @@
         </section>
 
         <!-- ON-SITE OUTLETS SECTION -->
-        <section class="m-outlets-section pb-5 pt-4 overflow-hidden">
-            <div class="container container-custom">
-                <div class="m-outlets-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
-                    <h2 class="m-outlets-title mb-0">On-Site Outlets</h2>
-                    <div class="m-outlets-stats d-flex gap-4">
-                        <span class="m-outlets-stat-item">total experiences (4)</span>
-                        <span class="m-outlets-stat-item"><i class="fa-regular fa-circle-check"></i> included
-                            experiences (1)</span>
-                    </div>
-                </div>
-
-                <div class="m-outlets-slider-wrapper position-relative">
-                    <div class="swiper m-outlets-swiper">
-                        <div class="swiper-wrapper">
-                            <!-- Outlet Card 1 -->
-                            <div class="swiper-slide">
-                                <div class="m-outlet-card">
-                                    <div class="m-outlet-img-wrap">
-                                        <img src="assets/img/project-1.jpg" alt="M Wellness Spa"
-                                            class="img-fluid w-100 h-100 object-fit-cover"
-                                            style="filter: brightness(0.85);">
-                                    </div>
-                                    <div class="m-outlet-content">
-                                        <h3 class="m-outlet-name">M Wellness Spa</h3>
-                                        <a href="experience-detail.html" class="btn m-btn-learn-more">Learn More +</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Outlet Card 2 -->
-                            <div class="swiper-slide">
-                                <div class="m-outlet-card">
-                                    <div class="m-outlet-badge"><i class="fa-regular fa-circle-check"></i> Included
-                                    </div>
-                                    <div class="m-outlet-img-wrap">
-                                        <img src="assets/img/project-3.jpg" alt="M Wellness"
-                                            class="img-fluid w-100 h-100 object-fit-cover"
-                                            style="filter: brightness(0.85);">
-                                    </div>
-                                    <div class="m-outlet-content">
-                                        <h3 class="m-outlet-name">M Wellness</h3>
-                                        <a href="experience-detail.html" class="btn m-btn-learn-more">Learn More +</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Outlet Card 3 -->
-                            <div class="swiper-slide">
-                                <div class="m-outlet-card">
-                                    <div class="m-outlet-img-wrap">
-                                        <img src="assets/img/project-4.jpg" alt="Outdoor Pool"
-                                            class="img-fluid w-100 h-100 object-fit-cover"
-                                            style="filter: brightness(0.85);">
-                                    </div>
-                                    <div class="m-outlet-content">
-                                        <h3 class="m-outlet-name">Outdoor Pool</h3>
-                                        <a href="#" class="btn m-btn-learn-more">Learn More +</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Outlet Card 4 -->
-                            <div class="swiper-slide">
-                                <div class="m-outlet-card">
-                                    <div class="m-outlet-img-wrap">
-                                        <img src="assets/img/project-5.jpg" alt="Whirlpool"
-                                            class="img-fluid w-100 h-100 object-fit-cover"
-                                            style="filter: brightness(0.85);">
-                                    </div>
-                                    <div class="m-outlet-content">
-                                        <h3 class="m-outlet-name">Whirlpool</h3>
-                                        <a href="experience-detail.html" class="btn m-btn-learn-more">Learn More +</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="m-outlets-controls mt-4 d-flex justify-content-center align-items-center gap-3">
-                            <button class="m-outlets-prev"><i class="fa-solid fa-chevron-left me-2"></i>
-                                Previous</button>
-                            <div class="m-outlets-pagination swiper-pagination-bullets"></div>
-                            <button class="m-outlets-next">Next <i class="fa-solid fa-chevron-right ms-2"></i></button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
+        <jcms:module:all-exp-list/>
 
         <!-- LOCAL ATTRACTIONS TEXT -->
         <jcms:module:exp-overview/>

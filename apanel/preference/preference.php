@@ -97,7 +97,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
-                        Icon Image :
+                        Favicon Image :
                     </label>
                 </div>
 

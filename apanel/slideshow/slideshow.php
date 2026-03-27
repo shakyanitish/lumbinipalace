@@ -3,7 +3,7 @@
 $moduleTablename = "tbl_slideshow"; // Database table name
 $moduleId = 4;                // module id >>>>> tbl_modules
 $position = array(1 => 'First', 2 => 'Second', 3 => 'Third', 4 => 'Four', 5 => 'Five');
-$type= array(1=>'Image',2=>'Video');// 
+$type= array(1=>'Image');// ,2=>'Video'
 
 if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode']) && $_GET['mode'] == "list"):
     clearImages($moduleTablename, "slideshow");
@@ -17,15 +17,15 @@ if (isset($_GET['page']) && $_GET['page'] == "slideshow" && isset($_GET['mode'])
     <h3>
         List Slideshow
         <?php 
-        if(! empty($type)) {
+        // if(! empty($type)) {
                 
-            $type_select_html = '<div class="pad0L col-md-3"><select class="user-hotel-select">';
-            foreach ($type as $key => $types ) {
-                $type_select_html .= '<option value="' . $key . '" ' . ($key == $typeid ? ' selected' : '') . '>' . $types . '</option>';
-            }
-            $type_select_html .= '</select></div>';
-            echo $type_select_html;
-        }
+            // $type_select_html = '<div class="pad0L col-md-3"><select class="user-hotel-select">';
+            // foreach ($type as $key => $types ) {
+            //     $type_select_html .= '<option value="' . $key . '" ' . ($key == $typeid ? ' selected' : '') . '>' . $types . '</option>';
+            // }
+            // $type_select_html .= '</select></div>';
+            //echo $type_select_html;
+        // }
         ?>
         <a class="loadingbar-demo btn medium bg-blue-alt float-right" href="javascript:void(0);"
            onClick="AddNewSlideshow();">

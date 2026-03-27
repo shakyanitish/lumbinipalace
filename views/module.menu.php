@@ -149,7 +149,8 @@ if ($menuRec) {
         }
         
         $menuLink = ($menuRow->linktype == 'external') ? $menuRow->linksrc : (($isHomeMenu) ? BASE_URL : BASE_URL . $menuRow->linksrc);
-        $mobileNav .= '<a href="' . $menuLink . '" role="button"' . $linkActive . '>' . $menuRow->name . '</a>';
+        $mobileNav .= '
+        <a href="' . $menuLink . '">' . $menuRow->name . ' <i class="fa-solid fa-chevron-right' . $linkActive . '"></i></a>';
     }
 }
 
@@ -211,7 +212,7 @@ if ($FmenuRec) {
 $jVars['module:footer-menu-list'] = $resfooter;
 
 $resfooter = '';
-$FmenuRec1 = Menu::getMenuByParent(0, 1);
+$FmenuRec1 = Menu::getMenuByParent(0, 3);
 if ($FmenuRec1) {
     foreach ($FmenuRec1 as $FmenuRow) {
         $resfooter .= '

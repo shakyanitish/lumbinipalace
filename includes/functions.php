@@ -23,6 +23,12 @@ function getDisplayFormat($date = "")
 	return $date;
 }
 
+function estimate_read_time($content) {
+    $word_count = str_word_count(strip_tags($content));
+    $words_per_minute = 200;
+    return ceil($word_count / $words_per_minute);
+}
+
 // Remove the  marked zeros from date.
 function strip_zeros_from_date($marked_string = "")
 {
@@ -397,7 +403,9 @@ function template($filename, $vars, $current = "orion")
 		$output = preg_replace('/src="/', 	'src="' . BASE_URL . 'template/' . $current . '/', $output);
 		$output = preg_replace('/<link rel="stylesheet" href="/', '<link rel="stylesheet" href="' . BASE_URL . 'template/' . $current . '/', $output);
 		foreach ($vars as $key => $value):
-		$output = preg_replace('/<jcms:' . $key . '\/>/', ($value ?? ''), $output);
+		if (!is_array($value)) {
+			$output = preg_replace('/<jcms:' . $key . '\/>/', ($value ?? ''), $output);
+		}
 		endforeach;
 		echo $output;
 	} else {
@@ -868,20 +876,12 @@ function check_url($value)
 
 function get_youtube_code($url)
 {
-	// Handle youtu.be shortlinks
-	if (preg_match('/youtu\.be\/([a-zA-Z0-9_-]{11})/', $url, $matches)) {
-		return $matches[1];
-	}
-	// Handle youtube.com/watch?v= and youtube.com/embed/
-	if (preg_match('/(youtube\.com|youtube-nocookie\.com)\/(?:watch\?v=|embed\/)([a-zA-Z0-9_-]{11})/', $url, $matches)) {
-		return $matches[2];
-	}
-	// Fallback to old method
 	$parse = parse_url($url);
 	if (!empty($parse['query'])) {
 		preg_match("/v=([^&]+)/i", $url, $matches);
-		return !empty($matches[1]) ? $matches[1] : '';
+		return $matches[1];
 	} else {
+		//to get basename
 		$info = pathinfo($url);
 		return $info['basename'];
 	}
@@ -895,9 +895,16 @@ function getHost($Address)
 
 function get_youtube_thumbnail($url)
 {
-	$id = get_youtube_code($url);
-	// Use https for better security and modern standards
-	$img = "https://img.youtube.com/vi/$id/0.jpg";
+	$parse = parse_url($url);
+	if (!empty($parse['query'])) {
+		preg_match("/v=([^&]+)/i", $url, $matches);
+		$id = $matches[1];
+	} else {
+		//to get basename
+		$info = pathinfo($url);
+		$id = $info['basename'];
+	}
+	$img = "http://img.youtube.com/vi/$id/0.jpg";
 	return $img;
 }
 
@@ -1218,11 +1225,11 @@ function curPageURL()
 		$pageURL .= "s";
 	}
 	$pageURL .= "://";
-	// if ($_SERVER["SERVER_PORT"] != "80") {
-	// 	$pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
-	// } else {
+	if ($_SERVER["SERVER_PORT"] != "80") {
+		$pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+	} else {
 		$pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-	// }
+	}
 	return $pageURL;
 }
 
