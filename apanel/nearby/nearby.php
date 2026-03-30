@@ -32,7 +32,7 @@ if (isset($_GET['page']) && $_GET['page'] == "nearby" && isset($_GET['mode']) &&
                 </thead>
 
                 <tbody>
-                <?php $records = Nearby::find_by_sql("SELECT * FROM " . $moduleTablename . " ORDER BY sortorder DESC ");
+                <?php $records = Nearby::find_by_sql("SELECT * FROM " . $moduleTablename . " ORDER BY sortorder ASC ");
                 foreach ($records as $key => $record): ?>
                     <tr id="<?php echo $record->id; ?>">
                         <td style="display:none;"><?php echo $key + 1; ?></td>

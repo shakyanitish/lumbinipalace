@@ -53,13 +53,12 @@ RewriteRule ^news/page/([0-9]+)?$ news_list.php?pageno=$1 [L]
 RewriteRule ^news/([0-9]+)/page/([0-9]+)?$ news_list.php?year=$1&pageno=$2 [L]
 
 #For offer pages.
-RewriteRule ^offer-list/?$ offers.php [L]
+RewriteRule ^offer/?$ offers.php [L]
 
 
 #For inner pages.
 RewriteRule ^alumini/?$ alumini.php?slug=$1  [L]
 #RewriteRule ^company/([a-zA-Z0-9-]+)$ company.php?slug=$1 [L]
-
 
 
 #For experiences pages.
@@ -99,9 +98,7 @@ RewriteRule ^facilities/([a-zA-Z0-9-=]+)$ package_detail.php?slug=$1 [L]
 #For Subpackage Details
 RewriteRule ^subpackage/([a-zA-Z0-9-]+)$ subpkgdetail.php?slug=$1 [L]
 
-#RewriteRule ^rooms/page/([0-9]+)?$ room_list.php?pageno=$1 [L]
-#RewriteRule ^([a-zA-Z0-9-=]+)$ subpkgdetail.php?slug=$1 [L]
-#RewriteRule ^([a-zA-Z0-9-=]+)/?$ package.php [L]
+
 
 #For global page
 RewriteRule ^([a-zA-Z0-9-=]+)/?$ global.php?slug=$1 [L]

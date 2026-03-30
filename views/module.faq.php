@@ -344,6 +344,56 @@ if (defined('EXPERIENCE_PAGE')) {
 $jVars['module:faq:experience'] = $faq_details;
 
 
+//Room or Accomodation faqs
+$faq_room = '';
+if (defined('ROOM_PAGE')) {
+
+    $faqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 8 ORDER BY sortorder DESC");
+
+    if (!empty($faqs)) {
+        $faqItems = '';
+        foreach ($faqs as $i => $faq) {
+            $collapseId = 'roomFaq' . ($i + 1);
+            $expandedAttr = '';
+            $btnClass = ' collapsed';
+            $borderClass = ($i === count($faqs) - 1) ? 'border-bottom' : 'border-bottom-0';
+            
+            $faqItems .= '
+        <div class="accordion-item border-top ' . $borderClass . '">
+            <h2 class="accordion-header">
+                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
+                    . $faq->title . '</button>
+            </h2>
+            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
+            </div>
+        </div>';
+        }
+
+        $faq_room = '
+        <section class="m-property-details py-5 bg-white">
+            <div class="container">
+                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
+                <div class="accordion accordion-flush" id="faqAccordion">
+                ' . $faqItems . '
+                </div>
+            </div>
+        </section>';
+    }
+    else {
+        $faq_room = '        
+        <section class="m-property-details py-5 bg-white">
+            <div class="container">
+                <h3 class="text-center p-4">No Accomodation FAQ Found</h3>
+            </div>
+        </section>';
+    }
+}
+
+$jVars['module:faq:room'] = $faq_room;
+
+
 //Events faq
 $faq_details_event = '';
 if (defined('EVENT_PAGE')) {

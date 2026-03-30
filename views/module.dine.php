@@ -41,6 +41,9 @@ if (!empty($diningPkgs)) {
             }
             
             $cuisine = !empty($dining->sub_title) ? $dining->sub_title : '';
+            $short_title = !empty($dining->short_title) ? $dining->short_title : '';
+            $phone = !empty($dining->phone) ? $dining->phone : '';
+            $dress = !empty($dining->dress) ? $dining->dress :
             $time = !empty($dining->time) ? $dining->time : '';
             $content = !empty($dining->content) ? strip_tags($dining->content) : '';
             $accordion_id = 'diningDetails' . $dining->id;
@@ -76,7 +79,7 @@ if (!empty($diningPkgs)) {
                                             <span>Everyday</span>
                                         </div>
 
-                                        <span>' . htmlspecialchars($time) . '</span>
+                                        <span>' . htmlspecialchars($short_title) . '</span>
                                     </div>
 
 
@@ -85,11 +88,11 @@ if (!empty($diningPkgs)) {
                                         <div class="m-dining-extra-info">
                                             <div class="m-dining-extra-item border-bottom pb-3 mb-3">
                                                 <i class="fa-solid fa-phone"></i>
-                                                <span>+977 01-9801971643</span>
+                                                <span>' . htmlspecialchars($phone) . '</span>
                                             </div>
                                             <div class="m-dining-extra-item border-bottom pb-3">
                                                 <i class="fa-brands fa-black-tie"></i>
-                                                <span>Dress Code: Casual</span>
+                                                <span>Dress Code: ' . htmlspecialchars($dress) . '</span>
                                             </div>
                                         </div>
                                     </div>
@@ -121,89 +124,114 @@ if (!empty($diningPkgs)) {
 
 $jVars['module:dining-list'] = $dining_list_html;
 
-/*
-* Dining FAQ
-*/
-$dining_faq_html = '';
-$diningFaqItems = Package::get_itinerary(25);
+$great_room_html = '';
 
-if (!empty($diningFaqItems)) {
-    $faqItems = '';
-    foreach ($diningFaqItems as $i => $faq) {
-        $collapseId = 'diningFaq' . ($i + 1);
-        $expandedAttr = '';
-        $btnClass = ' collapsed';
-        $borderClass = ($i === count($diningFaqItems) - 1) ? 'border-bottom' : 'border-bottom-0';
+if (defined('HOME_PAGE')) {
+    // Fetch dining packages where type=0
+    $diningPkgs = Package::find_by_sql("SELECT id FROM tbl_package WHERE status=1 AND type=0");
+
+    if (!empty($diningPkgs)) {
+        $pkgids = array();
+        foreach ($diningPkgs as $pkg) {
+            $pkgids[] = $pkg->id;
+        }
+        $idstr = implode(',', $pkgids);
         
-        $faqItems .= '
-        <div class="accordion-item border-top ' . $borderClass . '">
-            <h2 class="accordion-header">
-                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
-                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-                    . $faq->title . '</button>
-            </h2>
-            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#diningFaqAccordion">
-                <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
-            </div>
-        </div>';
-    }
+        // Fetch all subpackages for dining
+        $sql = "SELECT * FROM tbl_package_sub WHERE status='1' AND type IN ($idstr) ORDER BY sortorder DESC LIMIT 5";
+        $diningItems = Subpackage::find_by_sql($sql);
+        
+        if (!empty($diningItems)) {
+            // Build swiper slides
+            $slides_html = '';
+            
+            foreach ($diningItems as $k => $dining) {
+                // Get image path
+                $imgpath = '';
+                if (!empty($dining->image2)) {
+                    $file_path = SITE_ROOT . 'images/subpackage/image/' . $dining->image2;
+                    if (file_exists($file_path)) {
+                        $imgpath = IMAGE_PATH . 'subpackage/image/' . $dining->image2;
+                    }
+                } elseif ($dining->image != "a:0:{}") {
+                    $imageList = @unserialize($dining->image);
+                    if (!empty($imageList) && !empty($imageList[0])) {
+                        $file_path = SITE_ROOT . 'images/subpackage/' . $imageList[0];
+                        if (file_exists($file_path)) {
+                            $imgpath = IMAGE_PATH . 'subpackage/' . $imageList[0];
+                        }
+                    }
+                }
+                
+                // Fallback image if no dining image available
+                if (empty($imgpath)) {
+                    $imgpath = ASSETS_PATH . 'img/dine-1.jpg';
+                }
+                
+                $title = !empty($dining->title) ? htmlspecialchars($dining->title) : '';
+                $cuisine = !empty($dining->sub_title) ? htmlspecialchars($dining->sub_title) : '';
+                $content = !empty($dining->content) ? strip_tags($dining->content) : '';
+                
+                $slides_html .= '
+                        <!-- Slide ' . ($k + 1) . ' -->
+                        <div class="swiper-slide">
+                            <div class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
+                                <div class="col-xl-8 position-relative order-1 order-xl-2">
+                                    <img src="' . $imgpath . '" alt="' . $title . '"
+                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
+                                </div>
+                                <div class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
+                                    <div class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
+                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">' . $title . '</h2>
+                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
+                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
+                                            ' . substr($content, 0, 200) . (strlen($content) > 200 ? '...' : '') . '
+                                        </p>
+                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
+                                            style="border-radius: 6px;">Explore</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+            }
+            
+            // Build complete section HTML
+            $great_room_html = '
+            
+        <section class="m-great-room bg-dark text-white overflow-hidden py-5 pt-lg-0 pb-lg-0">
+            <div class="container mx-auto p-0 position-relative" style="max-width: 1200px;">
+                <div class="swiper m-great-room-swiper w-100 h-100">
+                    <div class="swiper-wrapper">
+                        ' . $slides_html . '
+                    </div>
+                </div>
 
-    $dining_faq_html = '
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="diningFaqAccordion">
-                    ' . $faqItems . '
+                <!-- Global Navigation exactly inside the container to align with the left col -->
+                <div class="m-great-room-nav-container d-flex align-items-center position-absolute w-100">
+                    <div class="col-xl-4 p-4 p-md-5 py-0 py-xl-0 d-flex align-items-center justify-content-center justify-content-xl-start w-100"
+                        style="pointer-events: auto;">
+                        <div class="mgr-nav d-flex align-items-center justify-content-between justify-content-xl-start w-100"
+                            style="max-width: 320px;">
+                            <div class="m-great-room-prev small cursor-pointer text-white m-0 d-flex align-items-center fw-semibold">
+                                <span class="d-none d-xl-inline">Prev</span>
+                                <span class="mgr-line ms-0 ms-xl-3"></span>
+                            </div>
+                            <div class="m-great-room-pagination small fw-bold tracking-widest text-center mx-3 mx-xl-4"
+                                style="min-width: 60px;"></div>
+                            <div class="m-great-room-next small cursor-pointer text-white m-0 d-flex align-items-center fw-semibold">
+                                <span class="mgr-line me-0 me-xl-3"></span>
+                                <span class="d-none d-xl-inline">Next</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>';
-}
-
-$jVars['module:dining-faq'] = $dining_faq_html;
-
-
-
-$room_package = '';
-$room_package = Package::get_itinerary(24);
-
-if (!empty($room_package)) {
-    $faqItems = '';
-    foreach ($room_package as $i => $room) {
-        $collapseId = 'diningFaq' . ($i + 1);
-        $expandedAttr = '';
-        $btnClass = ' collapsed';
-        $borderClass = ($i === count($room_package) - 1) ? 'border-bottom' : 'border-bottom-0';
-        
-        $faqItems .= '
-         
-
-
-
-        <div class="accordion-item border-top ' . $borderClass . '">
-            <h2 class="accordion-header">
-                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
-                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-                    . $room->title . '</button>
-            </h2>
-            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#diningFaqAccordion">
-                <div class="accordion-body text-muted pt-0 pb-4">' . $room->content . '</div>
-            </div>
-        </div>';
+        }
     }
-
-    $room_package = '
-
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
-                ' . $faqItems . '
-                </div>
-            </div>
-        </section>';
 }
 
-$jVars['module:room-package-faq'] = $room_package;
+$jVars['module:home-dine'] = $great_room_html;
 
 
 

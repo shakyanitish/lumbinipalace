@@ -47,7 +47,7 @@
     <main class="main-body">
 
         <!-- OVERVIEW -->
-        <jcms:module:home-pages/>
+        <jcms:module:home-article1/>
 
         <!-- ROOMS SECTION --> 
         <jcms:module:list-package-room/>
@@ -85,171 +85,14 @@
                 <jcms:module:features:amenities/>
                 <div class="m-hotel-info-section">
                     <h4 class="m-hotel-info-title">HOTEL INFORMATION</h4>
-                    <div class="m-hotel-info-grid">
-                        <div class="m-amenity-item"><i class="fa-light fa-clock"></i>
-                            <div class="m-amenity-text">Check-in: 3:00 pm</div>
-                        </div>
-                        <div class="m-amenity-item"><i class="fa-light fa-clock"></i>
-                            <div class="m-amenity-text">Check-out: 12:00 pm</div>
-                        </div>
-                        <div class="m-amenity-item"><i class="fa-light fa-bell-concierge"></i>
-                            <div class="m-amenity-text">Front Desk <span>Staffed</span></div>
-                        </div>
-                        <div class="m-amenity-item"><i class="fa-light fa-paw"></i>
-                            <div class="m-amenity-text">Pet Policy</div>
-                        </div>
-                        <div class="m-amenity-item"><i class="fa-solid fa-parking"></i>
-                            <div class="m-amenity-text">Parking <span>Complimentary On Site Parking<br>Long Term
-                                    Parking</span></div>
-                        </div>
-                    </div>
+                    <jcms:module:home-article/>
                 </div>
             </div>
         </section>
 
         <!-- DINING SECTION -->
-        <section class="m-great-room bg-dark text-white overflow-hidden py-5 pt-lg-0 pb-lg-0">
-            <div class="container mx-auto p-0 position-relative" style="max-width: 1200px;">
-                <div class="swiper m-great-room-swiper w-100 h-100">
-                    <div class="swiper-wrapper">
-                        <!-- Slide 1 -->
-                        <div class="swiper-slide">
-                            <div
-                                class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
-                                <div class="col-xl-8 position-relative order-1 order-xl-2">
-                                    <img src="assets/img/dine-1.jpg" alt="The Corbett Kitchen"
-                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
-                                </div>
-                                <div
-                                    class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
-                                    <div
-                                        class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
-                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">The Corbett
-                                            Kitchen
-                                        </h2>
-                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
-                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
-                                            Enjoy global cuisine at The Corbett Kitchen in Jim Corbett, an all-day
-                                            restaurant with interactive kitchens and indoor/outdoor seating. Savor
-                                            dishes made from the freshest ingredients while engaging with our chefs for
-                                            a lively and interactive experience.
-                                        </p>
-                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
-                                            style="border-radius: 6px;">Explore</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <jcms:module:home-dine/>
 
-                        <!-- Slide 2 -->
-                        <div class="swiper-slide">
-                            <div
-                                class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
-                                <div class="col-xl-8 position-relative order-1 order-xl-2">
-                                    <img src="assets/img/project-2.jpg" alt="Malani Grill"
-                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
-                                </div>
-                                <div
-                                    class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
-                                    <div
-                                        class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
-                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">Malani Grill
-                                            -
-                                            Opening Soon</h2>
-                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
-                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
-                                            Embark on a unique culinary journey at Malani Grill, where chefs interpret
-                                            the five elements—Earth, Water, Air, Fire, and Space—plus the sixth,
-                                            ‘Daivik,’ for balance. Enjoy views of the hills and Kosi River at our
-                                            outdoor restaurant in Jim Corbett.
-                                        </p>
-                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
-                                            style="border-radius: 6px;">Explore</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide 3 -->
-                        <div class="swiper-slide">
-                            <div
-                                class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
-                                <div class="col-xl-8 position-relative order-1 order-xl-2">
-                                    <img src="assets/img/blog-1.jpg" alt="The Great Room"
-                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
-                                </div>
-                                <div
-                                    class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
-                                    <div
-                                        class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
-                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">The Great
-                                            Room</h2>
-                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
-                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
-                                            The Great Room is the heartbeat of our hotel, designed for unwinding with a
-                                            classic cocktail. With chic, comfortable seating overlooking the pool, it
-                                            features an exquisite selection of baked pastries and artisan breads in a
-                                            relaxed atmosphere.
-                                        </p>
-                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
-                                            style="border-radius: 6px;">Explore</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide 4 -->
-                        <div class="swiper-slide">
-                            <div
-                                class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
-                                <div class="col-xl-8 position-relative order-1 order-xl-2">
-                                    <img src="assets/img/project-3.jpg" alt="Sal Bar"
-                                        class="img-fluid w-100 h-100 object-fit-cover m-great-room-img">
-                                </div>
-                                <div
-                                    class="col-xl-4 d-flex flex-column justify-content-center p-4 p-md-5 pt-5 pt-xl-5 position-relative z-1 order-2 order-xl-1 text-center text-xl-start">
-                                    <div
-                                        class="mgr-text-content d-flex flex-column align-items-center align-items-xl-start mt-4 mt-xl-0">
-                                        <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">Sal Bar</h2>
-                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
-                                            style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
-                                            Join Sal Bar's rich celebration of Indian spirits, blending authenticity and
-                                            innovation. Enjoy a unique journey through local distilling traditions while
-                                            honoring the country's deep-rooted customs and modern advancements in the
-                                            beverage industry.
-                                        </p>
-                                        <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
-                                            style="border-radius: 6px;">Explore</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Global Navigation exactly inside the container to align with the left col -->
-                <div class="m-great-room-nav-container d-flex align-items-center position-absolute w-100">
-                    <div class="col-xl-4 p-4 p-md-5 py-0 py-xl-0 d-flex align-items-center justify-content-center justify-content-xl-start w-100"
-                        style="pointer-events: auto;">
-                        <div class="mgr-nav d-flex align-items-center justify-content-between justify-content-xl-start w-100"
-                            style="max-width: 320px;">
-                            <div
-                                class="m-great-room-prev small cursor-pointer text-white m-0 d-flex align-items-center fw-semibold">
-                                <span class="d-none d-xl-inline">Prev</span>
-                                <span class="mgr-line ms-0 ms-xl-3"></span>
-                            </div>
-                            <div class="m-great-room-pagination small fw-bold tracking-widest text-center mx-3 mx-xl-4"
-                                style="min-width: 60px;"></div>
-                            <div
-                                class="m-great-room-next small cursor-pointer text-white m-0 d-flex align-items-center fw-semibold">
-                                <span class="mgr-line me-0 me-xl-3"></span>
-                                <span class="d-none d-xl-inline">Next</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- MORE WAYS TO ENJOY YOUR STAY -->
         <jcms:module:enjoy-stay/>
@@ -264,7 +107,7 @@
         <jcms:module:faq:homepage1/>
 
         <!-- FAQ -->
-        <jcms:module:faq:homepage/>
+        <jcms:module:faq:homepage/> 
 
         <!-- TESTIMONIALS (hidden) -->
         <section class="m-testimonials wow animate__fadeInUp d-none">

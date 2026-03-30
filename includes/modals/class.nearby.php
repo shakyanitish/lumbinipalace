@@ -104,7 +104,7 @@ class Nearby extends DatabaseObject {
     //Find all the rows in the current database table.
     public static function find_all_active(){
         global $db;
-        return self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE status=1 ORDER BY sortorder DESC");
+        return self::find_by_sql("SELECT * FROM ".self::$table_name." WHERE status=1 ORDER BY sortorder ASC");
     }
 
 	//Find a single row in the database where slug is provided.

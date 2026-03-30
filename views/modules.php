@@ -113,7 +113,6 @@ endforeach;
 
 require_once("views/module.contact.php");
 require_once("views/module.programs.php");
-require_once("views/module.enjoy_stay.php");
 require_once("views/module.offers.php");
 require_once("views/module.faq.php");
 require_once("views/module.dine.php");

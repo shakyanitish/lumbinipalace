@@ -344,6 +344,47 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 <div id="preview_Image6"></div>
             </div>
 
+            <!-- Offer Banner Image -->
+            <div class="form-row">
+                <div class="form-label col-md-2">
+                    <label for="">
+                        Offer Banner Image :
+                    </label>
+                </div>
+
+                <?php if (!empty($PrefeRow->offer_upload)): ?>
+                    <div class="col-md-2" id="removeSavedimg9">
+                        <div class="infobox info-bg">
+                            <div class="button-group" data-toggle="buttons">
+                                <span class="float-left">
+                                    <?php
+                                    if (file_exists(SITE_ROOT . "images/preference/offer/" . $PrefeRow->offer_upload)):
+                                        $filesize = filesize(SITE_ROOT . "images/preference/offer/" . $PrefeRow->offer_upload);
+                                        echo 'Size : ' . getFileFormattedSize($filesize);
+                                    endif;
+                                    ?>
+                                </span>
+                                <a class="btn small float-right" href="javascript:void(0);" onclick="deleteSavedPreferenceimage(9);">
+                                    <i class="glyph-icon icon-trash-o"></i>
+                                </a>
+                            </div>
+                            <img src="<?php echo IMAGE_PATH . 'preference/offer/thumbnails/' . $PrefeRow->offer_upload; ?>" style="width:100%" />
+                            <input type="hidden" name="imageArrayname9"
+                                value="<?php echo $PrefeRow->offer_upload; ?>" />
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="form-input col-md-10 uploader9 <?php echo !empty($PrefeRow->offer_upload) ? "hide" : ""; ?>">
+                    <input type="file" name="offer_upload" id="offer_upload" class="transparent no-shadow">
+                    <label>
+                        <small>Image Dimensions (<?php echo Module::get_properties($moduleId, 'ofimgwidth'); ?> px
+                            X <?php echo Module::get_properties($moduleId, 'ofimgheight'); ?> px)
+                        </small>
+                    </label>
+                </div>
+                <div id="preview_Image9"></div>
+            </div> 
+
             <?php if ($PrefeRow->id == 1) { ?>
                 <div class="form-row">
                     <div class="form-label col-md-2">
@@ -430,45 +471,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             <!-- <div id="preview_Image8"></div>
             </div> -->
 
-            <!-- <div class="form-row">
-                <div class="form-label col-md-2">
-                    <label for="">
-                        Logo2 :
-                    </label>
-                </div>
 
-                <?php if (!empty($PrefeRow->offer_upload)): ?>
-                    <div class="col-md-2" id="removeSavedimg9">
-                        <div class="infobox info-bg">
-                            <div class="button-group" data-toggle="buttons">
-                                <span class="float-left">
-                                    <?php
-                                    if (file_exists(SITE_ROOT . "images/preference/offer/" . $PrefeRow->offer_upload)):
-                                        $filesize = filesize(SITE_ROOT . "images/preference/offer/" . $PrefeRow->offer_upload);
-                                        echo 'Size : ' . getFileFormattedSize($filesize);
-                                    endif;
-                                    ?>
-                                </span>
-                                <a class="btn small float-right" href="javascript:void(0);" onclick="deleteSavedPreferenceimage(9);">
-                                    <i class="glyph-icon icon-trash-o"></i>
-                                </a>
-                            </div>
-                            <img src="<?php echo IMAGE_PATH . 'preference/offer/thumbnails/' . $PrefeRow->offer_upload; ?>" style="width:100%" />
-                            <input type="hidden" name="imageArrayname9"
-                                value="<?php echo $PrefeRow->offer_upload; ?>" />
-                        </div>
-                    </div>
-                <?php endif; ?>
-                <div class="form-input col-md-10 uploader9 <?php echo !empty($PrefeRow->offer_upload) ? "hide" : ""; ?>">
-                    <input type="file" name="offer_upload" id="offer_upload" class="transparent no-shadow">
-                    <label>
-                        <small>Image Dimensions (<?php echo Module::get_properties($moduleId, 'ofimgwidth'); ?> px
-                            X <?php echo Module::get_properties($moduleId, 'ofimgheight'); ?> px)
-                        </small>
-                    </label>
-                </div>
-                <div id="preview_Image9"></div>
-            </div> -->
 
             <!-- <div class="form-row">
                 <div class="form-label col-md-2">
@@ -1012,7 +1015,7 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
             'height': 21,
             'removeCompleted': true,
             'progressData': 'speed',
-            'uploadLimit': 1,
+            'uploadLimit': 5,
             'fileTypeExts': '*.gif; *.jpg; *.jpeg;  *.png; *.GIF; *.JPG; *.JPEG; *.PNG;',
             'buttonClass': 'button formButtons',
             /* 'checkExisting' : '/uploadify/check-exists.php',*/

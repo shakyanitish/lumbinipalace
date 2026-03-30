@@ -16,12 +16,12 @@ switch ($action) {
 
 		$record->slug = create_slug($_REQUEST['title']);
 		$record->title = $_REQUEST['title'];
-		$record->tag = $_REQUEST['tag'];
+		$record->tag = (!empty($_REQUEST['tag'])) ? $_REQUEST['tag'] : '';
 		$record->image = (!empty($_REQUEST['imageArrayname'])) ? $_REQUEST['imageArrayname'] : '';
 		$record->list_image = (!empty($_REQUEST['imageArrayname3'])) ? $_REQUEST['imageArrayname3'] : '';
 		$record->rate = $_REQUEST['rate'];
 		$record->discount = $_REQUEST['discount'];
-		//			$record->brief			= $_REQUEST['brief'];
+		$record->brief			= $_REQUEST['brief'];
 		$record->content = $_REQUEST['content'];
 		$record->linksrc = $_REQUEST['linksrc'];
 		$record->linktype = $_REQUEST['linktype'];
@@ -110,10 +110,10 @@ switch ($action) {
 
 		$record->slug = create_slug($_REQUEST['title']);
 		$record->title = $_REQUEST['title'];
-		$record->tag = $_REQUEST['tag'];
+		$record->tag = (!empty($_REQUEST['tag'])) ? $_REQUEST['tag'] : '';
 		$record->rate = $_REQUEST['rate'];
 		$record->discount = $_REQUEST['discount'];
-		//			$record->brief			= $_REQUEST['brief'];
+		$record->brief			= $_REQUEST['brief'];
 		$record->content = $_REQUEST['content'];
 		$record->linksrc = $_REQUEST['linksrc'];
 		$record->linktype = $_REQUEST['linktype'];

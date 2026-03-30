@@ -5,10 +5,10 @@ $recRows = Nearby::find_all_active();
 
 if (!empty($recRows)) {
     foreach ($recRows as $key => $recRow) {
-        $active_class = ($key == 0) ? 'show' : '';
-        $button_class = ($key == 0) ? '' : 'collapsed';
-        $aria_expanded = ($key == 0) ? 'true' : 'false';
-        
+        $active_class = '';
+        $button_class = 'collapsed';
+        $aria_expanded = 'false';
+
         // Extract src from google_embeded if it's an iframe tag
         $map_url = $recRow->google_embeded;
         if (preg_match('/src="([^"]+)"/', $map_url, $match)) {
@@ -30,11 +30,10 @@ if (!empty($recRows)) {
             </h2>
             <div id="collapse' . $recRow->id . '" class="accordion-collapse collapse ' . $active_class . '" aria-labelledby="heading' . $recRow->id . '" data-bs-parent="#locationAccordion">
                 <div class="accordion-body">
-                    <p class="mb-1"><strong>Distance from Property:</strong> ' . $recRow->distance . '</p>
-                    <div class="mb-2">' . $recRow->content . '</div>
-<a href="javascript:void(0);" data-map-url="' . $map_url . '" class="mhm-right-link view-map-btn" style="color: white;">
-    <i class="fa-solid fa-location-dot"></i> <span>VIEW MAP</span>
-</a>
+                    ' . $recRow->content . '
+                    <a href="javascript:void(0);" data-map-url="' . $map_url . '" class="mhm-right-link view-map-btn" style="color: white;">
+                        <i class="fa-solid fa-location-dot"></i> <span>VIEW MAP</span>
+                    </a>
                 </div>
             </div>
         </div>';
@@ -92,5 +91,3 @@ if (!empty($recRows)) {
 
 $jVars['module:inner-nearby-detail'] = $nearbydetail;
 $jVars['module:inner-nearby-detail-modals'] = '';
-
-?>

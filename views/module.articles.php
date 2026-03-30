@@ -51,7 +51,7 @@ if (!empty($homearticle)) {
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-6">                 
                     <div class="about-right wow fadeInUp" data-wow-delay=".25s">
                         <div class="site-heading mb-3">
                             <h2 class="site-title">' . $title . '</h2>
@@ -72,9 +72,11 @@ if (!empty($homearticle)) {
 
 $jVars['module:aboutarticle'] = $t;
 
+
+
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------
-$resinnh = '';
+$resinnh = $homePageSection = '';
 
 
 if (defined('HOME_PAGE')) {
@@ -94,14 +96,26 @@ if (defined('HOME_PAGE')) {
             }
             $resinnh .= '
 
-                    ' . $content[0] . '
+                    ' . $content[1] . '
             
             ';
+                    $homePageSection = '
+
+        <section class="m-overview wow animate__fadeInUp">
+            <div class="m-overview-center">
+                <p class="m-overview-label">Welcome to Lumbini Palace Resort</p>
+                <div class="m-overview-divider"></div>
+                 ' . $content[0] . ' 
+            </div>
+        </section>
+
+';
         }
     }
 }
 
 $jVars['module:home-article'] = $resinnh;
+$jVars['module:home-article1'] = $homePageSection;
 
 
 // -----------------------------------------------------------------

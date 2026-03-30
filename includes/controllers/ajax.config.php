@@ -120,7 +120,7 @@ endif;
 			$record->contact_upload     = (!empty($_REQUEST['imageArrayname6'])) ? $_REQUEST['imageArrayname6'] : '';
             $record->other_upload       = (!empty($_REQUEST['imageArrayname7'])) ? $_REQUEST['imageArrayname7'] : '';
             $record->facility_upload    = (!empty($_REQUEST['imageArrayname8'])) ? $_REQUEST['imageArrayname8'] : '';
-            // $record->offer_upload       = (!empty($_REQUEST['imageArrayname9'])) ? $_REQUEST['imageArrayname9'] : '';
+            $record->offer_upload       = (!empty($_REQUEST['imageArrayname9'])) ? $_REQUEST['imageArrayname9'] : '';
 
 			$db->begin();
 			if($record->save()):$db->commit();

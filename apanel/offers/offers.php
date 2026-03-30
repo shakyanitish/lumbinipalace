@@ -554,7 +554,7 @@ if (isset($_GET['page']) && $_GET['page'] == "offers" && isset($_GET['mode']) &&
                     </div>
                 </div>-->
 
-                <!--<div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Brief :
@@ -563,7 +563,7 @@ if (isset($_GET['page']) && $_GET['page'] == "offers" && isset($_GET['mode']) &&
                     <div class="form-input col-md-8">
                         <textarea name="brief"><?php echo !empty($advInfo->brief) ? $advInfo->brief : ""; ?></textarea>
                     </div>
-                </div>-->
+                </div>
 
                 <div class="form-row hide">
                     <div class="form-label col-md-2">

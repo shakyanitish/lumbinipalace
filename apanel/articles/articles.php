@@ -133,7 +133,7 @@ if (isset($_GET['page']) && $_GET['page'] == "articles" && isset($_GET['mode']) 
                         </label>
                     </div>
                     <div class="form-input col-md-20">
-                        <input placeholder=" Sub Title" class="col-md-6 validate[required,length[0,200]]" type="text"
+                        <input placeholder=" Sub Title" class="col-md-6 validate[length[0,200]]" type="text"
                                name="sub_title" id="sub_title"
                                value="<?php echo !empty($articlesInfo->sub_title) ? $articlesInfo->sub_title : ""; ?>">
                     </div>

@@ -169,7 +169,7 @@
 		case "sort":			
 			$id 	 = $_REQUEST['id']; 	// IS a line containing ids starting with : sortIds
 			$sortIds = $_REQUEST['sortIds'];
-			datatableReordering('tbl_nearby', $sortIds, "sortorder", '','',1);
+			datatableReordering('tbl_nearby', $sortIds, "sortorder", '','',0);
 			$message  = sprintf($GLOBALS['basic']['sorted_'], "Article"); 
 			echo json_encode(array("action"=>"success","message"=>$message));
 		break;

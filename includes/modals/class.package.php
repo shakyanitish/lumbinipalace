@@ -39,6 +39,7 @@ class Package extends DatabaseObject
 	var $capacity_largest_space;
 	var $breakout_rooms;
     var $included;
+	
 
 	public static function get_latestprogram_by($limit = '')
 	{

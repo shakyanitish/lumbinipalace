@@ -1,50 +1,48 @@
-<?php 
-$resoffr=$socialshare='';
-$expired='';
-$enquiry='';
-$resrandoffr=$hmresoffr=$resinndetail=$offbredd='';
+<?php
+$resoffr = $socialshare = '';
+$expired = '';
+$enquiry = '';
+$resrandoffr = $hmresoffr = $resinndetail = $offbredd = '';
 $offrRec = Offers::get_offer_by();
 
-if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
+if (defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
     $slug = addslashes($_REQUEST['slug']);
     $recRow = Offers::find_by_slug($slug);
-    if(!empty($recRow)) {
-        
-        if(!empty($recRow->image)) { 
-              $imglink =IMAGE_PATH.'offers/'.$recRow->image;
+    if (!empty($recRow)) {
+
+        if (!empty($recRow->image)) {
+            $imglink = IMAGE_PATH . 'offers/' . $recRow->image;
+        } else {
+            $imglink = IMAGE_PATH . 'static/inner-img.jpg';
         }
-        else {
-            $imglink = IMAGE_PATH.'static/inner-img.jpg';
-        }
-        $socialshare='<div class="share-social">
-            <a class="facebook-share" target="blank" href="https://www.facebook.com/sharer/sharer.php?u='.BASE_URL.'offer/'.$recRow->slug.'&p='.$recRow->title.'&p[images][0]='.$imglink.'">
+        $socialshare = '<div class="share-social">
+            <a class="facebook-share" target="blank" href="https://www.facebook.com/sharer/sharer.php?u=' . BASE_URL . 'offer/' . $recRow->slug . '&p=' . $recRow->title . '&p[images][0]=' . $imglink . '">
                 <i class="fa fa-facebook" aria-hidden="true"></i><span>Share</span></a> 
-            <a class="twitter-share" target="blank" href="https://twitter.com/intent/tweet?text='.$recRow->title.' ?url='.BASE_URL.'offer/'.$recRow->slug.'" >
+            <a class="twitter-share" target="blank" href="https://twitter.com/intent/tweet?text=' . $recRow->title . ' ?url=' . BASE_URL . 'offer/' . $recRow->slug . '" >
                 <i class="fa fa-twitter" aria-hidden="true"></i><span>Share</span></a>
-            <a class="gplus-share" target="blank" href="https://plus.google.com/share?url='.BASE_URL.'offer/'.$recRow->slug.'">
+            <a class="gplus-share" target="blank" href="https://plus.google.com/share?url=' . BASE_URL . 'offer/' . $recRow->slug . '">
                 <i class="fa fa-google-plus" aria-hidden="true"></i><span>Share</span></a>
         </div>';
-        $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($recRow->content));   
-        $content = !empty($rescontent[1])?$rescontent[1] : $rescontent[0];
-    $currentdate = date("Y-m-d") ;
-    // pr($recRow);
-    // pr($currentdate);
-    if($recRow->deadline_type == 'alltime' || empty($recRow->offer_date)){
-        $enquiry='<a href="'.BASE_URL.'book/'.$recRow->slug.'" class="btn btn-primary btn-book" style="color: #fff;background-color: #7b2b2e;border-color: #7b2b2e;">Enquiry</a>';
-    } elseif($recRow->offer_date > $currentdate){
-        $enquiry='<a href="'.BASE_URL.'book/'.$recRow->slug.'" class="btn btn-primary btn-book" style="color: #fff;background-color: #7b2b2e;border-color: #7b2b2e;">Enquiry</a>';
-    }
-    else{
-        $enquiry='';
-    }
-          $resinndetail.=$socialshare.'
+        $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($recRow->content));
+        $content = !empty($rescontent[1]) ? $rescontent[1] : $rescontent[0];
+        $currentdate = date("Y-m-d");
+        // pr($recRow);
+        // pr($currentdate);
+        if ($recRow->deadline_type == 'alltime' || empty($recRow->offer_date)) {
+            $enquiry = '<a href="' . BASE_URL . 'book/' . $recRow->slug . '" class="btn btn-primary btn-book" style="color: #fff;background-color: #7b2b2e;border-color: #7b2b2e;">Enquiry</a>';
+        } elseif ($recRow->offer_date > $currentdate) {
+            $enquiry = '<a href="' . BASE_URL . 'book/' . $recRow->slug . '" class="btn btn-primary btn-book" style="color: #fff;background-color: #7b2b2e;border-color: #7b2b2e;">Enquiry</a>';
+        } else {
+            $enquiry = '';
+        }
+        $resinndetail .= $socialshare . '
                         <div class="offer-detail3">
-                            <h2>'.$recRow->title.'</h2>
-                            '.$content.'
-                            '.$enquiry.'
+                            <h2>' . $recRow->title . '</h2>
+                            ' . $content . '
+                            ' . $enquiry . '
                         </div>';
 
-                $offbredd.='<section class="breadcrumb-area overlay-dark-2 bg-2" style="background-image:url('.$imglink.'); background-repeat: no-repeat; "> 
+        $offbredd .= '<section class="breadcrumb-area overlay-dark-2 bg-2" style="background-image:url(' . $imglink . '); background-repeat: no-repeat; "> 
                
             <div class="container">
                 <div class="row">
@@ -52,9 +50,9 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
                         <div class="breadcrumb-text article text-center">
                             <div class="breadcrumb-bar">
                                 <ul class="breadcrumb">
-                                    <li><a href="'.BASE_URL.'">Home</a></li>
-                                    <li><a href="'.BASE_URL.'offer-list">Offer</a></li>
-                                    <li>'.$recRow->title.'</li>
+                                    <li><a href="' . BASE_URL . '">Home</a></li>
+                                    <li><a href="' . BASE_URL . 'offer-list">Offer</a></li>
+                                    <li>' . $recRow->title . '</li>
                                 </ul>
                             </div>
                         </div>
@@ -62,14 +60,12 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
                 </div>
             </div>
         </section>';
-    }
-    else {
+    } else {
         redirect_to(BASE_URL);
-    }    
-}
-else{ 
-    
-      $offbredd.='<section class="breadcrumb-area overlay-dark-2 bg-2" style="background-image:url('.BASE_URL.'images/fac.jpg); background-repeat: no-repeat; "> 
+    }
+} else {
+
+    $offbredd .= '<section class="breadcrumb-area overlay-dark-2 bg-2" style="background-image:url(' . BASE_URL . 'images/fac.jpg); background-repeat: no-repeat; "> 
                
             <div class="container">
                 <div class="row">
@@ -77,7 +73,7 @@ else{
                         <div class="breadcrumb-text article text-center">
                             <div class="breadcrumb-bar">
                                <!-- <ul class="breadcrumb">
-                                    <li><a href="'.BASE_URL.'">Home</a></li>
+                                    <li><a href="' . BASE_URL . '">Home</a></li>
                                     <li>Offers</li>
                                 </ul>-->
                             </div>
@@ -86,76 +82,75 @@ else{
                 </div>
             </div>
         </section>';
-         $offList= Offers::find_all();
-         $resinndetail.='<div class="row">
+    $offList = Offers::find_all();
+    $resinndetail .= '<div class="row">
                             <div class="col-sm-12">
                                 <h1 class="text-center">Exclusive Offers</h1>
                                 <br/>
                             </div>
                         ';
-         foreach ($offList as $offer) {
-   
-             $currentdate = date("Y-m-d") ;
-             // Show offer if it's "All Time" or if dates are valid and within range
-             $isAllTime = ($offer->deadline_type == 'alltime' || empty($offer->start_date) || empty($offer->offer_date));
-             $isActive = $isAllTime || ($offer->start_date <= $currentdate && $offer->offer_date >= $currentdate);
-             
-             if($isActive) {
-                 // Only mark as expired if it has a deadline and is past the deadline
-                 if(!$isAllTime && $offer->offer_date < $currentdate) {
-                     $expired .='<div class="offer__expire position-absolute"><span>Expired</span></div>';
-                 }
-                 else{
-                     $expired .='';
-                 }
+    foreach ($offList as $offer) {
+
+        $currentdate = date("Y-m-d");
+        // Show offer if it's "All Time" or if dates are valid and within range
+        $isAllTime = ($offer->deadline_type == 'alltime' || empty($offer->start_date) || empty($offer->offer_date));
+        $isActive = $isAllTime || ($offer->start_date <= $currentdate && $offer->offer_date >= $currentdate);
+
+        if ($isActive) {
+            // Only mark as expired if it has a deadline and is past the deadline
+            if (!$isAllTime && $offer->offer_date < $currentdate) {
+                $expired .= '<div class="offer__expire position-absolute"><span>Expired</span></div>';
+            } else {
+                $expired .= '';
+            }
             //  pr($expired);
-            $resinndetail.='<div class="col-md-4">
+            $resinndetail .= '<div class="col-md-4">
                                 <div class="offer offer-item position-relative">
-                                    <a href="'.BASE_URL.'offer/'.$offer->slug.'">
-                                        <img src="'.IMAGE_PATH.'offers/listimage/'.$offer->list_image.'" alt="'.$offer->image.'">
+                                    <a href="' . BASE_URL . 'offer/' . $offer->slug . '">
+                                        <img src="' . IMAGE_PATH . 'offers/listimage/' . $offer->list_image . '" alt="' . $offer->image . '">
                                         <div class="details">
-                                            <h3>'.$offer->title.'</h3>
+                                            <h3>' . $offer->title . '</h3>
                                         </div>
                                     </a>
                                 </div>
-                                '.$expired.'
+                                ' . $expired . '
                             </div>';
-         $expired='';
-             }
-         }
-         $resinndetail.='</div>';
+            $expired = '';
+        }
+    }
+    $resinndetail .= '</div>';
 }
 
 
-    // Rand offer
-    $randRec = Offers::get_offer_rand();
-    if(!empty($randRec)) {
-        $file_path = SITE_ROOT.'images/offers/'.$randRec->image;
-        if(file_exists($file_path) and !empty($randRec->image)) {
-            $linkTarget = ($randRec->linktype == 1)? ' target="_blank" ' : ''; 
-            $linksrc    = ($randRec->linktype != 1)? BASE_URL.$randRec->linksrc : $randRec->linksrc;
-            $linkstart  = ($randRec->linksrc!='')? '<a href="'.$linksrc.'" '.$linkTarget.'>' : '<a href="javascript:void(0);">';
-            $linkend    = ($randRec->linksrc!='')? '</a>' : '</a>' ;
+// Rand offer
+$randRec = Offers::get_offer_rand();
+if (!empty($randRec)) {
+    $file_path = SITE_ROOT . 'images/offers/' . $randRec->image;
+    if (file_exists($file_path) and !empty($randRec->image)) {
+        $linkTarget = ($randRec->linktype == 1) ? ' target="_blank" ' : '';
+        $linksrc = ($randRec->linktype != 1) ? BASE_URL . $randRec->linksrc : $randRec->linksrc;
+        $linkstart = ($randRec->linksrc != '') ? '<a href="' . $linksrc . '" ' . $linkTarget . '>' : '<a href="javascript:void(0);">';
+        $linkend = ($randRec->linksrc != '') ? '</a>' : '</a>';
 
 
-            $resrandoffr.='<div class="section panel">
+        $resrandoffr .= '<div class="section panel">
                 <div class="item fade">
-                    <div class="back" data-image="'.IMAGE_PATH.'offers/'.$randRec->image.'"></div>
+                    <div class="back" data-image="' . IMAGE_PATH . 'offers/' . $randRec->image . '"></div>
                     <div class="panel-button">
                         <div class="button-container">
-                            '.$linkstart.$randRec->title.$linkend.'
+                            ' . $linkstart . $randRec->title . $linkend . '
                             <span>Our Offer <i class="icon ion-ios-arrow-right"></i>
                         </div>
                     </div>
                 </div>
 
             </div>';
-        }
     }
+}
 
 if (defined('HOME_PAGE')) {
-        $sql = "SELECT * FROM tbl_offers WHERE status='1' and homepage='1' AND (deadline_type='alltime' OR (start_date IS NOT NULL AND offer_date IS NOT NULL AND CURDATE() BETWEEN start_date AND offer_date)) ORDER BY sortorder DESC ";
-        $offrRec = Offers::find_by_sql($sql);
+    $sql = "SELECT * FROM tbl_offers WHERE status='1' and homepage='1' AND (deadline_type='alltime' OR (start_date IS NOT NULL AND offer_date IS NOT NULL AND CURDATE() BETWEEN start_date AND offer_date)) ORDER BY sortorder DESC ";
+    $offrRec = Offers::find_by_sql($sql);
     if ($offrRec) {
         $slides = '';
         foreach ($offrRec as $offrRow) {
@@ -182,7 +177,7 @@ if (defined('HOME_PAGE')) {
                         <div class="m-offer-content">
                             <span class="m-offer-dates">' . $dateRange . '</span>
                             <h3 class="m-offer-title">' . $offrRow->title
-                             . ' <i class="fa-solid fa-chevron-right"></i><i class="fa-light fa-arrow-up-right"></i></h3>
+                    . ' <i class="fa-solid fa-chevron-right"></i><i class="fa-light fa-arrow-up-right"></i></h3>
                         </div>
                     </a>
                 </div>';
@@ -210,23 +205,84 @@ if (defined('HOME_PAGE')) {
 }
 
 
+// OFFERS GRID SECTION - for offers listing page
+$offers_grid = '';
+if (defined('OFFERS_PAGE') and !isset($_REQUEST['slug'])) {
+    $offList = Offers::find_all();
+    
+    if (!empty($offList)) {
+        $offerCards = '';
+        foreach ($offList as $offer) {
+            $currentdate = date("Y-m-d");
+            // Show offer if it's "All Time" or if dates are valid and within range
+            $isAllTime = ($offer->deadline_type == 'alltime' || empty($offer->start_date) || empty($offer->offer_date));
+            $isActive = $isAllTime || ($offer->start_date <= $currentdate && $offer->offer_date >= $currentdate);
+            
+            if ($isActive) {
+                $imageFile = !empty($offer->image) ? $offer->image : $offer->list_image;
+                $imageFolder = !empty($offer->image) ? 'offers/' : 'offers/listimage/';
+                $file_path = SITE_ROOT . 'images/' . $imageFolder . $imageFile;
+                
+                if (file_exists($file_path) && !empty($imageFile)) {
+                    $badge = !empty($offer->tag) ? '<span class="m-offer-badge"><i class="fa-solid fa-lock"></i> ' . htmlspecialchars($offer->tag) . '</span>' : '';
+                    
+                    $dateRange = '';
+                    if (!empty($offer->start_date) && !empty($offer->offer_date)) {
+                        $dateRange = date("M j, Y", strtotime($offer->start_date)) . ' - ' . date("M j, Y", strtotime($offer->offer_date));
+                    } elseif (!empty($offer->offer_date)) {
+                        $dateRange = 'Valid until ' . date("M j, Y", strtotime($offer->offer_date));
+                    }
+                    
+                    $offerCards .= '
+                    <div class="col-md-6 col-lg-4">
+                        <div class="m-offer-v-card">
+                            <div class="m-offer-v-img-wrap">
+                                ' . $badge . '
+                                <img src="' . IMAGE_PATH . $imageFolder . $imageFile . '" alt="' . htmlspecialchars($offer->title) . '">
+                            </div>
+                            <div class="m-offer-v-content">
+                                <h3 class="m-offer-v-title">' . htmlspecialchars($offer->title) . '</h3>
+                                <div class="m-offer-location">
+                                    <i class="fa-regular fa-calendar-days"></i> ' . $dateRange . '
+                                </div>
+                                <p class="m-offer-v-desc">' . substr(strip_tags($offer->content), 0, 120) . '...</p>
+                                <a href="' . BASE_URL . 'offer/' . $offer->slug . '" class="btn m-btn-pill-dark">Details</a>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            }
+        }
+        
+        $offers_grid = '
+        <section class="m-offers-grid-section">
+            <div class="container container-custom">
+                <div class="row g-4">
+                    ' . $offerCards . '
+                </div>
+            </div>
+        </section>';
+    }
+}
+
 $jVars['module:homeoffers-list'] = $hmresoffr;
 $jVars['module:offers-details'] = $resinndetail;
+$jVars['module:offers-grid'] = $offers_grid;
 $jVars['module:offer_breadcrum'] = $offbredd;
 
 
 //hompage popup code
-$homepopup='';
+$homepopup = '';
 
 
-if(defined('HOME_PAGE')){
-    $homepopupdatas= offers::get_offer_by_popup();
+if (defined('HOME_PAGE')) {
+    $homepopupdatas = offers::get_offer_by_popup();
     // pr($homepopupdatas);
-if (!empty($homepopupdatas)) {
-    //modal img
-    $count = 1;
-    $active = '';
-    $homepopup = ' 
+    if (!empty($homepopupdatas)) {
+        //modal img
+        $count = 1;
+        $active = '';
+        $homepopup = ' 
      <div class="col-sm-10 center-block center-text">
         <div class="modal fade" id="modal-popup-image">
             <div class="modal-dialog">
@@ -239,33 +295,33 @@ if (!empty($homepopupdatas)) {
                         <div id="myCarousel" class="carousel slide">
                             <div class="carousel-inner">		
                             ';
-    foreach ($homepopupdatas as $popr) {
-        if (!empty($popr->list_image)) {
-            $q = $popr->list_image;
-            $file_path = SITE_ROOT . 'images/offers/listimage/' . $q;
-            if (file_exists($file_path)) {
-                $imglink = IMAGE_PATH . 'offers/listimage/' . $q;
-            } else {
-                $imglink = BASE_URL . 'template/cms/images/welcome.jpg';
-            }
-            $active = ($count == 1) ? 'active' : '';
-            $linkhref = ($popr->linktype == 1) ? $popr->linksrc : BASE_URL . $popr->linksrc;
-            $target = ($popr->linktype == 1) ? 'target="_blank"' : '';
-            $homepopup .= '  
+        foreach ($homepopupdatas as $popr) {
+            if (!empty($popr->list_image)) {
+                $q = $popr->list_image;
+                $file_path = SITE_ROOT . 'images/offers/listimage/' . $q;
+                if (file_exists($file_path)) {
+                    $imglink = IMAGE_PATH . 'offers/listimage/' . $q;
+                } else {
+                    $imglink = BASE_URL . 'template/cms/images/welcome.jpg';
+                }
+                $active = ($count == 1) ? 'active' : '';
+                $linkhref = ($popr->linktype == 1) ? $popr->linksrc : BASE_URL . $popr->linksrc;
+                $target = ($popr->linktype == 1) ? 'target="_blank"' : '';
+                $homepopup .= '  
                 <div class="carousel-item ' . $active . '">
                     <a href="' . $linkhref . '" ' . $target . '><img src="' . $imglink . '" alt="' . $popr->title . '"></a>
                 </div>
                 ';
                 // pr($imglink);
 
-            $count++;
+                $count++;
+            }
         }
-    }
-    $homepopup .= ' <!--end carousel-inner-->
+        $homepopup .= ' <!--end carousel-inner-->
                         </div>
     ';
-    if(sizeof($homepopupdatas) > 1) {
-        $homepopup .= '
+        if (sizeof($homepopupdatas) > 1) {
+            $homepopup .= '
             <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -275,8 +331,8 @@ if (!empty($homepopupdatas)) {
                 <span class="visually-hidden">Next</span>
             </button>
         ';
-    }
-    $homepopup .='
+        }
+        $homepopup .= '
                         
                         </div>
                         <!--end carousel-->
@@ -291,21 +347,21 @@ if (!empty($homepopupdatas)) {
     </div>
     <!--end col-->					
 ';
-}
+    }
 }
 
 $jVars['module:offer_homepopup'] = $homepopup;
 
 
 //mutli,dynamic,fixed,none mode for offer detail page 
-$resbpkg='';
+$resbpkg = '';
 
-if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
-	$slug = !empty($_REQUEST['slug'])?addslashes($_REQUEST['slug']):'';
-	$sRec = Offers::find_by_slug($slug);
+if (defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
+    $slug = !empty($_REQUEST['slug']) ? addslashes($_REQUEST['slug']) : '';
+    $sRec = Offers::find_by_slug($slug);
 
-	if(!empty($sRec)) {
-		$resbpkg.='
+    if (!empty($sRec)) {
+        $resbpkg .= '
 	 	<div class="breadcrumb-area overlay-dark-2 bg-2" style="background-image:url(' . IMAGE_PATH . 'offers/' . $sRec->image . '); background-repeat: no-repeat; ">
             <div class="container">
                 <div class="row">
@@ -336,9 +392,9 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
 					<form action="" method="post" id="frm-booking">
 					    <div class="row">
 							<div class="col-lg-7 col-md-7 col-xs-12">
-							    <input type="hidden" name="offer_type" value="'.$sRec->type.'">';
-                                if ($sRec->type == 1) {
-                                $resbpkg .= '
+							    <input type="hidden" name="offer_type" value="' . $sRec->type . '">';
+        if ($sRec->type == 1) {
+            $resbpkg .= '
 								<table class="table table-bordered">
 									<tr>
 										<th>Package</th>
@@ -362,10 +418,10 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
 											<select name="no_pax[]" class="form-control">
                                               <option value="">Select</option>
                                               ';
-                                            for ($i = 1; $i <= $sRec->adults; $i++) {
-                                                $resbpkg .= '<option value="' . $i . '">' . $i . '</option>';
-                                            }
-                                            $resbpkg .= '
+            for ($i = 1; $i <= $sRec->adults; $i++) {
+                $resbpkg .= '<option value="' . $i . '">' . $i . '</option>';
+            }
+            $resbpkg .= '
                                             </select>
 										</td>
 										<td class="text-center totalamt">0</td>
@@ -400,7 +456,7 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
             $sql = "SELECT * FROM tbl_offer_child WHERE offer_id=$sRec->id";
             $query = $db->query($sql);
             $num = $db->num_rows($query);
-            
+
             if ($num > 0) {
                 while ($row = $db->fetch_array($query)) {
                     $resbpkg .= '
@@ -425,7 +481,7 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
 								</table>
 								';
         }
-		if ($sRec->type == 2) {
+        if ($sRec->type == 2) {
             $resbpkg .= '
 								<table class="table">
 									<tr>
@@ -439,7 +495,7 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
             $sql = "SELECT * FROM tbl_offer_child WHERE offer_id=$sRec->id";
             $query = $db->query($sql);
             $num = $db->num_rows($query);
-            
+
             if ($num >= 0) {
                 while ($row = $db->fetch_array($query)) {
                     $resbpkg .= '
@@ -467,9 +523,9 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
 											
 											</tr>
 											';
-										}
-									}
-									$resbpkg .= '
+                }
+            }
+            $resbpkg .= '
 									<tr>
 									<td></td>
 									<td></td>
@@ -481,7 +537,7 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
 								</table>
 								';
         }
-		if ($sRec->type == 3) {
+        if ($sRec->type == 3) {
             $resbpkg .= '';
         }
 
@@ -543,7 +599,7 @@ if(defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
 				</div>
 			
 		</section>';
-	}
+    }
 }
 
 $jVars['module:bookpkg_detail'] = $resbpkg;

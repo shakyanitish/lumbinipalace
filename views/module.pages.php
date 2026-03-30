@@ -29,11 +29,6 @@ if (defined('HOME_PAGE')) {
             </div>
         </section>
 
-
-
-
-
-    
 ';
     }
 }

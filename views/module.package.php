@@ -564,7 +564,7 @@ if (!empty($overviewPkg)) {
 
                         $overview_items_html .= '
                     <div class="m-overview-item-new">
-                        <p>' . $itemText . $learnMoreLink . '</p>
+                        <p>' . $itemText . ' ' . $learnMoreLink . '</p>
                     </div>';
                     }
                 }
@@ -624,8 +624,38 @@ if (!empty($pkgExp)) {
 ';
 }
 $jVars['module:exp-banner'] = $exp_banner;
+
+//Accomodation Banner
+$room_banner = $siteRegulars = '';
+$siteRegulars = Config::find_by_id(1);
+$pkgroom = Package::find_by_sql("SELECT title, banner_image FROM tbl_package WHERE status=1 AND type=1 LIMIT 1");
+if (!empty($pkgroom)) {
+    $pkg = $pkgroom[0];
+    $imglink = ($siteRegulars) ? IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload : '';
+    if (!empty($pkg->banner_image) && $pkg->banner_image != "a:0:{}") {
+        $pkgRowList = unserialize($pkg->banner_image);
+        if (!empty($pkgRowList[0])) {
+            $file_path = SITE_ROOT . 'images/package/banner/' . $pkgRowList[0];
+            if (file_exists($file_path)) {
+                $imglink = IMAGE_PATH . 'package/banner/' . $pkgRowList[0];
+            }
+        }
+    }
+
+    $room_banner = '
+        <section class="marriott-style-banner">
+        <div class="ul-banner-slider swiper" style="width:100%;height:100%;">
+            <div class="ul-banner-slide marriott-slide-image" data-img="' . $imglink . '">
+            </div>
+        </div>
+    </section>
+';
+}
+$jVars['module:room-banner'] = $room_banner;
+
+
+
 //DINING
-// Experience Banner
 $dining_banner = $siteRegulars = '';
 $siteRegulars = Config::find_by_id(1);
 $pkgExp = Package::find_by_sql("SELECT title, banner_image FROM tbl_package WHERE status=1 AND type=0 LIMIT 1");
@@ -802,6 +832,81 @@ $local = '
 
 $jVars['module:local'] = $local;
 
+// MORE WAYS TO ENJOY YOUR STAY - Dynamic Experience Tabs
+$enjoy_stay_tabs = '';
+$enjoy_stay_content = '';
+$enjoy_stay_section = '';
+$roompkg = Package::find_by_sql("SELECT id FROM tbl_package WHERE status=1 AND type=2");
+if (!empty($roompkg)) {
+    $pkgids = array();
+    foreach ($roompkg as $rp) {
+        $pkgids[] = $rp->id;
+    }
+    $idstr = implode(',', $pkgids);
+    $sql = "SELECT * FROM tbl_package_sub WHERE status='1' AND type IN ($idstr) ORDER BY sortorder ASC LIMIT 6";
+    $pkgRec = Subpackage::find_by_sql($sql);
+
+    if (!empty($pkgRec)) {
+        $tab_counter = 0;
+        foreach ($pkgRec as $expRow) {
+            $tab_id = 'enjoy-exp-' . $expRow->id;
+            $active_class = ($tab_counter === 0) ? 'active' : '';
+            
+            // Tab button
+            $enjoy_stay_tabs .= '<button class="tab-nav ' . $active_class . '" data-tab="' . $tab_id . '">' . htmlspecialchars($expRow->title) . '</button>';
+            
+            // Tab content
+            $imgpath = IMAGE_PATH . 'static/default-art-pac-sub.jpg';
+            if (!empty($expRow->image2)) {
+                $imgpath = IMAGE_PATH . 'subpackage/image/' . $expRow->image2;
+            } elseif ($expRow->image != "a:0:{}") {
+                $imageList = unserialize($expRow->image);
+                if (!empty($imageList[0])) {
+                    $imgpath = IMAGE_PATH . 'subpackage/' . $imageList[0];
+                }
+            }
+            
+            $content_text = !empty($expRow->sub_title) ? $expRow->sub_title : $expRow->detail;
+            $content_text = substr($content_text, 0, 150) . (strlen($content_text) > 150 ? '...' : '');
+            
+            $enjoy_stay_content .= '
+                    <div class="ul-tab ' . ($tab_counter === 0 ? 'active' : '') . '" id="' . $tab_id . '">
+                        <div class="m-enjoy-card">
+                            <div class="m-enjoy-card-img"><img src="' . $imgpath . '" alt="' . htmlspecialchars($expRow->title) . '"></div>
+                            <div class="m-enjoy-card-body">
+                                <p class="m-card-label">Restro &amp; Bar</p>
+                                <h3 class="m-card-title">' . htmlspecialchars($expRow->title) . '</h3>
+                                <p class="m-card-text">Discover the freshest flavors at our organic restaurant, where
+                                    farm-to-table ingredients meet culinary excellence.</p>
+                                <a href="' . BASE_URL . 'experiences/' . $expRow->slug . '" class="m-card-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>';
+            
+            $tab_counter++;
+        }
+        
+        $enjoy_stay_section = '
+
+        <section class="m-enjoy-stay wow animate__fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <div class="m-enjoy-stay-inner">
+                <div class="m-enjoy-stay-header">
+                    <h2 class="m-enjoy-stay-title">More Ways to Enjoy Your Stay</h2>
+                </div>
+                <div class="m-enjoy-tabs">
+                ' . $enjoy_stay_tabs . '
+                </div>
+                <div class="m-enjoy-content">
+                    ' . $enjoy_stay_content . '
+                </div>
+            </div>
+        </section>
+';
+    }
+}
+
+$jVars['module:enjoy-stay'] = $enjoy_stay_section;
+
 $experience_list = $experience = '';
 $total_experiences = 0;
 $included_experiences = 0;
@@ -899,6 +1004,7 @@ $jVars['module:all-exp-list'] = $experience;
 
 /* * Rooms Page - All Rooms List */
 $all_rooms_list = '';
+$accessible_rooms_list = '';
 $roompkg = Package::find_by_sql("SELECT id FROM tbl_package WHERE status=1 AND type=1");
 if (!empty($roompkg)) {
     $pkgids = array();
@@ -922,11 +1028,11 @@ if (!empty($roompkg)) {
                 }
             }
 
-            $occupancy = !empty($subpkgRow->occupancy) ? $subpkgRow->occupancy : '';
-            $size = !empty($subpkgRow->size) ? $subpkgRow->size : '';
-            $short_desc = $occupancy . ' | ' . $size;
+            $capacity = !empty($subpkgRow->capacity) ? $subpkgRow->capacity : '';
+            $room_size = !empty($subpkgRow->room_size) ? $subpkgRow->room_size : '';
+            $short_desc = $capacity . ' | ' . $room_size;
 
-            $all_rooms_list .= '
+            $room_card_html = '
                                 <div class="col-md-6">
                                     <div class="m-room-card-new">
                                         <div class="m-room-image-wrap">
@@ -944,10 +1050,16 @@ if (!empty($roompkg)) {
                                         </div>
                                     </div>
                                 </div>';
+
+            $all_rooms_list .= $room_card_html;
+            if ($subpkgRow->accessible_rooms == 1) {
+                $accessible_rooms_list .= $room_card_html;
+            }
         }
     }
 }
 $jVars['module:all-rooms-list'] = $all_rooms_list;
+$jVars['module:accessible-rooms-list'] = $accessible_rooms_list;
 
 
 /* * Sub package detail */
@@ -955,7 +1067,7 @@ $resubpkgDetail = '';
 $subimg = '';
 $imageList = '';
 
-if ((defined('SUBPACKAGE_PAGE') || defined('EXPERIENCE_PAGE')) and isset($_REQUEST['slug'])) {
+if ((defined('SUBPACKAGE_PAGE') || defined('EXPERIENCE_PAGE')|| defined('ROOM_PAGE')) and isset($_REQUEST['slug'])) {
     $slug = !empty($_REQUEST['slug']) ? addslashes($_REQUEST['slug']) : '';
     $subpkgRec = Subpackage::find_by_slug($slug);
 

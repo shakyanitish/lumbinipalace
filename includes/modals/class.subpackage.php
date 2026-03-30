@@ -9,7 +9,7 @@ class Subpackage extends DatabaseObject
         'extra_bed', 'currency', 'discount', 'people_qnty', 'onep_price', 'twop_price', 'threep_price', 'oneb_price', 'twob_price', 'threeb_price', 'short_title',
         'time', 'location', 'serve', 'meta_title', 'meta_keywords', 'meta_description', 'status', 'sortorder', 'added_date', 'modified_date', 'type', 'theatre_style',
         'class_room_style', 'shape', 'round_table', 'clusture', 'cocktail', 'seats', 'below_content', 'seminar', 'meeting', 'events', 'conference', 'catering', 'celebration',
-        'organic_food', 'occupancy', 'view', 'size', 'service', 'three60_image','google_embeded','homepage', 'room_size', 'link_a', 'link_b', 'explorelinksrc','explorelinktype','content2','included');
+        'organic_food', 'occupancy', 'view', 'size', 'service', 'three60_image','google_embeded','homepage', 'room_size', 'link_a', 'link_b', 'explorelinksrc','explorelinktype','content2','included','dress','phone','capacity','accessible_rooms');
 
     public $id;
     public $slug;
@@ -37,6 +37,9 @@ class Subpackage extends DatabaseObject
     public $twob_price;
     public $threeb_price;
     public $short_title;
+    public $dress;
+    public $capacity;   
+    public $phone;  
     public $time;
     public $location;
     public $serve;
@@ -86,7 +89,7 @@ class Subpackage extends DatabaseObject
     public $explorelinksrc;
 	public $explorelinktype;
     public $included;
-
+    public $accessible_rooms;
 
     //Get Facility Ttle
     public static function getFacility()

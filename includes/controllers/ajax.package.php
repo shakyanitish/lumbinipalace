@@ -335,6 +335,7 @@ switch ($action) {
         $record->type             = $_REQUEST['type'];
         $record->slug             = $_REQUEST['slug'];
         $record->title             = $_REQUEST['title'];
+
         $record->detail         = !empty($_REQUEST['detail']) ? $_REQUEST['detail'] : '';
         $record->image2            = !empty($_REQUEST['imageArrayname2']) ? $_REQUEST['imageArrayname2'] : '';
         $record->image4            = !empty($_REQUEST['imageArraynameCompanyDoc']) ? $_REQUEST['imageArraynameCompanyDoc'] : '';
@@ -345,6 +346,7 @@ switch ($action) {
         $record->content         = $_REQUEST['content'];
         $record->content2        = !empty($_REQUEST['content2']) ? $_REQUEST['content2'] : '';
         $record->included        = !empty($_REQUEST['included']) ? $_REQUEST['included'] : 1;
+        $record->accessible_rooms        = !empty($_REQUEST['accessible_rooms']) ? $_REQUEST['accessible_rooms'] : 1;
         $record->status            = $_REQUEST['status'];
         $record->number_room    = !empty($_REQUEST['number_room']) ? $_REQUEST['number_room'] : '';
         $record->currency         = !empty($_REQUEST['currency']) ? $_REQUEST['currency'] : '';
@@ -365,7 +367,14 @@ switch ($action) {
         $record->cocktail     = !empty($_REQUEST['cocktail']) ? $_REQUEST['cocktail'] : '';
         $record->seats     = !empty($_REQUEST['seats']) ? $_REQUEST['seats'] : '';
 
-        // $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
+        $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
+        $record->sub_title    = !empty($_REQUEST['sub_title']) ? $_REQUEST['sub_title'] : '';
+
+        $record->dress             = !empty($_REQUEST['dress']) ? $_REQUEST['dress'] : '';
+        $record->capacity          = !empty($_REQUEST['capacity']) ? $_REQUEST['capacity'] : '';
+        $record->room_size         = !empty($_REQUEST['room_size']) ? $_REQUEST['room_size'] : '';
+
+        $record->phone             = !empty($_REQUEST['phone']) ? $_REQUEST['phone'] : '';
         $record->time     = !empty($_REQUEST['time']) ? $_REQUEST['time'] : '';
         $record->location     = !empty($_REQUEST['location']) ? $_REQUEST['location'] : '';
         $record->serve     = !empty($_REQUEST['serve']) ? $_REQUEST['serve'] : '';
@@ -379,6 +388,7 @@ switch ($action) {
         $record->modified_date     = registered();
 
         $record->below_content         = !empty($_REQUEST['below_content']) ? $_REQUEST['below_content'] : '';
+
 
 
         $record->seminar     = !empty($_REQUEST['seminar']) ? $_REQUEST['seminar'] : '';
@@ -446,6 +456,11 @@ switch ($action) {
         $record->type             = $_REQUEST['type'];
         $record->slug             = $_REQUEST['slug'];
         $record->title             = $_REQUEST['title'];
+        $record->dress             = !empty($_REQUEST['dress']) ? $_REQUEST['dress'] : '';
+        $record->capacity          = !empty($_REQUEST['capacity']) ? $_REQUEST['capacity'] : '';
+        $record->room_size         = !empty($_REQUEST['room_size']) ? $_REQUEST['room_size'] : '';
+        $record->phone             = !empty($_REQUEST['phone']) ? $_REQUEST['phone'] : '';
+
         $record->detail         = !empty($_REQUEST['detail']) ? $_REQUEST['detail'] : '';
         $record->image2            = !empty($_REQUEST['imageArrayname2']) ? $_REQUEST['imageArrayname2'] : '';
         $record->image4            = !empty($_REQUEST['imageArraynameCompanyDoc']) ? $_REQUEST['imageArraynameCompanyDoc'] : '';
@@ -456,6 +471,7 @@ switch ($action) {
         $record->content         = $_REQUEST['content'];
         $record->content2         = !empty($_REQUEST['content2']) ? $_REQUEST['content2'] : '';
         $record->included         = !empty($_REQUEST['included']) ? $_REQUEST['included'] : 1;
+        $record->accessible_rooms         = !empty($_REQUEST['accessible_rooms']) ? $_REQUEST['accessible_rooms'] : 1;
         $record->status            = $_REQUEST['status'];
         $record->number_room    = !empty($_REQUEST['number_room']) ? $_REQUEST['number_room'] : '';
         $record->currency         = !empty($_REQUEST['currency']) ? $_REQUEST['currency'] : '';
@@ -476,7 +492,8 @@ switch ($action) {
         $record->twob_price     = !empty($_REQUEST['twob_price']) ? $_REQUEST['twob_price'] : '';
         $record->threeb_price     = !empty($_REQUEST['threeb_price']) ? $_REQUEST['threeb_price'] : '';
 
-        // $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
+        $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
+        $record->sub_title    = !empty($_REQUEST['sub_title']) ? $_REQUEST['sub_title'] : '';
         $record->time     = !empty($_REQUEST['time']) ? $_REQUEST['time'] : '';
         $record->location     = !empty($_REQUEST['location']) ? $_REQUEST['location'] : '';
         $record->serve     = !empty($_REQUEST['serve']) ? $_REQUEST['serve'] : '';
@@ -588,20 +605,28 @@ switch ($action) {
         $allid = explode("|", $id);
         $return = "0";
         $db->begin();
+        $affected_type_ids = array();
         for ($i = 1; $i < count($allid); $i++) {
             $record = Subpackage::find_by_id($allid[$i]);
-            $record1 = Itinerary::find_by_id($allid[$i]);
+            if ($record) {
+                $affected_type_ids[] = $record->type;
+            }
             $res  = $db->query("DELETE FROM tbl_package_sub WHERE id='" . $allid[$i] . "'");
             $db->query("DELETE FROM tbl_mlink WHERE act_id='" . $allid[$i] . "' AND mod_class='Subpackage'");
             $db->query("DELETE FROM tbl_subpackage_images WHERE subpackageid='" . $allid[$i] . "'");
             $db->query("DELETE FROM tbl_itinerary WHERE package_id='" . $allid[$i] . "'");
 
-            reOrderSub("tbl_package_sub", "sortorder", "type", $record->type);
-            reOrderSub("tbl_itinerary", "sortorder", "package_id", $record1->package_id);
-
-            reOrder('tbl_subpackage_images', "sortorder");
             $return = 1;
         }
+
+        if (!empty($affected_type_ids)) {
+            foreach (array_unique($affected_type_ids) as $type_id) {
+                reOrderSub("tbl_package_sub", "sortorder", "type", $type_id);
+            }
+        }
+        reOrder('tbl_subpackage_images', "sortorder");
+        reOrder('tbl_itinerary', "sortorder");
+
         if ($res) $db->commit();
         else $db->rollback();
 
@@ -885,13 +910,7 @@ switch ($action) {
         echo json_encode(array("action" => "success"));
         break;
 
-    case "subibulkToggleStatus":
-        // ... existing bulk logic ...
-        $id = $_REQUEST['idArray'];
-        $allid = explode("|", $id);
-        // ... (rest of bulk logic) ...
-        echo json_encode(array("action" => "success"));
-        break;
+
 
     // --- NEW CASE FOR SINGLE TOGGLE ---
     case "subisingleToggleStatus":

@@ -213,7 +213,7 @@ endif;
                                value="<?php echo !empty($blogInfo->title) ? $blogInfo->title : ""; ?>">
                     </div>
                 </div>
-                <div class="form-row hide">
+                <div class="form-row">
                     <div class="form-label col-md-2">
                         <label for="">
                             Reading Time :

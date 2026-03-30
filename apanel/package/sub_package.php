@@ -138,6 +138,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
 
 <?php elseif (isset($_GET['mode']) && $_GET['mode'] == "addEditsubpackage"):
     $pid = addslashes($_REQUEST['id']);
+    $pkg = Package::find_by_id($pid);
     if (isset($_GET['subid']) and !empty($_GET['subid'])):
         $subpackageId = addslashes($_REQUEST['subid']);
         $subpackageInfo = Subpackage::find_by_id($subpackageId);
@@ -147,6 +148,8 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
         $nothomepage = ($subpackageInfo->homepage == 0) ? "checked" : " ";
         $included = ($subpackageInfo->included == 1) ? "checked" : " ";
         $unincluded = ($subpackageInfo->included == 0) ? "checked" : " ";
+        $accessible_rooms = ($subpackageInfo->accessible_rooms == 1) ? "checked" : " ";
+        $unaccessible_rooms = ($subpackageInfo->accessible_rooms == 0) ? "checked" : " ";
     endif;
 ?>
     <h3>
@@ -177,18 +180,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
-                <div class="form-row hide">
-                    <div class="form-label col-md-2">
-                        <label for="">
-                            Sub Title :
-                        </label>
-                    </div>
-                    <div class="form-input col-md-20">
-                        <input placeholder="Package Sub Title" class="col-md-6 validate[length[0,50]]" type="text"
-                            name="sub_title" id="sub_title"
-                            value="<?php echo !empty($subpackageInfo->sub_title) ? $subpackageInfo->sub_title : ""; ?>">
-                    </div>
-                </div>
+
 
 
                 <div class="form-row">
@@ -203,15 +195,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <span id="error"></span>
                     </div>
                 </div>
-                <div class="form-row hide">
-                    <div class="form-label col-md-2">
-                        <label for="">Short Title :</label>
-                    </div>
-                    <div class="form-input col-md-6">
-                        <input placeholder="Sub Title" class="col-md-12" type="text" name="short_title" id="short_title"
-                            value="<?php echo !empty($subpackageInfo->short_title) ? $subpackageInfo->short_title : ''; ?>">
-                    </div>
-                </div>
+
 
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
@@ -259,6 +243,69 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                     <?php endif; ?>
                 </div>
+                <?php if ($pkg->type == 1): ?>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Capacity :</label>
+                    </div>
+                    <div class="form-input col-md-3">
+                        <input placeholder="Capacity" class="col-md-12" type="text" name="capacity" id="capacity"
+                            value="<?php echo !empty($subpackageInfo->capacity) ? $subpackageInfo->capacity : ''; ?>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Room Size:</label>
+                    </div>
+                    <div class="form-input col-md-3">
+                        <input placeholder="Room Size(sq.ft.)" class="col-md-12" type="text" name="room_size" id="room_size"
+                            value="<?php echo !empty($subpackageInfo->room_size) ? $subpackageInfo->room_size : ''; ?>">
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <?php if ($pkg->type == 0): ?>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Sub Title :</label>
+                    </div>
+                    <div class="form-input col-md-3">
+                        <input placeholder="Sub Title" class="col-md-12" type="text" name="sub_title" id="sub_title"
+                            value="<?php echo !empty($subpackageInfo->sub_title) ? $subpackageInfo->sub_title : ''; ?>">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Every Day :</label>
+                    </div>
+                    <div class="form-input col-md-3">
+                        <input placeholder="Day" class="col-md-12" type="text" name="short_title" id="short_title"
+                            value="<?php echo !empty($subpackageInfo->short_title) ? $subpackageInfo->short_title : ''; ?>">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Phone :</label>
+                    </div>
+                    <div class="form-input col-md-3">
+                        <input placeholder="Phone" class="col-md-12" type="text" name="phone" id="phone"
+                            value="<?php echo !empty($subpackageInfo->phone) ? $subpackageInfo->phone : ''; ?>">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">Dress Code :</label>
+                    </div>
+                    <div class="form-input col-md-3">
+                        <input placeholder="Dress Code" class="col-md-12" type="text" name="dress" id="dress"
+                            value="<?php echo !empty($subpackageInfo->dress) ? $subpackageInfo->dress : ''; ?>">
+                    </div>
+                </div>
+                <?php endif; ?>
 
 
                 <div class="form-row hide">
@@ -348,7 +395,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     <div id="preview_Video"></div>
                 </div>
 
-                <?php $pkg = Package::find_by_id($pid); ?>
+
                 <!-- <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
@@ -693,8 +740,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
-                <?php $parentInfo = Package::find_by_id($pid);
-                if ($parentInfo->type == 2): ?>
+                <?php if ($pkg->type == 2): ?>
                     <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">
@@ -707,6 +753,24 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                             <label for="">Yes</label>
                             <input type="radio" class="custom-radio" name="included" id="check0"
                                 value="0" <?php echo !empty($unincluded) ? $unincluded : ""; ?>>
+                            <label for="">No</label>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($pkg->type == 1): ?>
+                    <div class="form-row">
+                        <div class="form-label col-md-2">
+                            <label for="">
+                                Accessible Rooms:
+                            </label>
+                        </div>
+                        <div class="form-checkbox-radio col-md-9">
+                            <input type="radio" class="custom-radio" name="accessible_rooms" id="check1"
+                                value="1" <?php echo !empty($accessible_rooms) ? $accessible_rooms : ""; ?>>
+                            <label for="">Yes</label>
+                            <input type="radio" class="custom-radio" name="accessible_rooms" id="check0"
+                                value="0" <?php echo !empty($unaccessible_rooms) ? $unaccessible_rooms : "checked"; ?>>
                             <label for="">No</label>
                         </div>
                     </div>
