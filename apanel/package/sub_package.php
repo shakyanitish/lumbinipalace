@@ -177,7 +177,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">
                             Sub Title :
@@ -216,7 +216,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
                         <label for="">
-                        Image :
+                            Image :
                         </label>
                     </div>
                     <div class="form-input col-md-10 uploader">
@@ -400,7 +400,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                 </div> -->
                 <?php if ($pkg->type == 111) { ?>
 
-                <?php /* ?>
+                    <?php /* ?>
                     <div class="form-row">
                         <div class="form-label col-md-2">
                             <label for="">
@@ -431,9 +431,9 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                         <div class="form-input col-md-6">
                             <input placeholder="Charge" class="col-md-3 validate[length[0,3]]" type="text"
-                                   name="threep_price" id="room_price3"
-                                   value="<?php //echo !empty($subpackageInfo->threep_price) ? $subpackageInfo->threep_price : ''; 
-                                            ?>">
+                                name="threep_price" id="room_price3"
+                                value="<?php //echo !empty($subpackageInfo->threep_price) ? $subpackageInfo->threep_price : ''; 
+                                        ?>">
                         </div>
                     </div>
 
@@ -590,16 +590,6 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                     </div>
 
-                    <div class="form-row hide">
-                        <div class="form-label col-md-2">
-                            <label for="">Bed:</label>
-                        </div>
-                        <div class="form-input col-md-6">
-                            <input placeholder="King/Deluxe/Twin" class="col-md-3 validate[length[0,3]]" type="text"
-                                name="bed" id="bed"
-                                value="<?php echo !empty($subpackageInfo->bed) ? $subpackageInfo->bed : ''; ?>">
-                        </div>
-                    </div>
 
                     <div class="form-row">
                         <div class="form-label col-md-2">
@@ -697,7 +687,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <textarea name="content2" id="content2"
                             class="large-textarea"><?php echo !empty($subpackageInfo->content2) ? $subpackageInfo->content2 : ""; ?></textarea>
                         <a class="btn medium bg-orange mrg5T" title="Read More" id="readMore2"
-                            href="javascript:void(0);">
+                            href="javascript:void(0);"> 
                             <span class="button-content">Read More</span>
                         </a>
                     </div>
@@ -721,7 +711,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                     </div>
                 <?php endif; ?>
-                
+
 
 
                 <div class="form-row">

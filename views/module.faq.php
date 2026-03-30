@@ -215,81 +215,6 @@ $jVars['module:faq:homepage1'] = $homeFaqSection2;
 
 
 
-
-
-
-
-
-
-
-
-
-$faq_details = '';
-if (defined('PACKAGE_PAGE')) {
-
-    $faqs = Faq::find_by_type(1);   
-
-    if (!empty($faqs)) {
-
-        $faq_details = '
-<section class="ul-why-join ul-section-spacing pt-0">
-    <div class="ul-why-join-wrapper ul-section-spacing">
-        <div class="ul-container">
-            <div class="row row-cols-md-2 row-cols-1 gy-4 align-items-center">
-
-                <div class="col">
-                    <div class="ul-why-join-img">
-                        <img src="template/web/assets/img/why-join.jpg" alt="Image">
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="ul-why-join-txt">
-                        <span class="ul-section-sub-title">Join us</span>
-                        <h2 class="ul-section-title">Why We Need You Become a Volunteer</h2>
-                        <p class="ul-section-descr">
-                            We help companies develop powerful corporate social responsibility,
-                            grantmaking, and employee engagement strategies.
-                        </p>
-
-                        <div class="ul-accordion">
-        ';
-
-        foreach ($faqs as $i => $faq) {
-            $open = ($i === 0) ? 'open' : '';
-
-            $faq_details .= '
-            <div class="ul-single-accordion-item ' . $open . '">
-                <div class="ul-single-accordion-item__header">
-                    <div class="left">
-                        <h3 class="ul-single-accordion-item__title">' . htmlspecialchars($faq->title) . '</h3>
-                    </div>
-                    <span class="icon"><i class="flaticon-next"></i></span>
-                </div>
-                <div class="ul-single-accordion-item__body">
-                    <p>' . $faq->content . '</p>
-                </div>
-            </div>';
-        }
-
-        $faq_details .= '
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</section>';
-    }
-    else {
-        $faq_details = '<h3 class="text-center p-4">No Volunteer FAQ Found</h3>';
-    }
-}
-
-$jVars['module:faq:volunteer'] = $faq_details;
-
-
 /**
  * Homepage Testimonials - Dynamic from Database
  */
@@ -368,4 +293,115 @@ $jVars['module:testimonials:homepage'] = $testimonials_section;
 /**
  * Location/Transportation Accordion - Using Category 3
  */
+
+
+$faq_details = '';
+if (defined('EXPERIENCE_PAGE')) {
+
+    $faqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 10 ORDER BY sortorder DESC");
+
+    if (!empty($faqs)) {
+        $faqItems = '';
+        foreach ($faqs as $i => $faq) {
+            $collapseId = 'experienceFaq' . ($i + 1);
+            $expandedAttr = '';
+            $btnClass = ' collapsed';
+            $borderClass = ($i === count($faqs) - 1) ? 'border-bottom' : 'border-bottom-0';
+            
+            $faqItems .= '
+        <div class="accordion-item border-top ' . $borderClass . '">
+            <h2 class="accordion-header">
+                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
+                    . $faq->title . '</button>
+            </h2>
+            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
+            </div>
+        </div>';
+        }
+
+        $faq_details = '
+        <section class="m-property-details py-5 bg-white">
+            <div class="container">
+                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
+                <div class="accordion accordion-flush" id="faqAccordion">
+                ' . $faqItems . '
+                </div>
+            </div>
+        </section>';
+    }
+    else {
+        $faq_details = '        
+        <section class="m-property-details py-5 bg-white">
+            <div class="container">
+                <h3 class="text-center p-4">No Experience FAQ Found</h3>
+            </div>
+        </section>';
+    }
+}
+
+$jVars['module:faq:experience'] = $faq_details;
+
+
+//Events faq
+$faq_details_event = '';
+if (defined('EVENT_PAGE')) {
+
+    $faqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 9 ORDER BY sortorder DESC");
+
+    if (!empty($faqs)) {
+        $faqItems = '';
+        foreach ($faqs as $i => $faq) {
+            $collapseId = 'eventFaq' . ($i + 1);
+            $expandedAttr = '';
+            $btnClass = ' collapsed';
+            $borderClass = ($i === count($faqs) - 1) ? 'border-bottom' : 'border-bottom-0';
+            
+            $faqItems .= '
+        <div class="accordion-item border-top ' . $borderClass . '">
+            <h2 class="accordion-header">
+                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
+                    . $faq->title . '</button>
+            </h2>
+            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
+            </div>
+        </div>';
+        }
+
+        $faq_details_event = '
+
+        <section class="m-property-details py-5 bg-white">
+            <div class="container">
+                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
+                <div class="accordion accordion-flush" id="faqAccordion">
+                ' . $faqItems . '
+                </div>
+            </div>
+        </section>';
+    }
+    else {
+        $faq_details_event = '
+        
+        <section class="m-property-details py-5 bg-white">
+            <div class="container">
+                <h3 class="text-center p-4">No Event FAQ Found</h3>
+            </div>
+        </section>
+        
+        
+        
+        
+        
+        
+        
+        
+        ';
+    }
+}
+
+$jVars['module:faq:event'] = $faq_details_event;
+
 

@@ -3,7 +3,7 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 //include ("jpcache/jpcache.php");
 
-define('FACILITY_PAGE', 1); // Track experiences/facilities page.
+define('EXPERIENCE_PAGE', 1); // Track experiences/facilities page.
 define('JCMSTYPE', 0); // Track Current site language.
 
 require_once("includes/initialize.php");

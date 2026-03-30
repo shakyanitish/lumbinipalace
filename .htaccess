@@ -19,22 +19,12 @@ ErrorDocument 404 /404.php
 RewriteRule ^book/([a-zA-Z0-9-]+)/?$ book.php?slug=$1 [L]
 
 #For inner pages.
-RewriteRule ^/?$ inner.php?slug=about-us [L]
-
-
-
+RewriteRule ^about-us/?$ inner.php?slug=about-us [L]
 
 
 #For service pages.
-
-
 #RewriteRule ^services/([a-zA-Z0-9-]+)$ service_list.php?slug=$1 [L]
 
-
-#For hospitality pages.
-
-
-#RewriteRule ^page/([a-zA-Z0-9-=_.]+)$ inner.php?slug=$1 [L]
 
 #For gallery pages.
 RewriteRule ^gallery/?$ gallery.php [L]

@@ -206,45 +206,5 @@ if (!empty($room_package)) {
 $jVars['module:room-package-faq'] = $room_package;
 
 
-$experience_package = '';
-$experience_package = Package::get_itinerary(28);
 
-if (!empty($experience_package)) {
-    $faqItems = '';
-    foreach ($experience_package as $i => $experience) {
-        $collapseId = 'experienceFaq' . ($i + 1);
-        $expandedAttr = '';
-        $btnClass = ' collapsed';
-        $borderClass = ($i === count($experience_package) - 1) ? 'border-bottom' : 'border-bottom-0';
-        
-        $faqItems .= '
-         
-
-
-
-        <div class="accordion-item border-top ' . $borderClass . '">
-            <h2 class="accordion-header">
-                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
-                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-                    . $experience->title . '</button>
-            </h2>
-            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#diningFaqAccordion">
-                <div class="accordion-body text-muted pt-0 pb-4">' . $experience->content . '</div>
-            </div>
-        </div>';
-    }
-
-    $experience_package = '
-
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
-                ' . $faqItems . '
-                </div>
-            </div>
-        </section>';
-}
-
-$jVars['module:experience-package-faq'] = $experience_package;
 ?>

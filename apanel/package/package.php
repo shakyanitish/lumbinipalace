@@ -525,7 +525,7 @@
                     <div class="form-row">
                         <div class="form-label col-md-12">
                             <label for="">
-                                <span id="contentLabel">Content :</span>
+                                <span id="contentLabel"><?php echo (isset($packageInfo->type) && $packageInfo->type == 3) ? 'Meeting and Hall:' : 'Content :'; ?></span>
                             </label>
                             <textarea name="content" id="content"
                                 class="large-textarea validate[required]"><?php echo !empty($packageInfo->content) ? $packageInfo->content : ""; ?></textarea>

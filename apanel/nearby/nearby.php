@@ -339,6 +339,7 @@ $metadata = $metasql->fetch_object();
                             class="col-md-3 validate[required,length[0,200]]" type="text"
                             name="distance" id="distance"
                             value="<?php echo !empty($articlesInfo->distance) ? $articlesInfo->distance : ""; ?>">
+                            <a href="https://fontawesome.com/" target="_blank" style="margin-left: 10px; color: #0065B3; text-decoration: none; font-weight: bold;">View Icon</a>
                     </div>
                 </div>
                 <div class="form-row">

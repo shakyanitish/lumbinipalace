@@ -38,12 +38,7 @@
     <jcms:module:header/>
 
     <!-- BANNER SECTION -->
-    <section class="marriott-style-banner">
-        <div class="ul-banner-slider swiper ul-hero-swiper-fixed">
-            <div class="ul-banner-slide marriott-slide-image" data-img="templatre/web/assets/img/hall-details-img-big-1.jpg">
-            </div>
-        </div>
-    </section>
+    <jcms:module:event-banner/>
     <main class="main-body">
 
         <!-- EVENTS HERO SECTION -->
@@ -67,22 +62,22 @@
                 <div class="row text-center g-4 justify-content-center">
                     <div class="col-6 col-md-3">
                         <div class="m-events-stat-divider"></div>
-                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num">7</h2>
+                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num"><jcms:module:eventroom/></h2>
                         <p class="font-secondary text-dark fw-bold mb-0 m-events-stat-label">Event Rooms</p>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="m-events-stat-divider"></div>
-                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num">954 SQ MT</h2>
+                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num"><jcms:module:eventspace/></h2>
                         <p class="font-secondary text-dark fw-bold mb-0 m-events-stat-label">Total Event Space</p>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="m-events-stat-divider"></div>
-                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num">600</h2>
+                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num"><jcms:module:eventcapacity/></h2>
                         <p class="font-secondary text-dark fw-bold mb-0 m-events-stat-label">Capacity Largest Space</p>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="m-events-stat-divider"></div>
-                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num">5</h2>
+                        <h2 class="font-primary fw-bold mb-3 text-dark m-events-stat-num"><jcms:module:breakoutrooms/></h2>
                         <p class="font-secondary text-dark fw-bold mb-0 m-events-stat-label">Breakout Rooms</p>
                     </div>
                 </div>
@@ -101,32 +96,14 @@
 
         <!-- MEETING AND EVENTS OVERVIEW -->
         <section class="m-meeting-overview bg-white pb-5">
-            <!-- Large Image (Full Width) -->
-            <div class="container-fluid px-0 pb-4">
-                <div class="m-meeting-hero-img accordion-highlights__image dynamic-meetings__image">
-                    <picture>
-                        <source media="(min-width: 1920px)" srcset="template/web/assets/img/hall-details-img-big-1.jpg">
-                        <source media="(min-width: 1200px) and (max-width: 1919px)"
-                            srcset="template/web/assets/img/hall-details-img-big-1.jpg">
-                        <source media="(min-width: 768px) and (max-width: 1199px)"
-                            srcset="template/web/assets/img/hall-details-img-big-1.jpg">
-                        <source media="(min-width: 320px) and (max-width: 767px)"
-                            srcset="template/web/assets/img/hall-details-img-big-1.jpg">
-                        <img src="template/web/assets/img/hall-details-img-big-1.jpg"
-                            class="img-fluid w-100 object-fit-cover m-meeting-hero-img-style"
-                            alt="Trishuli Meeting Room">
-                    </picture>
-                </div>
-            </div>
-
             <div class="container">
                 <!-- Meeting Info Text -->
                 <div class="text-center pb-2 mx-auto m-meeting-info-wrap">
-                    <h2 class="font-primary fw-bold mt-2 m-meeting-info-title">Meeting and Events</h2>
-                    <p class="font-secondary text-dark m-meeting-info-desc">Enjoy 8,105 square feet of contemporary
-                        event space and banquet halls in Kathmandu</p>
+                    <jcms:module:event-content1/>
                 </div>
-
+                <div class="text-center pb-4">
+                    <button class="btn m-btn-book-table">Learn More</button>
+                </div>
                 <!-- 3 Columns with Red Borders -->
                 <div class="row gx-4 gx-lg-5 gy-4 align-items-stretch pb-3">
                     <div class="col-md-4">
@@ -156,32 +133,14 @@
             </div>
         </section>
         <section class="m-meeting-overview bg-white pb-5">
-            <!-- Large Image (Full Width) -->   
-            <div class="container-fluid px-0 pb-4">
-                <div class="m-meeting-hero-img accordion-highlights__image dynamic-meetings__image">
-                    <picture>
-                        <source media="(min-width: 1920px)" srcset="template/web/assets/img/hall-details-img-big-1.jpg">
-                        <source media="(min-width: 1200px) and (max-width: 1919px)"
-                            srcset="template/web/assets/img/hall-details-img-big-1.jpg">
-                        <source media="(min-width: 768px) and (max-width: 1199px)"
-                            srcset="template/web/assets/img/hall-details-img-big-1.jpg">
-                        <source media="(min-width: 320px) and (max-width: 767px)"
-                            srcset="./template/web/assets/img/hall-details-img-big-1.jpg">
-                        <img src="./template/web/assets/img/hall-details-img-big-1.jpg"
-                            class="img-fluid w-100 object-fit-cover m-meeting-hero-img-style"
-                            alt="Trishuli Meeting Room">
-                    </picture>
-                </div>
-            </div>
-
             <div class="container">
                 <!-- Meeting Info Text -->
                 <div class="text-center pb-2 mx-auto m-meeting-info-wrap">
-                    <h2 class="font-primary fw-bold mt-2 m-meeting-info-title">Meeting and Events</h2>
-                    <p class="font-secondary text-dark m-meeting-info-desc">Enjoy 8,105 square feet of contemporary
-                        event space and banquet halls in Kathmandu</p>
+                    <jcms:module:event-content/>
                 </div>
-
+                <div class="text-center pb-4">
+                    <button class="btn m-btn-book-table">Learn More</button>
+                </div>
                 <!-- 3 Columns with Red Borders -->
                 <div class="row gx-4 gx-lg-5 gy-4 align-items-stretch pb-3">
                     <div class="col-md-4">
@@ -224,445 +183,13 @@
                             <div class="accordion" id="eventsAccordion">
 
                                 <!-- Capacity Chart Accordion -->
-                                <div class="accordion-item border-0 bg-transparent border-top rounded-0 mb-0">
-                                    <h2 class="accordion-header" id="headingCapacity">
-                                        <button class="accordion-button collapsed bg-transparent shadow-none px-0 py-4"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseCapacity"
-                                            aria-expanded="false" aria-controls="collapseCapacity">
-                                            Capacity Chart
-                                        </button>
-                                    </h2>
-                                    <div id="collapseCapacity" class="accordion-collapse collapse"
-                                        aria-labelledby="headingCapacity" data-bs-parent="#eventsAccordion">
-                                        <div class="accordion-body px-0 pt-0 pb-4">
-                                            <div class="capacity-chart app-js__capacity-chart">
-                                                <ul class="nav nav-pills mb-4" id="capacity-tab" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <button
-                                                            class="nav-link active rounded-pill px-4 py-2 font-secondary small"
-                                                            id="feet-tab" data-bs-toggle="pill" data-bs-target="#feet"
-                                                            type="button" role="tab" aria-controls="feet"
-                                                            aria-selected="true"
-                                                            style="background-color: var(--ul-primary); color: white;">Feet</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button
-                                                            class="nav-link rounded-pill px-4 py-2 font-secondary small text-dark border ms-2"
-                                                            id="meter-tab" data-bs-toggle="pill" data-bs-target="#meter"
-                                                            type="button" role="tab" aria-controls="meter"
-                                                            aria-selected="false">Meters</button>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content border-top pt-4" id="capacity-tabContent">
-                                                    <!-- Feet Tab Panel -->
-                                                    <div class="tab-pane fade show active" id="feet" role="tabpanel"
-                                                        aria-labelledby="feet-tab">
-                                                        <div class="table-responsive">
-                                                            <table
-                                                                class="table font-secondary small text-muted align-middle">
-                                                                <thead>
-                                                                    <tr class="text-dark border-bottom">
-                                                                        <th class="fw-bold py-3 border-0">Meeting Room
-                                                                        </th>
-                                                                        <th class="fw-bold py-3 border-0">Dimensions
-                                                                            (LxWxH)</th>
-                                                                        <th class="fw-bold py-3 border-0">Area (sq.ft)
-                                                                        </th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Theater</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Schoolroom</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Conference</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            U-Shape</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Reception</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Banquet</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Glade 1</td>
-                                                                        <td class="py-3 border-0">147.6x139.4x59.1</td>
-                                                                        <td class="py-3 border-0">1912.8</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">70</td>
-                                                                        <td class="text-center py-3 border-0">80</td>
-                                                                        <td class="text-center py-3 border-0">60</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">80</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Glade 2</td>
-                                                                        <td class="py-3 border-0">147.6x139.4x59.1</td>
-                                                                        <td class="py-3 border-0">1912.8</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">70</td>
-                                                                        <td class="text-center py-3 border-0">80</td>
-                                                                        <td class="text-center py-3 border-0">60</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">80</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Kosi Lawn
-                                                                        </td>
-                                                                        <td class="py-3 border-0">1,417.4x196.9x-</td>
-                                                                        <td class="py-3 border-0">2368.1</td>
-                                                                        <td class="text-center py-3 border-0">750</td>
-                                                                        <td class="text-center py-3 border-0">600</td>
-                                                                        <td class="text-center py-3 border-0">350</td>
-                                                                        <td class="text-center py-3 border-0">400</td>
-                                                                        <td class="text-center py-3 border-0">750</td>
-                                                                        <td class="text-center py-3 border-0">350</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Glade
-                                                                            Ballroom</td>
-                                                                        <td class="py-3 border-0">278.9x147.6x59.1</td>
-                                                                        <td class="py-3 border-0">3825.5</td>
-                                                                        <td class="text-center py-3 border-0">300</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">120</td>
-                                                                        <td class="text-center py-3 border-0">300</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Glade Pre
-                                                                            Function Area</td>
-                                                                        <td class="py-3 border-0">173.9x75.5x59.1</td>
-                                                                        <td class="py-3 border-0">1218.5</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Kosi Lawn
-                                                                            Deck</td>
-                                                                        <td class="py-3 border-0">150.9x59.1x-</td>
-                                                                        <td class="py-3 border-0">827.8</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Center Lawn
-                                                                        </td>
-                                                                        <td class="py-3 border-0">433.1x387.2x-</td>
-                                                                        <td class="py-3 border-0">15575.5</td>
-                                                                        <td class="text-center py-3 border-0">500</td>
-                                                                        <td class="text-center py-3 border-0">400</td>
-                                                                        <td class="text-center py-3 border-0">500</td>
-                                                                        <td class="text-center py-3 border-0">300</td>
-                                                                        <td class="text-center py-3 border-0">600</td>
-                                                                        <td class="text-center py-3 border-0">250</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Meters Tab Panel -->
-                                                    <div class="tab-pane fade" id="meter" role="tabpanel"
-                                                        aria-labelledby="meter-tab">
-                                                        <div class="table-responsive">
-                                                            <table
-                                                                class="table font-secondary small text-muted align-middle">
-                                                                <thead>
-                                                                    <tr class="text-dark border-bottom">
-                                                                        <th class="fw-bold py-3 border-0">Meeting Room
-                                                                        </th>
-                                                                        <th class="fw-bold py-3 border-0">Dimensions
-                                                                            (LxWxH)</th>
-                                                                        <th class="fw-bold py-3 border-0">Area (sq.mt)
-                                                                        </th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Theater</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Schoolroom</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Conference</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            U-Shape</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Reception</th>
-                                                                        <th class="fw-bold py-3 border-0 text-center">
-                                                                            Banquet</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <!-- Table rows structure equivalent to feet but with sq.mt values, for demonstration matching user request -->
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Glade 1</td>
-                                                                        <td class="py-3 border-0">45.0x42.5x18.0</td>
-                                                                        <td class="py-3 border-0">177.7</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">70</td>
-                                                                        <td class="text-center py-3 border-0">80</td>
-                                                                        <td class="text-center py-3 border-0">60</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">80</td>
-                                                                    </tr>
-                                                                    <!-- Add remaining table rows similarly to original response -->
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Glade 2</td>
-                                                                        <td class="py-3 border-0">45.0x42.5x18.0</td>
-                                                                        <td class="py-3 border-0">177.7</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">70</td>
-                                                                        <td class="text-center py-3 border-0">80</td>
-                                                                        <td class="text-center py-3 border-0">60</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">80</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Kosi Lawn
-                                                                        </td>
-                                                                        <td class="py-3 border-0">432.0x60.0x-</td>
-                                                                        <td class="py-3 border-0">220.0</td>
-                                                                        <td class="text-center py-3 border-0">750</td>
-                                                                        <td class="text-center py-3 border-0">600</td>
-                                                                        <td class="text-center py-3 border-0">350</td>
-                                                                        <td class="text-center py-3 border-0">400</td>
-                                                                        <td class="text-center py-3 border-0">750</td>
-                                                                        <td class="text-center py-3 border-0">350</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Glade
-                                                                            Ballroom</td>
-                                                                        <td class="py-3 border-0">85.0x45.0x18.0</td>
-                                                                        <td class="py-3 border-0">355.4</td>
-                                                                        <td class="text-center py-3 border-0">300</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                        <td class="text-center py-3 border-0">120</td>
-                                                                        <td class="text-center py-3 border-0">300</td>
-                                                                        <td class="text-center py-3 border-0">150</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Glade Pre
-                                                                            Function Area</td>
-                                                                        <td class="py-3 border-0">53.0x23.0x18.0</td>
-                                                                        <td class="py-3 border-0">113.2</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Kosi Lawn
-                                                                            Deck</td>
-                                                                        <td class="py-3 border-0">46.0x18.0x-</td>
-                                                                        <td class="py-3 border-0">76.9</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                        <td class="text-center py-3 border-0">-</td>
-                                                                    </tr>
-                                                                    <tr class="border-bottom">
-                                                                        <td class="text-dark py-3 border-0">Center Lawn
-                                                                        </td>
-                                                                        <td class="py-3 border-0">132.0x118.0x-</td>
-                                                                        <td class="py-3 border-0">1447.0</td>
-                                                                        <td class="text-center py-3 border-0">500</td>
-                                                                        <td class="text-center py-3 border-0">400</td>
-                                                                        <td class="text-center py-3 border-0">500</td>
-                                                                        <td class="text-center py-3 border-0">300</td>
-                                                                        <td class="text-center py-3 border-0">600</td>
-                                                                        <td class="text-center py-3 border-0">250</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <jcms:module:event-content3/>
 
                                 <!-- Room Set-up Examples Accordion -->
-                                <div class="accordion-item border-0 bg-transparent border-top rounded-0 mb-0">
-                                    <h2 class="accordion-header" id="headingSetup">
-                                        <button class="accordion-button collapsed bg-transparent shadow-none px-0 py-4"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseSetup"
-                                            aria-expanded="false" aria-controls="collapseSetup">
-                                            Room Set-up Examples
-                                        </button>
-                                    </h2>
-                                    <div id="collapseSetup" class="accordion-collapse collapse"
-                                        aria-labelledby="headingSetup" data-bs-parent="#eventsAccordion">
-                                        <div class="accordion-body px-0 pt-0 pb-4">
-                                            <!-- Setup examples layout matches the users source request format -->
-                                            <div class="row align-items-center mb-4">
-                                                <div class="col-md-3">
-                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-banquet-33747:Square?wid=206&fit=constrain"
-                                                        alt="Banquet setup" class="img-fluid border">
-                                                </div>
-                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
-                                                    <h6 class="text-dark fw-bold mb-2">Banquet</h6>
-                                                    <p class="small mb-0">Generally used for meals and sessions
-                                                        involving small group discussions. A five foot round table seats
-                                                        eight people comfortably. A six foot round table seats 10 people
-                                                        comfortably.</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center mb-4">
-                                                <div class="col-md-3">
-                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-conference-and-hollow-40456:Square?wid=206&fit=constrain"
-                                                        alt="Conference Setup" class="img-fluid border">
-                                                </div>
-                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
-                                                    <h6 class="text-dark fw-bold mb-2">Conference and Hollow Square</h6>
-                                                    <p class="small mb-0">Appropriate for interactive discussions and
-                                                        note-taking sessions for fewer than 25 people. Many hotels have
-                                                        elegant "boardrooms" for 10 to 20 people, equipped with full
-                                                        audiovisual capabilities, a writing board, cork board and a flip
-                                                        chart.</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center mb-4">
-                                                <div class="col-md-3">
-                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-e-u-t-shape-32935:Square?wid=206&fit=constrain"
-                                                        alt="E-U-T Shape Setup" class="img-fluid border">
-                                                </div>
-                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
-                                                    <h6 class="text-dark fw-bold mb-2">E-Shape, U-Shape and T-Shape</h6>
-                                                    <p class="small mb-0">Appropriate for groups of fewer than 40
-                                                        people. These are best for interaction with a leader seated at
-                                                        the head of the setup. Audiovisual is usually best set up at the
-                                                        open end of the seating.</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center mb-4">
-                                                <div class="col-md-3">
-                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-theater-15044:Square?wid=206&fit=constrain"
-                                                        alt="Theater Setup" class="img-fluid border">
-                                                </div>
-                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
-                                                    <h6 class="text-dark fw-bold mb-2">Theater</h6>
-                                                    <p class="small mb-0">Appropriate for large sessions and short
-                                                        lectures that do not require extensive note-taking. This is a
-                                                        convenient setup to use before breaking into discussion or
-                                                        role-playing groups because chairs can be moved.</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center mb-4">
-                                                <div class="col-md-3">
-                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-reception-10460:Square?wid=206&fit=constrain"
-                                                        alt="Reception Setup" class="img-fluid border">
-                                                </div>
-                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
-                                                    <h6 class="text-dark fw-bold mb-2">Reception</h6>
-                                                    <p class="small mb-0">Stand-up social function where beverages and
-                                                        light foods are served. Foods may be presented on small buffet
-                                                        tables or passed by servers. May precede a meal function.</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center mb-4">
-                                                <div class="col-md-3">
-                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-schoolroom-20857:Square?wid=206&fit=constrain"
-                                                        alt="Schoolroom Setup" class="img-fluid border">
-                                                </div>
-                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
-                                                    <h6 class="text-dark fw-bold mb-2">Schoolroom or Classroom</h6>
-                                                    <p class="small mb-0">The most desirable setup for medium to
-                                                        large-size lectures. Requires a relatively large room. Tables
-                                                        provide attendees with space for spreading out materials and
-                                                        taking notes.</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="row align-items-center">
-                                                <div class="col-md-3">
-                                                    <img src="https://cache.marriott.com/is/image/marriotts7prod/bonvoy-ovals-and-rounds-33776:Square?wid=206&fit=constrain"
-                                                        alt="Ovals and Rounds Setup" class="img-fluid border">
-                                                </div>
-                                                <div class="col-md-9 pt-3 pt-md-0 font-secondary text-muted">
-                                                    <h6 class="text-dark fw-bold mb-2">Ovals and Rounds</h6>
-                                                    <p class="small mb-0">Generally used for meals and sessions
-                                                        involving small group discussions. A five foot round table seats
-                                                        eight people comfortably. A six foot round table seats 10 people
-                                                        comfortably.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <jcms:module:event-content4/>
 
                                 <!-- Equipment and Services Accordion -->
-                                <div
-                                    class="accordion-item border-0 bg-transparent border-top border-bottom rounded-0 mb-0">
-                                    <h2 class="accordion-header" id="headingEquipment">
-                                        <button class="accordion-button collapsed bg-transparent shadow-none px-0 py-4"
-                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseEquipment"
-                                            aria-expanded="false" aria-controls="collapseEquipment">
-                                            Equipment and Services
-                                        </button>
-                                    </h2>
-                                    <div id="collapseEquipment" class="accordion-collapse collapse"
-                                        aria-labelledby="headingEquipment" data-bs-parent="#eventsAccordion">
-                                        <div class="accordion-body px-0 pt-0 pb-4 font-secondary">
-                                            <div class="row">
-                                                <div class="col-md-4 mb-4">
-                                                    <h6 class="text-dark fw-bold mb-3 small text-uppercase">Audio-Visual
-                                                        Equipment</h6>
-                                                    <ul class="list-unstyled small text-muted">
-                                                        <li class="mb-2">AV Technician</li>
-                                                        <li class="mb-2">LCD Projector</li>
-                                                        <li class="mb-2">TV</li>
-                                                        <li class="mb-2">TV Production Service Provider</li>
-                                                        <li class="mb-2">Videoconferencing</li>
-                                                        <li class="mb-2">Wired Internet</li>
-                                                        <li class="mb-2">Wireless Internet</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-4 mb-4">
-                                                    <h6 class="text-dark fw-bold mb-3 small text-uppercase">Event
-                                                        Services</h6>
-                                                    <ul class="list-unstyled small text-muted">
-                                                        <li class="mb-2">Carpenter</li>
-                                                        <li class="mb-2">Decorator</li>
-                                                        <li class="mb-2">Electrician</li>
-                                                        <li class="mb-2">Locksmith</li>
-                                                        <li class="mb-2">Message Service</li>
-                                                        <li class="mb-2">Photographer</li>
-                                                        <li class="mb-2">Registration Service</li>
-                                                        <li class="mb-2">Security Guards</li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-md-4 mb-4">
-                                                    <h6 class="text-dark fw-bold mb-3 small text-uppercase">Event
-                                                        Equipment & Supplies</h6>
-                                                    <ul class="list-unstyled small text-muted">
-                                                        <li class="mb-2">Direction Signs</li>
-                                                        <li class="mb-2">Easels/Markers</li>
-                                                        <li class="mb-2">Microphones</li>
-                                                        <li class="mb-2">Pens/Writing Pads</li>
-                                                        <li class="mb-2">Podium</li>
-                                                        <li class="mb-2">Tables/Chairs</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <jcms:module:event-content5/>
                             </div>
                         </div>
 
@@ -672,85 +199,7 @@
         </div>
 
         <!-- FAQ SECTION -->
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
-                    <div class="accordion-item border-top border-bottom-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">What are the check-in
-                                and check-out
-                                times at Lumbini Palace Resort?</button>
-                        </h2>
-                        <div id="faqOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Check-in is at 3:00 PM and check-out is at
-                                12:00 PM.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-top border-bottom-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">Does Lumbini Palace
-                                Resort allow
-                                pets?</button>
-                        </h2>
-                        <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Please contact the resort directly for our
-                                current pet policy and associated fees.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-top border-bottom">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">What are the parking
-                                options at
-                                Lumbini Palace Resort?</button>
-                        </h2>
-                        <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">We offer complimentary on-site parking and
-                                valet services for all guests.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-top border-bottom-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">What property
-                                amenities are
-                                available at Lumbini Palace Resort?</button>
-                        </h2>
-                        <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Amenities include a full-service spa,
-                                outdoor pool, fitness center, and multiple dining venues.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-top border-bottom-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqFive">Does Lumbini Palace
-                                Resort have
-                                in-room Wi-Fi?</button>
-                        </h2>
-                        <div id="faqFive" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Yes, high-speed Wi-Fi is available in all
-                                guest rooms and public areas.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-top border-bottom">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqSix">What is the closest
-                                airport near
-                                Lumbini Palace Resort?</button>
-                        </h2>
-                        <div id="faqSix" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Pantnagar Airport (PGH) is the nearest
-                                airport, located approximately 85 km away.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <jcms:module:faq:event/>
 
 
     </main>

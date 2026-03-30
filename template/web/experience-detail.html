@@ -35,14 +35,7 @@
     <section class="marriott-style-banner">
         <div class="ul-banner-slider swiper" style="width:100%;height:100%;">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="ul-banner-slide marriott-slide-image" data-img="assets/img/project-1.jpg">
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="ul-banner-slide marriott-slide-image" data-img="assets/img/project-3.jpg">
-                    </div>
-                </div>
+                <jcms:module:sub-package-swiper-gallery/>
             </div>
         </div>
         <div class="marriott-banner-bottom-controls">
@@ -61,101 +54,12 @@
                 <div class="m-overview-header text-center">
                     <p class="m-overview-label-new">LUMBINI PALACE RESORT</p>
                     <div class="m-overview-divider-red"></div>
-                    <h2 class="m-overview-title-main">M Wellness Spa</h2>
+                    <h2 class="m-overview-title-main"><jcms:module:sub-package-title/></h2>
                 </div>
-
-                <!-- BOOKING BAR / INFO BAR -->
-                <div class="room-booking-bar">
-                    <div class="container container-custom">
-                        <div class="row align-items-center">
-                            <div class="col-md-9">
-                                <p class="mb-2">
-                                    <a href="tel:+977015970300" class="text-dark text-decoration-none fw-bold">
-                                        <i class="fa-solid fa-phone me-2" style="color: var(--ul-primary);"></i> +977 01-5970300 Ext. 2032
-                                    </a>
-                                </p>
-                                <p class="text-muted mb-2">Unwind with a relaxing massage at the sleek and sophisticated spa at our hotel in Lumbini. Our spa offers a wide range of treatments inspired by ancient Ayurvedic traditions blended with modern wellness techniques.</p>
-                                <p class="mb-0" style="color: var(--ul-primary); font-weight: 600; font-size: 14px;">
-                                    <i class="fa-solid fa-calendar-check me-2"></i> Appointment required
-                                </p>
-                            </div>
-                            <div class="col-md-3 text-md-end mt-3 mt-md-0">
-                                <a href="tel:+977015970300" class="btn m-btn-view-rates">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- HOURS SECTION -->
-                <div class="room-booking-bar" style="padding-top: 30px;">
-                    <div class="container container-custom">
-                        <h3 class="fw-bold mb-3" style="font-size: 20px;">Hours</h3>
-                        <div class="d-flex justify-content-between align-items-center" style="max-width: 400px;">
-                            <span class="text-muted" style="font-size: 16px;">Everyday:</span>
-                            <span class="fw-bold" style="font-size: 16px;">10:00 AM - 10:00 PM</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SPECIFICATIONS GRID -->
-                <section class="spec-section">
-                    <div class="container container-custom">
-                        <h3 class="fw-bold mb-4" style="font-size: 20px;">Services, Treatments and Amenities</h3>
-                        <div class="spec-grid">
-
-                            <!-- Body Treatments -->
-                            <div class="spec-item">
-                                <div class="spec-item-title"><i class="fa-solid fa-spa"></i> Body Treatments</div>
-                                <ul class="spec-list">
-                                    <li>Ayurvedic Treatment</li>
-                                    <li>Body Scrub</li>
-                                    <li>Body Wrap</li>
-                                    <li>Therapy Bath</li>
-                                    <li>Steam Room</li>
-                                </ul>
-                            </div>
-
-                            <!-- Massage Services -->
-                            <div class="spec-item">
-                                <div class="spec-item-title"><i class="fa-solid fa-hands"></i> Massage Services</div>
-                                <ul class="spec-list">
-                                    <li>Massages</li>
-                                    <li>Couples Massages</li>
-                                    <li>Foot Bath</li>
-                                    <li>Instructions in the art of massage</li>
-                                </ul>
-                            </div>
-
-                            <!-- Beauty & Grooming -->
-                            <div class="spec-item">
-                                <div class="spec-item-title"><i class="fa-solid fa-face-smile-beam"></i> Beauty &amp; Grooming</div>
-                                <ul class="spec-list">
-                                    <li>Facials</li>
-                                    <li>Makeup Services</li>
-                                    <li>Manicures/Pedicures</li>
-                                    <li>Scalp &amp; Hair Treatment</li>
-                                    <li>Waxing</li>
-                                </ul>
-                            </div>
-
-                            <!-- Specialized Services -->
-                            <div class="spec-item">
-                                <div class="spec-item-title"><i class="fa-solid fa-dumbbell"></i> Specialized Services</div>
-                                <ul class="spec-list">
-                                    <li>Fitness Classes</li>
-                                    <li>Fitness Counseling Services</li>
-                                    <li>Kids Services</li>
-                                    <li>Men's Services</li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
+                <jcms:module:sub-package-content/>
 
             </div>
         </section>
-
         <!-- BOOK A ROOM BLOCK -->
         <section class="m-room-block-section py-5 bg-light">
             <div class="container container-custom">
@@ -173,49 +77,8 @@
         </section>
 
         <!-- FAQ SECTION -->
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
-                    <div class="accordion-item border-top border-bottom-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">Do I need to book a spa appointment in advance?</button>
-                        </h2>
-                        <div id="faqOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Yes, we recommend booking your spa appointment in advance to ensure availability. Walk-in appointments are subject to availability.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-top border-bottom-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">What are the spa operating hours?</button>
-                        </h2>
-                        <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Our spa is open everyday from 10:00 AM to 10:00 PM.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-top border-bottom">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">Are couples treatments available?</button>
-                        </h2>
-                        <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Yes, we offer couples massages and treatments in a private suite. Please contact the spa directly for availability and pricing.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item border-top border-bottom-0">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed px-0 py-4 bg-transparent shadow-none"
-                                type="button" data-bs-toggle="collapse" data-bs-target="#faqFour">Is the spa available for non-hotel guests?</button>
-                        </h2>
-                        <div id="faqFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body text-muted pt-0 pb-4">Yes, our spa is open to both hotel guests and external visitors. Advance booking is recommended.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <jcms:module:faq:experience/>
+
 
     </main>
 
