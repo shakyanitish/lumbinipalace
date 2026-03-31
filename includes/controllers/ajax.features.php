@@ -20,7 +20,9 @@
 			$Features->title    	= $_REQUEST['title'];	
 			$Features->image		= !empty($_REQUEST['imageArrayname']) ? $_REQUEST['imageArrayname'] : '';
 			$Features->icon    	= $_REQUEST['icon'];			
-			$Features->brief    	= $_REQUEST['brief'];	
+			$Features->brief    	= $_REQUEST['brief'];
+			$Features->linksrc    	= $_REQUEST['linksrc'];
+			$Features->linktype    	= $_REQUEST['linktype'];	
 			$Features->status		= $_REQUEST['status'];
 			$Features->sortorder	= Features::find_maximum_byparent("sortorder",$_REQUEST['parentId']);
 			$Features->added_date 	= registered();
@@ -61,7 +63,9 @@
 			$Features->title    = $_REQUEST['title'];	
 			$Features->brief    = $_REQUEST['brief'];
 			$Features->icon    	= $_REQUEST['icon'];	
-			$Features->status   = $_REQUEST['status'];	
+			$Features->status   = $_REQUEST['status'];
+			$Features->linksrc    	= $_REQUEST['linksrc'];
+			$Features->linktype    	= $_REQUEST['linktype'];			
 
 			$db->begin();				
 			if($Features->save()):$db->commit();	

@@ -1,17 +1,23 @@
 <?php
 $resoffr = $socialshare = '';
+$more_offers_html = '';
 $expired = '';
 $enquiry = '';
+$offer_details = '';
+$offer_hero = '';
 $resrandoffr = $hmresoffr = $resinndetail = $offbredd = '';
 $offrRec = Offers::get_offer_by();
 
-if (defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
+if (defined('OFFERS_PAGE_DETAIL') and isset($_REQUEST['slug'])) {
     $slug = addslashes($_REQUEST['slug']);
     $recRow = Offers::find_by_slug($slug);
-    if (!empty($recRow)) {
+    if (!empty($recRow)) {  
 
-        if (!empty($recRow->image)) {
-            $imglink = IMAGE_PATH . 'offers/' . $recRow->image;
+        $imageFile = !empty($recRow->image) ? $recRow->image : $recRow->list_image;
+        $imageFolder = !empty($recRow->image) ? 'offers/' : 'offers/listimage/';
+        $file_path = SITE_ROOT . 'images/' . $imageFolder . $imageFile;
+        if (file_exists($file_path) && !empty($imageFile)) {
+            $imglink = IMAGE_PATH . $imageFolder . $imageFile;
         } else {
             $imglink = IMAGE_PATH . 'static/inner-img.jpg';
         }
@@ -42,24 +48,127 @@ if (defined('OFFERS_PAGE') and isset($_REQUEST['slug'])) {
                             ' . $enquiry . '
                         </div>';
 
-        $offbredd .= '<section class="breadcrumb-area overlay-dark-2 bg-2" style="background-image:url(' . $imglink . '); background-repeat: no-repeat; "> 
-               
-            <div class="container">
+        $offer_details = '
+        <section class="m-offer-details-section">
+            <div class="container container-custom">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="breadcrumb-text article text-center">
-                            <div class="breadcrumb-bar">
-                                <ul class="breadcrumb">
-                                    <li><a href="' . BASE_URL . '">Home</a></li>
-                                    <li><a href="' . BASE_URL . 'offer-list">Offer</a></li>
-                                    <li>' . $recRow->title . '</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    ' . $content . '
                 </div>
             </div>
-        </section>';
+        </section>
+        ';
+
+        $offer_title = htmlspecialchars($recRow->title);
+        $offer_subtitle = substr(strip_tags((!empty($recRow->brief)) ? $recRow->brief : $recRow->content), 0, 150) . '...';
+        
+        $offer_hero = '
+    <section class="m-offer-hero" style="background-image: url(\'' . $imglink . '\');">
+        <div class="m-offer-hero-content">
+            <h1 class="m-offer-hero-title">' . $offer_title . '</h1>
+            <p class="m-offer-hero-subtitle">' . $offer_subtitle . '</p>
+        </div>
+
+        <!-- Offer Enquiry Widget -->
+        <div class="m-offer-booking-wrapper">
+            <form action="#">
+                <div class="m-offer-booking-grid">
+                    <div class="m-offer-booking-field">
+                        <div class="m-offer-booking-label"><i class="fa-solid fa-user"></i> FULL NAME</div>
+                        <input type="text" class="m-offer-booking-input" placeholder="Enter your name">
+                    </div>
+                    <div class="m-offer-booking-field">
+                        <div class="m-offer-booking-label"><i class="fa-solid fa-phone"></i> MOBILE NUMBER</div>
+                        <input type="tel" class="m-offer-booking-input" placeholder="Enter mobile number">
+                    </div>
+                    <div class="m-offer-booking-field">
+                        <div class="m-offer-booking-label"><i class="fa-solid fa-calendar-days"></i> PREFERRED DATES
+                        </div>
+                        <input type="text" class="m-offer-booking-input" placeholder="Select dates">
+                    </div>
+                    <div class="m-offer-booking-action">
+                        <button type="submit" class="btn m-btn-offer-book">Enquire Now</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>';
+
+
+        
+        // Fetch "More Offers At This Property" (excluding current offer)
+        $sqlOther = "SELECT * FROM tbl_offers WHERE status=1 AND id != " . $recRow->id . " AND (deadline_type='alltime' OR (start_date IS NOT NULL AND offer_date IS NOT NULL AND CURDATE() BETWEEN start_date AND offer_date)) ORDER BY sortorder DESC";
+        $otherOffers = Offers::find_by_sql($sqlOther);
+
+        if (!empty($otherOffers)) {
+            $other_offer_cards = '';
+            $counter = 1;
+            foreach ($otherOffers as $oOffer) {
+                // Determine image
+                $imageFile = !empty($oOffer->image) ? $oOffer->image : $oOffer->list_image;
+                $imageFolder = !empty($oOffer->image) ? 'offers/' : 'offers/listimage/';
+                $$imageFile_path = SITE_ROOT . 'images/' . $imageFolder . $imageFile;
+                $imglink = file_exists($$imageFile_path) && !empty($imageFile) ? IMAGE_PATH . $imageFolder . $imageFile : IMAGE_PATH . 'static/inner-img.jpg';
+
+                $dNoneClass = ($counter > 3) ? ' d-none' : '';
+                
+                // Content description
+                $desc = substr(strip_tags($oOffer->content), 0, 150) . '...';
+                
+                // Alternate image position if desired like in static HTML
+                $orderClassImg = ($counter % 2 != 0) ? ' order-md-2' : '';
+                $orderClassContent = ($counter % 2 != 0) ? ' order-md-1' : '';
+
+                $other_offer_cards .= '
+                    <!-- Offer Card ' . $counter . ' -->
+                    <div class="m-offer-list-card' . $dNoneClass . '">
+                        <div class="row g-0">
+                            <div class="col-md-6' . $orderClassImg . '">
+                                <img src="' . $imglink . '" alt="' . htmlspecialchars($oOffer->title) . '"
+                                    class="img-fluid w-100 m-offer-list-img">
+                            </div>
+                            <div class="col-md-6' . $orderClassContent . '">
+                                <div class="m-offer-list-content">
+                                    <h3 class="m-offer-list-title">' . htmlspecialchars($oOffer->title) . '</h3>
+                                    <p class="m-offer-list-desc">' . $desc . '</p>
+                                    <a href="' . BASE_URL . 'offer/' . $oOffer->slug . '" class="btn m-btn-see-details shadow-none">See details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
+                
+                $counter++;
+            }
+
+            $showMoreBtn = ($counter > 4) ? '
+                    <div class="text-center mt-5">
+                        <button class="btn m-btn-see-details px-4 py-2" id="btnShowMoreOffers">Show More</button>
+                    </div>' : '';
+
+            $more_offers_html = '
+        <section class="m-more-offers-section">
+            <div class="container container-custom">
+                <h2 class="m-more-offers-title">More Offers At This Property</h2>
+
+                <div class="m-offer-list">
+                    ' . $other_offer_cards . '
+                    ' . $showMoreBtn . '
+                </div>
+            </div>
+        </section>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const showMoreBtn = document.getElementById("btnShowMoreOffers");
+                if(showMoreBtn) {
+                    const hiddenCards = document.querySelectorAll(".m-offer-list-card.d-none");
+
+                    showMoreBtn.addEventListener("click", function () {
+                        hiddenCards.forEach(card => card.classList.remove("d-none"));
+                        showMoreBtn.parentElement.classList.add("d-none");
+                    });
+                }
+            });
+        </script>';
+        }
     } else {
         redirect_to(BASE_URL);
     }
@@ -217,6 +326,7 @@ if (defined('OFFERS_PAGE') and !isset($_REQUEST['slug'])) {
             // Show offer if it's "All Time" or if dates are valid and within range
             $isAllTime = ($offer->deadline_type == 'alltime' || empty($offer->start_date) || empty($offer->offer_date));
             $isActive = $isAllTime || ($offer->start_date <= $currentdate && $offer->offer_date >= $currentdate);
+
             
             if ($isActive) {
                 $imageFile = !empty($offer->image) ? $offer->image : $offer->list_image;
@@ -262,12 +372,18 @@ if (defined('OFFERS_PAGE') and !isset($_REQUEST['slug'])) {
                 </div>
             </div>
         </section>';
+
+
+
     }
 }
+$jVars['module:offers-grid'] = $offers_grid;
+$jVars['module:offers-detailed'] = $offer_details;
+$jVars['module:more_offers'] = $more_offers_html;
+$jVars['module:offer_hero'] = $offer_hero;
 
 $jVars['module:homeoffers-list'] = $hmresoffr;
 $jVars['module:offers-details'] = $resinndetail;
-$jVars['module:offers-grid'] = $offers_grid;
 $jVars['module:offer_breadcrum'] = $offbredd;
 
 

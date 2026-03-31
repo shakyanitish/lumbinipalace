@@ -215,6 +215,20 @@ $(document).ready(function () {
             $('.MessageBoxContainer').fadeOut(1000);
         });
     }
+    function linkTypeSelect(Re){
+        if(Re == 0) {		
+            $('#linkPage_chosen').removeClass("hide");
+            ($('#linksrc').val() == 'http://www.') ? $('#linksrc').val('') : null ;
+        } else {
+            $('#linkPage_chosen').addClass("hide");
+            ($('#linksrc').val() == '') ? $('#linksrc').val("http://www.") : null ;
+        }
+    }
+    $(document).ready(function(){	
+        $('#linkPage').change(function(){
+            $('#linksrc').val($(this).val());
+        });
+    });
 
 
     // Deleting Record

@@ -8,7 +8,7 @@ require_once("includes/initialize.php");
 
 $currentTemplate	= Config::getCurrentTemplate('template');
 $jVars 				= array();
-$template 			= "template/web/alumini.html";
+$template 			= "template/web/instagram.html";
 
 require_once('views/modules.php');
 

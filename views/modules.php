@@ -48,27 +48,18 @@ else {
     $img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
 }
 
-$jVars['site:faq'] = '
+$jVars['site:offer'] = '
 
 
-        <header class="header-fullwidth menu-expand transparent">
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="col-md-12">
-                        <!-- logo begin -->
-                        <div id="logo">
-                            <a href="' . BASE_URL . 'home' . '">
-                                <img class="logo" src="' . $img . '" alt="">
-                            </a>
-                        </div>
-                        <!-- logo close -->
+    <section class="m-offer-hero" style="background-image: url(' . $img . '); padding: 120px 0;">
+        <div class="m-offer-hero-content text-center">
+            <h1 class="m-offer-hero-title">Exclusive Offers</h1>
+            <p class="m-offer-hero-subtitle mx-auto">Discover our curated selection of special packages and limited-time
+                deals designed to elevate your stay.</p>
+        </div>
+    </section>
 
-                        <!-- small button begin -->
-                        <!-- small button close -->
-                    </div>
-                </div>
-            </div>
-        </header>
+
 ';
 
 
@@ -80,9 +71,19 @@ if (!empty($imglink)) {
 else {
     $img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
 }
-$jVars['site:blog'] = ' 
-                            <img src="' . $img . '" alt />
+$jVars['site:faq-banner'] = '
+    <section class="m-offer-hero"
+        style="background-image: url(' . $img . '); padding: 120px 0; background-size: cover; background-position: center; position: relative;">
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0,0,0,0.5);"></div>
+        <div class="m-offer-hero-content text-center position-relative z-1">
+            <h1 class="m-offer-hero-title text-white">Frequently Asked Questions</h1>
+            <p class="m-offer-hero-subtitle mx-auto text-white">Find answers to common questions about your stay at
+                Lumbini Palace Resort.</p>
+        </div>
+    </section>
 
+
+            
 ';
 
 

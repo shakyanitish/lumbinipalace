@@ -471,6 +471,7 @@
                                                 <span class="drag-handle cp" style="cursor: move;"><i class="glyph-icon icon-arrows"></i></span>
                                                 <input type="text" placeholder="Includes Text" class="form-control" style="flex: 1;"
                                                     name="incexc_text[<?php echo $childKey; ?>]" value="<?php echo $incText; ?>">
+                                                <span class="btn small bg-green tooltip-button cp" title="Zoom In" onclick="openZoomText(this);" style="cursor: pointer; margin-right: 5px;"><i class="glyph-icon icon-search-plus"></i></span>
                                                 <span class="cp remove_includes_row" onclick="$(this).closest('.mrg10B').remove();" style="cursor: pointer;"><i class="glyph-icon icon-minus-square"></i></span>
                                             </div>
 
@@ -559,12 +560,14 @@
                                                     <span class="drag-handle cp" style="cursor: move;"><i class="glyph-icon icon-arrows"></i></span>
                                                     <input type="text" placeholder="Includes Text" class="form-control" style="flex: 1;"
                                                         name="incexc_text1[<?php echo $childKey; ?>]" value="<?php echo $incText; ?>">
+                                                    <span class="btn small bg-green tooltip-button cp" title="Zoom In" onclick="openZoomText(this);" style="cursor: pointer; margin-right: 5px;"><i class="glyph-icon icon-search-plus"></i></span>
                                                     <span class="cp remove_includes_row" onclick="$(this).closest('.mrg10B').remove();" style="cursor: pointer;"><i class="glyph-icon icon-minus-square"></i></span>
                                                 </div>
                                                 <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;" class="subtitle-field" <?php echo ($packageInfo->type != 2) ? 'style="display: none;"' : ''; ?>>
                                                     <span style="visibility: hidden;"><i class="glyph-icon icon-arrows"></i></span>
                                                     <input type="text" placeholder="Subtitle" class="form-control" style="flex: 1;"
                                                         name="incexc_subtitle1[<?php echo $childKey; ?>]" value="<?php echo htmlspecialchars($incSubtitle); ?>">
+                                                    <span class="btn small bg-green tooltip-button cp" title="Zoom In" onclick="openZoomText(this);" style="cursor: pointer; margin-right: 5px;"><i class="glyph-icon icon-search-plus"></i></span>
                                                     <span style="visibility: hidden;"><i class="glyph-icon icon-minus-square"></i></span>
                                                 </div>
 

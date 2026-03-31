@@ -167,7 +167,9 @@ $footer = '
             <div class="footer-divider" style="margin-bottom: 30px;"></div>
             <div class="row">
                 <div class="col-12">
-                    <p class="small d-inline-block me-3 mb-0">Follow Lumbini Palace Resort</p>
+                    <p class="small d-inline-block me-3 mb-0">
+                        ' . $jVars['site:copyright'] . '
+                    </p>
                     ' . $jVars['module:socilaLinkbtmfooter'] . '
 
                 </div>

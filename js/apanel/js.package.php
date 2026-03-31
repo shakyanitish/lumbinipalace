@@ -65,12 +65,49 @@
             }
         }
 
+window.openZoomText = function(btn) {
+    var $input = $(btn).siblings('input[type="text"]');
+    var currentText = $input.val();
+    var placeholder = $input.attr('placeholder') || 'Edit Text';
+    
+    if ($('#zoomTextModal').length === 0) {
+        $('body').append(
+            '<div id="zoomTextModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; background: rgba(0,0,0,0.6);">' +
+                '<div style="background: #fff; width: 50%; margin: 8% auto; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">' +
+                    '<h3 id="zoomTextModalTitle" style="margin-top: 0; border-bottom: 1px solid #ddd; padding-bottom: 10px;">Edit Text</h3>' +
+                    '<textarea id="zoomTextarea" class="form-control" style="width: 95%; height: 250px; font-size: 14px; padding: 10px; margin-top: 15px; resize: vertical;"></textarea>' +
+                    '<div style="text-align: right; margin-top: 20px;">' +
+                        '<button type="button" class="btn medium bg-green" id="saveZoomTextBtn" style="margin-right: 10px;" title="Zoom Out"><i class="glyph-icon icon-search-minus"></i> <span class="button-content">Zoom Out</span></button>' +
+                        '<button type="button" class="btn medium bg-red" id="closeZoomTextBtn"><span class="button-content">Cancel</span></button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>'
+        );
+
+        $('#closeZoomTextBtn').on('click', function() {
+            $('#zoomTextModal').fadeOut();
+        });
+    }
+
+    $('#zoomTextModalTitle').text('Edit: ' + placeholder);
+    $('#zoomTextarea').val(currentText);
+    $('#zoomTextModal').fadeIn();
+    $('#zoomTextarea').focus();
+
+    $('#saveZoomTextBtn').off('click').on('click', function() {
+        var newText = $('#zoomTextarea').val();
+        $input.val(newText);
+        $('#zoomTextModal').fadeOut();
+    });
+};
+
 window.addIncludesRow = function() {
     var uniqId = new Date().getTime();
     var newRow = '<div class="mrg10B" style="background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px;">\
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">\
             <span class="drag-handle cp" style="cursor: move;"><i class="glyph-icon icon-arrows"></i></span>\
             <input type="text" placeholder="Includes Text" class="form-control" style="flex: 1;" name="incexc_text[' + uniqId + ']">\
+            <span class="btn small bg-green tooltip-button cp" title="Zoom In" onclick="openZoomText(this);" style="cursor: pointer; margin-right: 5px;"><i class="glyph-icon icon-search-plus"></i></span>\
             <span class="cp remove_includes_row" onclick="$(this).closest(\'.mrg10B\').remove();" style="cursor: pointer;"><i class="glyph-icon icon-minus-square"></i></span>\
         </div>\
         <div class="form-row">\
@@ -113,11 +150,13 @@ window.addIncludesRow2 = function() {
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">\
             <span class="drag-handle cp" style="cursor: move;"><i class="glyph-icon icon-arrows"></i></span>\
             <input type="text" placeholder="Includes Text" class="form-control" style="flex: 1;" name="incexc_text1[' + uniqId + ']">\
+            <span class="btn small bg-green tooltip-button cp" title="Zoom In" onclick="openZoomText(this);" style="cursor: pointer; margin-right: 5px;"><i class="glyph-icon icon-search-plus"></i></span>\
             <span class="cp remove_includes_row" onclick="$(this).closest(\'.mrg10B\').remove();" style="cursor: pointer;"><i class="glyph-icon icon-minus-square"></i></span>\
         </div>\
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;" class="subtitle-field" ' + ($('input[name="type"]:checked').val() != 2 ? 'style="display: none;"' : '') + '>\
             <span style="visibility: hidden;"><i class="glyph-icon icon-arrows"></i></span>\
             <input type="text" placeholder="Subtitle" class="form-control" style="flex: 1;" name="incexc_subtitle1[' + uniqId + ']">\
+            <span class="btn small bg-green tooltip-button cp" title="Zoom In" onclick="openZoomText(this);" style="cursor: pointer; margin-right: 5px;"><i class="glyph-icon icon-search-plus"></i></span>\
             <span style="visibility: hidden;"><i class="glyph-icon icon-minus-square"></i></span>\
         </div>\
         <div class="form-row">\

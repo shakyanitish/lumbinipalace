@@ -54,10 +54,11 @@ RewriteRule ^news/([0-9]+)/page/([0-9]+)?$ news_list.php?year=$1&pageno=$2 [L]
 
 #For offer pages.
 RewriteRule ^offer/?$ offers.php [L]
+RewriteRule ^offer/([a-zA-Z0-9-=]+)$ offer_detail.php?slug=$1 [L]
 
 
-#For inner pages.
-RewriteRule ^alumini/?$ alumini.php?slug=$1  [L]
+
+RewriteRule ^instagram/?$ instagram.php?slug=$1  [L]
 #RewriteRule ^company/([a-zA-Z0-9-]+)$ company.php?slug=$1 [L]
 
 

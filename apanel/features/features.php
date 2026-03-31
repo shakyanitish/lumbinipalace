@@ -205,6 +205,49 @@ if (isset($_GET['page']) && $_GET['page'] == "features" && isset($_GET['mode']) 
                                value="<?php echo !empty($featuresInfo->icon) ? $featuresInfo->icon : ""; ?>">
                     </div>
                 </div>
+                                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Link Type :
+                        </label>
+                    </div>
+                    <div class="form-checkbox-radio col-md-9">
+                        <?php 
+                            $internal = (!empty($featuresInfo->linktype) && $featuresInfo->linktype == 0) ? "checked" : "";
+                            $external = (!empty($featuresInfo->linktype) && $featuresInfo->linktype == 1) ? "checked" : "";
+                        ?>
+                        <input id="" class="custom-radio" type="radio" name="linktype" value="0"
+                               onClick="linkTypeSelect(0);" <?php echo !empty($internal) ? $internal : "checked"; ?>>
+                        <label for="">Internal Link</label>
+                        <input id="" class="custom-radio" type="radio" name="linktype" value="1"
+                               onClick="linkTypeSelect(1);" <?php echo !empty($external) ? $external : ""; ?>>
+                        <label for="">External Link</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Link :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-8">
+                        <div class="col-md-4" style="padding-left:0px !important;">
+                            <input placeholder="Link" class="" type="text" name="linksrc" id="linksrc"
+                                   value="<?php echo !empty($featuresInfo->linksrc) ? $featuresInfo->linksrc : ""; ?>">
+                        </div>
+                        <div class="col-md-6" style="padding-left:0px !important;">
+                            <select data-placeholder="Select Link Page" class="col-md-4 chosen-select" id="linkPage">
+                                <option value=""></option>
+                                <?php
+                                    $Lpageview = !empty($featuresInfo->linksrc) ? $featuresInfo->linksrc : "";
+                                    $LinkTypeview = !empty($featuresInfo->linktype) ? $featuresInfo->linktype : "";
+                                    echo Article::get_internal_link($Lpageview, $LinkTypeview);
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                </div> 
 
                 <div class="form-row">
                     <div class="form-label col-md-8">
@@ -215,6 +258,8 @@ if (isset($_GET['page']) && $_GET['page'] == "features" && isset($_GET['mode']) 
                                   class="large-textarea validate[required]"><?php echo !empty($featuresInfo->brief) ? $featuresInfo->brief : ""; ?></textarea>
                     </div>
                 </div>
+
+
 
                 <div class="form-row">
                     <div class="form-label col-md-2">
@@ -414,6 +459,47 @@ if (isset($_GET['page']) && $_GET['page'] == "features" && isset($_GET['mode']) 
                     <div id="preview_Image"><input type="hidden" name="imageArrayname"
                                                    value="<?php echo !empty($featuresInfo->image) ? $featuresInfo->image : ""; ?>"
                                                    class=""/></div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Link Type :
+                        </label>
+                    </div>
+                    <div class="form-checkbox-radio col-md-9">
+                        <input id="" class="custom-radio" type="radio" name="linktype" value="0"
+                               onClick="linkTypeSelect(0);" <?php echo !empty($internal) ? $internal : "checked"; ?>>
+                        <label for="">Internal Link</label>
+                        <input id="" class="custom-radio" type="radio" name="linktype" value="1"
+                               onClick="linkTypeSelect(1);" <?php echo !empty($external) ? $external : ""; ?>>
+                        <label for="">External Link</label>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Link :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-8">
+                        <div class="col-md-4" style="padding-left:0px !important;">
+                            <input placeholder="Link" class="" type="text" name="linksrc" id="linksrc"
+                                   value="<?php echo !empty($articlesInfo->linksrc) ? $articlesInfo->linksrc : ""; ?>">
+                        </div>
+                        <div class="col-md-6" style="padding-left:0px !important;">
+                            <select data-placeholder="Select Link Page" class="col-md-4 chosen-select" id="linkPage">
+                                <option value=""></option>
+                                <?php
+                                // $Lpageview = !empty($articlesInfo->linksrc) ? $articlesInfo->linksrc : "";
+                                // $LinkTypeview = !empty($articlesInfo->linktype) ? $articlesInfo->linktype : "";
+                                // Article Page Link
+                                echo Article::get_internal_link($Lpageview, $LinkTypeview);
+                                ?>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-row">

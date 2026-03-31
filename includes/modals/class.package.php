@@ -10,6 +10,8 @@ class Package extends DatabaseObject
 	var $image;
 	var $header_image;
 	var $banner_image;
+
+
 	var $flag_image;
 	var $linksrc;
 	var $linktype;
@@ -47,7 +49,6 @@ class Package extends DatabaseObject
 		$cond = !empty($limit) ? 'LIMIT ' . $limit : '';
 		$sql = "SELECT * FROM " . self::$table_name . " WHERE status='1' ORDER BY program_date DESC $cond";
 		// $sql = "SELECT id, slug, title, author, brief, content, image, blog_date, source, viewcount, linksrc, linktype FROM " . self::$table_name . " WHERE status='1' ORDER BY blog_date DESC $cond";
-
 		$result = self::find_by_sql($sql);
 		return $result;
 	}
