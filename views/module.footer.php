@@ -59,7 +59,7 @@ foreach ($faxno as $index => $fax) {
     }
 }
 $roomlinked = '';
-$roomno = array_map('trim', explode(',', $siteRegulars->room_reservation_number));
+$roomno = array_map('trim', explode(',', $siteRegulars->contact_info));
 
 foreach ($roomno as $index => $room) {
     // remove spaces for tel link
@@ -72,7 +72,7 @@ foreach ($roomno as $index => $room) {
 
     // separator except last item
     if ($index !== array_key_last($roomno)) {
-        $roomlinked .= ' ';
+        $roomlinked .= ',';
     }
 }
 
