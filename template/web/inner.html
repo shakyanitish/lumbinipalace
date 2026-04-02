@@ -46,84 +46,8 @@
     <jcms:module:footer/>   
 
     <!-- VIRTUAL TOUR POPUP MODAL -->
-    <div class="modal fade m-vt-popup" id="virtualTourModal" tabindex="-1" aria-labelledby="virtualTourModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl m-vt-dialog">
-            <div class="modal-content m-vt-content border-0">
-                <!-- Modal Header -->
-                <div class="modal-header m-vt-header border-0 px-4 py-3 bg-white align-items-center">
-                    <h5 class="modal-title m-vt-title fw-bold mb-0 text-dark" id="virtualTourModalLabel">Lumbini Palace
-                        Resort</h5>
-                    <button type="button" class="btn-close m-vt-close shadow-none" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
+    <jcms:module:virtualtour-modal/>
 
-                <!-- Modal Body (Iframe + Sidebar) -->
-                <div class="modal-body p-0 position-relative overflow-hidden w-100 bg-black"
-                    style="min-height: 500px; height: 75vh;">
-
-                    <!-- The 360 Iframe / Image placeholder -->
-                    <img src="assets/img/dine-details-img-big-1.jpg" alt="Virtual Tour Exterior"
-                        class="img-fluid w-100 h-100" style="object-fit: cover;">
-                    <!-- <iframe class="w-100 h-100 border-0 m-vt-iframe" title="Lumbini Palace Virtual Tour" src="https://visitingmedia.com/tt8/?ttid=san-francisco-marriott-marquis#/360?group=0&amp;tour=0" allowfullscreen=""></iframe> -->
-
-                    <!-- Sliding Sidebar Menu -->
-                    <div class="m-vt-sidebar-wrapper position-absolute top-0 bottom-0 start-0 d-flex h-100"
-                        id="vtSidebarWrapper">
-
-                        <!-- Panel containing menu items -->
-                        <div class="m-vt-sidebar-panel h-100 overflow-y-auto" id="vtSidebarPanel">
-                            <div class="m-vt-menu-list pb-5">
-                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0">PUBLIC SPACES</h6>
-                                <button
-                                    class="m-vt-menu-item active w-100 text-start border-0 px-4 py-3 fw-semibold transition">MAIN
-                                    LOBBY</button>
-                                <button
-                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">ORGANIC
-                                    RESTAURANT & PRIVATE DINING</button>
-                                <button
-                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">M
-                                    LOUNGE</button>
-                                <button
-                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">LUXURY
-                                    SPA</button>
-
-                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0 mt-3">EVENT SPACES</h6>
-                                <button
-                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">GRAND
-                                    BALLROOM</button>
-                                <button
-                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">PRE-FUNCTION
-                                    AREA</button>
-                                <button
-                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">MEETING
-                                    ROOM A</button>
-
-                                <h6 class="m-vt-menu-heading small fw-bold px-4 pt-4 pb-2 mb-0 mt-3">ACCOMMODATIONS</h6>
-                                <button
-                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">POND
-                                    VILLA</button>
-                                <button
-                                    class="m-vt-menu-item w-100 text-start border-0 px-4 py-3 fw-semibold transition">LUXURY
-                                    SUITE</button>
-                            </div>
-                        </div>
-
-                        <!-- Vertical Toggle Tab -->
-                        <div class="m-vt-sidebar-toggle h-100 d-flex flex-column justify-content-center align-items-center position-relative cursor-pointer"
-                            id="vtSidebarToggle">
-                            <!-- <div class="m-vt-tab-text fw-bold text-white text-uppercase" style="letter-spacing: 1px; white-space: nowrap;">OPEN MENU</div> -->
-                            <!-- Arrow Indicator -->
-                            <div class="m-vt-tab-arrow position-absolute"></div>
-                        </div>
-
-                    </div>
-                    <!-- /Sliding Sidebar Menu -->
-
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- JS Libraries (CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

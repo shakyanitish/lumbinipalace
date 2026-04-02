@@ -120,6 +120,9 @@ if (defined("BLOG_DETAIL_PAGE")) {
     if (!empty($Blogs)) {
         $blogDate = date('F d, Y', strtotime($Blogs->blog_date));
         $imgsrc = IMAGE_PATH . 'blog/' . $Blogs->image;
+        $fullUrl = BASE_URL . 'blog/' . $Blogs->slug;
+        $encodedUrl = rawurlencode($fullUrl);
+        $encodedTitle = rawurlencode($Blogs->title);
 
         // Detail Header Section
         $blog_detail_header = '
@@ -175,10 +178,10 @@ if (defined("BLOG_DETAIL_PAGE")) {
                             <div class="m-blog-share-bar mt-5 pt-4">
                                 <span class="m-blog-share-label">Share this article</span>
                                 <div class="m-blog-share-icons">
-                                    <a href="#" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
-                                    <a href="#" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                                    <a href="#" aria-label="Copy link"><i class="fa-light fa-link"></i></a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=' . $encodedUrl . '" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://twitter.com/intent/tweet?text=' . $encodedTitle . '&url=' . $encodedUrl . '" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . $encodedUrl . '" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="javascript:void(0);" onclick="copyToClipboard(\'' . $fullUrl . '\')" aria-label="Copy link"><i class="fa-light fa-link"></i></a>
                                 </div>
                             </div>
                         </article>
@@ -212,4 +215,39 @@ if (defined("BLOG_DETAIL_PAGE")) {
 }
 
 $jVars['module:blog-detail-header'] = $blog_detail_header;
-$jVars['module:blog-detail-content'] = $blog_detail_content;
+$jVars['module:blog-detail-content'] = $blog_detail_content . '
+<script>
+function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function() {
+            alert("Link copied to clipboard!");
+        }).catch(function(err) {
+            fallbackCopyToClipboard(text, err);
+        });
+        return;
+    }
+
+    fallbackCopyToClipboard(text);
+}
+
+function fallbackCopyToClipboard(text, originalError) {
+    try {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textArea);
+        alert("Link copied to clipboard!");
+    } catch (err) {
+        if (originalError) {
+            console.error("Could not copy text: ", originalError);
+        }
+        console.error("Could not copy text: ", err);
+        alert("Unable to copy link automatically. Please copy it manually: " + text);
+    }
+}
+</script>';

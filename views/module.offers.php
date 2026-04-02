@@ -342,6 +342,13 @@ if (defined('OFFERS_PAGE') and !isset($_REQUEST['slug'])) {
                     } elseif (!empty($offer->offer_date)) {
                         $dateRange = 'Valid until ' . date("M j, Y", strtotime($offer->offer_date));
                     }
+                    $calendarHtml = '';
+                    if ($offer->deadline_type == 'deadline') {
+                        $calendarHtml = '
+                        <div class="m-offer-location">
+                            <i class="fa-regular fa-calendar-days"></i> ' . $dateRange . '
+                        </div>';
+                    }
                     
                     $offerCards .= '
                     <div class="col-md-6 col-lg-4">
@@ -352,9 +359,7 @@ if (defined('OFFERS_PAGE') and !isset($_REQUEST['slug'])) {
                             </div>
                             <div class="m-offer-v-content">
                                 <h3 class="m-offer-v-title">' . htmlspecialchars($offer->title) . '</h3>
-                                <div class="m-offer-location">
-                                    <i class="fa-regular fa-calendar-days"></i> ' . $dateRange . '
-                                </div>
+                                ' . $calendarHtml . '
                                 <p class="m-offer-v-desc">' . substr(strip_tags($offer->content), 0, 120) . '...</p>
                                 <a href="' . BASE_URL . 'offer/' . $offer->slug . '" class="btn m-btn-pill-dark">Details</a>
                             </div>

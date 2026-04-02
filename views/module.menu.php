@@ -203,12 +203,32 @@ $jVars['module:footer-menu'] = $result;
 
 $resfooter = '';
 $FmenuRec = Menu::getMenuByParent(0, 2);
+
 if ($FmenuRec) {
     foreach ($FmenuRec as $FmenuRow) {
-        $resfooter .= '
-    <li><a href="' . BASE_URL . $FmenuRow->linksrc . '" class="text-decoration-underline text-dark fw-normal small">' . $FmenuRow->name . '</a></li>';
+
+        // Check if it's a modal link
+        if ($FmenuRow->linksrc == '#virtualTourModal') {
+            $resfooter .= '
+            <li>
+                <a href="' . $FmenuRow->linksrc . '" 
+                   data-bs-toggle="modal"
+                   class="text-decoration-underline text-dark fw-normal small">
+                   ' . $FmenuRow->name . '
+                </a>
+            </li>';
+        } else {
+            $resfooter .= '
+            <li>
+                <a href="' . BASE_URL . $FmenuRow->linksrc . '" 
+                   class="text-decoration-underline text-dark fw-normal small">
+                   ' . $FmenuRow->name . '
+                </a>
+            </li>';
+        }
     }
 }
+
 $jVars['module:footer-menu-list'] = $resfooter;
 
 $resfooter = '';
