@@ -20,4 +20,4 @@ require_once('views/modules.php');
 
 template($template, $jVars, $currentTemplate);
 
-?>
+?>  

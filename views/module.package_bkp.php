@@ -736,7 +736,7 @@ if (defined('HOME_PAGE')) {
 
 
 $jVars['module:list-modalpop-up'] = $modalpopup;
-$jVars['module:list-package-room'] = $room_package;
+$jVars['module:list-package-room1'] = $room_package;
 $jVars['module:list-package-room-bred'] = $roombread;
 
 

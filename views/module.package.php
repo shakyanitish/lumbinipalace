@@ -47,8 +47,7 @@ if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
 
                 if ($counter < 6) {
                     $singlepage .= $single;
-                }
-                else {
+                } else {
                     $single_more .= $single;
                 }
 
@@ -85,8 +84,7 @@ if (defined('PACKAGE_PAGE') and !isset($_REQUEST['slug'])) {
 ';
     }
     $jVars['module:packages'] = $roombread;
-}
-else {
+} else {
     $pkgRow = Package::find_by_slug($_REQUEST['slug']);
     $sql = "SELECT *  FROM tbl_package_sub WHERE status='1' AND type = '{$pkgRow->id}' ORDER BY sortorder DESC ";
 
@@ -181,8 +179,7 @@ if (isset($_REQUEST['slug'])) {
         $file_path = SITE_ROOT . 'images/package/banner/' . $pkgRowList[0];
         if (file_exists($file_path) and !empty($pkgRowList[0])) {
             $imglink = IMAGE_PATH . 'package/banner/' . $pkgRowList[0];
-        }
-        else {
+        } else {
             $imglink = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
         }
     }
@@ -261,8 +258,7 @@ if (isset($_REQUEST['slug'])) {
         </div>
     </section>';
     }
-}
-else {
+} else {
     $siteRegulars = Config::find_by_id(1);
     $imglink = ($siteRegulars) ? IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload : '';
     $pkgRowImg = !empty($pkgRow) ? $pkgRow->banner_image : '';
@@ -271,8 +267,7 @@ else {
         $file_path = SITE_ROOT . 'images/package/banner/' . $pkgRowList[0];
         if (file_exists($file_path) and !empty($pkgRowList[0])) {
             $imglink = IMAGE_PATH . 'package/banner/' . $pkgRowList[0];
-        }
-        else {
+        } else {
             $imglink = ($siteRegulars) ? IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload : '';
         }
     }
@@ -321,7 +316,7 @@ else {
         $max_count = count($subpkgRec);
 
         foreach ($pkgRec as $key => $subpkgRow) {
-            $gallRec = SubPackageImage::getImagelimit_by(3, $subpkgRow->id);
+            $gallRec = SubPackageImage::getImagelimit_by(100, $subpkgRow->id);
             $subpkg_caro = '';
             foreach ($gallRec as $row) {
                 $file_path = SITE_ROOT . 'images/package/galleryimages/' . $row->image;
@@ -367,11 +362,6 @@ else {
                     $image1 = IMAGE_PATH . 'static/default-art-pac-sub.jpg';
                 }
             }
-
-            //  <div class="ul-project-info">
-            //                                 <span class="icon"><i class="fa-light fa-timer"></i></span>
-            //                                 <span class="text">' . $subpkgRow->theatre_style. '</span>
-            //                             </div>
 
 
             $st = '';
@@ -473,41 +463,76 @@ if (defined('HOME_PAGE')) {
                 $imgpath = IMAGE_PATH . 'static/default-art-pac-sub.jpg';
                 if (!empty($subpkgRow->image2)) {
                     $imgpath = IMAGE_PATH . 'subpackage/image/' . $subpkgRow->image2;
-                }
-                elseif ($subpkgRow->image != "a:0:{}") {
+                } elseif ($subpkgRow->image != "a:0:{}") {
                     $imageList = unserialize($subpkgRow->image);
                     if (!empty($imageList[0])) {
                         $imgpath = IMAGE_PATH . 'subpackage/' . $imageList[0];
                     }
                 }
 
+                $gallRec = SubPackageImage::getImagelist_by($subpkgRow->id);
+                $gallery_images = array();
+                if (!empty($gallRec)) {
+                    foreach ($gallRec as $row) {
+                        $gallery_images[] = IMAGE_PATH . 'package/galleryimages/' . $row->image;
+                    }
+                }
+                if (empty($gallery_images)) {
+                    $gallery_images[] = $imgpath;
+                }
+                $data_images_attr = htmlspecialchars(json_encode($gallery_images), ENT_QUOTES, 'UTF-8');
+
                 $room_list_html .= '
-                <div class="swiper-slide">
-                    <div class="m-room-slide-card">
-                        <div class="m-room-slide-img">
-                            <img src="' . $imgpath . '" alt="' . $subpkgRow->title . '">
-                            <a href="' . $imgpath . '" class="m-room-gallery-btn"><i class="fa-solid fa-expand"></i></a>
-                        </div>
-                        <div class="m-room-slide-body">
-                            <a href="' . BASE_URL . 'room/' . $subpkgRow->slug . '" class="m-room-slide-title">' . $subpkgRow->title . ' <i class="fa-solid fa-chevron-right" style="font-size: 13px; margin-left: 4px;"></i></a>
-                            <div class="m-room-slide-footer">
-                                <a href="' . BASE_URL . 'room/' . $subpkgRow->slug . '" class="m-view-more">View More</a>
-                                <a href="#" class="m-room-slide-btn">View Rates</a>
+
+                  <div class="swiper-slide">
+                            <div class="m-room-slide-card">
+                                <div class="m-room-slide-img">
+                                    <img src="' . $imgpath . '" alt="' . $subpkgRow->title . '">
+                                    <button class="m-room-gallery-btn m-room-zoom-btn"
+                                        data-room-name="' . $subpkgRow->title . '"
+                                        data-room-link="' . BASE_URL . 'room/' . $subpkgRow->slug . '"
+                                        data-images="' . $data_images_attr . '">
+                                        <i class="fa-solid fa-expand"></i>
+                                    </button>
+                                </div>
+                                <div class="m-room-slide-body">
+                                    <a href="' . BASE_URL . 'room/' . $subpkgRow->slug . '" class="m-room-slide-title">' . $subpkgRow->title . ' <i
+                                            class="fa-solid fa-chevron-right"
+                                            style="font-size: 13px; margin-left: 4px;"></i></a>
+                                    <div class="m-room-slide-footer">
+                                        <a href="' . BASE_URL . 'room/' . $subpkgRow->slug . '" class="m-view-more">View More</a>
+                                        <a href="#" class="m-room-slide-btn">View Rates</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>';
+
+';
             }
         }
 
         $pRow = $roompkg[0];
         $room_package = '
-        <section class="m-rooms wow animate__fadeInUp">
+
+                <section class="m-rooms wow animate__fadeInUp">
             <div class="m-rooms-header">
                 <h2 class="m-section-title">Rooms &amp; Suites</h2>
             </div>
             <div class="m-rooms-slider-container">
-                <div class="m-rooms-nav-wrapper">
+                <!-- Mobile Navigation (Arrows + Fraction) -->
+                <div class="m-rooms-nav-mob d-flex d-lg-none justify-content-between align-items-center mb-4 px-2">
+                    <div class="m-rooms-prev-mob cursor-pointer d-flex align-items-center justify-content-center">
+                        <span class="m-rooms-line-mob m-rooms-line-prev-mob"></span>
+                    </div>
+                    <div class="m-rooms-pagination-mob" style="font-size: 12px; font-weight: 500; letter-spacing: 2px;">
+                        01 / 06</div>
+                    <div class="m-rooms-next-mob cursor-pointer d-flex align-items-center justify-content-center">
+                        <span class="m-rooms-line-mob m-rooms-line-next-mob"></span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="m-rooms-nav-wrapper d-none d-lg-flex">
                     <div class="m-rooms-pagination"></div>
                     <div class="m-rooms-nav d-flex align-items-center" style="gap: 100px;">
                         <div class="m-rooms-prev cursor-pointer d-flex align-items-center "
@@ -524,11 +549,14 @@ if (defined('HOME_PAGE')) {
                 </div>
                 <div class="swiper m-rooms-swiper">
                     <div class="swiper-wrapper">
-                        ' . $room_list_html . '
+                       ' . $room_list_html . '
                     </div>
                 </div>
             </div>
-        </section>';
+        </section>
+
+
+';
     }
 }
 
@@ -574,6 +602,95 @@ if (!empty($overviewPkg)) {
 }
 
 $overview_section = '
+        <section class="m-overview-new wow animate__fadeInUp">
+            <div class="container container-custom">
+                <div class="m-overview-header text-center">
+                    <p class="m-overview-label-new">WELCOME TO LUMBINI PALACE RESORT</p>
+                    <div class="m-overview-divider-red"></div>
+                    <h2 class="m-overview-title-main">Escape to spacious Lumbini hotel <br> rooms</h2>
+                </div>
+
+                <div class="m-overview-grid-new mt-5 collapsed" id="overviewGrid">
+                    ' . $overview_items_html . '
+                </div>
+
+                <div class="text-start mt-4">
+                    <a href="#" class="m-overview-see-more" id="seeMoreBtn">See More</a>
+                    <a href="#" class="m-overview-see-less d-none" id="seeLessBtn">See Less</a>
+                </div>
+            </div>
+        </section>
+
+';
+
+$jVars['module:rooms-overview'] = $overview_section;
+
+/* * Rooms Page - Overview Section */
+
+// Fetch overview items from tbl_package incexc field
+$overview_items_html = '';
+$overviewPkg = Package::find_by_sql("SELECT incexc FROM tbl_package WHERE status=1 AND type=3 LIMIT 1");
+
+if (!empty($overviewPkg)) {
+    foreach ($overviewPkg as $pkg) {
+        if (!empty($pkg->incexc)) {
+            $includesList = unserialize($pkg->incexc);
+            if (!empty($includesList) && is_array($includesList)) {
+                foreach ($includesList as $item) {
+                    if (!empty($item)) {
+                        // Handle both old format (string) and new format (array)
+                        $itemText = is_array($item) ? $item['text'] : $item;
+                        $itemUrl = is_array($item) ? (!empty($item['url']) ? $item['url'] : '') : '';
+                        $linktarget = ($item['linktype'] == '1') ? ' target="_blank"' : '';
+
+                        $learnMoreLink = '';
+                        if (!empty($itemUrl)) {
+                            $learnMoreLink = '<a href="' . htmlspecialchars($itemUrl) . '"' . $linktarget . '
+                                    class="text-dark fw-bold text-decoration-underline">Learn More</a>';
+                        }
+
+                        $overview_items_html .= '
+                    <div class="col-md-4">
+                        <div class="h-100 ps-3 py-1 m-meeting-feature-border">
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">' . $itemText . ' ' . $learnMoreLink . '</p>
+                        </div>
+                    </div>
+
+
+
+                        ';
+                    }
+                }
+            }
+        }
+    }
+}
+
+$overview_section = '
+
+        <section class="m-meeting-overview bg-white pb-5">
+            <div class="container">
+                <!-- Meeting Info Text -->
+                <div class="text-center pb-2 mx-auto m-meeting-info-wrap">
+                    ' . $jVars['module:event-content1'] . '
+                </div>
+                <div class="text-center pb-4">
+                    <button class="btn m-btn-book-table">Learn More</button>
+                </div>
+                <!-- 3 Columns with Red Borders -->
+                <div class="row gx-4 gx-lg-5 gy-4 align-items-stretch pb-3">
+                    ' . $overview_items_html . '
+                </div>
+
+                <div class="text-center mt-3 mb-4">
+                    <a href="#" class="text-muted text-decoration-none font-secondary m-meeting-see-more"><span
+                            class="text-decoration-underline ul-underline-offset">See More</span></a>
+                </div>
+            </div>
+        </section>
+
+
+
         <section class="m-overview-new wow animate__fadeInUp">
             <div class="container container-custom">
                 <div class="m-overview-header text-center">
@@ -685,13 +802,14 @@ $jVars['module:dine-banner'] = $dining_banner;
 
 
 // Event Banner & Stats
-$event_banner = ''; $pkg = null;
+$event_banner = '';
+$pkg = null;
 $pkgExp = Package::find_by_sql("SELECT * FROM tbl_package WHERE status=1 AND type=3 LIMIT 1");
 if (!empty($pkgExp)) {
     $pkg = $pkgExp[0];
     $siteRegulars = Config::find_by_id(1);
     $imglink = ($siteRegulars) ? IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload : '';
-    
+
     if (!empty($pkg->banner_image) && $pkg->banner_image != "a:0:{}") {
         $pkgRowList = unserialize($pkg->banner_image);
         if (!empty($pkgRowList[0])) {
@@ -708,7 +826,7 @@ if (!empty($pkgExp)) {
             <div class="ul-banner-slide marriott-slide-image" data-img="' . $imglink . '"></div>
         </div>
     </section>';
-    
+
     $jVars['module:eventroom'] = !empty($pkg->events_room) ? $pkg->events_room : '';
     $jVars['module:eventspace'] = !empty($pkg->total_event_space) ? $pkg->total_event_space : '';
     $jVars['module:eventcapacity'] = !empty($pkg->capacity_largest_space) ? $pkg->capacity_largest_space : '';
@@ -720,7 +838,6 @@ if (!empty($pkgExp)) {
     $jVars['module:event-content3'] = !empty($pkg->content3) ? $pkg->content3 : '';
     $jVars['module:event-content4'] = !empty($pkg->content4) ? $pkg->content4 : '';
     $jVars['module:event-content5'] = !empty($pkg->content5) ? $pkg->content5 : '';
-
 }
 
 
@@ -851,10 +968,10 @@ if (!empty($roompkg)) {
         foreach ($pkgRec as $expRow) {
             $tab_id = 'enjoy-exp-' . $expRow->id;
             $active_class = ($tab_counter === 0) ? 'active' : '';
-            
+
             // Tab button
             $enjoy_stay_tabs .= '<button class="tab-nav ' . $active_class . '" data-tab="' . $tab_id . '">' . htmlspecialchars($expRow->title) . '</button>';
-            
+
             // Tab content
             $imgpath = IMAGE_PATH . 'static/default-art-pac-sub.jpg';
             if (!empty($expRow->image2)) {
@@ -865,10 +982,10 @@ if (!empty($roompkg)) {
                     $imgpath = IMAGE_PATH . 'subpackage/' . $imageList[0];
                 }
             }
-            
+
             $content_text = !empty($expRow->sub_title) ? $expRow->sub_title : $expRow->detail;
             $content_text = substr($content_text, 0, 150) . (strlen($content_text) > 150 ? '...' : '');
-            
+
             $enjoy_stay_content .= '
                     <div class="ul-tab ' . ($tab_counter === 0 ? 'active' : '') . '" id="' . $tab_id . '">
                         <div class="m-enjoy-card">
@@ -882,10 +999,10 @@ if (!empty($roompkg)) {
                             </div>
                         </div>
                     </div>';
-            
+
             $tab_counter++;
         }
-        
+
         $enjoy_stay_section = '
 
         <section class="m-enjoy-stay wow animate__fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
@@ -925,8 +1042,7 @@ if (!empty($roompkg)) {
         foreach ($pkgRec as $subpkgRow) {
             if (!empty($subpkgRow->image2)) {
                 $imgpath = IMAGE_PATH . 'subpackage/image/' . $subpkgRow->image2;
-            }
-            elseif ($subpkgRow->image != "a:0:{}") {
+            } elseif ($subpkgRow->image != "a:0:{}") {
                 $imageList = unserialize($subpkgRow->image);
                 if (!empty($imageList[0])) {
                     $imgpath = IMAGE_PATH . 'subpackage/' . $imageList[0];
@@ -1020,8 +1136,7 @@ if (!empty($roompkg)) {
             $imgpath = IMAGE_PATH . 'static/default-art-pac-sub.jpg';
             if (!empty($subpkgRow->image2)) {
                 $imgpath = IMAGE_PATH . 'subpackage/image/' . $subpkgRow->image2;
-            }
-            elseif ($subpkgRow->image != "a:0:{}") {
+            } elseif ($subpkgRow->image != "a:0:{}") {
                 $imageList = unserialize($subpkgRow->image);
                 if (!empty($imageList[0])) {
                     $imgpath = IMAGE_PATH . 'subpackage/' . $imageList[0];
@@ -1067,7 +1182,7 @@ $resubpkgDetail = '';
 $subimg = '';
 $imageList = '';
 
-if ((defined('SUBPACKAGE_PAGE') || defined('EXPERIENCE_PAGE')|| defined('ROOM_PAGE')) and isset($_REQUEST['slug'])) {
+if ((defined('SUBPACKAGE_PAGE') || defined('EXPERIENCE_PAGE') || defined('ROOM_PAGE')) and isset($_REQUEST['slug'])) {
     $slug = !empty($_REQUEST['slug']) ? addslashes($_REQUEST['slug']) : '';
     $subpkgRec = Subpackage::find_by_slug($slug);
 
@@ -1076,86 +1191,86 @@ if ((defined('SUBPACKAGE_PAGE') || defined('EXPERIENCE_PAGE')|| defined('ROOM_PA
 
 
 
-// New gallery for Swiper in room_details.html
-$subpkg_swiper_gallery = '';
-if (!empty($gallRec)) {
-    foreach ($gallRec as $row) {
-        $file_path = SITE_ROOT . 'images/package/galleryimages/' . $row->image;
-        if (file_exists($file_path) and !empty($row->image)) {
-            $img_url = IMAGE_PATH . 'package/galleryimages/' . $row->image;
-            $subpkg_swiper_gallery .= '
+        // New gallery for Swiper in room_details.html
+        $subpkg_swiper_gallery = '';
+        if (!empty($gallRec)) {
+            foreach ($gallRec as $row) {
+                $file_path = SITE_ROOT . 'images/package/galleryimages/' . $row->image;
+                if (file_exists($file_path) and !empty($row->image)) {
+                    $img_url = IMAGE_PATH . 'package/galleryimages/' . $row->image;
+                    $subpkg_swiper_gallery .= '
             <div class="swiper-slide">
                 <div class="ul-banner-slide marriott-slide-image" data-img="' . $img_url . '"></div>
             </div>';
+                }
+            }
         }
-    }
-}
-if (empty($subpkg_swiper_gallery)) {
-    if (!empty($subpkgRec->image)) {
-        $img_url = IMAGE_PATH . 'subpackage/' . $subpkgRec->image;
-    } else {
-        $siteRegulars = Config::find_by_id(1);
-        $img_url = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
-    }
-    $subpkg_swiper_gallery = '
+        if (empty($subpkg_swiper_gallery)) {
+            if (!empty($subpkgRec->image)) {
+                $img_url = IMAGE_PATH . 'subpackage/' . $subpkgRec->image;
+            } else {
+                $siteRegulars = Config::find_by_id(1);
+                $img_url = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
+            }
+            $subpkg_swiper_gallery = '
     <div class="swiper-slide">
         <div class="ul-banner-slide marriott-slide-image" data-img="' . $img_url . '"></div>
     </div>';
-}
-$jVars['module:sub-package-swiper-gallery'] = $subpkg_swiper_gallery;
+        }
+        $jVars['module:sub-package-swiper-gallery'] = $subpkg_swiper_gallery;
 
-// Granular features for room_details.html
-$subpkg_features_list = '';
-if (!empty($subpkgRec->feature)) {
-    $ftRec = unserialize($subpkgRec->feature);
-    if (!empty($ftRec)) {
-        foreach ($ftRec as $k => $v) {
-            if (empty($v[1]))
-                continue;
-            $feattitle = !empty($v[0][0]) ? $v[0][0] : 'Amenities';
-            $feature_items = '';
-            foreach ($v[1] as $kk => $vv) {
-                $sfetname = Features::find_by_id($vv);
-                if ($sfetname) {
-                    $feature_items .= '<li>' . $sfetname->title . '</li>';
-                }
-            }
-            $subpkg_features_list .= '
+        // Granular features for room_details.html
+        $subpkg_features_list = '';
+        if (!empty($subpkgRec->feature)) {
+            $ftRec = unserialize($subpkgRec->feature);
+            if (!empty($ftRec)) {
+                foreach ($ftRec as $k => $v) {
+                    if (empty($v[1]))
+                        continue;
+                    $feattitle = !empty($v[0][0]) ? $v[0][0] : 'Amenities';
+                    $feature_items = '';
+                    foreach ($v[1] as $kk => $vv) {
+                        $sfetname = Features::find_by_id($vv);
+                        if ($sfetname) {
+                            $feature_items .= '<li>' . $sfetname->title . '</li>';
+                        }
+                    }
+                    $subpkg_features_list .= '
             <div class="spec-item">
                 <div class="spec-item-title">' . $feattitle . '</div>
                 <ul class="spec-list">
                     ' . $feature_items . '
                 </ul>
             </div>';
+                }
+            }
         }
-    }
-}
-$jVars['module:sub-package-features-list'] = $subpkg_features_list;
+        $jVars['module:sub-package-features-list'] = $subpkg_features_list;
 
-// Itinerary FAQ for room_details.html
-$subpkg_itinerary_faq = '';
-$itineraryInfos = Itinerary::get_itinerary($subpkgRec->id);
-if (!empty($itineraryInfos)) {
-    $faqItems = '';
-    foreach ($itineraryInfos as $i => $iti) {
-        $collapseId = 'itiFaq' . ($i + 1);
-        $expandedAttr = '';
-        $btnClass = ' collapsed';
-        $faqItems .= '
+        // Itinerary FAQ for room_details.html
+        $subpkg_itinerary_faq = '';
+        $itineraryInfos = Itinerary::get_itinerary($subpkgRec->id);
+        if (!empty($itineraryInfos)) {
+            $faqItems = '';
+            foreach ($itineraryInfos as $i => $iti) {
+                $collapseId = 'itiFaq' . ($i + 1);
+                $expandedAttr = '';
+                $btnClass = ' collapsed';
+                $faqItems .= '
         <div class="accordion-item border-top ' . ($i === count($itineraryInfos) - 1 ? 'border-bottom' : 'border-bottom-0') . '">
             <h2 class="accordion-header">
                 <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
                     type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-            . htmlspecialchars($iti->title) .
-            '</button>
+                    . htmlspecialchars($iti->title) .
+                    '</button>
             </h2>
             <div id="' . $collapseId . '" class="accordion-collapse collapse ' . $expandedAttr . '" data-bs-parent="#faqAccordion">
                 <div class="accordion-body text-muted pt-0 pb-4">' . $iti->content . '</div>
             </div>
         </div>';
-    }
+            }
 
-    $subpkg_itinerary_faq = '
+            $subpkg_itinerary_faq = '
     <section class="m-property-details py-5 bg-white">
         <div class="container">
             <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
@@ -1164,12 +1279,12 @@ if (!empty($itineraryInfos)) {
             </div>
         </div>
     </section>';
-}
-    $jVars['module:sub-package-itinerary-faq'] = $subpkg_itinerary_faq;
-    $jVars['module:sub-package-detail'] = $resubpkgDetail;
-    $jVars['module:sub-package-title'] = $subpkgRec->title;
-    $jVars['module:sub-package-subtitle'] = $subpkgRec->sub_title;
-    $jVars['module:sub-package-content'] = $subpkgRec->content;
-    $jVars['module:sub-package-brief'] = $subpkgRec->detail;
+        }
+        $jVars['module:sub-package-itinerary-faq'] = $subpkg_itinerary_faq;
+        $jVars['module:sub-package-detail'] = $resubpkgDetail;
+        $jVars['module:sub-package-title'] = $subpkgRec->title;
+        $jVars['module:sub-package-subtitle'] = $subpkgRec->sub_title;
+        $jVars['module:sub-package-content'] = $subpkgRec->content;
+        $jVars['module:sub-package-brief'] = $subpkgRec->detail;
     } // end if !empty($subpkgRec)
 } // end if defined page

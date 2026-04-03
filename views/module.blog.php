@@ -71,7 +71,7 @@ $jVars['module:bloglist'] = $bl;
 // New Home Page Blog List for Ideal Model
 $homelatestblog = '';
 if (defined('HOME_PAGE') || defined('BLOG_DETAIL_PAGE')) {
-    $latestBlogs = Blog::get_latestblog_by(3);
+    $latestBlogs = Blog::get_latestblog_by();
     if (!empty($latestBlogs)) {
         $blogItems = '';
         foreach ($latestBlogs as $blog) {
@@ -181,7 +181,6 @@ if (defined("BLOG_DETAIL_PAGE")) {
                                     <a href="https://www.facebook.com/sharer/sharer.php?u=' . $encodedUrl . '" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
                                     <a href="https://twitter.com/intent/tweet?text=' . $encodedTitle . '&url=' . $encodedUrl . '" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
                                     <a href="https://www.linkedin.com/sharing/share-offsite/?url=' . $encodedUrl . '" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                                    <a href="javascript:void(0);" onclick="copyToClipboard(\'' . $fullUrl . '\')" aria-label="Copy link"><i class="fa-light fa-link"></i></a>
                                 </div>
                             </div>
                         </article>
@@ -216,38 +215,4 @@ if (defined("BLOG_DETAIL_PAGE")) {
 
 $jVars['module:blog-detail-header'] = $blog_detail_header;
 $jVars['module:blog-detail-content'] = $blog_detail_content . '
-<script>
-function copyToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(function() {
-            alert("Link copied to clipboard!");
-        }).catch(function(err) {
-            fallbackCopyToClipboard(text, err);
-        });
-        return;
-    }
-
-    fallbackCopyToClipboard(text);
-}
-
-function fallbackCopyToClipboard(text, originalError) {
-    try {
-        var textArea = document.createElement("textarea");
-        textArea.value = text;
-        textArea.style.position = "fixed";
-        textArea.style.left = "-9999px";
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand("copy");
-        document.body.removeChild(textArea);
-        alert("Link copied to clipboard!");
-    } catch (err) {
-        if (originalError) {
-            console.error("Could not copy text: ", originalError);
-        }
-        console.error("Could not copy text: ", err);
-        alert("Unable to copy link automatically. Please copy it manually: " + text);
-    }
-}
-</script>';
+';

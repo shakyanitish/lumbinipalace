@@ -164,13 +164,13 @@
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/swiper.js"></script>
-        <script src="assets/js/calendar.js"></script>
+    <script src="assets/js/calendar.js"></script>
 
     <!-- Mobile Floating Action Button -->
     <div class="m-mob-floating-action d-lg-none">
-        <a href="https://booking.marriott.com/rez/v3/hotel/61486" class="btn m-btn-check-availability">Check
-            Availability</a>
+        <a href="#" class="btn m-btn-check-availability" id="mobile-check-availability-btn">Check Availability</a>
     </div>
+
     <!-- Mobile Booking Form Overlay -->
     <div class="m-mob-booking-overlay d-lg-none" id="m-mob-booking-overlay">
         <div class="m-mob-booking-header">
@@ -210,7 +210,8 @@
     <div class="m-mob-calendar-overlay d-lg-none" id="m-mob-calendar-overlay">
         <div class="m-mob-calendar-header flex-shrink-0">
             <div class="m-mob-cal-top">
-                <div class="m-mob-cal-label"><i class="bi bi-calendar3"></i> <span id="m-mob-cal-label-text">DATES (1 NIGHT)</span></div>
+                <div class="m-mob-cal-label"><i class="bi bi-calendar3"></i> <span id="m-mob-cal-label-text">DATES (1
+                        NIGHT)</span></div>
                 <div class="m-mob-cal-close" id="m-mob-calendar-close">Cancel</div>
             </div>
             <div class="m-mob-cal-dates" id="m-mob-cal-dates-display">
@@ -240,8 +241,11 @@
                 <div class="d-flex flex-wrap justify-content-center gap-3 px-3 mb-4" id="mob-flex-months-grid"></div>
             </div>
         </div>
-        <div class="m-mob-full-footer" style="position:sticky;bottom:0;background:#fff;padding:16px;border-top:1px solid #eee;z-index:10;">
-            <button class="m-mob-btn-done w-100" id="m-mob-calendar-done" style="background:var(--ul-primary);color:#fff;border:none;padding:14px;font-size:15px;font-weight:700;border-radius:50px;width:100%;">View Rates</button>
+        <div class="m-mob-full-footer"
+            style="position:sticky;bottom:0;background:#fff;padding:16px;border-top:1px solid #eee;z-index:10;">
+            <button class="m-mob-btn-done w-100" id="m-mob-calendar-done"
+                style="background:var(--ul-primary);color:#fff;border:none;padding:14px;font-size:15px;font-weight:700;border-radius:50px;width:100%;">View
+                Rates</button>
         </div>
     </div>
 
@@ -260,7 +264,7 @@
             <div class="m-mob-counter-row">
                 <div class="m-mob-counter-info">
                     <div class="m-mob-counter-label">Rooms</div>
-                    <div class="m-mob-counter-hint">(Max: 3 Rooms/person)</div>
+                    <div class="m-mob-counter-hint">(Max: 9 Rooms/person)</div>
                 </div>
                 <div class="m-mob-counter-ctrl">
                     <button class="m-mob-counter-btn minus" data-type="rooms"><i class="fa-solid fa-minus"></i></button>
@@ -365,6 +369,7 @@
             <button class="m-mob-btn-done" id="m-mob-special-rates-done">Done</button>
         </div>
     </div>
+
 </body>
 
 </html>

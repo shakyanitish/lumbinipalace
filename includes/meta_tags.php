@@ -71,15 +71,11 @@ function className_metatags()
     return '';
 }
 
-function getImageMetaTag($imagePath, $defaultImage, &$seoSources)
+function getImageMetaTag($localPath, $webURL, $defaultURL, &$seoSources)
 {
-    if (file_exists($imagePath)) {
-        $seoSources .= '<meta property="og:image" content="' . $imagePath . '">' . "\n";
-        $seoSources .= '<meta property="twitter:image" content="' . $imagePath . '">' . "\n";
-    } else {
-        $seoSources .= '<meta property="og:image" content="' . $defaultImage . '">' . "\n";
-        $seoSources .= '<meta property="twitter:image" content="' . $defaultImage . '">' . "\n";
-    }
+    $imageToShow = (!empty($localPath) && file_exists($localPath)) ? $webURL : $defaultURL;
+    $seoSources .= '<meta property="og:image" content="' . $imageToShow . '">' . "\n";
+    $seoSources .= '<meta property="twitter:image" content="' . $imageToShow . '">' . "\n";
 }
 
 function MetaTagsFor_SEO()
@@ -194,91 +190,87 @@ function MetaTagsFor_SEO()
     $seoSources .= '<meta name="author" content="Longtail-e-media">' . "\n\n";
 
     //Facebook and twitter sharing
-    $seoSources .= '<meta property="og:title" content="' . $sitetitle . '">' . "\n";
-    $seoSources .= '<meta property="og:description" content="' . $description . '">' . "\n";
-
     $tot = strlen(SITE_FOLDER) + 2;
     $data = substr($_SERVER['REQUEST_URI'], $tot);
+    // Correct URL formatting to avoid double slashes
+    $full_og_url = rtrim(BASE_URL, '/') . '/' . ltrim($data, '/');
+
+    // Dynamic Facebook and Twitter sharing titles/descriptions
+    $og_title = !empty($addtitle) ? $addtitle . $addsep . $sitetitle : $sitetitle;
+    $og_description = !empty($description) ? $description : $config->site_description;
+
+    $seoSources .= '<meta property="og:title" content="' . $og_title . '">' . "\n";
+    $seoSources .= '<meta property="og:description" content="' . $og_description . '">' . "\n";
 
     if (!empty($_REQUEST['slug'])) {
+        $defaultImageWeb = !empty($config->fb_upload) ? IMAGE_PATH . 'preference/' . $config->fb_upload : IMAGE_PATH . 'preference/' . $config->logo_upload;
+        $imagePathLocal = null;
+        $imagePathWeb = null;
+        $classname = $class;
+
         if ($class == 'Global') {
             $nrec = Mlink::find_by_slug($_REQUEST['slug']);
-
             if (!empty($nrec)) {
                 $cls = new $nrec->mod_class;
                 $classname = $nrec->mod_class;
                 $rec = $cls->find_by_slug($_REQUEST['slug']);
-
-                $defaultImage = IMAGE_PATH . 'preference/' . $config->fb_upload;
-
-                if (!empty($rec)) {
-                    switch ($classname) {
-                        case 'Article':
-                            $images = unserialize($rec->image);
-                            $img = !empty($images) ? $images[0] : null;
-                            $imagePath = $img ? SITE_ROOT . 'images/articles/' . $img : null;
-                            break;
-                        case 'Package':
-                            $images = unserialize($rec->banner_image);
-                            $img = !empty($images) ? $images[0] : null;
-                            $imagePath = $img ? SITE_ROOT . 'images/package/banner/' . $img : null;
-                            break;
-                        case 'Subpackage':
-                            $images = unserialize($rec->image);
-                            $img = !empty($images) ? $images[0] : null;
-                            $imagePath = $img ? SITE_ROOT . 'images/subpackage/' . $img : null;
-                            break;
-                        case 'Services':
-                            $images = unserialize($rec->iconimage);
-                            $img = !empty($images) ? $images[0] : null;
-                            $imagePath = $img ? SITE_ROOT . 'images/services/' . $img : null;
-                            break;
-                            
-                        default:
-                            $imagePath = null;
-                    }
-                    $schema .= '
-                        <script type="application/ld+json">
-                        {
-                          "@context": "https://schema.org",
-                          "@type": "WebPage",
-                          "name": "' . $addtitle . $addsep . $sitetitle . '",
-                          "url": "' . BASE_URL . $data . '",
-                          "description": "' . $description . '",
-                          "publisher": {
-                            "@type": "Organization",
-                            "name": "' . $config->sitetitle . '",
-                            "logo": {
-                              "@type": "ImageObject",
-                              "url": "' . IMAGE_PATH . 'preference/' . $config->logo_upload . '"
-                            }
-                          },
-                          "datePublished": "' . $rec->added_date . '",
-                          "dateModified": "' . $rec->modified_date . '",
-                          "potentialAction": {
-                            "@type": "ReadAction",
-                            "target": "' . BASE_URL . $data . '"
-                          }
-                        }
-                        </script>
-                    ';
-                }
-
-                // If an image path was found, use it, otherwise use the default image.
-                getImageMetaTag($imagePath ?? '', $defaultImage, $seoSources);
-            } else {
-                // Default image in case no record is found.
-                getImageMetaTag('', IMAGE_PATH . 'preference/' . $config->fb_upload, $seoSources);
             }
-        } else {
+        }
+        // For non-Global classes, $rec was already fetched above at line 123.
+
+        if (!empty($rec)) {
+            switch ($classname) {
+                case 'Article':
+                    $unserialized = @unserialize($rec->image);
+                    $img = ($unserialized !== false && is_array($unserialized)) ? $unserialized[0] : $rec->image;
+                    if (!empty($img)) {
+                        $imagePathLocal = SITE_ROOT . 'images/articles/' . $img;
+                        $imagePathWeb = IMAGE_PATH . 'articles/' . $img;
+                    }
+                    break;
+                case 'Package':
+                    $unserialized = @unserialize($rec->banner_image);
+                    $img = ($unserialized !== false && is_array($unserialized)) ? $unserialized[0] : $rec->banner_image;
+                    if (!empty($img)) {
+                        $imagePathLocal = SITE_ROOT . 'images/package/banner/' . $img;
+                        $imagePathWeb = IMAGE_PATH . 'package/banner/' . $img;
+                    }
+                    break;
+                case 'Subpackage':
+                    $unserialized = @unserialize($rec->image);
+                    $img = ($unserialized !== false && is_array($unserialized)) ? $unserialized[0] : $rec->image;
+                    if (!empty($img)) {
+                        $imagePathLocal = SITE_ROOT . 'images/subpackage/' . $img;
+                        $imagePathWeb = IMAGE_PATH . 'subpackage/' . $img;
+                    }
+                    break;
+                case 'Services':
+                    $unserialized = @unserialize($rec->iconimage);
+                    $img = ($unserialized !== false && is_array($unserialized)) ? $unserialized[0] : $rec->iconimage;
+                    if (!empty($img)) {
+                        $imagePathLocal = SITE_ROOT . 'images/services/' . $img;
+                        $imagePathWeb = IMAGE_PATH . 'services/' . $img;
+                    }
+                    break;
+                case 'Blog':
+                    $unserialized = @unserialize($rec->image);
+                    $img = ($unserialized !== false && is_array($unserialized)) ? $unserialized[0] : $rec->image;
+                    if (!empty($img)) {
+                        $imagePathLocal = SITE_ROOT . 'images/blog/' . $img;
+                        $imagePathWeb = IMAGE_PATH . 'blog/' . $img;
+                    }
+                    break;
+            }
+
+            // Schema for specific record
             $schema .= '
                 <script type="application/ld+json">
                 {
                   "@context": "https://schema.org",
                   "@type": "WebPage",
                   "name": "' . $addtitle . $addsep . $sitetitle . '",
-                  "url": "' . BASE_URL . $data . '",
-                  "description": "' . $description . '",
+                  "url": "' . $full_og_url . '",
+                  "description": "' . $og_description . '",
                   "publisher": {
                     "@type": "Organization",
                     "name": "' . $config->sitetitle . '",
@@ -287,26 +279,31 @@ function MetaTagsFor_SEO()
                       "url": "' . IMAGE_PATH . 'preference/' . $config->logo_upload . '"
                     }
                   },
+                  "datePublished": "' . (isset($rec->added_date) ? $rec->added_date : '') . '",
+                  "dateModified": "' . (isset($rec->modified_date) ? $rec->modified_date : '') . '",
                   "potentialAction": {
                     "@type": "ReadAction",
-                    "target": "' . BASE_URL . $data . '"
+                    "target": "' . $full_og_url . '"
                   }
                 }
                 </script>
             ';
 
-            // Default image for non-'Global' class cases.
-            getImageMetaTag('', IMAGE_PATH . 'preference/' . $config->fb_upload, $seoSources);
+            // Output image tag
+            getImageMetaTag($imagePathLocal, $imagePathWeb, $defaultImageWeb, $seoSources);
+        } else {
+            getImageMetaTag('', '', $defaultImageWeb, $seoSources);
         }
     } else {
+        $defaultImageWeb = !empty($config->fb_upload) ? IMAGE_PATH . 'preference/' . $config->fb_upload : IMAGE_PATH . 'preference/' . $config->logo_upload;
         $schema .= '
             <script type="application/ld+json">
             {
               "@context": "https://schema.org",
               "@type": "WebPage",
               "name": "' . $addtitle . $addsep . $sitetitle . '",
-              "url": "' . BASE_URL . $data . '",
-              "description": "' . $description . '",
+              "url": "' . $full_og_url . '",
+              "description": "' . $og_description . '",
               "publisher": {
                 "@type": "Organization",
                 "name": "' . $config->sitetitle . '",
@@ -317,17 +314,17 @@ function MetaTagsFor_SEO()
               },
               "potentialAction": {
                 "@type": "ReadAction",
-                "target": "' . BASE_URL . $data . '"
+                "target": "' . $full_og_url . '"
               }
             }
             </script>
         ';
 
-        // Default image when 'slug' is empty or not set.
-        getImageMetaTag('', IMAGE_PATH . 'preference/' . $config->fb_upload, $seoSources);
+        // Default image
+        getImageMetaTag('', '', $defaultImageWeb, $seoSources);
     }
 
-    $seoSources .= '<meta property="og:url" content="' . BASE_URL . $data . '">' . "\n";
+    $seoSources .= '<meta property="og:url" content="' . $full_og_url . '">' . "\n";
     $seoSources .= '<meta property="og:type" content="website">' . "\n";
     $seoSources .= '<meta property="twitter:card" content="summary_large_image">' . "\n\n";
     $seoSources .= '<link rel="canonical" href="' . curPageURL() . '" />' . "\n";

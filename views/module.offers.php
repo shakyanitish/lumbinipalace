@@ -257,61 +257,102 @@ if (!empty($randRec)) {
     }
 }
 
-if (defined('HOME_PAGE')) {
-    $sql = "SELECT * FROM tbl_offers WHERE status='1' and homepage='1' AND (deadline_type='alltime' OR (start_date IS NOT NULL AND offer_date IS NOT NULL AND CURDATE() BETWEEN start_date AND offer_date)) ORDER BY sortorder DESC ";
-    $offrRec = Offers::find_by_sql($sql);
-    if ($offrRec) {
-        $slides = '';
-        foreach ($offrRec as $offrRow) {
-            // Use image if available, fallback to list_image
-            $imageFile = !empty($offrRow->image) ? $offrRow->image : $offrRow->list_image;
-            $imageFolder = !empty($offrRow->image) ? 'offers/' : 'offers/listimage/';
-            $file_path = SITE_ROOT . 'images/' . $imageFolder . $imageFile;
-            if (file_exists($file_path) && !empty($imageFile)) {
-                $badge = !empty($offrRow->tag) ? '
-                    <div class="m-offer-badge"><i class="fa-solid fa-lock" style="font-size: 10px; margin-right: 4px;"></i> ' . $offrRow->tag . '</div>' : '';
+$home_offers = $homeie = '';
+if (defined('HOME_PAGE') and !isset($_REQUEST['slug'])) {
+    $sql = "SELECT * FROM tbl_offers WHERE status='1' ORDER BY sortorder DESC";
+    $offList = Offers::find_by_sql($sql);
+    
+    if (!empty($offList)) {
+        foreach ($offList as $offer) {
+            $currentdate = date("Y-m-d");
+            // Show offer if it's "All Time" or if dates are valid and within range
+            $isAllTime = ($offer->deadline_type == 'alltime' || empty($offer->start_date) || empty($offer->offer_date));
+            $isActive = $isAllTime || ($offer->start_date <= $currentdate && $offer->offer_date >= $currentdate);
 
-                $dateRange = '';
-                if (!empty($offrRow->start_date) && !empty($offrRow->offer_date)) {
-                    $dateRange = date("F j, Y", strtotime($offrRow->start_date)) . ' - ' . date("F j, Y", strtotime($offrRow->offer_date));
-                } elseif (!empty($offrRow->offer_date)) {
-                    $dateRange = 'Valid until ' . date("F j, Y", strtotime($offrRow->offer_date));
+            
+            if ($isActive) {
+                $imageFile = !empty($offer->image) ? $offer->image : $offer->list_image;
+                $imageFolder = !empty($offer->image) ? 'offers/' : 'offers/listimage/';
+                $file_path = SITE_ROOT . 'images/' . $imageFolder . $imageFile;
+                
+                if (file_exists($file_path) && !empty($imageFile)) {
+                    $badge = !empty($offer->tag) ? '
+                                       <div class="m-offer-badge"><i class="fa-solid fa-lock"
+                                            style="font-size: 10px; margin-right: 4px;"></i> ' . htmlspecialchars($offer->tag) . '</div>
+                    
+
+                        ' : '';
+                    
+                    $dateRange = '';
+                    if (!empty($offer->start_date) && !empty($offer->offer_date)) {
+                        $dateRange = date("M j, Y", strtotime($offer->start_date)) . ' - ' . date("M j, Y", strtotime($offer->offer_date));
+                    } elseif (!empty($offer->offer_date)) {
+                        $dateRange = 'Valid until ' . date("M j, Y", strtotime($offer->offer_date));
+                    }
+                    $calendarHtml = '';
+                    if ($offer->deadline_type == 'deadline') {
+                        $calendarHtml = '
+                        <span class="m-offer-dates">' . $dateRange . '</span>
+                        ';
+                    }
+                    
+                    $home_offers .= '
+                            <div class="swiper-slide">
+                                <a href="' . BASE_URL . 'offer/' . $offer->slug . '" class="m-offer-card">
+                                    <img src="' . IMAGE_PATH . $imageFolder . $imageFile . '" alt="' . htmlspecialchars($offer->title) . '"
+                                        class="m-offer-bg">
+                                            ' . $badge . '
+                                    <div class="m-offer-content">
+                                        ' . $calendarHtml . '
+                                        <h3 class="m-offer-title">' . htmlspecialchars($offer->title) . ' <i
+                                                class="fa-solid fa-chevron-right"></i><i
+                                                class="fa-solid fa-arrow-up-right"></i></h3>
+                                    </div>
+                                </a>
+                            </div>
+           ';
                 }
-
-                $slides .= '
-                <div class="swiper-slide">
-                    <a href="' . BASE_URL . 'offer/' . $offrRow->slug . '" class="m-offer-card">
-                        <img src="' . IMAGE_PATH . $imageFolder . $imageFile . '" alt="' . $offrRow->title . '" class="m-offer-bg">
-                        ' . $badge . '
-                        <div class="m-offer-content">
-                            <span class="m-offer-dates">' . $dateRange . '</span>
-                            <h3 class="m-offer-title">' . $offrRow->title
-                    . ' <i class="fa-solid fa-chevron-right"></i><i class="fa-light fa-arrow-up-right"></i></h3>
-                        </div>
-                    </a>
-                </div>';
             }
         }
-
-        $hmresoffr = '
+        
+        $homeie = '
         <section class="m-offers wow animate__fadeInUp">
             <div class="m-offers-inner">
                 <h2 class="m-offers-section-title">Offers &amp; Packages</h2>
                 <div class="m-offers-slider-container position-relative">
                     <div class="swiper m-offers-swiper">
                         <div class="swiper-wrapper">
-                            ' . $slides . '
+                            ' . $home_offers . '
                         </div>
                     </div>
-                    <!-- Navigation / Pagination -->
-                    <div class="m-offers-prev"><i class="fa-solid fa-chevron-left"></i></div>
-                    <div class="m-offers-next"><i class="fa-solid fa-chevron-right"></i></div>
-                    <div class="m-offers-pagination"></div>
+                    <!-- Mobile Navigation / Shared Pagination -->
+                    <div class="d-flex justify-content-center align-items-center d-lg-block mt-4" style="gap: 15px;">
+                        <!-- Mobile Prev Arrow -->
+                        <div class="m-offers-prev-mob cursor-pointer d-flex d-lg-none align-items-center justify-content-center"
+                            style="font-size: 16px; color: #1c1c1c;">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </div>
+
+                        <!-- Shared Pagination (Centered automatically in flex on mobile, text-center on desktop via CSS) -->
+                        <div class="m-offers-pagination d-flex align-items-center justify-content-center"
+                            style="margin-top: 0 !important; width: auto !important;"></div>
+
+                        <!-- Mobile Next Arrow -->
+                        <div class="m-offers-next-mob cursor-pointer d-flex d-lg-none align-items-center justify-content-center"
+                            style="font-size: 16px; color: #1c1c1c;">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+
+                    <!-- Desktop Navigation Arrows -->
+                    <div class="m-offers-prev d-none d-lg-flex"><i class="fa-solid fa-chevron-left"></i></div>
+                    <div class="m-offers-next d-none d-lg-flex"><i class="fa-solid fa-chevron-right"></i></div>
                 </div>
             </div>
         </section>';
     }
 }
+$jVars['module:homeoffers-grid'] = $homeie;
 
 
 // OFFERS GRID SECTION - for offers listing page

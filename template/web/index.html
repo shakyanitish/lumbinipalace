@@ -53,7 +53,8 @@
         <jcms:module:list-package-room/>
 
         <!-- OFFERS & PACKAGES -->
-        <jcms:module:homeoffers-list/>
+        <jcms:module:homeoffers-grid/>
+
 
 
         <!-- VIRTUAL TOUR SECTION -->
@@ -194,7 +195,7 @@
                     <!-- The 360 Iframe / Image placeholder -->
                     <img src="assets/img/dine-details-img-big-1.jpg" alt="Virtual Tour Exterior"
                         class="img-fluid w-100 h-100" style="object-fit: cover;">
-
+                    <!-- <iframe class="w-100 h-100 border-0 m-vt-iframe" title="Lumbini Palace Virtual Tour" src="https://visitingmedia.com/tt8/?ttid=san-francisco-marriott-marquis#/360?group=0&amp;tour=0" allowfullscreen=""></iframe> -->
 
                     <!-- Sliding Sidebar Menu -->
                     <div class="m-vt-sidebar-wrapper position-absolute top-0 bottom-0 start-0 d-flex h-100"
@@ -243,7 +244,7 @@
                             id="vtSidebarToggle">
                             <!-- <div class="m-vt-tab-text fw-bold text-white text-uppercase" style="letter-spacing: 1px; white-space: nowrap;">OPEN MENU</div> -->
                             <!-- Arrow Indicator -->
-                            <div class="m-vt-tab-arrow m-0"></div>
+                            <div class="m-vt-tab-arrow position-absolute"></div>
                         </div>
 
                     </div>
@@ -348,22 +349,241 @@
             </div>
         </div>
     </div>
-
     <!-- JS Libraries (CDN) -->
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js'></script>
     <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
 
-    <!-- Lightgallery JS -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/lightgallery.umd.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/zoom/lg-zoom.umd.min.js'></script>
-    <script
-        src='https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.2/plugins/thumbnail/lg-thumbnail.umd.min.js'></script>
+
 
     <!-- Custom JS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/swiper.js"></script>
+    <script src="assets/js/calendar.js"></script>
+
+    <div class="m-mob-floating-action d-lg-none">
+        <a href="#" class="btn m-btn-check-availability" id="mobile-check-availability-btn">Check Availability</a>
+    </div>
+
+    <!-- Mobile Booking Form Overlay -->
+    <div class="m-mob-booking-overlay d-lg-none" id="m-mob-booking-overlay">
+        <div class="m-mob-booking-header">
+            <i class="fa-solid fa-arrow-left m-mob-booking-back" id="m-mob-booking-close"></i>
+        </div>
+        <div class="m-mob-booking-content">
+            <div class="m-mob-book-field" id="m-mob-dates-trigger">
+                <div class="m-mob-book-label"><i class="bi bi-calendar3"></i> DATES (1 NIGHT)</div>
+                <div class="m-mob-book-value m-mob-book-dates-val">
+                    <span>Sun, Mar 22</span>
+                    <span>Mon, Mar 23</span>
+                </div>
+            </div>
+
+            <div class="m-mob-book-field" id="m-mob-rooms-guests-trigger">
+                <div class="m-mob-book-label">ROOMS & GUESTS</div>
+                <div class="m-mob-book-value">
+                    <span id="m-mob-rooms-guests-val">1 Room, 1 Adult</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+
+            <div class="m-mob-book-field" id="m-mob-special-rates-trigger">
+                <div class="m-mob-book-label">SPECIAL RATES</div>
+                <div class="m-mob-book-value">
+                    <span id="m-mob-special-rates-val">Lowest Regular Rate</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+        </div>
+        <div class="m-mob-booking-footer">
+            <a href="https://booking.marriott.com/rez/v3/hotel/61486" class="m-mob-btn-find">Find a Room</a>
+        </div>
+    </div>
+
+    <!-- Mobile Calendar Overlay -->
+    <div class="m-mob-calendar-overlay d-lg-none" id="m-mob-calendar-overlay">
+        <div class="m-mob-calendar-header flex-shrink-0">
+            <div class="m-mob-cal-top">
+                <div class="m-mob-cal-label"><i class="bi bi-calendar3"></i> <span id="m-mob-cal-label-text">DATES (1 NIGHT)</span></div>
+                <div class="m-mob-cal-close" id="m-mob-calendar-close">Cancel</div>
+            </div>
+            <div class="m-mob-cal-dates" id="m-mob-cal-dates-display">
+                <span class="m-mob-cal-start">Sun, Mar 22</span>
+                <span class="m-mob-cal-end">Mon, Mar 23</span>
+            </div>
+        </div>
+        <div class="m-mob-calendar-body" id="m-mob-calendar-container">
+            <!-- Tabs -->
+            <div class="mob-dates-tabs d-flex border-bottom">
+                <div class="mob-date-tab active" data-mob-tab="specific">Specific Dates</div>
+                <div class="mob-date-tab" data-mob-tab="flexible">Flexible Dates</div>
+            </div>
+            <!-- Specific: calendar renders here -->
+            <div class="mob-cal-specific-wrap" id="mob-cal-specific-wrap"></div>
+            <!-- Flexible Dates -->
+            <div class="mob-cal-flexible-wrap d-none" id="mob-cal-flexible-wrap">
+                <div class="d-flex justify-content-center align-items-center py-4 gap-4">
+                    <span class="fw-bold" style="font-size:15px;color:#1c1c1c;">Number of Nights</span>
+                    <div class="d-flex align-items-center gap-3">
+                        <button class="mhb-count-btn minus disabled" id="mob-flex-minus">-</button>
+                        <span class="mhb-count-num fw-bold" id="mob-flex-nights-count">1</span>
+                        <button class="mhb-count-btn plus" id="mob-flex-plus">+</button>
+                    </div>
+                </div>
+                <div class="border-bottom w-100 mb-4 mx-auto" style="max-width:350px;"></div>
+                <div class="d-flex flex-wrap justify-content-center gap-3 px-3 mb-4" id="mob-flex-months-grid"></div>
+            </div>
+        </div>
+        <div class="m-mob-full-footer" style="position:sticky;bottom:0;background:#fff;padding:16px;border-top:1px solid #eee;z-index:10;">
+            <button class="m-mob-btn-done w-100" id="m-mob-calendar-done" style="background:var(--ul-primary);color:#fff;border:none;padding:14px;font-size:15px;font-weight:700;border-radius:50px;width:100%;">View Rates</button>
+        </div>
+    </div>
+
+
+    <!-- Mobile Rooms & Guests Overlay -->
+    <div class="m-mob-full-overlay d-lg-none" id="m-mob-rooms-guests-overlay">
+        <div class="m-mob-full-header">
+            <div class="m-mob-full-header-top">
+                <div class="m-mob-full-title">ROOMS & GUESTS</div>
+                <div class="m-mob-full-cancel" id="m-mob-rooms-guests-close">Cancel</div>
+            </div>
+            <div class="m-mob-full-current" id="m-mob-rooms-guests-current">1 Room, 1 Adult</div>
+        </div>
+        <div class="m-mob-full-body">
+            <div class="m-mob-full-subheader">MAXIMUM 8 GUESTS PER ROOM</div>
+
+            <div class="m-mob-counter-row">
+                <div class="m-mob-counter-info">
+                    <div class="m-mob-counter-label">Rooms</div>
+                    <div class="m-mob-counter-hint">(Max: 9 Rooms/person)</div>
+                </div>
+                <div class="m-mob-counter-ctrl">
+                    <button class="m-mob-counter-btn minus" data-type="rooms"><i class="fa-solid fa-minus"></i></button>
+                    <span class="m-mob-counter-val" id="m-mob-count-rooms">1</span>
+                    <button class="m-mob-counter-btn plus" data-type="rooms"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="m-mob-counter-row">
+                <div class="m-mob-counter-info">
+                    <div class="m-mob-counter-label">Adults</div>
+                    <div class="m-mob-counter-hint">(Max: 8 total guests/room)</div>
+                </div>
+                <div class="m-mob-counter-ctrl">
+                    <button class="m-mob-counter-btn minus" data-type="adults"><i
+                            class="fa-solid fa-minus"></i></button>
+                    <span class="m-mob-counter-val" id="m-mob-count-adults">1</span>
+                    <button class="m-mob-counter-btn plus" data-type="adults"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="m-mob-counter-row">
+                <div class="m-mob-counter-info">
+                    <div class="m-mob-counter-label">Children</div>
+                    <div class="m-mob-counter-hint">(Max: 8 total guests/room)</div>
+                </div>
+                <div class="m-mob-counter-ctrl">
+                    <button class="m-mob-counter-btn minus" data-type="children"><i
+                            class="fa-solid fa-minus"></i></button>
+                    <span class="m-mob-counter-val" id="m-mob-count-children">0</span>
+                    <button class="m-mob-counter-btn plus" data-type="children"><i
+                            class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="m-mob-full-footer">
+            <button class="m-mob-btn-done" id="m-mob-rooms-guests-done">Done</button>
+        </div>
+    </div>
+
+    <!-- Mobile Special Rates Overlay -->
+    <div class="m-mob-full-overlay d-lg-none" id="m-mob-special-rates-overlay">
+        <div class="m-mob-full-header">
+            <div class="m-mob-full-header-top">
+                <div class="m-mob-full-title">SPECIAL RATES</div>
+                <div class="m-mob-full-cancel" id="m-mob-special-rates-close">Cancel</div>
+            </div>
+            <div class="m-mob-full-current" id="m-mob-special-rates-current">Lowest Regular Rate</div>
+        </div>
+        <div class="m-mob-full-body">
+            <div class="m-mob-full-subheader">SELECT A RATE</div>
+
+            <div class="m-mob-rate-list">
+                <label class="m-mob-rate-item">
+                    <span class="m-mob-rate-label">Lowest Regular Rate</span>
+                    <input type="radio" name="m-mob-rate" value="Lowest Regular Rate" checked>
+                    <span class="m-mob-rate-radio"></span>
+                </label>
+
+                <label class="m-mob-rate-item">
+                    <span class="m-mob-rate-label">Corp/Promo Code</span>
+                    <input type="radio" name="m-mob-rate" value="Corp/Promo Code" id="m-mob-rate-promo-radio">
+                    <span class="m-mob-rate-radio"></span>
+                </label>
+                <div class="m-mob-promo-input-wrapper d-none" id="m-mob-promo-field">
+                    <input type="text" class="m-mob-promo-input" placeholder="Enter Code">
+                    <i class="fa-solid fa-circle-xmark m-mob-promo-clear"></i>
+                </div>
+
+                <label class="m-mob-rate-item">
+                    <span class="m-mob-rate-label">Senior Discount</span>
+                    <input type="radio" name="m-mob-rate" value="Senior Discount">
+                    <span class="m-mob-rate-radio"></span>
+                </label>
+
+                <label class="m-mob-rate-item">
+                    <span class="m-mob-rate-label">AAA/CAA</span>
+                    <input type="radio" name="m-mob-rate" value="AAA/CAA">
+                    <span class="m-mob-rate-radio"></span>
+                </label>
+
+                <label class="m-mob-rate-item">
+                    <span class="m-mob-rate-label">Government & Military</span>
+                    <input type="radio" name="m-mob-rate" value="Government & Military">
+                    <span class="m-mob-rate-radio"></span>
+                </label>
+
+                <label class="m-mob-rate-item">
+                    <span class="m-mob-rate-label">Group Code</span>
+                    <input type="radio" name="m-mob-rate" value="Group Code">
+                    <span class="m-mob-rate-radio"></span>
+                </label>
+
+                <label class="m-mob-rate-item">
+                    <span class="m-mob-rate-label">Marriott Bonvoy Points</span>
+                    <input type="radio" name="m-mob-rate" value="Marriott Bonvoy Points">
+                    <span class="m-mob-rate-radio"></span>
+                </label>
+            </div>
+        </div>
+        <div class="m-mob-full-footer">
+            <button class="m-mob-btn-done" id="m-mob-special-rates-done">Done</button>
+        </div>
+    </div>
+
+    <!-- Custom Room Lightbox -->
+    <div class="m-room-lightbox" id="m-room-lightbox">
+        <button class="m-rlb-close" id="m-rlb-close">&times;</button>
+        <div class="m-rlb-thumbs d-none" id="m-rlb-thumbs"></div>
+        <div class="m-rlb-main">
+            <button class="m-rlb-arrow m-rlb-prev" id="m-rlb-prev">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="m-rlb-img-wrap">
+                <img src="" alt="" id="m-rlb-img">
+            </div>
+            <button class="m-rlb-arrow m-rlb-next" id="m-rlb-next">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="m-rlb-footer">
+            <span class="m-rlb-counter" id="m-rlb-counter">1 of 1</span>
+            <span class="m-rlb-sep">|</span>
+            <span class="m-rlb-title" id="m-rlb-title"></span>
+            <a href="#" class="m-rlb-details-link" id="m-rlb-details-link">View Room Details</a>
+        </div>
+    </div>
 </body>
 
 </html>
