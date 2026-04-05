@@ -37,7 +37,7 @@ foreach ($telno as $index => $tel) {
 
     // separator except last item
     if ($index !== array_key_last($telno)) {
-        $tolllinked .= ' ';
+        $tolllinked .= ', ';
     }
 }
 
@@ -101,7 +101,7 @@ foreach ($emails as $index => $email) {
 
     // separator except last item
     if ($index !== array_key_last($emails)) {
-        $emailinked .= ' ';
+        $emailinked .= ', ';
     }
 }
 
@@ -129,10 +129,10 @@ if (!empty($socialRec)) {
 }
 
 
-
-
 $footer = '
-    <footer class="ul-footer py-5 footer-main">
+
+
+    <footer class="ul-footer py-5 footer-main px-2">
         <div class="container">
             <h2 class="footer-title">Lumbini Palace Resort</h2>
             <div class="row gx-lg-5">
@@ -141,7 +141,7 @@ $footer = '
                         <div class="col-6">
                             <div class="footer-divider"></div>
                             <ul class="list-unstyled mb-0" style="line-height: 2.2;">
-                            ' . $jVars['module:footer-menu-list1'] . '
+                                ' . $jVars['module:footer-menu-list1'] . '
                             </ul>
                         </div>
                         <div class="col-6">
@@ -158,37 +158,22 @@ $footer = '
                         ' . $siteRegulars->fiscal_address . '
                     </p>
                     <p class="small mb-0 fw-normal">
-                        TOLL FREE: ' . $tolllinked . '<br>
-                        ROOM RESERVATIONS PHONE NUMBER: ' . $roomlinked . '<br>
-                        FAX: ' . $faxlinked . '<br>
+                        EMAIL: ' . $emailinked . '<br>
+                        PHONE NUMBER: ' . $tolllinked . '<br>
                     </p>
                 </div>
             </div>
             <div class="footer-divider" style="margin-bottom: 30px;"></div>
             <div class="row">
                 <div class="col-12">
-                    <p class="small d-inline-block me-3 mb-0">
-                        ' . $jVars['site:copyright'] . '
-                    </p>
+                    <p class="small d-inline-block me-3 mb-0">Follow Lumbini Palace Resort</p>
                     ' . $jVars['module:socilaLinkbtmfooter'] . '
-
                 </div>
             </div>
-
         </div>
     </footer>
 
-
-
-
-
-
-
-
-
-
-
-
+        ' . $jVars['module:virtualtour-modal'] . '
 
 
  ';

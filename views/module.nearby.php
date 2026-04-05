@@ -46,32 +46,33 @@ if (!empty($recRows)) {
     $phone = !empty($siteConfig->contact_info) ? $siteConfig->contact_info : '';
 
     $nearbydetail = '
-    <section class="m-location wow animate__fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-        <div class="m-location-inner">
-            <!-- Left Content: Location details & accordion -->
-            <div class="m-location-text">
-                <p class="m-section-label">OUR LOCATION</p>
-                <h2 class="m-section-title">Getting Here</h2>
 
-                <div class="mb-5">
-                    <p class="m-location-address"><strong>' . $siteRegulars->fiscal_address . '</strong><br>
-                    </p>
-                    <p class="m-location-tel mb-5">Tel: <a href="tel:' . $siteRegulars->contact_info . '">' . $siteRegulars->contact_info . '</a></p>
-                </div>
+            <section class="m-location wow animate__fadeInUp">
+            <div class="m-location-inner">
+                <div class="m-location-text">
+                    <p class="m-section-label">OUR LOCATION</p>
+                    <h2 class="m-section-title">Getting Here</h2>
 
-                <!-- Accordion -->
-                <div class="accordion m-location-accordion" id="locationAccordion">
+                    <div class="mb-5">
+                        <p class="m-location-address">' . $siteRegulars->fiscal_address . '</p>
+                        <p class="m-location-tel mb-5">Tel: <a href="tel:' . $siteRegulars->contact_info . '">' . $siteRegulars->contact_info . '</a></p>
+                    </div>
+
+                    <!-- Accordion -->
+                    <div class="accordion m-location-accordion" id="locationAccordion">
                     ' . $nearby_list . '
+                    </div>
+                </div>
+
+                <!-- Right Content: Map -->
+                <div class="m-location-map-wrap p-2">
+                    <iframe id="nearby-map-iframe"
+                        src="' . $first_map . '"
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="' . $sitename . '">
+                    </iframe>
                 </div>
             </div>
-
-            <!-- Right Content: Map -->
-            <div class="m-location-map-wrap p-2">
-                <iframe id="nearby-map-iframe" src="' . $first_map . '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="' . $sitename . '">
-                </iframe>
-            </div>
-        </div>
-    </section>
+        </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

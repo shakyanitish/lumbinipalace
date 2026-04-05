@@ -31,28 +31,24 @@ foreach ($telno as $tel) {
     }
 }
 $header = '
-
-
-
-    <!-- ============ SIDEBAR (MOBILE) ============ -->
-     <div class="ul-sidebar">
+ <!-- ============ SIDEBAR (MOBILE) ============ -->
+        <div class="ul-sidebar">
         <div class="ul-sidebar-top-bar">
             <button class="ul-sidebar-closer"><i class="fa-light fa-xmark"></i></button>
         </div>
-        
+
         <div class="ul-sidebar-brand-section">
             <div class="usbs-logo">
-            <a href="' . BASE_URL . '' . '">
                 <img src="' . IMAGE_PATH . 'preference/' . $siteRegulars->logo_upload . '" alt="LPR Logo" style="height: 60px;">
-            </a>
             </div>
             <div class="usbs-name">
-                <h3>Lumbini Palace<br>Resort</h3>
+                <h3>Lumbini Palace Resort</h3>
             </div>
         </div>
 
         <div class="ul-sidebar-contact-section">
-            <a href="' . $siteRegulars->mapping . '" target="_blank" rel="noopener noreferrer" class="usc-link">
+            <a href="' . $siteRegulars->mapping . '"
+                target="_blank" rel="noopener noreferrer" class="usc-link">
                 <i class="bi bi-geo-alt"></i> <span>VIEW MAP</span>
             </a>
             ' . $tellinkedmobileside . '
@@ -60,7 +56,7 @@ $header = '
 
         <div class="ul-sidebar-nav-container">
             <nav class="ul-header-nav">
-            ' . $jVars['module:mobile-nav'] . ' 
+                 ' . $jVars['module:mobile-nav'] . ' 
             </nav>
         </div>
     </div>
@@ -73,7 +69,7 @@ $header = '
                         style="height: 60px;"></a>
             </div>
             <div class="marriott-header-nav">
-            ' . $jVars['module:desktop-nav'] . '
+                ' . $jVars['module:desktop-nav'] . '
             </div>
         </div>
         <div class="marriott-header-middle-wrapper" style="height: 70px;">
@@ -96,8 +92,8 @@ $header = '
                     <a href="' . $siteRegulars->mapping . '"
                         target="_blank" rel="noopener noreferrer" class="mhm-right-link"><i
                             class="bi bi-geo-alt text-decoration-none"></i> <span>VIEW MAP</span></a>
-                        ' . $jVars['site:phone-news-side'] . '
 
+                    ' . $jVars['site:phone-news-side'] . '
                 </div>
             </div>
         </div>
@@ -112,17 +108,32 @@ $header = '
                             <span>Sun, Mar 08 <span style="margin: 0 10px; color: #767676;">&rarr;</span> Mon, Mar
                                 09</span>
                         </div>
-                       <div class="mhb-dropdown mhb-dates-dropdown">
+                        <div class="mhb-dropdown mhb-dates-dropdown">
                             <div class="mhb-dropdown-header">
                                 <div class="mhb-close-btn"><i class="fa-solid fa-xmark"></i></div>
                             </div>
-                            <div class="mhb-dates-tabs">
-                                <div class="mhb-date-tab active">Specific Dates</div>
-                                <div class="mhb-date-tab">Flexible Dates</div>
-                            </div>
-                            <div class="mhb-calendar-container" id="mhb-calendar-container">
- 
-           
+                            <div id="mhb-dates-content-wrap" class="w-100">
+                                <div class="mhb-dates-tabs">
+                                    <div class="mhb-date-tab active" data-tab="specific">Specific Dates</div>
+                                    <div class="mhb-date-tab" data-tab="flexible">Flexible Dates</div>
+                                </div>
+                                <div class="mhb-calendar-container" id="mhb-calendar-container">
+                                </div>
+                                <!-- Flexible Dates Container -->
+                                <div class="mhb-flexible-dates-container d-none" id="mhb-flexible-dates-container">
+                                    <div class="mhb-flex-nights d-flex justify-content-center align-items-center mb-4 mt-2">
+                                        <span class="mhb-flex-nights-label fw-bold me-4" style="color:#1c1c1c; font-size: 15px;">Number of Nights</span>
+                                        <div class="mhb-counter d-flex align-items-center gap-3">
+                                            <button class="mhb-count-btn minus disabled">-</button>
+                                            <span class="mhb-count-num fw-bold" id="flex-nights-count">1</span>
+                                            <button class="mhb-count-btn plus">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="border-bottom w-100 mb-4 mx-auto" style="max-width: 350px;"></div>
+                                    <div class="mhb-flex-months-grid d-flex flex-wrap justify-content-center gap-3 mb-2" id="flex-months-grid" style="max-width: 600px; margin: 0 auto;">
+                                        <!-- Month pills will be injected via JS -->
+                                    </div>
+                                </div>
                             </div>
                             <div class="mhb-dropdown-done">
                                 <button class="mhb-done-btn">Done</button>
@@ -145,7 +156,7 @@ $header = '
                             <div class="mhb-row" data-type="rooms">
                                 <div class="mhb-row-info">
                                     <span class="mhb-row-label">Rooms</span>
-                                    <span class="mhb-row-subtext">(Max: 3 Rooms/person)</span>
+                                    <span class="mhb-row-subtext">(Max: 9 Rooms/person)</span>
                                 </div>
                                 <div class="mhb-counter">
                                     <button class="mhb-count-btn minus disabled">-</button>
@@ -237,8 +248,7 @@ $header = '
         </div>
     </header>
 
-
-
+    <!-- ============ MOBILE HEADER ============ -->
     <header class="ul-header d-lg-none bg-white border-bottom sticky-top">
         <div class="container-fluid py-2">
             <div class="d-flex justify-content-between align-items-center">
@@ -266,11 +276,6 @@ $header = '
             </div>
         </div>
     </header>
-
-
-
-    <!-- ============ MOBILE HEADER ============ -->
-
 
 
 ';

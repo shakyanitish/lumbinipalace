@@ -345,8 +345,8 @@ switch ($action) {
         $record->feature        = serialize($newArr);
         $record->content         = $_REQUEST['content'];
         $record->content2        = !empty($_REQUEST['content2']) ? $_REQUEST['content2'] : '';
-        $record->included        = !empty($_REQUEST['included']) ? $_REQUEST['included'] : 1;
-        $record->accessible_rooms        = !empty($_REQUEST['accessible_rooms']) ? $_REQUEST['accessible_rooms'] : 1;
+        $record->included        = isset($_REQUEST['included']) ? $_REQUEST['included'] : 1;
+        $record->accessible_rooms        = isset($_REQUEST['accessible_rooms']) ? $_REQUEST['accessible_rooms'] : 1;
         $record->status            = $_REQUEST['status'];
         $record->number_room    = !empty($_REQUEST['number_room']) ? $_REQUEST['number_room'] : '';
         $record->currency         = !empty($_REQUEST['currency']) ? $_REQUEST['currency'] : '';
@@ -369,6 +369,7 @@ switch ($action) {
 
         $record->short_title    = !empty($_REQUEST['short_title']) ? $_REQUEST['short_title'] : '';
         $record->sub_title    = !empty($_REQUEST['sub_title']) ? $_REQUEST['sub_title'] : '';
+        $record->tagline           = !empty($_REQUEST['tagline']) ? $_REQUEST['tagline'] : '';
 
         $record->dress             = !empty($_REQUEST['dress']) ? $_REQUEST['dress'] : '';
         $record->capacity          = !empty($_REQUEST['capacity']) ? $_REQUEST['capacity'] : '';
@@ -456,6 +457,8 @@ switch ($action) {
         $record->type             = $_REQUEST['type'];
         $record->slug             = $_REQUEST['slug'];
         $record->title             = $_REQUEST['title'];
+        $record->tagline           = !empty($_REQUEST['tagline']) ? $_REQUEST['tagline'] : '';
+
         $record->dress             = !empty($_REQUEST['dress']) ? $_REQUEST['dress'] : '';
         $record->capacity          = !empty($_REQUEST['capacity']) ? $_REQUEST['capacity'] : '';
         $record->room_size         = !empty($_REQUEST['room_size']) ? $_REQUEST['room_size'] : '';
@@ -470,8 +473,8 @@ switch ($action) {
         $record->feature        = serialize($newArr);
         $record->content         = $_REQUEST['content'];
         $record->content2         = !empty($_REQUEST['content2']) ? $_REQUEST['content2'] : '';
-        $record->included         = !empty($_REQUEST['included']) ? $_REQUEST['included'] : 1;
-        $record->accessible_rooms         = !empty($_REQUEST['accessible_rooms']) ? $_REQUEST['accessible_rooms'] : 1;
+        $record->included         = isset($_REQUEST['included']) ? $_REQUEST['included'] : 1;
+        $record->accessible_rooms         = isset($_REQUEST['accessible_rooms']) ? $_REQUEST['accessible_rooms'] : 1;
         $record->status            = $_REQUEST['status'];
         $record->number_room    = !empty($_REQUEST['number_room']) ? $_REQUEST['number_room'] : '';
         $record->currency         = !empty($_REQUEST['currency']) ? $_REQUEST['currency'] : '';

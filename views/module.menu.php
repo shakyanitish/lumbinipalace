@@ -116,7 +116,8 @@ if ($menuRec) {
         }
         
         $menuLink = ($menuRow->linktype == 'external') ? $menuRow->linksrc : (($isHomeMenu) ? BASE_URL : BASE_URL . $menuRow->linksrc);
-        $desktopNav .= '<a href="' . $menuLink . '"' . $linkActive . '>' . $menuRow->name . '</a>';
+        $desktopNav .= '
+                        <a href="' . $menuLink . '"' . $linkActive . '>' . $menuRow->name . '</a>';
     }
 }
 
@@ -150,6 +151,8 @@ if ($menuRec) {
         
         $menuLink = ($menuRow->linktype == 'external') ? $menuRow->linksrc : (($isHomeMenu) ? BASE_URL : BASE_URL . $menuRow->linksrc);
         $mobileNav .= '
+
+
         <a href="' . $menuLink . '">' . $menuRow->name . ' <i class="fa-solid fa-chevron-right' . $linkActive . '"></i></a>';
     }
 }

@@ -174,7 +174,7 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </label>
                     </div>
                     <div class="form-input col-md-20">
-                        <input placeholder="Package Title" class="col-md-6 validate[required,length[0,50]]" type="text"
+                        <input placeholder="Sub Package Title" class="col-md-6 validate[required,length[0,50]]" type="text"
                             name="title" id="title"
                             value="<?php echo !empty($subpackageInfo->title) ? $subpackageInfo->title : ""; ?>">
                     </div>
@@ -195,7 +195,20 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         <span id="error"></span>
                     </div>
                 </div>
-
+            <?php if ($pkg->type == 2): ?>
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Tagline :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-20">
+                        <input placeholder="Tagline" class="col-md-6 validate[length[0,50]]" type="text"
+                            name="tagline" id="tagline"
+                            value="<?php echo !empty($subpackageInfo->tagline) ? $subpackageInfo->tagline : ""; ?>">
+                    </div>
+                </div>
+            <?php endif; ?>
 
                 <div class="form-row add-image">
                     <div class="form-label col-md-2">
@@ -749,10 +762,10 @@ if (isset($_GET['page']) && $_GET['page'] == "package" && isset($_GET['mode']) &
                         </div>
                         <div class="form-checkbox-radio col-md-9">
                             <input type="radio" class="custom-radio" name="included" id="check1"
-                                value="1" <?php echo !empty($included) ? $included : "checked"; ?>>
+                                value="1" <?php echo !empty($included) ? $included : ""; ?>>
                             <label for="">Yes</label>
                             <input type="radio" class="custom-radio" name="included" id="check0"
-                                value="0" <?php echo !empty($unincluded) ? $unincluded : ""; ?>>
+                                value="0" <?php echo !empty($unincluded) ? $unincluded : "checked"; ?>>
                             <label for="">No</label>
                         </div>
                     </div>

@@ -63,15 +63,44 @@ $jVars['site:offer'] = '
 ';
 
 
-$imglink = $siteRegulars->contact_upload;
+$bannerlink = $siteRegulars->gallery_upload;
+
+if (!empty($bannerlink)) {
+    $img = IMAGE_PATH . 'preference/gallery/' . $siteRegulars->gallery_upload;
+}
+else {
+    $img = IMAGE_PATH . 'preference/gallery/' . $siteRegulars->other_upload;
+}
+
+$jVars['site:ig'] = '
+
+    <section class="m-offer-hero"
+        style="background-image: url(' . $img .'); padding: 120px 0; background-position: center; background-size: cover; position: relative;">
+        <!-- Overlay -->
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0,0,0,0.5);"></div>
+        <div class="m-offer-hero-content text-center position-relative z-1">
+            <h1 class="m-offer-hero-title text-white">Instagram</h1>
+            <p class="m-offer-hero-subtitle mx-auto text-white">Follow Us <a
+                    href="https://www.instagram.com/lumbini_palace_resort/" target="_blank"
+                    class="text-white text-decoration-underline">@lumbini_palace_resort</a></p>
+        </div>
+    </section>
+
+
+
+';
+
+
+$imglink = $siteRegulars->fb_upload;
 
 if (!empty($imglink)) {
-    $img = IMAGE_PATH . 'preference/contact/' . $siteRegulars->contact_upload;
+    $img = IMAGE_PATH . 'preference/' . $siteRegulars->fb_upload;
 }
 else {
     $img = IMAGE_PATH . 'preference/other/' . $siteRegulars->other_upload;
 }
 $jVars['site:faq-banner'] = '
+
     <section class="m-offer-hero"
         style="background-image: url(' . $img . '); padding: 120px 0; background-size: cover; background-position: center; position: relative;">
         <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0,0,0,0.5);"></div>

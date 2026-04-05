@@ -80,29 +80,45 @@ if (defined('HOME_PAGE') || defined('BLOG_DETAIL_PAGE')) {
             $imgsrc = IMAGE_PATH . 'blog/' . $blog->image;
 
             $blogItems .= '
-            <div class="col-lg-4 col-md-6">
-                <div class="m-blog-card border-0">
-                    <div class="ratio ratio-1x1 mb-4">
-                        <img src="' . $imgsrc . '" alt="' . $blog->title . '" class="object-fit-cover">
-                    </div>
-                    <div class="m-blog-body">
-                        <h3 class="m-blog-title mb-3">' . $blog->title . '</h3>
-                        <div class="m-red-line mb-3"></div>
-                        <p class="m-blog-excerpt text-muted small mb-4">' . $blog->brief . '</p>
-                        <a href="' . $linksrc . '" class="m-blog-link">Explore <i class="fa-solid fa-arrow-right ms-2 small"></i></a>
-                    </div>
-                </div>
-            </div>';
+                        <div class="swiper-slide">
+                            <div class="m-blog-card border-0">
+                                <div class="ratio ratio-1x1 mb-4">
+                                    <img src="' . $imgsrc . '" alt="' . $blog->title . '" class="object-fit-cover">
+                                </div>
+                                <div class="m-blog-body">
+                                    <h3 class="m-blog-title mb-3">' . $blog->title . '</h3>
+                                    <div class="m-red-line mb-3"></div>
+                                    <p class="m-blog-excerpt text-muted small mb-4">' . $blog->brief . '</p>
+                                    <a href="' . $linksrc . '" class="m-blog-link">Explore <i
+                                            class="fa-solid fa-arrow-right ms-2 small"></i></a>
+                                </div>
+                            </div>
+                        </div>
+';
         }
 
         $homelatestblog = '
-        <section class="m-blogs py-5">
+                <section class="m-blogs py-5">
             <div class="container">
-                <div class="row g-4">
-                    ' . $blogItems . '
+                <div class="swiper m-blogs-swiper">
+                    <div class="swiper-wrapper">
+                        ' . $blogItems . '
+                    </div>
+                    <!-- Mobile Navigation -->
+                    <div
+                        class="m-blogs-nav-mob d-flex d-lg-none justify-content-center align-items-center w-100 px-3 mt-4">
+                        <div class="m-blogs-prev-mob cursor-pointer d-flex align-items-center" style="color: #1c1c1c;">
+                            <span class="m-blogs-line m-blogs-line-prev"></span>
+                        </div>
+                        <div class="m-blogs-pagination-mob small fw-bold text-center mx-4 tracking-widest"
+                            style="min-width: 45px; font-size: 13px;"></div>
+                        <div class="m-blogs-next-mob cursor-pointer d-flex align-items-center" style="color: #1c1c1c;">
+                            <span class="m-blogs-line m-blogs-line-next"></span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>';
+        </section>
+';
     }
 }
 $jVars['module:home-blog-list'] = $homelatestblog;

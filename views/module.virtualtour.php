@@ -175,6 +175,18 @@ function generate_virtual_tour($vtId)
                     /*width:  ' . $virtual->image_width . 'px;*/
                     height: ' . $virtual->image_height . 'px;
                 }
+                #panorama' . $vtId . ' .pnlm-panorama-info {
+                    left: auto !important;
+                    right: 12px !important;
+                    text-align: right !important;
+                    display: flex !important;
+                    flex-direction: column;
+                    align-items: flex-end;
+                }
+                #panorama' . $vtId . ' .pnlm-title-box,
+                #panorama' . $vtId . ' .pnlm-author-box {
+                    text-align: right !important;
+                }
                 .pnlm-dragfix {cursor: grab;}
                 .nav-section {height: ' . $virtual->image_height . 'px;}
             </style> 
@@ -322,6 +334,20 @@ if (!empty($allVirtualTours)) {
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl m-vt-dialog">
             <div class="modal-content m-vt-content border-0">
+                <style>
+                    #virtualTourModal .pnlm-panorama-info {
+                        left: auto !important;
+                        right: 12px !important;
+                        text-align: right !important;
+                        display: flex !important;
+                        flex-direction: column;
+                        align-items: flex-end;
+                    }
+                    #virtualTourModal .pnlm-title-box,
+                    #virtualTourModal .pnlm-author-box {
+                        text-align: right !important;
+                    }
+                </style>
                 <!-- Modal Header -->
                 <div class="modal-header m-vt-header border-0 px-4 py-3 bg-white align-items-center">
                     <h5 class="modal-title m-vt-title fw-bold mb-0 text-dark" id="virtualTourModalLabel">Lumbini Palace

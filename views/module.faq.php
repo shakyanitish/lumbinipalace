@@ -104,9 +104,7 @@ if (defined('FAQ_PAGE')) {
         $faq_scripts .= '<script>';
         $faq_scripts .= 'const faqData = ' . json_encode($faqJsArray, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) . ';';
         $faq_scripts .= '</script>';
-
-    }
-    else {
+    } else {
         $faq_details .= '<h3 class="text-center p-4">No FAQs Found</h3>';
     }
 }
@@ -147,7 +145,7 @@ if (defined('HOME_PAGE')) {
                         </div>
                     </div>';
         }
-                // Get category title from tbl_faq_category
+        // Get category title from tbl_faq_category
         $category = FaqCategory::find_by_id(1);
         $categoryTitle = (!empty($category) && !empty($category->title)) ? htmlspecialchars($category->title) : 'Frequently Asked Questions';
 
@@ -222,7 +220,7 @@ $testimonials_section = '';
 
 if (defined('HOME_PAGE')) {
 
-    
+
     $testimonials_html = '
         <section class="m-testimonials wow animate__fadeInUp">
             <div class="m-testimonials-inner">
@@ -283,7 +281,7 @@ if (defined('HOME_PAGE')) {
             </div>
         </section>
     ';
-    
+
     $testimonials_section = $testimonials_html;
 }
 
@@ -296,98 +294,147 @@ $jVars['module:testimonials:homepage'] = $testimonials_section;
 
 
 $faq_details = '';
-if (defined('EXPERIENCE_PAGE')) {
 
+if (defined('EXPERIENCE_PAGE') || defined('FAQ_PAGE')) {
     $faqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 10 ORDER BY sortorder DESC");
 
     if (!empty($faqs)) {
         $faqItems = '';
         foreach ($faqs as $i => $faq) {
             $collapseId = 'experienceFaq' . ($i + 1);
-            $expandedAttr = '';
             $btnClass = ' collapsed';
             $borderClass = ($i === count($faqs) - 1) ? 'border-bottom' : 'border-bottom-0';
-            
+
             $faqItems .= '
-        <div class="accordion-item border-top ' . $borderClass . '">
-            <h2 class="accordion-header">
-                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
-                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-                    . $faq->title . '</button>
-            </h2>
-            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
-            </div>
-        </div>';
+            <div class="accordion-item border-top ' . $borderClass . '">
+                <h2 class="accordion-header">
+                    <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">
+                        ' . $faq->title . '
+                    </button>
+                </h2>
+                <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
+                </div>
+            </div>';
         }
 
-        $faq_details = '
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
+        // Wrap differently depending on which page we're on
+        if (defined('FAQ_PAGE')) {
+            $faq_details = '
+            <div class="accordion accordion-flush" id="experienceAccordion">
                 ' . $faqItems . '
+            </div>';
+        } else {
+            // EXPERIENCE_PAGE default wrapper
+            $faq_details = '
+            <section class="m-property-details py-5 bg-white">
+                <div class="container">
+                    <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
+                    <div class="accordion accordion-flush" id="faqAccordion">
+                        ' . $faqItems . '
+                    </div>
                 </div>
-            </div>
-        </section>';
-    }
-    else {
-        $faq_details = '        
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h3 class="text-center p-4">No Experience FAQ Found</h3>
-            </div>
-        </section>';
+            </section>';
+        }
     }
 }
 
 $jVars['module:faq:experience'] = $faq_details;
 
 
-//Room or Accomodation faqs
-$faq_room = '';
-if (defined('ROOM_PAGE')) {
 
+//Dine 
+
+$faq_dine = '';
+
+if (defined('PACKAGE_PAGE') || defined('FAQ_PAGE')) {
+    $faqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 7 ORDER BY sortorder DESC");
+
+    if (!empty($faqs)) {
+        $faqItems = '';
+        foreach ($faqs as $i => $faq) {
+            $collapseId = 'diningFaq' . ($i + 1);
+            $btnClass = ' collapsed';
+            $borderClass = ($i === count($faqs) - 1) ? 'border-bottom' : 'border-bottom-0';
+
+            $faqItems .= '
+            <div class="accordion-item border-top ' . $borderClass . '">
+                <h2 class="accordion-header">
+                    <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">
+                        ' . $faq->title . '
+                    </button>
+                </h2>
+                <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#diningAccordion">
+                    <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
+                </div>
+            </div>';
+        }
+
+        // Wrap differently depending on which page we're on
+        if (defined('FAQ_PAGE')) {
+            $faq_dine = '
+            <div class="accordion accordion-flush" id="diningAccordion">
+                ' . $faqItems . '
+            </div>';
+        } else {
+            // PACKAGE_PAGE default wrapper
+            $faq_dine = '
+            ';
+        }
+    }
+}
+
+$jVars['module:dining-faq'] = $faq_dine;
+
+
+
+// Room or Accommodation FAQs
+$faq_room = '';
+
+if (defined('ROOM_PAGE') || defined('FAQ_PAGE')) {
     $faqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 8 ORDER BY sortorder DESC");
 
     if (!empty($faqs)) {
         $faqItems = '';
         foreach ($faqs as $i => $faq) {
             $collapseId = 'roomFaq' . ($i + 1);
-            $expandedAttr = '';
             $btnClass = ' collapsed';
             $borderClass = ($i === count($faqs) - 1) ? 'border-bottom' : 'border-bottom-0';
-            
+
             $faqItems .= '
-        <div class="accordion-item border-top ' . $borderClass . '">
-            <h2 class="accordion-header">
-                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
-                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-                    . $faq->title . '</button>
-            </h2>
-            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
-            </div>
-        </div>';
+            <div class="accordion-item border-top ' . $borderClass . '">
+                <h2 class="accordion-header">
+                    <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">
+                        ' . $faq->title . '
+                    </button>
+                </h2>
+                <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#roomAccordion">
+                    <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
+                </div>
+            </div>';
         }
 
-        $faq_room = '
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
+        // Wrap differently depending on which page we're on
+        if (defined('FAQ_PAGE')) {
+            $faq_room = '
+            <div class="accordion accordion-flush" id="roomAccordion">
                 ' . $faqItems . '
+            </div>';
+        } else {
+            // ROOM_PAGE default wrapper
+            $faq_room = '
+            <section class="m-property-details py-5 bg-white">
+                <div class="container">
+                    <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
+                    <div class="accordion accordion-flush" id="roomAccordion">
+                        ' . $faqItems . '
+                    </div>
                 </div>
-            </div>
-        </section>';
-    }
-    else {
-        $faq_room = '        
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h3 class="text-center p-4">No Accomodation FAQ Found</h3>
-            </div>
-        </section>';
+            </section>';
+        }
     }
 }
 
@@ -396,62 +443,43 @@ $jVars['module:faq:room'] = $faq_room;
 
 //Events faq
 $faq_details_event = '';
-if (defined('EVENT_PAGE')) {
 
+if (defined('EVENT_PAGE') || defined('FAQ_PAGE')) {
     $faqs = Faq::find_by_sql("SELECT * FROM tbl_faq WHERE status = 1 AND category = 9 ORDER BY sortorder DESC");
 
     if (!empty($faqs)) {
         $faqItems = '';
         foreach ($faqs as $i => $faq) {
             $collapseId = 'eventFaq' . ($i + 1);
-            $expandedAttr = '';
             $btnClass = ' collapsed';
             $borderClass = ($i === count($faqs) - 1) ? 'border-bottom' : 'border-bottom-0';
-            
+
             $faqItems .= '
-        <div class="accordion-item border-top ' . $borderClass . '">
-            <h2 class="accordion-header">
-                <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
-                    type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">'
-                    . $faq->title . '</button>
-            </h2>
-            <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
-            </div>
-        </div>';
+            <div class="accordion-item border-top ' . $borderClass . '">
+                <h2 class="accordion-header">
+                    <button class="accordion-button' . $btnClass . ' px-0 py-4 bg-transparent shadow-none"
+                        type="button" data-bs-toggle="collapse" data-bs-target="#' . $collapseId . '">
+                        ' . $faq->title . '
+                    </button>
+                </h2>
+                <div id="' . $collapseId . '" class="accordion-collapse collapse" data-bs-parent="#eventAccordion">
+                    <div class="accordion-body text-muted pt-0 pb-4">' . $faq->content . '</div>
+                </div>
+            </div>';
         }
 
-        $faq_details_event = '
-
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
-                <div class="accordion accordion-flush" id="faqAccordion">
+        // Wrap differently depending on which page we're on
+        if (defined('FAQ_PAGE')) {
+            $faq_details_event = '
+            <div class="accordion accordion-flush" id="eventAccordion">
                 ' . $faqItems . '
-                </div>
-            </div>
-        </section>';
-    }
-    else {
-        $faq_details_event = '
-        
-        <section class="m-property-details py-5 bg-white">
-            <div class="container">
-                <h3 class="text-center p-4">No Event FAQ Found</h3>
-            </div>
-        </section>
-        
-        
-        
-        
-        
-        
-        
-        
-        ';
+            </div>';
+        } else {
+            // EVENT_PAGE default wrapper
+            $faq_details_event = '
+           ';
+        }
     }
 }
 
 $jVars['module:faq:event'] = $faq_details_event;
-
-

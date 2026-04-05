@@ -7,9 +7,9 @@
         return 'table_dnd';
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Function to get paging information
-        $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings) {
+        $.fn.dataTableExt.oApi.fnPagingInfo = function (oSettings) {
             if (!oSettings || oSettings._iDisplayStart === undefined) {
                 return null; // Prevent errors if DataTable is not fully loaded
             }
@@ -38,18 +38,18 @@
             "iDisplayLength": desiredLength
         }).rowReordering({
             sURL: "<?php echo BASE_URL; ?>includes/controllers/ajax.package.php?action=sort",
-            fnSuccess: function(message) {
+            fnSuccess: function (message) {
                 var msg = jQuery.parseJSON(message);
                 showMessage(msg.action, msg.message);
             }
         });
 
-        $(document).on("click", "#example .fg-button", function() {
+        $(document).on("click", "#example .fg-button", function () {
             var currentPage = oTable.fnPagingInfo().iPage;
             localStorage.setItem("packagedbpage", currentPage);
         });
 
-        $(document).on('change', '#example_length select', function() {
+        $(document).on('change', '#example_length select', function () {
             var selectedLength = $(this).val();
             localStorage.setItem("packagedblength", selectedLength);
             if (selectedLength == -1) {
@@ -65,45 +65,45 @@
             }
         }
 
-window.openZoomText = function(btn) {
-    var $input = $(btn).siblings('input[type="text"]');
-    var currentText = $input.val();
-    var placeholder = $input.attr('placeholder') || 'Edit Text';
-    
-    if ($('#zoomTextModal').length === 0) {
-        $('body').append(
-            '<div id="zoomTextModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; background: rgba(0,0,0,0.6);">' +
-                '<div style="background: #fff; width: 50%; margin: 8% auto; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">' +
+        window.openZoomText = function (btn) {
+            var $input = $(btn).siblings('input[type="text"]');
+            var currentText = $input.val();
+            var placeholder = $input.attr('placeholder') || 'Edit Text';
+
+            if ($('#zoomTextModal').length === 0) {
+                $('body').append(
+                    '<div id="zoomTextModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; background: rgba(0,0,0,0.6);">' +
+                    '<div style="background: #fff; width: 50%; margin: 8% auto; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">' +
                     '<h3 id="zoomTextModalTitle" style="margin-top: 0; border-bottom: 1px solid #ddd; padding-bottom: 10px;">Edit Text</h3>' +
                     '<textarea id="zoomTextarea" class="form-control" style="width: 95%; height: 250px; font-size: 14px; padding: 10px; margin-top: 15px; resize: vertical;"></textarea>' +
                     '<div style="text-align: right; margin-top: 20px;">' +
-                        '<button type="button" class="btn medium bg-green" id="saveZoomTextBtn" style="margin-right: 10px;" title="Zoom Out"><i class="glyph-icon icon-search-minus"></i> <span class="button-content">Zoom Out</span></button>' +
-                        '<button type="button" class="btn medium bg-red" id="closeZoomTextBtn"><span class="button-content">Cancel</span></button>' +
+                    '<button type="button" class="btn medium bg-green" id="saveZoomTextBtn" style="margin-right: 10px;" title="Zoom Out"><i class="glyph-icon icon-search-minus"></i> <span class="button-content">Zoom Out</span></button>' +
+                    '<button type="button" class="btn medium bg-red" id="closeZoomTextBtn"><span class="button-content">Cancel</span></button>' +
                     '</div>' +
-                '</div>' +
-            '</div>'
-        );
+                    '</div>' +
+                    '</div>'
+                );
 
-        $('#closeZoomTextBtn').on('click', function() {
-            $('#zoomTextModal').fadeOut();
-        });
-    }
+                $('#closeZoomTextBtn').on('click', function () {
+                    $('#zoomTextModal').fadeOut();
+                });
+            }
 
-    $('#zoomTextModalTitle').text('Edit: ' + placeholder);
-    $('#zoomTextarea').val(currentText);
-    $('#zoomTextModal').fadeIn();
-    $('#zoomTextarea').focus();
+            $('#zoomTextModalTitle').text('Edit: ' + placeholder);
+            $('#zoomTextarea').val(currentText);
+            $('#zoomTextModal').fadeIn();
+            $('#zoomTextarea').focus();
 
-    $('#saveZoomTextBtn').off('click').on('click', function() {
-        var newText = $('#zoomTextarea').val();
-        $input.val(newText);
-        $('#zoomTextModal').fadeOut();
-    });
-};
+            $('#saveZoomTextBtn').off('click').on('click', function () {
+                var newText = $('#zoomTextarea').val();
+                $input.val(newText);
+                $('#zoomTextModal').fadeOut();
+            });
+        };
 
-window.addIncludesRow = function() {
-    var uniqId = new Date().getTime();
-    var newRow = '<div class="mrg10B" style="background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px;">\
+        window.addIncludesRow = function () {
+            var uniqId = new Date().getTime();
+            var newRow = '<div class="mrg10B" style="background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px;">\
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">\
             <span class="drag-handle cp" style="cursor: move;"><i class="glyph-icon icon-arrows"></i></span>\
             <input type="text" placeholder="Includes Text" class="form-control" style="flex: 1;" name="incexc_text[' + uniqId + ']">\
@@ -140,20 +140,20 @@ window.addIncludesRow = function() {
         </div>\
     </div>';
 
-    $('#add_includes_div').append(newRow);
-    $('#add_includes_div .chosen-select').last().chosen();
-}
+            $('#add_includes_div').append(newRow);
+            $('#add_includes_div .chosen-select').last().chosen();
+        }
 
-window.addIncludesRow2 = function() {
-    var uniqId = new Date().getTime();
-    var newRow = '<div class="mrg10B" style="background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px;">\
+        window.addIncludesRow2 = function () {
+            var uniqId = new Date().getTime();
+            var newRow = '<div class="mrg10B" style="background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px;">\
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">\
             <span class="drag-handle cp" style="cursor: move;"><i class="glyph-icon icon-arrows"></i></span>\
             <input type="text" placeholder="Includes Text" class="form-control" style="flex: 1;" name="incexc_text1[' + uniqId + ']">\
             <span class="btn small bg-green tooltip-button cp" title="Zoom In" onclick="openZoomText(this);" style="cursor: pointer; margin-right: 5px;"><i class="glyph-icon icon-search-plus"></i></span>\
             <span class="cp remove_includes_row" onclick="$(this).closest(\'.mrg10B\').remove();" style="cursor: pointer;"><i class="glyph-icon icon-minus-square"></i></span>\
         </div>\
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;" class="subtitle-field" ' + ($('input[name="type"]:checked').val() != 2 ? 'style="display: none;"' : '') + '>\
+        <div class="subtitle-field" style="display: ' + ($('input[name="type"]:checked').val() == 2 ? 'flex' : 'none') + '; align-items: center; gap: 10px; margin-bottom: 15px;">\
             <span style="visibility: hidden;"><i class="glyph-icon icon-arrows"></i></span>\
             <input type="text" placeholder="Subtitle" class="form-control" style="flex: 1;" name="incexc_subtitle1[' + uniqId + ']">\
             <span class="btn small bg-green tooltip-button cp" title="Zoom In" onclick="openZoomText(this);" style="cursor: pointer; margin-right: 5px;"><i class="glyph-icon icon-search-plus"></i></span>\
@@ -189,9 +189,9 @@ window.addIncludesRow2 = function() {
         </div>\
     </div>';
 
-    $('#add_includes_div_2').append(newRow);
-    $('#add_includes_div_2 .chosen-select').last().chosen();
-}
+            $('#add_includes_div_2').append(newRow);
+            $('#add_includes_div_2 .chosen-select').last().chosen();
+        }
 
 
         // Subpackages datatable
@@ -208,18 +208,18 @@ window.addIncludesRow2 = function() {
             "iDisplayLength": desiredSubLength
         }).rowReordering({
             sURL: "<?php echo BASE_URL; ?>includes/controllers/ajax.package.php?action=subSort",
-            fnSuccess: function(message) {
+            fnSuccess: function (message) {
                 var msg = jQuery.parseJSON(message);
                 showMessage(msg.action, msg.message);
             }
         });
-        
-        $(document).on("click", "#subexample .fg-button", function() {
+
+        $(document).on("click", "#subexample .fg-button", function () {
             var currentPage = oSubTable.fnPagingInfo().iPage;
             localStorage.setItem("subpackagedbpage", currentPage);
         });
 
-        $(document).on('change', '#subexample_length select', function() {
+        $(document).on('change', '#subexample_length select', function () {
             var selectedLength = $(this).val();
             localStorage.setItem("subpackagedblength", selectedLength);
         });
@@ -245,18 +245,18 @@ window.addIncludesRow2 = function() {
             "iDisplayLength": desiredItineraryLength
         }).rowReordering({
             sURL: "<?php echo BASE_URL; ?>includes/controllers/ajax.package.php?action=subiSort",
-            fnSuccess: function(message) {
+            fnSuccess: function (message) {
                 var msg = jQuery.parseJSON(message);
                 showMessage(msg.action, msg.message);
             }
         });
 
-        $(document).on("click", "#subexample1 .fg-button", function() {
+        $(document).on("click", "#subexample1 .fg-button", function () {
             var currentPage = oItineraryTable.fnPagingInfo().iPage;
             localStorage.setItem("itinerarydbpage", currentPage);
         });
 
-        $(document).on('change', '#subexample1_length select', function() {
+        $(document).on('change', '#subexample1_length select', function () {
             var selectedLength = $(this).val();
             localStorage.setItem("itinerarydblength", selectedLength);
         });
@@ -281,18 +281,18 @@ window.addIncludesRow2 = function() {
             "iDisplayLength": desiredPackageItineraryLength
         }).rowReordering({
             sURL: "<?php echo BASE_URL; ?>includes/controllers/ajax.package.php?action=packageitSort",
-            fnSuccess: function(message) {
+            fnSuccess: function (message) {
                 var msg = jQuery.parseJSON(message);
                 showMessage(msg.action, msg.message);
             }
         });
 
-        $(document).on("click", "#subexample2 .fg-button", function() {
+        $(document).on("click", "#subexample2 .fg-button", function () {
             var currentPage = oPackageItineraryTable.fnPagingInfo().iPage;
             localStorage.setItem("packageitinerarydbpage", currentPage);
         });
 
-        $(document).on('change', '#subexample2_length select', function() {
+        $(document).on('change', '#subexample2_length select', function () {
             var selectedLength = $(this).val();
             localStorage.setItem("packageitinerarydblength", selectedLength);
         });
@@ -303,7 +303,7 @@ window.addIncludesRow2 = function() {
             }
         }
 
-        $('.btn-submit').on('click', function() {
+        $('.btn-submit').on('click', function () {
             var actVal = $(this).attr('btn-action');
             $('#idValue').attr('myaction', actVal);
         });
@@ -312,7 +312,7 @@ window.addIncludesRow2 = function() {
             autoHidePrompt: true,
             promptPosition: "bottomLeft",
             scroll: true,
-            onValidationComplete: function(form, status) {
+            onValidationComplete: function (form, status) {
                 if (status == true) {
                     $('.btn-submit').attr('disabled', 'true');
                     var action = ($('#idValue').val() == 0) ? "action=add&" : "action=edit&";
@@ -325,11 +325,11 @@ window.addIncludesRow2 = function() {
                         dataType: "JSON",
                         url: getLocation(),
                         data: queryString,
-                        success: function(data) {
+                        success: function (data) {
                             var msg = eval(data);
                             if (msg.action == 'warning') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     $('.my-msg').html('');
                                 }, 3000);
                                 $('.btn-submit').removeAttr('disabled');
@@ -340,21 +340,21 @@ window.addIncludesRow2 = function() {
                                 showMessage(msg.action, msg.message);
                                 var actionId = $('#idValue').attr('myaction');
                                 if (actionId == 2)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/list";
                                     }, 3000);
                                 if (actionId == 1)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/addEdit";
                                     }, 3000);
                                 if (actionId == '0')
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "";
                                     }, 3000);
                             }
                             if (msg.action == 'notice') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     window.location.href = window.location.href;
                                 }, 3000);
                             }
@@ -377,7 +377,7 @@ window.addIncludesRow2 = function() {
             useSuffix: "_chosen",
             promptPosition: "bottomLeft",
             scroll: true,
-            onValidationComplete: function(form, status) {
+            onValidationComplete: function (form, status) {
                 if (status == true) {
                     var Re = $("#type").val();
                     $('.btn-submit').attr('disabled', 'true');
@@ -392,7 +392,7 @@ window.addIncludesRow2 = function() {
                         dataType: "JSON",
                         url: getLocation(),
                         data: queryString,
-                        success: function(data) {
+                        success: function (data) {
                             var msg = eval(data);
                             if (msg.action == 'warning') {
                                 showMessage(msg.action, msg.message);
@@ -404,21 +404,21 @@ window.addIncludesRow2 = function() {
                                 showMessage(msg.action, msg.message);
                                 var actionId = $('#idValue').attr('myaction');
                                 if (actionId == 2)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/subpackagelist/" + Re;
                                     }, 3000);
                                 if (actionId == 1)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/addEditsubpackage/" + Re;
                                     }, 3000);
                                 if (actionId == 0)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/subpackagelist/" + Re;
                                     }, 3000);
                             }
                             if (msg.action == 'notice') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     window.location.href = window.location.href;
                                 }, 3000);
                             }
@@ -438,7 +438,7 @@ window.addIncludesRow2 = function() {
         jQuery('#subgallery_frm').validationEngine({
             autoHidePrompt: true,
             scroll: false,
-            onValidationComplete: function(form, status) {
+            onValidationComplete: function (form, status) {
                 if (status == true) {
                     $('#btn-submit').attr('disabled', 'true');
                     var action = "action=addSubPackageImage&";
@@ -449,7 +449,7 @@ window.addIncludesRow2 = function() {
                         dataType: "JSON",
                         url: getLocation(),
                         data: queryString,
-                        success: function(data) {
+                        success: function (data) {
                             var msg = eval(data);
                             if (msg.action == 'warning') {
                                 showMessage(msg.action, msg.message);
@@ -459,13 +459,13 @@ window.addIncludesRow2 = function() {
                             }
                             if (msg.action == 'success') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     window.location.href = window.location.href;
                                 }, 3000);
                             }
                             if (msg.action == 'notice') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     window.location.href = window.location.href;
                                 }, 3000);
                             }
@@ -483,13 +483,13 @@ window.addIncludesRow2 = function() {
         });
 
         $(".subImagegallery-sort").sortable({
-            start: function(event, ui) {
+            start: function (event, ui) {
                 var start_pos = ui.item.index();
                 ui.item.data('start_pos', start_pos);
             },
-            update: function(event, ui) {
+            update: function (event, ui) {
                 var mySel = "";
-                $('div.oldsort').each(function(i) {
+                $('div.oldsort').each(function (i) {
                     mySel = mySel + ';' + $(this).attr('csort');
                 });
                 var id = ui.item.context.id;
@@ -499,7 +499,7 @@ window.addIncludesRow2 = function() {
                     dataType: "JSON",
                     url: getLocation(),
                     data: "action=sortSubGalley&id=" + id + "&toPosition=" + end_pos + "&sortIds=" + mySel,
-                    success: function(data) {
+                    success: function (data) {
                         var msg = eval(data);
                         showMessage(msg.action, msg.message);
                     }
@@ -513,7 +513,7 @@ window.addIncludesRow2 = function() {
             useSuffix: "_chosen",
             promptPosition: "bottomLeft",
             scroll: true,
-            onValidationComplete: function(form, status) {
+            onValidationComplete: function (form, status) {
                 if (status == true) {
                     var Re = $("#package_id").val();
                     $('.btn-submit').attr('disabled', 'true');
@@ -528,7 +528,7 @@ window.addIncludesRow2 = function() {
                         dataType: "JSON",
                         url: getLocation(),
                         data: queryString,
-                        success: function(data) {
+                        success: function (data) {
                             var msg = eval(data);
                             if (msg.action == 'warning') {
                                 showMessage(msg.action, msg.message);
@@ -540,21 +540,21 @@ window.addIncludesRow2 = function() {
                                 showMessage(msg.action, msg.message);
                                 var actionId = $('#idValue').attr('myaction');
                                 if (actionId == 2)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/itinerarylist/" + Re;
                                     }, 3000);
                                 if (actionId == 1)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/addEdititinerary/" + Re;
                                     }, 3000);
                                 if (actionId == 0)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/itinerarylist/" + Re;
                                     }, 3000);
                             }
                             if (msg.action == 'notice') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     window.location.href = window.location.href;
                                 }, 3000);
                             }
@@ -577,7 +577,7 @@ window.addIncludesRow2 = function() {
             useSuffix: "_chosen",
             promptPosition: "bottomLeft",
             scroll: true,
-            onValidationComplete: function(form, status) {
+            onValidationComplete: function (form, status) {
                 if (status == true) {
                     var Re = $("#package_id").val();
                     $('.btn-submit').attr('disabled', 'true');
@@ -592,7 +592,7 @@ window.addIncludesRow2 = function() {
                         dataType: "JSON",
                         url: getLocation(),
                         data: queryString,
-                        success: function(data) {
+                        success: function (data) {
                             var msg = eval(data);
                             if (msg.action == 'warning') {
                                 showMessage(msg.action, msg.message);
@@ -604,21 +604,21 @@ window.addIncludesRow2 = function() {
                                 showMessage(msg.action, msg.message);
                                 var actionId = $('#idValue').attr('myaction');
                                 if (actionId == 2)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/itinerarylistpackage/" + Re;
                                     }, 3000);
                                 if (actionId == 1)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/addEditItineraryPackage/" + Re;
                                     }, 3000);
                                 if (actionId == 0)
-                                    setTimeout(function() {
+                                    setTimeout(function () {
                                         window.location.href = "<?php echo ADMIN_URL ?>package/itinerarylistpackage/" + Re;
                                     }, 3000);
                             }
                             if (msg.action == 'notice') {
                                 showMessage(msg.action, msg.message);
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     window.location.href = window.location.href;
                                 }, 3000);
                             }
@@ -635,11 +635,11 @@ window.addIncludesRow2 = function() {
             }
         });
 
-        $('#linkPage').change(function() {
+        $('#linkPage').change(function () {
             $('#linksrc').val($(this).val());
         });
 
-        $('.maxppl').on('change', function() {
+        $('.maxppl').on('change', function () {
             var selVal = $(this).val();
             if (selVal == 1) {
                 $('.rmovprice1').removeClass('hide');
@@ -659,7 +659,7 @@ window.addIncludesRow2 = function() {
         });
         $('.maxppl').trigger('change');
 
-        $(".character-details").keyup(function() {
+        $(".character-details").keyup(function () {
             var a = 125,
                 b = $(this).val().length;
             if (b >= a) $(".description-remaining").text(" you have reached the limit");
@@ -668,7 +668,7 @@ window.addIncludesRow2 = function() {
                 $(".description-remaining").text(c + " characters left")
             }
         });
-        
+
         $('#program_date').datepicker({
             changeMonth: true,
             changeYear: true,
@@ -676,7 +676,7 @@ window.addIncludesRow2 = function() {
             dateFormat: 'yy-mm-dd',
         });
 
-        $('#applySelected_btn1').on("click", function() {
+        $('#applySelected_btn1').on("click", function () {
             var action = $('#groupTaskField1').val();
             if (action == '0') {
                 showMessage('warning', 'Please select an action!!');
@@ -684,7 +684,7 @@ window.addIncludesRow2 = function() {
             }
 
             var idArray = '0';
-            $('.bulkCheckbox:checked').each(function() {
+            $('.bulkCheckbox:checked').each(function () {
                 idArray += "|" + $(this).attr('bulkId');
             });
             if (idArray == '0') {
@@ -702,7 +702,7 @@ window.addIncludesRow2 = function() {
                     $('.divMessageBox').fadeIn();
                     $('.MessageBoxContainer').fadeIn(1000);
 
-                    $(".botTempo").off("click").on("click", function() {
+                    $(".botTempo").off("click").on("click", function () {
                         if ($(this).attr("id") === 'yes') {
                             subdeleteSelectedRecords(idArray);
                         }
@@ -718,7 +718,7 @@ window.addIncludesRow2 = function() {
             reStructureList(getTableId());
         });
 
-        $('#applySelected_btn2').on("click", function() {
+        $('#applySelected_btn2').on("click", function () {
             var action = $('#groupTaskField2').val();
             if (action == '0') {
                 showMessage('warning', 'Please select an action!!');
@@ -726,7 +726,7 @@ window.addIncludesRow2 = function() {
             }
 
             var idArray = '0';
-            $('.bulkCheckbox:checked').each(function() {
+            $('.bulkCheckbox:checked').each(function () {
                 idArray += "|" + $(this).attr('bulkId');
             });
             if (idArray == '0') {
@@ -744,7 +744,7 @@ window.addIncludesRow2 = function() {
                     $('.divMessageBox').fadeIn();
                     $('.MessageBoxContainer').fadeIn(1000);
 
-                    $(".botTempo").off("click").on("click", function() {
+                    $(".botTempo").off("click").on("click", function () {
                         if ($(this).attr("id") === 'yes') {
                             packageitdeleteSelectedRecords(idArray);
                         }
@@ -759,16 +759,16 @@ window.addIncludesRow2 = function() {
 
             reStructureList(getTableId());
         });
-        
+
         var initialType = <?php echo !empty($advInfo->explorelinktype) ? $advInfo->explorelinktype : 0; ?>;
         exploreLinkTypeSelect(initialType);
 
-        $('#exploreLinkPage').change(function() {
+        $('#exploreLinkPage').change(function () {
             $('#explorelinksrc').val($(this).val());
         });
 
         // Type toggle logic
-        $('input[name="type"]').on('change', function() {
+        $('input[name="type"]').on('change', function () {
             var val = $('input[name="type"]:checked').val();
 
             // Includes section: show for both Events (3) and Experiences (2)
@@ -778,7 +778,7 @@ window.addIncludesRow2 = function() {
 
                 // Subtitle field: show ONLY for Experiences (2)
                 if (val == 2) {
-                    $('.subtitle-field').show();
+                    $('.subtitle-field').css('display', 'flex');
                 } else {
                     $('.subtitle-field').hide();
                 }
@@ -810,11 +810,11 @@ window.addIncludesRow2 = function() {
 
         // Read More handlers for extra content fields
         for (var i = 1; i <= 5; i++) {
-            (function(index) {
-                $(document).on('click', '#readMore' + index, function() {
+            (function (index) {
+                $(document).on('click', '#readMore' + index, function () {
                     var instanceName = 'content' + (index == 1 ? '1' : index);
                     if (index == 0) instanceName = 'content'; // case for main one
-                    
+
                     var data = CKEDITOR.instances[instanceName].getData();
                     if (data.match(/<hr id="system_readmore" style="border-style: dashed; border-color: orange;" \/>/g)) {
                         showMessage('notice', 'Action already exists.');
@@ -832,7 +832,7 @@ window.addIncludesRow2 = function() {
             dataType: "JSON",
             url: getLocation(),
             data: "action=packageitbulkToggleStatus&idArray=" + idArray,
-            success: function(data) {
+            success: function (data) {
                 var msg = eval(data);
                 showMessage(msg.action, msg.message);
                 location.reload();
@@ -846,7 +846,7 @@ window.addIncludesRow2 = function() {
             dataType: "JSON",
             url: getLocation(),
             data: "action=packageitbulkDelete&idArray=" + idArray,
-            success: function(data) {
+            success: function (data) {
                 var msg = eval(data);
                 showMessage(msg.action, msg.message);
                 reStructureList(getTableId());
@@ -913,7 +913,7 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this facility permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
                 $.ajax({
@@ -921,7 +921,7 @@ window.addIncludesRow2 = function() {
                     dataType: "JSON",
                     url: getLocation(),
                     data: 'action=delete&id=' + Re,
-                    success: function(data) {
+                    success: function (data) {
                         var msg = eval(data);
                         showMessage(msg.action, msg.message);
                         $('#' + Re).remove();
@@ -941,7 +941,7 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this package permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
                 $.ajax({
@@ -949,7 +949,7 @@ window.addIncludesRow2 = function() {
                     dataType: "JSON",
                     url: getLocation(),
                     data: 'action=deleteitinerary&id=' + Re,
-                    success: function(data) {
+                    success: function (data) {
                         var msg = eval(data);
                         showMessage(msg.action, msg.message);
                         $('#' + Re).remove();
@@ -964,29 +964,29 @@ window.addIncludesRow2 = function() {
         });
     }
 
-    $(document).ready(function() {
-    $('.imageStatusToggle').on('click', function() {
-        var Re = $(this).attr('rowId');
-        var status = $(this).attr('status');
-        newStatus = (status == 1) ? 0 : 1;
-        $.ajax({
-            type: "POST",
-            url: getLocation(),
-            data: "action=SubitoggleStatus&id=" + Re,
-            success: function(msg) {}
+    $(document).ready(function () {
+        $('.imageStatusToggle').on('click', function () {
+            var Re = $(this).attr('rowId');
+            var status = $(this).attr('status');
+            newStatus = (status == 1) ? 0 : 1;
+            $.ajax({
+                type: "POST",
+                url: getLocation(),
+                data: "action=SubitoggleStatus&id=" + Re,
+                success: function (msg) { }
+            });
+            $(this).attr({
+                'status': newStatus
+            });
+            if (status == 1) {
+                $('#toggleImg' + Re).removeClass("icon-check-circle-o").addClass("icon-clock-os-circle-o");
+            } else {
+                $('#toggleImg' + Re).removeClass("icon-clock-os-circle-o").addClass("icon-check-circle-o");
+            }
         });
-        $(this).attr({
-            'status': newStatus
-        });
-        if (status == 1) {
-            $('#toggleImg' + Re).removeClass("icon-check-circle-o").addClass("icon-clock-os-circle-o");
-        } else {
-            $('#toggleImg' + Re).removeClass("icon-clock-os-circle-o").addClass("icon-check-circle-o");
-        }
     });
-        });
 
-    $('.statusItinerary').on('click', function() {
+    $('.statusItinerary').on('click', function () {
         var id = $(this).attr('moduleId');
         var status = $(this).attr('status');
         newStatus = (status == 1) ? 0 : 1;
@@ -994,7 +994,7 @@ window.addIncludesRow2 = function() {
             type: "POST",
             url: getLocation(),
             data: "action=SubitoggleStatus&id=" + id,
-            success: function(msg) {}
+            success: function (msg) { }
         });
         $(this).attr({
             'status': newStatus
@@ -1008,7 +1008,7 @@ window.addIncludesRow2 = function() {
         }
     });
 
-    $(document).on('click', '.statusItineraryPackage', function() {
+    $(document).on('click', '.statusItineraryPackage', function () {
         var id = $(this).attr('moduleId');
         var status = $(this).attr('status');
         newStatus = (status == 1) ? 0 : 1;
@@ -1017,7 +1017,7 @@ window.addIncludesRow2 = function() {
             dataType: "JSON",
             url: getLocation(),
             data: "action=statusItineraryPackage&id=" + id,
-            success: function(msg) {
+            success: function (msg) {
                 var data = eval(msg);
                 showMessage(data.action, 'Status updated successfully');
             }
@@ -1039,7 +1039,7 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this package permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
                 $.ajax({
@@ -1047,7 +1047,7 @@ window.addIncludesRow2 = function() {
                     dataType: "JSON",
                     url: getLocation(),
                     data: 'action=deletesubpackage&id=' + Re,
-                    success: function(data) {
+                    success: function (data) {
                         var msg = eval(data);
                         showMessage(msg.action, msg.message);
                         $('#' + Re).remove();
@@ -1065,15 +1065,15 @@ window.addIncludesRow2 = function() {
     function linkTypeSelect(Re) {
         if (Re == 0) {
             $('#linkPage_chosen').removeClass("hide");
-            ($('#linksrc').val() == 'http://www.') ? $('#linksrc').val(''): null;
+            ($('#linksrc').val() == 'http://www.') ? $('#linksrc').val('') : null;
         } else {
             $('#linkPage_chosen').addClass("hide");
-            ($('#linksrc').val() == '') ? $('#linksrc').val("http://www."): null;
+            ($('#linksrc').val() == '') ? $('#linksrc').val("http://www.") : null;
         }
     }
 
     function toggleMetadata() {
-        $(".metadata").slideToggle("slow", function() {});
+        $(".metadata").slideToggle("slow", function () { });
     }
 
     function viewPackagelist() {
@@ -1097,25 +1097,25 @@ window.addIncludesRow2 = function() {
     }
 
     function deleteTempimage(Re) {
-        $('#previewRoomsimage' + Re).fadeOut(1000, function() {
+        $('#previewRoomsimage' + Re).fadeOut(1000, function () {
             $('#previewRoomsimage' + Re).remove();
         });
     }
 
     function deleteTempimages(Re) {
-        $('#previewUserimage' + Re).fadeOut(1000, function() {
+        $('#previewUserimage' + Re).fadeOut(1000, function () {
             $('#previewUserimage' + Re).remove();
         });
     }
 
     function deleteTempflag(Re) {
-        $('#previewflag' + Re).fadeOut(1000, function() {
+        $('#previewflag' + Re).fadeOut(1000, function () {
             $('#previewflag' + Re).remove();
         });
     }
 
     function deleteTempVideo(Re) {
-        $('#previewVideo' + Re).fadeOut(1000, function() {
+        $('#previewVideo' + Re).fadeOut(1000, function () {
             $('#previewVideo' + Re).remove();
         });
     }
@@ -1157,7 +1157,7 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this itinerary permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
                 $.ajax({
@@ -1165,7 +1165,7 @@ window.addIncludesRow2 = function() {
                     dataType: "JSON",
                     url: getLocation(),
                     data: 'action=deletepackageitinerary&id=' + Re,
-                    success: function(data) {
+                    success: function (data) {
                         var msg = eval(data);
                         showMessage(msg.action, msg.message);
                         $('#' + Re).remove();
@@ -1185,7 +1185,7 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this image permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
                 $.ajax({
@@ -1193,10 +1193,10 @@ window.addIncludesRow2 = function() {
                     dataType: "JSON",
                     url: getLocation(),
                     data: 'action=deleteSubimage&id=' + Re,
-                    success: function(data) {
+                    success: function (data) {
                         var msg = eval(data);
                         if (msg.action == 'success') {
-                            $('.removeSavedimg' + Re).fadeOut(1000, function() {
+                            $('.removeSavedimg' + Re).fadeOut(1000, function () {
                                 $('.removeSavedimg' + Re).remove();
                             });
                         }
@@ -1215,10 +1215,10 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this pdf permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
-                $('.removeSavedCompanyDoc' + Re).fadeOut(1000, function() {
+                $('.removeSavedCompanyDoc' + Re).fadeOut(1000, function () {
                     $('.removeSavedCompanyDoc' + Re).remove();
                 });
             } else {
@@ -1234,10 +1234,10 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this image permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
-                $('#removeSavedimg' + Re).fadeOut(1000, function() {
+                $('#removeSavedimg' + Re).fadeOut(1000, function () {
                     $('#removeSavedimg' + Re).remove();
                     $('.uploader').fadeIn(500);
                 });
@@ -1254,10 +1254,10 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this image permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
-                $('#removeSavedflag' + Re).fadeOut(1000, function() {
+                $('#removeSavedflag' + Re).fadeOut(1000, function () {
                     $('#removeSavedflag' + Re).remove();
                     $('.uploader').fadeIn(500);
                 });
@@ -1274,10 +1274,10 @@ window.addIncludesRow2 = function() {
         $('.pText').html('Click on yes button to delete this video permanently.!!');
         $('.divMessageBox').fadeIn();
         $('.MessageBoxContainer').fadeIn(1000);
-        $(".botTempo").on("click", function() {
+        $(".botTempo").on("click", function () {
             var popAct = $(this).attr("id");
             if (popAct == 'yes') {
-                $('#removeSavedVid' + Re).fadeOut(1000, function() {
+                $('#removeSavedVid' + Re).fadeOut(1000, function () {
                     $('#removeSavedVid' + Re).remove();
                     $('.uploader' + Re).fadeIn(500);
                 });
@@ -1289,7 +1289,7 @@ window.addIncludesRow2 = function() {
         });
     }
 
-    $(document).on('blur', 'input[name="title"], input[name="slug"]', function() {
+    $(document).on('blur', 'input[name="title"], input[name="slug"]', function () {
         var title = $(this).val();
         var actid = $('#idValue').val();
         $.ajax({
@@ -1301,7 +1301,7 @@ window.addIncludesRow2 = function() {
                 'title': title,
                 'actid': actid
             },
-        }).done(function(data) {
+        }).done(function (data) {
             var msg = eval(data);
             $('input[name="slug"]').val(msg.result);
             $('span#error').html(msg.msgs);
@@ -1320,7 +1320,7 @@ window.addIncludesRow2 = function() {
             'imgId': Re
         }).appendTo($(clicked)).focus();
         $(clicked).append(' <button type="submit" id="ne-submit" class="col-md-3">Save</button>');
-        $('.up-title').on("click", "#ne-submit", function(e) {
+        $('.up-title').on("click", "#ne-submit", function (e) {
             var data = $("#ne-title");
             var id = $(data).attr("imgId");
             var title = $(data).val();
@@ -1329,23 +1329,23 @@ window.addIncludesRow2 = function() {
                 dataType: "JSON",
                 url: getLocation(),
                 data: 'action=editSubGalleryImageText&id=' + id + '&title=' + title,
-                success: function(data) {
+                success: function (data) {
                     var msg = eval(data);
                     if (msg.action == 'success') {
                         showMessage(msg.action, msg.message);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             window.location.href = window.location.href;
                         }, 3000);
                     }
                     if (msg.action == 'error') {
                         showMessage(msg.action, msg.message);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             window.location.href = window.location.href;
                         }, 3000);
                     }
                     if (msg.action == 'notice') {
                         showMessage(msg.action, msg.message);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             window.location.href = window.location.href;
                         }, 3000);
                     }
@@ -1364,7 +1364,7 @@ window.addIncludesRow2 = function() {
                 action: 'subibulkDelete',
                 idArray: idArray
             },
-            success: function(data) {
+            success: function (data) {
                 if (data.action === 'success') {
                     showMessage('success', data.message);
                     var ids = idArray.split("|");
@@ -1376,7 +1376,7 @@ window.addIncludesRow2 = function() {
                     showMessage('error', data.message);
                 }
             },
-            error: function(err) {
+            error: function (err) {
                 console.error("AJAX error:", err);
                 showMessage('error', 'AJAX request failed.');
             }
@@ -1390,7 +1390,7 @@ window.addIncludesRow2 = function() {
             dataType: "JSON",
             url: getLocation(),
             data: "action=subibulkToggleStatus&idArray=" + idArray,
-            success: function(msg) {
+            success: function (msg) {
                 var myMessage = idArray.split("|");
                 var counter = myMessage.length;
                 for (i = 1; i < counter; i++) {
@@ -1409,14 +1409,14 @@ window.addIncludesRow2 = function() {
                 }
                 showMessage('success', 'Status has been toggled.');
             },
-            error: function(err) {
+            error: function (err) {
                 console.error("AJAX error:", err);
                 showMessage('error', 'AJAX request failed.');
             }
         });
     }
 
-    $('.statusItinerary').on('click', function() {
+    $('.statusItinerary').on('click', function () {
         var $link = $(this);
         var id = $link.attr('moduleId');
         var status = $link.attr('status');
@@ -1427,7 +1427,7 @@ window.addIncludesRow2 = function() {
             dataType: "JSON",
             url: getLocation(),
             data: "action=subisingleToggleStatus&id=" + id,
-            success: function(msg) {
+            success: function (msg) {
                 if (msg.action === 'success') {
                     $link.attr({
                         'status': newStatus
@@ -1443,11 +1443,11 @@ window.addIncludesRow2 = function() {
                     showMessage('error', 'Server failed to update status.');
                 }
             },
-            error: function(err) {
+            error: function (err) {
                 console.error("AJAX error:", err);
                 showMessage('error', 'AJAX request failed.');
             },
-            complete: function() {
+            complete: function () {
                 $link.css('pointer-events', 'auto');
             }
         });
@@ -1463,11 +1463,11 @@ window.addIncludesRow2 = function() {
         }
     }
 
-    window.includeLinkTypeSelect = function(element) {
+    window.includeLinkTypeSelect = function (element) {
         var $row = $(element).closest('.mrg10B');
         var linkType = $row.find('input[name*="linktype"]:checked').val();
         var $pageSelectParent = $row.find('.incexc-page-select').closest('.col-md-6');
-        
+
         if (linkType == 0) {
             // Internal link - show dropdown
             $pageSelectParent.show();
@@ -1483,13 +1483,13 @@ window.addIncludesRow2 = function() {
         }
     };
 
-    $(document).on('change', '.incexc-page-select', function() {
+    $(document).on('change', '.incexc-page-select', function () {
         var $row = $(this).closest('.mrg10B');
         $row.find('.incexc-url-input').val($(this).val());
     });
 
-    $(document).ready(function() {
-        if($.fn.sortable) {
+    $(document).ready(function () {
+        if ($.fn.sortable) {
             $("#includes_sortable, #includes_sortable_2").sortable({
                 handle: '.drag-handle',
                 cursor: 'move',

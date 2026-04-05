@@ -176,10 +176,10 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 <div id="preview_Image2"><input type="hidden" name="imageArrayname2" value="" class="" /></div>
             </div>
 
-            <div class="form-row hide">
+            <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
-                        Logo footer :
+                        Faq Banner :
                     </label>
                 </div>
 
@@ -259,10 +259,10 @@ $notupcoming = ($PrefeRow->upcoming == 0) ? "checked" : " ";
                 <div id="preview_Image4"></div>
             </div> -->
 
-            <div class="form-row hide">
+            <div class="form-row">
                 <div class="form-label col-md-2">
                     <label for="">
-                        Gallery Image :
+                        Instagram Banner Image :
                     </label>
                 </div> 
 

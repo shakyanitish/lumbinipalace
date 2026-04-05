@@ -625,40 +625,42 @@ $overview_section = '
 
 $jVars['module:rooms-overview'] = $overview_section;
 
-/* * Rooms Page - Overview Section */
 
 // Fetch overview items from tbl_package incexc field
-$overview_items_html = '';
-$overviewPkg = Package::find_by_sql("SELECT incexc FROM tbl_package WHERE status=1 AND type=3 LIMIT 1");
+$events_section = '';
+$itemIndex = 0;
+$eventPkg = Package::find_by_sql("SELECT incexc FROM tbl_package WHERE status=1 AND type=3 LIMIT 1");
 
-if (!empty($overviewPkg)) {
-    foreach ($overviewPkg as $pkg) {
+if (!empty($eventPkg)) {
+    foreach ($eventPkg as $pkg) {
         if (!empty($pkg->incexc)) {
             $includesList = unserialize($pkg->incexc);
             if (!empty($includesList) && is_array($includesList)) {
                 foreach ($includesList as $item) {
                     if (!empty($item)) {
-                        // Handle both old format (string) and new format (array)
-                        $itemText = is_array($item) ? $item['text'] : $item;
-                        $itemUrl = is_array($item) ? (!empty($item['url']) ? $item['url'] : '') : '';
-                        $linktarget = ($item['linktype'] == '1') ? ' target="_blank"' : '';
+                        $itemText   = is_array($item) ? $item['text'] : $item;
+                        $itemUrl    = is_array($item) ? (!empty($item['url']) ? $item['url'] : '') : '';
+                        $linktarget = (isset($item['linktype']) && $item['linktype'] == '1') ? ' target="_blank"' : '';
 
                         $learnMoreLink = '';
                         if (!empty($itemUrl)) {
                             $learnMoreLink = '<a href="' . htmlspecialchars($itemUrl) . '"' . $linktarget . '
-                                    class="text-dark fw-bold text-decoration-underline">Learn More</a>';
+                                class="text-dark fw-bold text-decoration-underline">Learn More</a>';
                         }
 
-                        $overview_items_html .= '
-                    <div class="col-md-4">
+                        // Use inline style instead of d-none to avoid Bootstrap !important conflict
+                        $hiddenStyle = ($itemIndex >= 3) ? ' style="display:none;"' : '';
+
+                        $events_section .= '
+                    <div class="col-md-4" data-event-item' . $hiddenStyle . '>
                         <div class="h-100 ps-3 py-1 m-meeting-feature-border">
-                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">' . $itemText . ' ' . $learnMoreLink . '</p>
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">'
+                                . $itemText . ' ' . $learnMoreLink . '
+                            </p>
                         </div>
-                    </div>
+                    </div>';
 
-
-
-                        ';
+                        $itemIndex++;
                     }
                 }
             }
@@ -666,53 +668,140 @@ if (!empty($overviewPkg)) {
     }
 }
 
-$overview_section = '
+// Only show the See More button if there are more than 3 items
+$seeMoreBtn = ($itemIndex > 3)
+    ? '<div class="text-center mt-3 mb-4">
+        <a href="#" class="m-overview-see-more" id="seeMoreBtn">See More</a>
+        <a href="#" class="m-overview-see-less" id="seeLessBtn" style="display:none;">See Less</a>
+       </div>'
+    : '';
 
-        <section class="m-meeting-overview bg-white pb-5">
-            <div class="container">
-                <!-- Meeting Info Text -->
-                <div class="text-center pb-2 mx-auto m-meeting-info-wrap">
-                    ' . $jVars['module:event-content1'] . '
-                </div>
-                <div class="text-center pb-4">
-                    <button class="btn m-btn-book-table">Learn More</button>
-                </div>
-                <!-- 3 Columns with Red Borders -->
-                <div class="row gx-4 gx-lg-5 gy-4 align-items-stretch pb-3">
-                    ' . $overview_items_html . '
-                </div>
+$events_section = '
+    <div class="row gx-4 gx-lg-5 gy-4 align-items-stretch pb-3" id="eventsRow">
+        ' . $events_section . '
+    </div>
+    ' . $seeMoreBtn . '
+    <script>
+    (function() {
+        var seeMoreBtn = document.getElementById("seeMoreBtn");
+        var seeLessBtn = document.getElementById("seeLessBtn");
 
-                <div class="text-center mt-3 mb-4">
-                    <a href="#" class="text-muted text-decoration-none font-secondary m-meeting-see-more"><span
-                            class="text-decoration-underline ul-underline-offset">See More</span></a>
-                </div>
-            </div>
-        </section>
+        // Grab ALL event items then slice from index 3 onwards
+        var allItems   = document.querySelectorAll("[data-event-item]");
+        var extraItems = Array.prototype.slice.call(allItems, 3);
 
+        if (seeMoreBtn) {
+            seeMoreBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                extraItems.forEach(function(el) { el.style.display = ""; });
+                seeMoreBtn.style.display = "none";
+                seeLessBtn.style.display = "";
+            });
+        }
 
-
-        <section class="m-overview-new wow animate__fadeInUp">
-            <div class="container container-custom">
-                <div class="m-overview-header text-center">
-                    <p class="m-overview-label-new">WELCOME TO LUMBINI PALACE RESORT</p>
-                    <div class="m-overview-divider-red"></div>
-                    <h2 class="m-overview-title-main">Escape to spacious Lumbini hotel <br> rooms</h2>
-                </div>
-
-                <div class="m-overview-grid-new mt-5 collapsed" id="overviewGrid">
-                    ' . $overview_items_html . '
-                </div>
-
-                <div class="text-start mt-4">
-                    <a href="#" class="m-overview-see-more" id="seeMoreBtn">See More</a>
-                    <a href="#" class="m-overview-see-less d-none" id="seeLessBtn">See Less</a>
-                </div>
-            </div>
-        </section>
-
+        if (seeLessBtn) {
+            seeLessBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                extraItems.forEach(function(el) { el.style.display = "none"; });
+                seeLessBtn.style.display = "none";
+                seeMoreBtn.style.display = "";
+            });
+        }
+    })();
+    </script>
 ';
 
-$jVars['module:rooms-overview'] = $overview_section;
+$jVars['module:events-overview'] = $events_section;
+
+
+//PART 2
+$events_section2 = '';
+$itemIndex2 = 0;
+$eventPkg2 = Package::find_by_sql("SELECT incexc1 FROM tbl_package WHERE status=1 AND type=3 LIMIT 1");
+
+if (!empty($eventPkg2)) {
+    foreach ($eventPkg2 as $pkg) {
+        if (!empty($pkg->incexc1)) {
+            $includesList = unserialize($pkg->incexc1);
+            if (!empty($includesList) && is_array($includesList)) {
+                foreach ($includesList as $item) {
+                    if (!empty($item)) {
+                        $itemText   = is_array($item) ? $item['text'] : $item;
+                        $itemUrl    = is_array($item) ? (!empty($item['url']) ? $item['url'] : '') : '';
+                        $linktarget = (isset($item['linktype']) && $item['linktype'] == '1') ? ' target="_blank"' : '';
+
+                        $learnMoreLink = '';
+                        if (!empty($itemUrl)) {
+                            $learnMoreLink = '<a href="' . htmlspecialchars($itemUrl) . '"' . $linktarget . '
+                                class="text-dark fw-bold text-decoration-underline">Learn More</a>';
+                        }
+
+                        // Use inline style instead of d-none to avoid Bootstrap !important conflict
+                        $hiddenStyle2 = ($itemIndex2 >= 3) ? ' style="display:none;"' : '';
+
+                        $events_section2 .= '
+                    <div class="col-md-4" data-event-item' . $hiddenStyle2 . '>
+                        <div class="h-100 ps-3 py-1 m-meeting-feature-border">
+                            <p class="mb-0 text-muted font-secondary m-meeting-feature-text">'
+                                . $itemText . ' ' . $learnMoreLink . '
+                            </p>
+                        </div>
+                    </div>';
+
+                        $itemIndex2++;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Only show the See More button if there are more than 3 items
+$seeMoreBtn2 = ($itemIndex2 > 3)
+    ? '<div class="text-center mt-3 mb-4">
+        <a href="#" class="m-overview-see-more" id="seeMoreBtn2">See More</a>
+        <a href="#" class="m-overview-see-less" id="seeLessBtn2" style="display:none;">See Less</a>
+       </div>'
+    : '';
+
+$events_section2 = '
+    <div class="row gx-4 gx-lg-5 gy-4 align-items-stretch pb-3" id="eventsRow2">
+        ' . $events_section2 . '
+    </div>
+    ' . $seeMoreBtn2 . '
+    <script>
+    (function() {
+        var seeMoreBtn = document.getElementById("seeMoreBtn2");
+        var seeLessBtn = document.getElementById("seeLessBtn2");
+
+        // Scoped selection: only items inside eventsRow2
+        var allItems   = document.querySelectorAll("#eventsRow2 [data-event-item]");
+        var extraItems = Array.prototype.slice.call(allItems, 3);
+
+        if (seeMoreBtn) {
+            seeMoreBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                extraItems.forEach(function(el) { el.style.display = ""; });
+                seeMoreBtn.style.display = "none";
+                seeLessBtn.style.display = "";
+            });
+        }
+
+        if (seeLessBtn) {
+            seeLessBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                extraItems.forEach(function(el) { el.style.display = "none"; });
+                seeLessBtn.style.display = "none";
+                seeMoreBtn.style.display = "";
+            });
+        }
+    })();
+    </script>
+';
+
+$jVars['module:events-overview2'] = $events_section2;
+
+
 
 // Experience Banner
 $exp_banner = $siteRegulars = '';
@@ -843,6 +932,7 @@ if (!empty($pkgExp)) {
 
 //experience
 $overview_items_html2 = $local = '';
+$overviewItemCount2 = 0;
 $overviewPkg = Package::find_by_sql("SELECT incexc FROM tbl_package WHERE status=1 AND type=2 LIMIT 1");
 
 if (!empty($overviewPkg)) {
@@ -863,18 +953,27 @@ if (!empty($overviewPkg)) {
                                     class="text-dark fw-bold text-decoration-underline">Learn More</a>';
                         }
 
+                        $hiddenStyleOverview2 = ($overviewItemCount2 >= 3) ? ' style="display:none;"' : '';
                         $overview_items_html2 .= '
-                    <div class="col-md-4">
+                    <div class="col-md-4" data-local1-item' . $hiddenStyleOverview2 . '>
                         <div class="m-attraction-text-block h-100">
                             <p class="mb-0 text-muted" style="font-size: 0.9rem;">' . $itemText . $learnMoreLink . '</p>
                         </div>
                     </div>';
+                        $overviewItemCount2++;
                     }
                 }
             }
         }
     }
 }
+
+$seeMoreBtnLocal1 = ($overviewItemCount2 > 3)
+    ? '<div class="text-center mt-3 mb-4">
+        <a href="#" class="m-overview-see-more" id="seeMoreBtnLocal1">See More</a>
+        <a href="#" class="m-overview-see-less" id="seeLessBtnLocal1" style="display:none;">See Less</a>
+       </div>'
+    : '';
 
 $overview_section2 = '
         <section class="m-local-attractions-text py-5 bg-white mt-4">
@@ -885,6 +984,35 @@ $overview_section2 = '
             </div>
         </section>
 
+        ' . $seeMoreBtnLocal1 . '
+        <script>
+        (function() {
+            var seeMoreBtn = document.getElementById("seeMoreBtnLocal1");
+            var seeLessBtn = document.getElementById("seeLessBtnLocal1");
+            var allItems = document.querySelectorAll("[data-local1-item]");
+
+            if (!seeMoreBtn || !seeLessBtn || allItems.length <= 3) {
+                return;
+            }
+
+            var extraItems = Array.prototype.slice.call(allItems, 3);
+
+            seeMoreBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                extraItems.forEach(function(el) { el.style.display = ""; });
+                seeMoreBtn.style.display = "none";
+                seeLessBtn.style.display = "";
+            });
+
+            seeLessBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                extraItems.forEach(function(el) { el.style.display = "none"; });
+                seeLessBtn.style.display = "none";
+                seeMoreBtn.style.display = "";
+            });
+        })();
+        </script>
+
 ';
 $jVars['module:local1'] = $overview_section2;
 
@@ -892,6 +1020,7 @@ $jVars['module:local1'] = $overview_section2;
 $localme = Package::find_by_sql("SELECT incexc1 FROM tbl_package WHERE status=1 AND type=2 LIMIT 1");
 
 $cardsHtml = '';
+$localCardCount = 0;
 
 if (!empty($localme)) {
     foreach ($localme as $pkg1) {
@@ -912,8 +1041,9 @@ if (!empty($localme)) {
                         $target = (is_array($item) && !empty($item['linktype']) && $item['linktype'] == '1')
                             ? ' target="_blank" rel="noopener noreferrer"' : '';
 
+                        $hiddenStyleLocal = ($localCardCount >= 3) ? ' style="display:none;"' : '';
                         $cardsHtml .= '
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-4" data-local2-item' . $hiddenStyleLocal . '>
                                 <a href="' . $href . '"' . $target . '
                                     class="m-attraction-card d-block p-4 bg-white rounded-3 shadow-sm text-decoration-none h-100 transition-all">
                                     <h3 class="h6 fw-bold mb-2 font-primary d-flex align-items-center gap-2"
@@ -926,6 +1056,7 @@ if (!empty($localme)) {
                                 </a>
                             </div>
                         ';
+                        $localCardCount++;
                     }
                 }
             }
@@ -934,6 +1065,13 @@ if (!empty($localme)) {
 }
 
 // Final Section
+$seeMoreBtnLocal2 = ($localCardCount > 3)
+    ? '<div class="text-center mt-3 mb-4">
+        <a href="#" class="m-overview-see-more" id="seeMoreBtnLocal2">See More</a>
+        <a href="#" class="m-overview-see-less" id="seeLessBtnLocal2" style="display:none;">See Less</a>
+       </div>'
+    : '';
+
 $local = '
 <section class="m-local-attractions-cards py-5 bg-white pb-5 mb-3">
     <div class="container">
@@ -945,6 +1083,35 @@ $local = '
         </div>
     </div>
 </section>
+
+        ' . $seeMoreBtnLocal2 . '
+        <script>
+        (function() {
+            var seeMoreBtn = document.getElementById("seeMoreBtnLocal2");
+            var seeLessBtn = document.getElementById("seeLessBtnLocal2");
+            var allItems = document.querySelectorAll("[data-local2-item]");
+
+            if (!seeMoreBtn || !seeLessBtn || allItems.length <= 3) {
+                return;
+            }
+
+            var extraItems = Array.prototype.slice.call(allItems, 3);
+
+            seeMoreBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                extraItems.forEach(function(el) { el.style.display = ""; });
+                seeMoreBtn.style.display = "none";
+                seeLessBtn.style.display = "";
+            });
+
+            seeLessBtn.addEventListener("click", function(e) {
+                e.preventDefault();
+                extraItems.forEach(function(el) { el.style.display = "none"; });
+                seeLessBtn.style.display = "none";
+                seeMoreBtn.style.display = "";
+            });
+        })();
+        </script>
 ';
 
 $jVars['module:local'] = $local;
@@ -960,7 +1127,7 @@ if (!empty($roompkg)) {
         $pkgids[] = $rp->id;
     }
     $idstr = implode(',', $pkgids);
-    $sql = "SELECT * FROM tbl_package_sub WHERE status='1' AND type IN ($idstr) ORDER BY sortorder ASC LIMIT 6";
+    $sql = "SELECT * FROM tbl_package_sub WHERE status='1' AND homepage='1' AND type IN ($idstr) ORDER BY sortorder ASC LIMIT 6";
     $pkgRec = Subpackage::find_by_sql($sql);
 
     if (!empty($pkgRec)) {
@@ -983,18 +1150,18 @@ if (!empty($roompkg)) {
                 }
             }
 
-            $content_text = !empty($expRow->sub_title) ? $expRow->sub_title : $expRow->detail;
-            $content_text = substr($content_text, 0, 150) . (strlen($content_text) > 150 ? '...' : '');
+            $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($expRow->content));
+            $content_text = !empty($rescontent[1]) ? $rescontent[1] : $rescontent[0];
+            $content_text = strip_tags($content_text);
 
             $enjoy_stay_content .= '
                     <div class="ul-tab ' . ($tab_counter === 0 ? 'active' : '') . '" id="' . $tab_id . '">
                         <div class="m-enjoy-card">
-                            <div class="m-enjoy-card-img"><img src="' . $imgpath . '" alt="' . htmlspecialchars($expRow->title) . '"></div>
+                            <div class="m-enjoy-card-img"><img src="' . $imgpath . '" alt="' . $expRow->title . '"></div>
                             <div class="m-enjoy-card-body">
-                                <p class="m-card-label">Restro &amp; Bar</p>
-                                <h3 class="m-card-title">' . htmlspecialchars($expRow->title) . '</h3>
-                                <p class="m-card-text">Discover the freshest flavors at our organic restaurant, where
-                                    farm-to-table ingredients meet culinary excellence.</p>
+                                <p class="m-card-label">' . $expRow->tagline . '</p>
+                                <h3 class="m-card-title">' . $expRow->title . '</h3>
+                                <p class="m-card-text">' . $content_text . '</p>
                                 <a href="' . BASE_URL . 'experiences/' . $expRow->slug . '" class="m-card-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
@@ -1005,13 +1172,13 @@ if (!empty($roompkg)) {
 
         $enjoy_stay_section = '
 
-        <section class="m-enjoy-stay wow animate__fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <section class="m-enjoy-stay wow animate__fadeInUp">
             <div class="m-enjoy-stay-inner">
                 <div class="m-enjoy-stay-header">
                     <h2 class="m-enjoy-stay-title">More Ways to Enjoy Your Stay</h2>
                 </div>
                 <div class="m-enjoy-tabs">
-                ' . $enjoy_stay_tabs . '
+                    ' . $enjoy_stay_tabs . '
                 </div>
                 <div class="m-enjoy-content">
                     ' . $enjoy_stay_content . '
@@ -1146,13 +1313,32 @@ if (!empty($roompkg)) {
             $capacity = !empty($subpkgRow->capacity) ? $subpkgRow->capacity : '';
             $room_size = !empty($subpkgRow->room_size) ? $subpkgRow->room_size : '';
             $short_desc = $capacity . ' | ' . $room_size;
+            
+                $gallRec = SubPackageImage::getImagelist_by($subpkgRow->id);
+                $gallery_images = array();
+                if (!empty($gallRec)) {
+                    foreach ($gallRec as $row) {
+                        $gallery_images[] = IMAGE_PATH . 'package/galleryimages/' . $row->image;
+                    }
+                }
+                if (empty($gallery_images)) {
+                    $gallery_images[] = $imgpath;
+                }
+                $data_images_attr = htmlspecialchars(json_encode($gallery_images), ENT_QUOTES, 'UTF-8');
+            
 
             $room_card_html = '
                                 <div class="col-md-6">
                                     <div class="m-room-card-new">
                                         <div class="m-room-image-wrap">
-                                            <img src="' . $imgpath . '" alt="' . $subpkgRow->title . '" class="img-fluid">
-                                            <button class="m-room-zoom-btn"><i class="fa-solid fa-expand"></i></button>
+                                            <img src="' . $imgpath . '" alt="' . $subpkgRow->title . '"
+                                                class="img-fluid">
+                                            <button class="m-room-zoom-btn"
+                                                data-room-name="' . $subpkgRow->title . '"
+                                                data-room-link="' . BASE_URL . 'room/' . $subpkgRow->slug . '"
+                                                data-images="' . $data_images_attr . '">
+                                                <i class="fa-solid fa-expand"></i>
+                                            </button>
                                         </div>
                                         <div class="m-room-details">
                                             <h3 class="m-room-name">' . $subpkgRow->title . '</h3>
@@ -1160,7 +1346,7 @@ if (!empty($roompkg)) {
                                             <div class="m-room-divider-v2"></div>
                                             <div class="m-room-footer">
                                                 <a href="' . BASE_URL . 'room/' . $subpkgRow->slug . '" class="m-view-more">View More</a>
-                                               <a href="#" class="m-room-slide-btn">View Rates</a>
+                                                <a href="#" class="m-room-slide-btn">View Rates</a>
                                             </div>
                                         </div>
                                     </div>
@@ -1284,7 +1470,8 @@ if ((defined('SUBPACKAGE_PAGE') || defined('EXPERIENCE_PAGE') || defined('ROOM_P
         $jVars['module:sub-package-detail'] = $resubpkgDetail;
         $jVars['module:sub-package-title'] = $subpkgRec->title;
         $jVars['module:sub-package-subtitle'] = $subpkgRec->sub_title;
-        $jVars['module:sub-package-content'] = $subpkgRec->content;
+        $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', trim($subpkgRec->content));
+        $jVars['module:sub-package-content'] = $rescontent[0];
         $jVars['module:sub-package-brief'] = $subpkgRec->detail;
     } // end if !empty($subpkgRec)
 } // end if defined page
