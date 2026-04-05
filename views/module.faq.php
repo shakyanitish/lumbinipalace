@@ -381,6 +381,14 @@ if (defined('PACKAGE_PAGE') || defined('FAQ_PAGE')) {
         } else {
             // PACKAGE_PAGE default wrapper
             $faq_dine = '
+                        <section class="m-property-details py-5 bg-white">
+                <div class="container">
+                    <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
+                    <div class="accordion accordion-flush" id="eventAccordion">
+                        ' . $faqItems . '
+                    </div>
+                </div>
+            </section>
             ';
         }
     }
@@ -477,7 +485,14 @@ if (defined('EVENT_PAGE') || defined('FAQ_PAGE')) {
         } else {
             // EVENT_PAGE default wrapper
             $faq_details_event = '
-           ';
+            <section class="m-property-details py-5 bg-white">
+                <div class="container">
+                    <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
+                    <div class="accordion accordion-flush" id="eventAccordion">
+                        ' . $faqItems . '
+                    </div>
+                </div>
+            </section>';
         }
     }
 }

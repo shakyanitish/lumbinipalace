@@ -801,6 +801,103 @@ $events_section2 = '
 
 $jVars['module:events-overview2'] = $events_section2;
 
+// Local Attractions Section
+$localme = Package::find_by_sql("SELECT incexc1 FROM tbl_package WHERE status=1 AND type=2 LIMIT 1");
+
+$cardsHtml = '';
+$localCardCount = 0;
+
+if (!empty($localme)) {
+    foreach ($localme as $pkg1) {
+        if (!empty($pkg1->incexc1)) {
+            $includesList = unserialize($pkg1->incexc1);
+            if (!empty($includesList) && is_array($includesList)) {
+                $totalItems = count($includesList);
+                $itemsPerSlide = 3;
+                $itemCount = 0;
+
+                foreach ($includesList as $index => $item) {
+                    if (!empty($item)) {
+                        // Handle both formats
+                        $text = is_array($item) ? htmlspecialchars($item['text']) : htmlspecialchars($item);
+                        $subtitle = is_array($item) && !empty($item['subtitle']) ? htmlspecialchars($item['subtitle']) : '';
+                        $href = is_array($item) && !empty($item['url']) ? htmlspecialchars($item['url']) : '#';
+                        $target = (is_array($item) && !empty($item['linktype']) && $item['linktype'] == '1')
+                            ? ' target="_blank" rel="noopener noreferrer"' : '';
+
+                        // Start a new slide every 3 items
+                        if ($itemCount % $itemsPerSlide == 0) {
+                            $cardsHtml .= '
+                        <div class="swiper-slide">
+                            <div class="row g-4">';
+                        }
+
+                        $cardsHtml .= '
+                                <!-- Card ' . ($itemCount + 1) . ' -->
+                                <div class="col-md-6 col-lg-4">
+                                    <a href="' . $href . '"' . $target . '
+                                        class="m-attraction-card d-block p-4 bg-white rounded-3 shadow-sm text-decoration-none h-100 transition-all">
+                                        <h3 class="h6 fw-bold mb-2 font-primary d-flex align-items-center gap-2"
+                                            style="font-size: 0.9rem; color: #4a4a4a;">
+                                            ' . $text . '
+                                            <i class="bi bi-arrow-up-right"
+                                                style="font-size: 0.70rem; color: #1c1c1c;"></i>
+                                        </h3>
+                                        <p class="text-muted small mb-0 font-secondary"
+                                            style="font-size: 0.75rem; line-height: 1.6;">' . $subtitle . '</p>
+                                    </a>
+                                </div>';
+
+                        $itemCount++;
+
+                        // Close slide after 3 items or if it's the last item
+                        if ($itemCount % $itemsPerSlide == 0 || $itemCount == $totalItems) {
+                            $cardsHtml .= '
+                            </div>
+                        </div>';
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+$local = '
+        <section class="m-local-attractions-cards py-5 bg-white pb-5 mb-3">
+            <div class="container">
+                <h2 class="h6 font-secondary fw-bold text-center mb-5 text-uppercase"
+                    style="letter-spacing: 0.5px; color: #1c1c1c;">LOCAL ATTRACTIONS</h2>
+
+                <div class="swiper m-attractions-swiper">
+                    <div class="swiper-wrapper">
+                        ' . $cardsHtml . '
+                    </div>
+
+                    <!-- Mobile Navigation / Pagination -->
+                    <div
+                        class="m-attractions-controls mt-2 d-flex justify-content-center align-items-center gap-3 d-md-none">
+                        <button
+                            class="m-attractions-prev cursor-pointer d-flex align-items-center justify-content-center"
+                            style="background: none; border: none; font-size: 16px; color: #1c1c1c; padding: 5px;">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <div class="m-attractions-pagination d-flex justify-content-center align-items-center"
+                            style="width: auto;"></div>
+                        <button
+                            class="m-attractions-next cursor-pointer d-flex align-items-center justify-content-center"
+                            style="background: none; border: none; font-size: 16px; color: #1c1c1c; padding: 5px;">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+';
+
+$jVars['module:local'] = $local;
+
+
 
 
 // Experience Banner
@@ -1016,105 +1113,7 @@ $overview_section2 = '
 ';
 $jVars['module:local1'] = $overview_section2;
 
-// Step 1: Collect items from DB
-$localme = Package::find_by_sql("SELECT incexc1 FROM tbl_package WHERE status=1 AND type=2 LIMIT 1");
 
-$cardsHtml = '';
-$localCardCount = 0;
-
-if (!empty($localme)) {
-    foreach ($localme as $pkg1) {
-
-        if (!empty($pkg1->incexc1)) {
-            $includesList = unserialize($pkg1->incexc1);
-
-            if (!empty($includesList) && is_array($includesList)) {
-
-                foreach ($includesList as $item) {
-
-                    if (!empty($item)) {
-
-                        // Handle both formats
-                        $text = is_array($item) ? htmlspecialchars($item['text']) : htmlspecialchars($item);
-                        $subtitle = is_array($item) && !empty($item['subtitle']) ? htmlspecialchars($item['subtitle']) : '';
-                        $href = is_array($item) && !empty($item['url']) ? htmlspecialchars($item['url']) : '#';
-                        $target = (is_array($item) && !empty($item['linktype']) && $item['linktype'] == '1')
-                            ? ' target="_blank" rel="noopener noreferrer"' : '';
-
-                        $hiddenStyleLocal = ($localCardCount >= 3) ? ' style="display:none;"' : '';
-                        $cardsHtml .= '
-                            <div class="col-md-6 col-lg-4" data-local2-item' . $hiddenStyleLocal . '>
-                                <a href="' . $href . '"' . $target . '
-                                    class="m-attraction-card d-block p-4 bg-white rounded-3 shadow-sm text-decoration-none h-100 transition-all">
-                                    <h3 class="h6 fw-bold mb-2 font-primary d-flex align-items-center gap-2"
-                                        style="font-size: 0.9rem; color: #4a4a4a;">
-                                         ' . $text . '
-                                        <i class="bi bi-arrow-up-right" style="font-size: 0.70rem; color: #1c1c1c;"></i>
-                                    </h3>
-                                    <p class="text-muted small mb-0 font-secondary"
-                                        style="font-size: 0.75rem; line-height: 1.6;">' . $subtitle . '</p>
-                                </a>
-                            </div>
-                        ';
-                        $localCardCount++;
-                    }
-                }
-            }
-        }
-    }
-}
-
-// Final Section
-$seeMoreBtnLocal2 = ($localCardCount > 3)
-    ? '<div class="text-center mt-3 mb-4">
-        <a href="#" class="m-overview-see-more" id="seeMoreBtnLocal2">See More</a>
-        <a href="#" class="m-overview-see-less" id="seeLessBtnLocal2" style="display:none;">See Less</a>
-       </div>'
-    : '';
-
-$local = '
-<section class="m-local-attractions-cards py-5 bg-white pb-5 mb-3">
-    <div class="container">
-        <h2 class="h6 font-secondary fw-bold text-center mb-5 text-uppercase"
-            style="letter-spacing: 0.5px; color: #1c1c1c;">LOCAL ATTRACTIONS</h2>
-
-        <div class="row g-4">
-            ' . $cardsHtml . '
-        </div>
-    </div>
-</section>
-
-        ' . $seeMoreBtnLocal2 . '
-        <script>
-        (function() {
-            var seeMoreBtn = document.getElementById("seeMoreBtnLocal2");
-            var seeLessBtn = document.getElementById("seeLessBtnLocal2");
-            var allItems = document.querySelectorAll("[data-local2-item]");
-
-            if (!seeMoreBtn || !seeLessBtn || allItems.length <= 3) {
-                return;
-            }
-
-            var extraItems = Array.prototype.slice.call(allItems, 3);
-
-            seeMoreBtn.addEventListener("click", function(e) {
-                e.preventDefault();
-                extraItems.forEach(function(el) { el.style.display = ""; });
-                seeMoreBtn.style.display = "none";
-                seeLessBtn.style.display = "";
-            });
-
-            seeLessBtn.addEventListener("click", function(e) {
-                e.preventDefault();
-                extraItems.forEach(function(el) { el.style.display = "none"; });
-                seeLessBtn.style.display = "none";
-                seeMoreBtn.style.display = "";
-            });
-        })();
-        </script>
-';
-
-$jVars['module:local'] = $local;
 
 // MORE WAYS TO ENJOY YOUR STAY - Dynamic Experience Tabs
 $enjoy_stay_tabs = '';

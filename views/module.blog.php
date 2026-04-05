@@ -216,7 +216,7 @@ if (defined("BLOG_DETAIL_PAGE")) {
 
                             <!-- Related Posts -->
                             <div class="m-blog-sidebar-card">
-                                <h4 class="m-blog-sidebar-title">Related Posts</h4>
+                                <h4 class="m-blog-sidebar-title">Recent Posts</h4>
                                 ' . $recent_posts_html . '
                             </div>
                         </aside>

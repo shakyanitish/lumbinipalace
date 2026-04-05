@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
       
       if (dropdown && dropdown.classList.contains("mhb-rooms-dropdown") && btn.classList.contains("mhb-done-btn")) {
         if (bookingState.rooms > 9) {
-          window.location.href = "events.html#eventPlanModal";
+          window.location.href = "events#eventPlanModal";
           return;
         }
       }

@@ -19,7 +19,7 @@ if (isset($_GET['page']) && $_GET['page'] == "virtualtour" && isset($_GET['mode'
                     <th style="display:none;"></th>
                     <th class="text-center"><input class="check-all" type="checkbox"/></th>
                     <th>Title</th>
-                    <th>Short Code</th>
+                    <!-- <th>Short Code</th> -->
                     <th class="text-center">360 Images</th>
                     <th>Hotspots</th>
                     <th class="text-center"><?php echo $GLOBALS['basic']['action']; ?></th>
@@ -40,11 +40,11 @@ if (isset($_GET['page']) && $_GET['page'] == "virtualtour" && isset($_GET['mode'
                                    title="<?php echo $virtual_tour->title; ?>"><?php echo $virtual_tour->title; ?></a>
                             </div>
                         </td>
-                        <td class="text-center">
+                        <!-- <td class="text-center">
                             <div class="col-md-12">
                                 <?php echo $virtual_tour->id; ?>
                             </div>
-                        </td>
+                        </td> -->
                         <td class="text-center">
                             <div class="col-md-12">
                                 <a class="primary-bg medium btn loadingbar-demo" title="" href="javascript:void(0);"

@@ -42,7 +42,26 @@ if (!empty($diningPkgs)) {
             
             $cuisine = !empty($dining->sub_title) ? $dining->sub_title : '';
             $short_title = !empty($dining->short_title) ? $dining->short_title : '';
-            $phone = !empty($dining->phone) ? $dining->phone : '';
+
+$phone = '';
+$faxno = array_map('trim', explode(',', $dining->phone));
+
+foreach ($faxno as $index => $fax) {
+    // remove spaces for tel link
+    $cleanFax = str_replace(' ', '', $fax);
+
+    $phone .= '
+
+
+    <a href="tel:+977' . $cleanFax . '" class="text-dark text-decoration-none">+977 ' . $fax . '</a>';
+
+    // separator except last item
+    if ($index !== array_key_last($faxno)) {
+        $phone .= ' ';
+    }
+}
+    
+
             $dress = !empty($dining->dress) ? $dining->dress :
             $time = !empty($dining->time) ? $dining->time : '';
             $content = !empty($dining->content) ? strip_tags($dining->content) : '';
@@ -58,7 +77,7 @@ if (!empty($diningPkgs)) {
                 $dining_list_html .= '
                             <div class="col-md-5">
                                 <div class="m-dining-img-wrap">
-                                    <img src="' . $imgpath . '" alt="' . htmlspecialchars($dining->title) . '" class="img-fluid w-100 h-100 object-fit-cover">
+                                    <img src="' . $imgpath . '" alt="' . $dining->title . '" class="img-fluid w-100 h-100 object-fit-cover">
                                 </div>
                             </div>
                             <div class="col-md-7">';
@@ -69,8 +88,8 @@ if (!empty($diningPkgs)) {
 
             $dining_list_html .= '
                                 <div class="m-dining-details">
-                                    <h3 class="m-dining-title">' . htmlspecialchars($dining->title) . '</h3>
-                                    <p class="m-dining-cuisine">' . htmlspecialchars($cuisine) . '</p>
+                                    <h3 class="m-dining-title">' . $dining->title . '</h3>
+                                    <p class="m-dining-cuisine">' . $cuisine . '</p>
                                     <p class="m-dining-desc">' . $content . '</p>
 
                                     <div class="m-dining-info mb-4">
@@ -79,7 +98,7 @@ if (!empty($diningPkgs)) {
                                             <span>Everyday</span>
                                         </div>
 
-                                        <span>' . htmlspecialchars($short_title) . '</span>
+                                        <span>' . $short_title . '</span>
                                     </div>
 
 
@@ -88,11 +107,11 @@ if (!empty($diningPkgs)) {
                                         <div class="m-dining-extra-info">
                                             <div class="m-dining-extra-item border-bottom pb-3 mb-3">
                                                 <i class="fa-solid fa-phone"></i>
-                                                <span>' . htmlspecialchars($phone) . '</span>
+                                                <span>' . $phone . '</span>
                                             </div>
                                             <div class="m-dining-extra-item border-bottom pb-3">
                                                 <i class="fa-brands fa-black-tie"></i>
-                                                <span>Dress Code: ' . htmlspecialchars($dress) . '</span>
+                                                <span>Dress Code: ' . $dress . '</span>
                                             </div>
                                         </div>
                                     </div>
@@ -163,17 +182,32 @@ if (defined('HOME_PAGE')) {
                     }
                 }
                 
-                // Fallback image if no dining image available
-                if (empty($imgpath)) {
-                    $imgpath = ASSETS_PATH . 'img/dine-1.jpg';
-                }
-                
                 $title = !empty($dining->title) ? htmlspecialchars($dining->title) : '';
                 $cuisine = !empty($dining->sub_title) ? htmlspecialchars($dining->sub_title) : '';
-                $content = !empty($dining->content) ? strip_tags($dining->content) : '';
                 
-                $slides_html .= '
-                        <!-- Slide ' . ($k + 1) . ' -->
+                $raw_content = !empty($dining->content) ? trim($dining->content) : '';
+                $rescontent = explode('<hr id="system_readmore" style="border-style: dashed; border-color: orange;" />', $raw_content);
+                $content = !empty($rescontent[1]) ? strip_tags($rescontent[1]) : strip_tags($rescontent[0]);
+                
+                if (empty($imgpath)) {
+                    $slides_html .= '
+                        <div class="swiper-slide">
+                            <div class="row w-100 h-100 g-0 align-items-center justify-content-center m-great-room-row text-center">
+                                <div class="col-12 col-md-10 col-xl-8 d-flex flex-column justify-content-center align-items-center p-4 p-md-5 position-relative z-1">
+                                    <div class="mgr-text-content d-flex flex-column align-items-center mt-4 mt-xl-0">
+                                        <h2 class="h3 fw-bold mb-3 mb-xl-4 text-white" style="letter-spacing: 0.5px;">' . $title . '</h2>
+                                        <p class="mb-4 mb-xl-5 font-weight-normal mx-auto text-white"
+                                            style="max-width: 650px; line-height: 1.7; font-size: 15px; color: #fff !important;">
+                                            ' . $content . '
+                                        </p>
+                                        <a href="#" class="btn mgr-btn-red px-5 py-2 fw-semibold"
+                                            style="border-radius: 50px;">Explore</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+                } else {
+                    $slides_html .= '
                         <div class="swiper-slide">
                             <div class="row g-0 align-items-stretch justify-content-center m-great-room-row flex-column flex-xl-row">
                                 <div class="col-xl-8 position-relative order-1 order-xl-2">
@@ -185,7 +219,7 @@ if (defined('HOME_PAGE')) {
                                         <h2 class="h3 fw-bold mb-3 mb-xl-4" style="letter-spacing: 0.5px;">' . $title . '</h2>
                                         <p class="mb-4 mb-xl-5 font-weight-normal mx-auto mx-xl-0"
                                             style="max-width: 450px; line-height: 1.7; font-size: 15px; color: #fff !important;">
-                                            ' . substr($content, 0, 200) . (strlen($content) > 200 ? '...' : '') . '
+                                            ' . $content . '
                                         </p>
                                         <a href="#" class="btn mgr-btn-red px-4 py-2 fw-semibold"
                                             style="border-radius: 6px;">Explore</a>
@@ -193,6 +227,7 @@ if (defined('HOME_PAGE')) {
                                 </div>
                             </div>
                         </div>';
+                }
             }
             
             // Build complete section HTML
