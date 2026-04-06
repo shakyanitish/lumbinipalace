@@ -143,6 +143,36 @@ foreach ($faxno as $index => $fax) {
 
 $jVars['module:dining-list'] = $dining_list_html;
 
+$overview_title_dining = '';
+$overview_content_dining = '';
+$overviewPkgDining = Package::find_by_sql("SELECT title, content FROM tbl_package WHERE status=1 AND type=0 LIMIT 1");
+
+if (!empty($overviewPkgDining)) {
+    foreach ($overviewPkgDining as $pkg) {
+        if (!empty($pkg->title)) {
+            $overview_title_dining = strtoupper($pkg->title);
+        }
+        if (!empty($pkg->content)) {
+            $overview_content_dining = $pkg->content;
+        }
+    }
+}
+
+$overview_section_dining = '
+
+        <section class="m-overview-new wow animate__fadeInUp">
+            <div class="container container-custom">
+                <div class="m-overview-header text-center">
+                    <p class="m-overview-label-new">' . $overview_title_dining . '</p>
+                    <div class="m-overview-divider-red"></div>
+                    <h2 class="m-overview-title-main">' . $overview_content_dining . '</h2>
+                </div>
+            </div>
+        </section>
+
+';
+$jVars['module:dining-overview'] = $overview_section_dining;
+
 $great_room_html = '';
 
 if (defined('HOME_PAGE')) {

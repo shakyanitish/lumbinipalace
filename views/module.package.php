@@ -570,10 +570,13 @@ $jVars['module:list-package-room-bred'] = $roombread;
 
 // Fetch overview items from tbl_package incexc field
 $overview_items_html = '';
-$overviewPkg = Package::find_by_sql("SELECT incexc FROM tbl_package WHERE status=1 AND type=1 LIMIT 1");
-
+$overview_title = '';
+$overview_content = '';
+$overviewPkg = Package::find_by_sql("SELECT title, content, incexc FROM tbl_package WHERE status=1 AND type=1 LIMIT 1");
 if (!empty($overviewPkg)) {
     foreach ($overviewPkg as $pkg) {
+        $overview_title = !empty($pkg->title) ? strtoupper($pkg->title) : '';
+        $overview_content = !empty($pkg->content) ? $pkg->content : '';
         if (!empty($pkg->incexc)) {
             $includesList = unserialize($pkg->incexc);
             if (!empty($includesList) && is_array($includesList)) {
@@ -605,10 +608,10 @@ $overview_section = '
         <section class="m-overview-new wow animate__fadeInUp">
             <div class="container container-custom">
                 <div class="m-overview-header text-center">
-                    <p class="m-overview-label-new">WELCOME TO LUMBINI PALACE RESORT</p>
+                    <p class="m-overview-label-new">' . $overview_title . '</p>
                     <div class="m-overview-divider-red"></div>
-                    <h2 class="m-overview-title-main">Escape to spacious Lumbini hotel <br> rooms</h2>
-                </div>
+                    <h2 class="m-overview-title-main">' . $overview_content . '</h2>
+                    </div>
 
                 <div class="m-overview-grid-new mt-5 collapsed" id="overviewGrid">
                     ' . $overview_items_html . '
@@ -927,6 +930,35 @@ if (!empty($pkgExp)) {
 ';
 }
 $jVars['module:exp-banner'] = $exp_banner;
+
+// Experiences Overview
+$overview_title_exp = '';
+$overview_content_exp = '';
+$overviewPkgExp = Package::find_by_sql("SELECT title, content FROM tbl_package WHERE status=1 AND type=2 LIMIT 1");
+
+if (!empty($overviewPkgExp)) {
+    foreach ($overviewPkgExp as $pkg) {
+        if (!empty($pkg->title)) {
+            $overview_title_exp = strtoupper($pkg->title);
+        }
+        if (!empty($pkg->content)) {
+            $overview_content_exp = $pkg->content;
+        }
+    }
+}
+
+$overview_section_exp = '
+        <section class="m-overview-new wow animate__fadeInUp">
+            <div class="container container-custom">
+                <div class="m-overview-header text-center">
+                    <p class="m-overview-label-new">' . $overview_title_exp . '</p>
+                    <div class="m-overview-divider-red"></div>
+                    <h2 class="m-overview-title-main">' . $overview_content_exp . '</h2>
+                </div>
+            </div>
+        </section>
+';
+$jVars['module:experiences-overview'] = $overview_section_exp;
 
 //Accomodation Banner
 $room_banner = $siteRegulars = '';
