@@ -225,6 +225,19 @@ endif;
                                value="<?php echo !empty($blogInfo->category) ? $blogInfo->category : ""; ?>">
                     </div>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-label col-md-2">
+                        <label for="">
+                            Tag :
+                        </label>
+                    </div>
+                    <div class="form-input col-md-6">
+                        <input placeholder="Tag" class="col-md-6 validate[required,length[0,200]]" type="text"
+                               name="tag" id="tag"
+                               value="<?php echo !empty($blogInfo->tag) ? $blogInfo->tag : ""; ?>">
+                    </div>
+                </div>
                 <div class="form-row hide">
                     <div class="form-label col-md-2">
                         <label for="">

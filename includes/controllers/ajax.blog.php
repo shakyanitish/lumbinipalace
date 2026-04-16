@@ -21,6 +21,7 @@
 			$record->brief 		= $_REQUEST['brief'];		
 			$record->content	= $_REQUEST['content'];
 			$record->category	= $_REQUEST['category'];
+			$record->tag	= $_REQUEST['tag'];
 			// $record->linksrc 		= $_REQUEST['linksrc'];
 			// $record->linktype 		= $_REQUEST['linktype'];
 			// $record->type 		= $_REQUEST['type'];			
@@ -54,6 +55,7 @@
 			$record->title 		= $_REQUEST['title'];
 			$record->author 	= $_REQUEST['author'];
 			$record->category	= $_REQUEST['category'];
+			$record->tag	= $_REQUEST['tag'];
 			$record->brief 		= $_REQUEST['brief'];		
 			$record->content	= $_REQUEST['content'];
 			// $record->linksrc 		= $_REQUEST['linksrc'];

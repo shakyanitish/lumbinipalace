@@ -31,7 +31,7 @@ if (!empty($recRows)) {
             <div id="collapse' . $recRow->id . '" class="accordion-collapse collapse ' . $active_class . '" aria-labelledby="heading' . $recRow->id . '" data-bs-parent="#locationAccordion">
                 <div class="accordion-body">
                     ' . $recRow->content . '
-                    <a href="javascript:void(0);" data-map-url="' . $map_url . '" class="mhm-right-link view-map-btn" style="color: white;">
+                    <a href="javascript:void(0);" data-map-url="' . $map_url . '" class="mhm-right-link view-map-btn mt-3" style="color: white;">
                         <i class="fa-solid fa-location-dot"></i> <span>VIEW MAP</span>
                     </a>
                 </div>

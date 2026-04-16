@@ -4,7 +4,7 @@ class Blog extends DatabaseObject
 {
 
     protected static $table_name = "tbl_blog";
-    protected static $db_fields = array('id', 'slug', 'title', 'author', 'brief', 'content', 'status', 'meta_keywords', 'meta_description', 'blog_date','linksrc','linktype', 'archive_date', 'sortorder', 'type', 'viewcount', 'added_date', 'image', 'source', 'category');
+    protected static $db_fields = array('id', 'slug', 'title', 'author', 'brief', 'content', 'status', 'meta_keywords', 'meta_description', 'blog_date','linksrc','linktype', 'archive_date', 'sortorder', 'type', 'viewcount', 'added_date', 'image', 'source', 'category','tag');
 
     public $id;
     public $slug;
@@ -26,6 +26,7 @@ class Blog extends DatabaseObject
     public $image;
     public $source;
     public $category;
+    public $tag;
 
     //get latest blog
     public static function get_latestblog_by($limit = '')

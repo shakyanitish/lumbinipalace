@@ -147,7 +147,7 @@ if (defined("BLOG_DETAIL_PAGE")) {
             <div class="m-blog-hero-overlay">
                 <div class="container">
                     <div class="m-blog-hero-content">
-                        <span class="m-blog-category">' . $Blogs->category. '</span>
+                        <span class="m-blog-category">' . $Blogs->tag . '</span>
                         <h1 class="m-blog-hero-title">' . $Blogs->title . '</h1>
                         <div class="m-blog-meta">
                             <span><i class="fa-light fa-calendar-days me-2"></i> ' . $blogDate . '</span>
