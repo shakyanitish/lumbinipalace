@@ -150,7 +150,7 @@ if (defined('HOME_PAGE')) {
         $categoryTitle = (!empty($category) && !empty($category->title)) ? htmlspecialchars($category->title) : 'Frequently Asked Questions';
 
         $homeFaqSection = '
-    <section class="m-property-details py-5 bg-white">
+    <section class="m-property-details py-5 bg-white px-3 px-md-5 px-lg-0">
         <div class="container">
             <h2 class="h5 fw-bold mb-4 title">' . $categoryTitle . '</h2>
             <div class="accordion accordion-flush" id="faqAccordionSect1">'
@@ -196,7 +196,7 @@ if (defined('HOME_PAGE')) {
         $categoryTitle = (!empty($category) && !empty($category->title)) ? htmlspecialchars($category->title) : 'Property Details';
 
         $homeFaqSection2 = '
-        <section class="m-property-details py-5 bg-white">
+        <section class="m-property-details py-5 bg-white px-3 px-md-5 px-lg-0">
             <div class="container">
                 <h2 class="h5 fw-bold mb-4 title">' . $categoryTitle . '</h2>
                 <div class="accordion accordion-flush" id="faqAccordionSect2">'
@@ -328,7 +328,7 @@ if (defined('EXPERIENCE_PAGE') || defined('FAQ_PAGE')) {
         } else {
             // EXPERIENCE_PAGE default wrapper
             $faq_details = '
-            <section class="m-property-details py-5 bg-white">
+            <section class="m-property-details py-5 bg-white px-3 px-md-5 px-lg-0">
                 <div class="container">
                     <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
                     <div class="accordion accordion-flush" id="faqAccordion">
@@ -381,7 +381,7 @@ if (defined('PACKAGE_PAGE') || defined('FAQ_PAGE')) {
         } else {
             // PACKAGE_PAGE default wrapper
             $faq_dine = '
-                        <section class="m-property-details py-5 bg-white">
+                        <section class="m-property-details py-5 bg-white px-3 px-md-5 px-lg-0">
                 <div class="container">
                     <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
                     <div class="accordion accordion-flush" id="eventAccordion">
@@ -434,7 +434,7 @@ if (defined('ROOM_PAGE') || defined('FAQ_PAGE')) {
         } else {
             // ROOM_PAGE default wrapper
             $faq_room = '
-            <section class="m-property-details py-5 bg-white">
+            <section class="m-property-details py-5 bg-white px-3 px-md-5 px-lg-0">
                 <div class="container">
                     <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
                     <div class="accordion accordion-flush" id="roomAccordion">
@@ -485,7 +485,7 @@ if (defined('EVENT_PAGE') || defined('FAQ_PAGE')) {
         } else {
             // EVENT_PAGE default wrapper
             $faq_details_event = '
-            <section class="m-property-details py-5 bg-white">
+            <section class="m-property-details py-5 bg-white px-3 px-md-5 px-lg-0">
                 <div class="container">
                     <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
                     <div class="accordion accordion-flush" id="eventAccordion">

@@ -41,7 +41,7 @@
         <!-- GALLERY NAV (Sticky below Header) -->
         <div class="bg-white sticky-top m-gallery-nav-wrapper">
             <div class="container m-gallery-nav" id="gallery-navbar">
-                <ul class="nav justify-content-center">
+                <ul class="nav justify-content-start justify-content-sm-center">
                     <jcms:module:gallery-nav/>
                 </ul>
             </div>
@@ -72,7 +72,7 @@
 
     <script>
         $(document).ready(function () {
-            // Gallery Smooth Scroll to Center
+        // Gallery Smooth Scroll to Top
             $('.m-gallery-nav-link').on('click', function (e) {
                 if (this.hash !== "") {
                     e.preventDefault();
@@ -80,25 +80,17 @@
                     var target = $(hash);
 
                     if (target.length) {
-                        // Calculate position to center the target
-                        var windowHeight = $(window).height();
-                        var targetHeight = target.outerHeight();
-                        var targetOffset = target.offset().top;
+                    // Offset for sticky headers (approx 230px on desktop, 140px on mobile)
+                        var offset = $(window).width() < 992 ? 140 : 230;
+                        var scrollTo = target.offset().top - offset;
 
-                        // Center positioning: target top - (window height / 2) + (target height / 2)
-                        // But we also have a sticky header/nav (~230px total in Marriott style)
-                        // Let's refine it to push it down from top but not strictly middle if it's too large
-                        var scrollTo = targetOffset - (windowHeight / 1.65) + (targetHeight / 2);
+                        $('html, body').stop().animate({
+                            scrollTop: scrollTo
+                        }, 500);
 
-                        // Ensure we don't scroll above the page
-                        if (scrollTo < 0) scrollTo = 0;
-
-                        $('html, body').scrollTop(scrollTo);
-
-                        // Update URL hash without jumping
+                    // Update URL hash without jumping
                         window.history.pushState(null, null, hash);
 
-                        // Manually update active class (ScrollSpy may lag with custom scroll position)
                         $('.m-gallery-nav-link').removeClass('active');
                         $(this).addClass('active');
                     }
@@ -117,7 +109,7 @@
         <a href="#" class="btn m-btn-check-availability" id="mobile-check-availability-btn">Check Availability</a>
     </div>
 
-        <!-- Mobile Booking Form Overlay -->
+    <!-- Mobile Booking Form Overlay -->
     <div class="m-mob-booking-overlay d-lg-none" id="m-mob-booking-overlay">
         <div class="m-mob-booking-header">
             <i class="fa-solid fa-arrow-left m-mob-booking-back" id="m-mob-booking-close"></i>

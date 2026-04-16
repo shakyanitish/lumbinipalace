@@ -161,7 +161,7 @@ if (!empty($overviewPkgDining)) {
 $overview_section_dining = '
 
         <section class="m-overview-new wow animate__fadeInUp">
-            <div class="container container-custom">
+            <div class="container">
                 <div class="m-overview-header text-center">
                     <p class="m-overview-label-new">' . $overview_title_dining . '</p>
                     <div class="m-overview-divider-red"></div>

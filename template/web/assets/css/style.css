@@ -2711,14 +2711,28 @@ button {
 
 .m-enjoy-tabs {
   display: flex;
-  justify-content: center;
   gap: 30px;
   margin-bottom: 30px;
   border-bottom: 1px solid #eee;
   padding-bottom: 1px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+@media (min-width: 768px) {
+  .m-enjoy-tabs {
+    justify-content: center;
+  }
+}
+
+.m-enjoy-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .m-enjoy-tabs .tab-nav {
+  flex-shrink: 0;
   font-size: 16px;
   font-weight: 600;
   color: #666;
@@ -3443,7 +3457,7 @@ button {
 @media (min-width: 1200px) {
   .m-outlets-slider-wrapper {
     margin-right: calc(-50vw + 50%);
-    padding-right: 60px;
+    padding-right: 0;
   }
 }
 
@@ -3480,6 +3494,18 @@ button {
   height: 560px;
   width: 100%;
   transition: transform .35s ease;
+}
+
+@media (max-width: 991px) {
+  .m-outlet-card {
+    height: 480px;
+  }
+}
+
+@media (max-width: 575px) {
+  .m-outlet-card {
+    height: 420px;
+  }
 }
 
 .m-outlet-card:hover {
@@ -3834,12 +3860,30 @@ a.m-attraction-card:hover i {
   z-index: 1020;
 }
 
+@media (max-width: 991px) {
+  .m-gallery-nav-wrapper {
+    top: 80px;
+  }
+}
+
 .m-gallery-bg {
   background-color: #f6f6f6;
 }
 
 .m-gallery-nav {
   border-bottom: 1px solid #e5e5e5;
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.m-gallery-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.m-gallery-nav .nav {
+  flex-wrap: nowrap;
 }
 
 .m-gallery-nav-link {
@@ -5520,6 +5564,14 @@ a.m-attraction-card:hover i {
   margin: 0;
   padding: 0;
   height: 100%;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.m-lightbox-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .m-lightbox-tab {

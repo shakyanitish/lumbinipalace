@@ -426,7 +426,7 @@ if (isset($_REQUEST['slug'])) {
             }
 
             $pkg_itinerary_faq = '
-    <section class="m-property-details py-5 bg-white">
+    <section class="m-property-details py-5 bg-white px-3 px-md-5 px-lg-0">
         <div class="container">
             <h2 class="h5 fw-bold mb-4 title">Itinerary</h2>
             <div class="accordion accordion-flush" id="pkgFaqAccordion">
@@ -606,7 +606,7 @@ if (!empty($overviewPkg)) {
 
 $overview_section = '
         <section class="m-overview-new wow animate__fadeInUp">
-            <div class="container container-custom">
+            <div class="container">
                 <div class="m-overview-header text-center">
                     <p class="m-overview-label-new">' . $overview_title . '</p>
                     <div class="m-overview-divider-red"></div>
@@ -949,7 +949,7 @@ if (!empty($overviewPkgExp)) {
 
 $overview_section_exp = '
         <section class="m-overview-new wow animate__fadeInUp">
-            <div class="container container-custom">
+            <div class="container">
                 <div class="m-overview-header text-center">
                     <p class="m-overview-label-new">' . $overview_title_exp . '</p>
                     <div class="m-overview-divider-red"></div>
@@ -1278,7 +1278,7 @@ if (!empty($roompkg)) {
 
 $experience = '
 <section class="m-outlets-section pb-5 pt-4 overflow-hidden">
-    <div class="container container-custom">
+    <div class="container container-custom pe-0 ps-4 ps-lg-0">
         <div class="m-outlets-header mb-4 d-flex justify-content-between align-items-end flex-wrap gap-3">
             <h2 class="m-outlets-title mb-0">On-Site Outlets</h2>
             <div class="m-outlets-stats d-flex gap-4">
@@ -1488,7 +1488,7 @@ if ((defined('SUBPACKAGE_PAGE') || defined('EXPERIENCE_PAGE') || defined('ROOM_P
             }
 
             $subpkg_itinerary_faq = '
-    <section class="m-property-details py-5 bg-white">
+    <section class="m-property-details py-5 bg-white px-3 px-md-5 px-lg-0">
         <div class="container">
             <h2 class="h5 fw-bold mb-4 title">Frequently Asked Questions</h2>
             <div class="accordion accordion-flush" id="faqAccordion">
