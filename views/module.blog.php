@@ -210,7 +210,8 @@ if (defined("BLOG_DETAIL_PAGE")) {
                                 <h4 class="m-blog-sidebar-title">Quick Info</h4>
                                 <ul class="m-blog-sidebar-list">
                                     <li><i class="fa-light fa-calendar-days me-2"></i> Published: ' . $blogDate . '</li>
-                                    <li><i class="fa-light fa-clock me-2"></i> '. $Blogs->category . '</li>
+                                    <li><i class="fa-light fa-clock me-2"></i> 
+                                     `Reading Time: `'. $Blogs->category . '</li>
                                 </ul>
                             </div>
 

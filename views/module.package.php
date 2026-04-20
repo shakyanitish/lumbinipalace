@@ -1158,7 +1158,7 @@ if (!empty($roompkg)) {
         $pkgids[] = $rp->id;
     }
     $idstr = implode(',', $pkgids);
-    $sql = "SELECT * FROM tbl_package_sub WHERE status='1' AND homepage='1' AND type IN ($idstr) ORDER BY sortorder ASC LIMIT 6";
+    $sql = "SELECT * FROM tbl_package_sub WHERE status='1' AND homepage='1' AND type IN ($idstr) ORDER BY sortorder DESC LIMIT 6";
     $pkgRec = Subpackage::find_by_sql($sql);
 
     if (!empty($pkgRec)) {
@@ -1372,7 +1372,9 @@ if (!empty($roompkg)) {
                                             </button>
                                         </div>
                                         <div class="m-room-details">
+                                        <a href="' . BASE_URL . 'room/' . $subpkgRow->slug . '" class="m-view-more">
                                             <h3 class="m-room-name">' . $subpkgRow->title . '</h3>
+                                        </a>
                                             <p class="m-room-bed">' . $short_desc . '</p>
                                             <div class="m-room-divider-v2"></div>
                                             <div class="m-room-footer">

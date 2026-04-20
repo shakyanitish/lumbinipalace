@@ -22,7 +22,7 @@ $jVars['site:contact-header'] = '<span class="address"><a href="tel:' . $siteReg
 $jVars['site:phone-news-side'] = '
 
 
-<a href="tel:+977' . $siteRegulars->contact_info . '" class="mhm-right-link"><i class="fa-solid fa-phone"></i> <span>+977' . $siteRegulars->contact_info . '</span></a>
+<a href="tel:' . $siteRegulars->contact_info . '" class="mhm-right-link"><i class="fa-solid fa-phone"></i> <span>' . $siteRegulars->contact_info . '</span></a>
 ';
 
 $jVars['site:fevicon'] = '<link rel="shortcut icon" href="' . IMAGE_PATH . 'preference/' . $siteRegulars->icon_upload . '"> 

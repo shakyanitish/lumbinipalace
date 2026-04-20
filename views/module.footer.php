@@ -32,7 +32,7 @@ foreach ($telno as $index => $tel) {
     $cleanTel = str_replace(' ', '', $tel);
 
     $tolllinked .= '
-    <a href="tel:+977' . $cleanTel . '" class="text-dark text-decoration-none">+977
+    <a href="tel:' . $cleanTel . '" class="text-dark text-decoration-none">
                             ' . $tel . '</a>';
 
     // separator except last item
