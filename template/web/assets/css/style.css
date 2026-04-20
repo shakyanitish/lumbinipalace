@@ -4399,7 +4399,8 @@ a.m-attraction-card:hover i {
 
 .m-offer-list-img {
     height: 100%;
-    min-height: 250px;
+    /* aspect-ratio: 16 / 9; */
+    max-height: 350px;
     object-fit: cover;
 }
 
@@ -6726,4 +6727,41 @@ a.m-attraction-card:hover i {
         font-size: 15px;
         margin-bottom: 20px;
     }
+}
+
+
+
+
+.m-offer-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ul-primary) !important;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: 0.2s ease;
+}
+
+.m-offer-link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.m-offer-link i {
+  font-size: 12px;
+}
+
+.m-offer-link:hover i.fa-arrow-up-right {
+  display: inline-block;
+}
+
+.m-offer-link i.fa-arrow-up-right {
+  display: none;
+}
+.m-offer-link:hover i.fa-arrow-right {
+  display: none;
+}
+
+.m-offer-link i.fa-arrow-right {
+  display: inline-block;
 }

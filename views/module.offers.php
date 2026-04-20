@@ -318,7 +318,10 @@ if (defined('HOME_PAGE') and !isset($_REQUEST['slug'])) {
         $homeie = '
         <section class="m-offers wow animate__fadeInUp">
             <div class="m-offers-inner">
-                <h2 class="m-offers-section-title">Offers &amp; Packages</h2>
+                <div class="d-flex justify-content-between">
+                    <h2 class="m-offers-section-title">Offers &amp; Packages</h2>
+                    <a href="' . BASE_URL . 'offer" class="m-offer-link">View All <i class="fa-solid fa-arrow-right ms-2"></i> <i class="fa-solid fa-arrow-up-right ms-2"></i></a>
+                </div>
                 <div class="m-offers-slider-container position-relative">
                     <div class="swiper m-offers-swiper">
                         <div class="swiper-wrapper">
